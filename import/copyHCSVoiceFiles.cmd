@@ -14,6 +14,7 @@ FOR /D %%G IN (hcspack-*) do call :processDir %%G
 
 SET companionsFound
 
+pause
 ECHO ON
 @exit /b
 
@@ -1240,6 +1241,3 @@ ECHO ON
     echo Firing Hacking is empty.
   )
   exit /b
-
-
-
