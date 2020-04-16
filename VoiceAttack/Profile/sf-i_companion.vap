@@ -18426,7 +18426,7 @@ public class VAInline
       <LongTapInvoked>false</LongTapInvoked>
       <ShortTapDelayedInvoked>false</ShortTapDelayedInvoked>
       <Id>628b130c-96dc-45f6-aaa8-fd7e5f687a96</Id>
-      <CommandString>Set game voice [enabled;on;disableo;off]</CommandString>
+      <CommandString>Set game voice [enabled;on;disabled;off]</CommandString>
       <ActionSequence>
         <CommandAction>
           <PairingSet>false</PairingSet>
