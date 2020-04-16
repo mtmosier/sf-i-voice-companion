@@ -44,6 +44,15 @@ ECHO ON
   SET companionsFound=%companionsFound%;%companionName%
   IF NOT EXIST "%vaSoundDir%\%newDir%\" mkdir "%vaSoundDir%\%newDir%"
   SET filesFound=0
+  IF NOT EXIST "%vaSoundDir%\%newDir%\Non-Verbal Error\" mkdir "%vaSoundDir%\%newDir%\Non-Verbal Error"
+  IF EXIST "%vaSoundDir%\%curDir%\Effects\Error beep\Error beep.mp3" (
+    copy "%vaSoundDir%\%curDir%\Effects\Error beep\Error beep.mp3" "%vaSoundDir%\%newDir%\Non-Verbal Error\Error beep.mp3" >nul
+    IF EXIST "%vaSoundDir%\%newDir%\Non-Verbal Error\Error beep.mp3"  SET filesFound=1
+  )
+  IF "%filesFound%"=="0" (
+    echo Non-Verbal Error is empty.
+  )
+  SET filesFound=0
   IF NOT EXIST "%vaSoundDir%\%newDir%\Switch Companion Target\" mkdir "%vaSoundDir%\%newDir%\Switch Companion Target"
   IF EXIST "%vaSoundDir%\%curDir%\Additional dialogue\A smidgen of power.mp3" (
     copy "%vaSoundDir%\%curDir%\Additional dialogue\A smidgen of power.mp3" "%vaSoundDir%\%newDir%\Switch Companion Target\A smidgen of power.mp3" >nul
@@ -331,6 +340,19 @@ ECHO ON
   )
   IF "%filesFound%"=="0" (
     echo Acknowledged is empty.
+  )
+  SET filesFound=0
+  IF NOT EXIST "%vaSoundDir%\%newDir%\Display Cargo\" mkdir "%vaSoundDir%\%newDir%\Display Cargo"
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\ED\Panels\((RS - Cargo hold))\non-verbose\Cargo hold.mp3" (
+    copy "%vaSoundDir%\%curDir%\Profile Sounds\ED\Panels\((RS - Cargo hold))\non-verbose\Cargo hold.mp3" "%vaSoundDir%\%newDir%\Display Cargo\Cargo hold.mp3" >nul
+    IF EXIST "%vaSoundDir%\%newDir%\Display Cargo\Cargo hold.mp3"  SET filesFound=1
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Additional dialogue\Our cargo.mp3" (
+    copy "%vaSoundDir%\%curDir%\Additional dialogue\Our cargo.mp3" "%vaSoundDir%\%newDir%\Display Cargo\Our cargo.mp3" >nul
+    IF EXIST "%vaSoundDir%\%newDir%\Display Cargo\Our cargo.mp3"  SET filesFound=1
+  )
+  IF "%filesFound%"=="0" (
+    echo Display Cargo is empty.
   )
   SET filesFound=0
   IF NOT EXIST "%vaSoundDir%\%newDir%\Display Ship Info\" mkdir "%vaSoundDir%\%newDir%\Display Ship Info"
@@ -1241,3 +1263,6 @@ ECHO ON
     echo Firing Hacking is empty.
   )
   exit /b
+
+
+
