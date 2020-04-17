@@ -342,6 +342,61 @@ ECHO ON
     echo Acknowledged is empty.
   )
   SET filesFound=0
+  IF NOT EXIST "%vaSoundDir%\%newDir%\Red Alert\" mkdir "%vaSoundDir%\%newDir%\Red Alert"
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Combat\((RS - Red Alert 1))\non-verbose\Red alert.mp3" (
+    copy "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Combat\((RS - Red Alert 1))\non-verbose\Red alert.mp3" "%vaSoundDir%\%newDir%\Red Alert\Red alert.mp3" >nul
+    IF EXIST "%vaSoundDir%\%newDir%\Red Alert\Red alert.mp3"  SET filesFound=1
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Combat\((RS - Red Alert))\non-verbose\Red alert.mp3" (
+    copy "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Combat\((RS - Red Alert))\non-verbose\Red alert.mp3" "%vaSoundDir%\%newDir%\Red Alert\Red alert.mp3" >nul
+    IF EXIST "%vaSoundDir%\%newDir%\Red Alert\Red alert.mp3"  SET filesFound=1
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Combat\((RS - Red Alert))\Verbose\Red alert confirmed.mp3" (
+    copy "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Combat\((RS - Red Alert))\Verbose\Red alert confirmed.mp3" "%vaSoundDir%\%newDir%\Red Alert\Red alert confirmed.mp3" >nul
+    IF EXIST "%vaSoundDir%\%newDir%\Red Alert\Red alert confirmed.mp3"  SET filesFound=1
+  )
+  IF "%filesFound%"=="0" (
+    echo Red Alert is empty.
+  )
+  SET filesFound=0
+  IF NOT EXIST "%vaSoundDir%\%newDir%\Yellow Alert\" mkdir "%vaSoundDir%\%newDir%\Yellow Alert"
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Combat\((RS - Yellow Alert))\non-verbose\Yellow alert.mp3" (
+    copy "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Combat\((RS - Yellow Alert))\non-verbose\Yellow alert.mp3" "%vaSoundDir%\%newDir%\Yellow Alert\Yellow alert.mp3" >nul
+    IF EXIST "%vaSoundDir%\%newDir%\Yellow Alert\Yellow alert.mp3"  SET filesFound=1
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Combat\((RS - Yellow Alert))\non-verbose\Yellow alert 2.mp3" (
+    copy "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Combat\((RS - Yellow Alert))\non-verbose\Yellow alert 2.mp3" "%vaSoundDir%\%newDir%\Yellow Alert\Yellow alert 2.mp3" >nul
+    IF EXIST "%vaSoundDir%\%newDir%\Yellow Alert\Yellow alert 2.mp3"  SET filesFound=1
+  )
+  IF "%filesFound%"=="0" (
+    echo Yellow Alert is empty.
+  )
+  SET filesFound=0
+  IF NOT EXIST "%vaSoundDir%\%newDir%\Evasive Manuevers\" mkdir "%vaSoundDir%\%newDir%\Evasive Manuevers"
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Acknowledgements\((RS - Concur))\non-verbose\I concur.mp3" (
+    copy "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Acknowledgements\((RS - Concur))\non-verbose\I concur.mp3" "%vaSoundDir%\%newDir%\Evasive Manuevers\I concur.mp3" >nul
+    IF EXIST "%vaSoundDir%\%newDir%\Evasive Manuevers\I concur.mp3"  SET filesFound=1
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Configuration Commands\Engaging evasive manoeuvres.mp3" (
+    copy "%vaSoundDir%\%curDir%\Configuration Commands\Engaging evasive manoeuvres.mp3" "%vaSoundDir%\%newDir%\Evasive Manuevers\Engaging evasive manoeuvres.mp3" >nul
+    IF EXIST "%vaSoundDir%\%newDir%\Evasive Manuevers\Engaging evasive manoeuvres.mp3"  SET filesFound=1
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Configuration Commands\Evasive manoeuvres alt.mp3" (
+    copy "%vaSoundDir%\%curDir%\Configuration Commands\Evasive manoeuvres alt.mp3" "%vaSoundDir%\%newDir%\Evasive Manuevers\Evasive manoeuvres alt.mp3" >nul
+    IF EXIST "%vaSoundDir%\%newDir%\Evasive Manuevers\Evasive manoeuvres alt.mp3"  SET filesFound=1
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Configuration Commands\Evasive manoeuvres.mp3" (
+    copy "%vaSoundDir%\%curDir%\Configuration Commands\Evasive manoeuvres.mp3" "%vaSoundDir%\%newDir%\Evasive Manuevers\Evasive manoeuvres.mp3" >nul
+    IF EXIST "%vaSoundDir%\%newDir%\Evasive Manuevers\Evasive manoeuvres.mp3"  SET filesFound=1
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Configuration Commands\Executing evasive manoeuvres.mp3" (
+    copy "%vaSoundDir%\%curDir%\Configuration Commands\Executing evasive manoeuvres.mp3" "%vaSoundDir%\%newDir%\Evasive Manuevers\Executing evasive manoeuvres.mp3" >nul
+    IF EXIST "%vaSoundDir%\%newDir%\Evasive Manuevers\Executing evasive manoeuvres.mp3"  SET filesFound=1
+  )
+  IF "%filesFound%"=="0" (
+    echo Evasive Manuevers is empty.
+  )
+  SET filesFound=0
   IF NOT EXIST "%vaSoundDir%\%newDir%\Display Cargo\" mkdir "%vaSoundDir%\%newDir%\Display Cargo"
   IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\ED\Panels\((RS - Cargo hold))\non-verbose\Cargo hold.mp3" (
     copy "%vaSoundDir%\%curDir%\Profile Sounds\ED\Panels\((RS - Cargo hold))\non-verbose\Cargo hold.mp3" "%vaSoundDir%\%newDir%\Display Cargo\Cargo hold.mp3" >nul
