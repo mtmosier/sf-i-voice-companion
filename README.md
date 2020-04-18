@@ -14,9 +14,11 @@
 <a name="intro"></a>
 ## What Is This?
 
-[Starfighter: Infinity](http://www.starfighterinfinity.com/) is a space based MMORPG with a focus on ‘dogfighting’ style action and exploration.  It is in currently in early access on [Steam](https://store.steampowered.com/app/967330/Starfighter_Infinity/).
+**This project is a simple voice companion which will help you on your journeys while playing [Starfighter: Infinity](http://www.starfighterinfinity.com/).** *Starfighter: Infinity* is a space based MMORPG with a focus on ‘dogfighting’ style action and exploration.  It is in currently in early access on [Steam](https://store.steampowered.com/app/967330/Starfighter_Infinity/).
 
-**This project is a simple voice companion which will help you on your journeys while playing SF:I.** My primary focus has been on streamlining weapon usage during battle. Most ship functions can be accessed verbally using the companion. The companion also has some limited chatting options, though I plan to flesh them out much more in the future.
+My primary focus has been on streamlining weapon usage during battle. Weapons can be set up in groups, and groups can be fired as a one-off or in a continuous barrage. Beyond that most ship functions can be accessed verbally using the companion. The companion also has some limited chatting options, though I plan to flesh them out more in the future.
+
+Please note that I am not currently distributing any pre-recorded voice files for this companion. As such all interactions are currently done via text-to-speech.
 
 <a name="prereq"></a>
 ## Prerequisites
@@ -26,9 +28,11 @@ In order to make use of this ship's companion you must have the full version of 
 <a name="install"></a>
 ## Installation
 
-***Coming Soon***
+Currently installation is as simple as downloading a zip from [Releases page](https://github.com/mtmosier/sf-i-voice-companion/releases), extracting the sf-i_companion.vap file (located under sf-i-voice-companion\VoiceAttack\Profile) and importing that profile in to VoiceAttack.
 
+In the future I plan to add some basic voice mp3s and a VA plugin, but for now the profile alone is all that's required.
 
+If you own an HCS Voice Pack you can also import voice files from your existing pack. See the [Import](import/) section for instructions.
 
 <a name="howToUse"></a>
 ## Basic usage
@@ -56,29 +60,36 @@ Here's an example of a typical interaction.  Assume all requests and responses a
   #
 ```
 
-The weapon group firing system is decently robust. [Read a more detailed description of what you can do.](weaponGroupConfigurationReference.md)
+To see a full list of voice commands available please check the [voice command reference guide](https://htmlpreview.github.io/?https://github.com/mtmosier/sf-i-voice-companion/blob/master/VoiceAttack/Reference/Starfighter%20Infinity%20Companion%20Reference.html).
+
+The weapon group firing system is somewhat robust. [Read a more detailed description of what you can do with weapon groups.](weaponGroupConfigurationReference.md)
 
 
 
 <a name="issues"></a>
 ## Troubleshooting
 
-#### The companion doesn't respond correctly more often than not.
+##### The companion doesn't respond correctly more often than not.
 
 This is a common problem with speech recognition, especially when using the built-in speech engine from windows. The first thing to try is to train your speech engine. [Here are the instructions provided by Microsoft for doing so.](https://support.microsoft.com/en-us/help/4027176/windows-10-use-voice-recognition)
 
-I have some issues with failed recognition myself, due to living in a noisy apartment. That's the reason why many voice commands in this profile have multiple methods of calling them. For example, you can say "Switch to battle ship" or "Swap to battle" or "Change to battle ship", all of which do the same thing.
+I have some issues with failed recognition myself, due to living in a noisy apartment. That's the reason why many voice commands in this profile have multiple methods of calling them. For example, you can say "Switch to battle ship" or "Swap to battle" or "Change to battle ship", all of which do the same thing. [View the voice command reference guide](https://htmlpreview.github.io/?https://github.com/mtmosier/sf-i-voice-companion/blob/master/VoiceAttack/Reference/Starfighter%20Infinity%20Companion%20Reference.html) to see all commands, and command variations available.
 
 If you're still having trouble with your voice recognition I suggest reading over this [post on the VoiceAttack forums](https://forum.voiceattack.com/smf/index.php?topic=1635.0), which covers more advanced troubleshooting methods better than I ever could.
 
-#### Sometimes the companion responds several seconds late, or not at all.
+##### Sometimes the companion responds several seconds late, or not at all.
 
 I have found that on occasion companion responses may get quite laggy. I'm continuing to look in to the issue, though I'm honestly not sure how much control I have over this. So far it seems that the speech engine gets less priority than the running game, and if the game is taxing your system the speech engine is high up on the list of processes to be delayed.
 
 One thing I would suggest is to open the "[Config] General" profile command under Configuration and reduce the number of weapon group names (>>weaponGroupNameList) and ship names (>>shipNameListStr) included in the profile. Each weapon group added to the list increases the total number of commands the speech engine has to search for by over a dozen per, which can adversely affect performance. Ship names have less of an impact, but can help nonetheless. Also consider changing the number of weapon groups available under each group name (>>maxWeaponGroupNum). I've set this value to 3 by default, which I find to be a good compromise between performance and usability. Setting it to 2, or even 1 would be less taxing on your system.
 
-**After changing the above configuration settings you will have to reload your profile before using it further. Do so by switching to another profile and back, or closing and re-starting voice attack.**
+*After changing the above configuration settings you will have to reload your profile before using it further. Do so by switching to another profile and back, or closing and re-starting voice attack.*
 
+##### The companion says it engaged hyperspace (or other such command) even though it really didn't.
+
+There currently is no direct tie-in with Starfighter: Infinity. This companion doesn't actually know what's going on in game. It is simply taking your commands and attempting to perform them in game, with no idea of whether they succeeded or failed. So if you ask to engage hyperspace with no course plotted, or without auto-pilot active, it will fail with no verbal warning from the companion. The same goes for trying to fire a weapon with no ammo or not enough energy.
+
+I hope to add some game log parsing to get feedback directly from the companion at some point, but for the moment all I can offer is this somewhat-blind companion.
 
 
 <a name="faq"></a>
