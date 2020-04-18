@@ -74,7 +74,7 @@ Here's an example of a typical interaction, from configuring a weapon group to f
   # Cutting engines
 ```
 
-To see a full list of voice commands available please check the [voice command reference guide](https://htmlpreview.github.io/?https://github.com/mtmosier/sf-i-voice-companion/blob/master/VoiceAttack/Reference/Starfighter%20Infinity%20Companion%20Reference.html).
+To see a full list of voice commands available please check the [voice command reference guide](https://htmlpreview.github.io/?https://github.com/mtmosier/sf-i-voice-companion/blob/master/reference/Starfighter%20Infinity%20Companion%20Reference.html).
 
 The weapon group firing system is somewhat robust. [Read a more detailed description of what you can do with weapon groups.](weaponGroupConfigurationReference.md)
 
@@ -87,7 +87,7 @@ The weapon group firing system is somewhat robust. [Read a more detailed descrip
 
 This is a common problem with speech recognition, especially when using the built-in speech engine provided with windows. The first thing to try is to train your speech engine. [Here are the instructions provided by Microsoft for doing so.](https://support.microsoft.com/en-us/help/4027176/windows-10-use-voice-recognition)
 
-I have some issues with failed recognition myself due to living in a noisy apartment. That's the reason why many voice commands in this profile have multiple methods of calling them. For example, you can say "Switch to battle ship" or "Swap to battle" or "Change to battle ship", all of which do the same thing. [View the voice command reference guide](https://htmlpreview.github.io/?https://github.com/mtmosier/sf-i-voice-companion/blob/master/VoiceAttack/Reference/Starfighter%20Infinity%20Companion%20Reference.html) to see all commands and command variations available.
+I have some issues with failed recognition myself due to living in a noisy apartment. That's the reason why many voice commands in this profile have multiple methods of calling them. For example, you can say "Switch to battle ship" or "Swap to battle" or "Change to battle ship", all of which do the same thing. [View the voice command reference guide](https://htmlpreview.github.io/?https://github.com/mtmosier/sf-i-voice-companion/blob/master/reference/Starfighter%20Infinity%20Companion%20Reference.html) to see all commands and command variations available.
 
 If you're still having trouble with your voice recognition I suggest reading over this [post on the VoiceAttack forums](https://forum.voiceattack.com/smf/index.php?topic=1635.0) which covers more advanced troubleshooting methods better than I ever could.
 
