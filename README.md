@@ -64,12 +64,12 @@ Here's an example of a typical interaction.  Assume all requests and responses a
 
 1. Can you make this work with [some other game]?
   * I don't have time to port to other projects at the moment.  However, you are more than welcome to clone the project and update it for use with any game you want.
-  * Depending on your desired game you might be able to change the keybind configuration to make the profile work with it with essentially no changes.
+  * Depending on your desired game you might be able to change the keybind configuration to make the profile work with it with minimal changes.
 2. Why are there no voice files included?
-  * I plan to record the default companion voice, Null, myself when I have time. I don't know when I'll have that done.
+  * I plan to record the default companion voice, Null, myself when I have time. I don't know when I'll have that done, but assume it'll be a while.
 3. I already own an HCS Voice Pack.  Can I use my existing sound files with this project?
   * Yes, you can.  Check the [Import](import/) scripts for instructions.
-  * Please note that this project is in no way affiliated with HCS, and is not authorized to use these voice files in any capacity. Use at your own risk.
+  * Please note that this project is in no way affiliated with HCS, and is not authorized to use these voice files in any capacity. Use at your own risk!
 4. Can I use this voice assistant in VR?
   * Yes, this project was designed with the idea that the user would be in VR. To that end most weapon and ship configuration is done via voice interface. You can also ask for details about existing configuration to get a verbal description.
   * Note that VR is in no way necessary to make use of this assistant.
@@ -77,3 +77,4 @@ Here's an example of a typical interaction.  Assume all requests and responses a
   * No, you cannot. The VA demo only allows up to 20 voice commands. At the time of this writing this profile is using over 1,300 commands. It would be very difficult to compress it down to only 20.
 6. I don't like the weapon group names or ship names you selected.  Can I change them?
   * Yes, absolutely. Open the profile in VoiceAttack and edit the command labeled "[Config] General" under the "Configuration" category. Edit the variables ">>weaponGroupNameList" and/or ">>shipNameListStr" to better reflect your play style.  These must be formatted as a semi-colon (;) separated list.
+  * After making changes to these variables you must reload the profile before they will take affect. You can do this by switching to another profile and switching back, or by restarting VoiceAttack.
