@@ -83,7 +83,7 @@ The weapon group firing system is somewhat robust. [Read a more detailed descrip
 <a name="issues"></a>
 ## Troubleshooting
 
-##### The companion doesn't respond consistently (or ever).
+#### The companion doesn't respond consistently (or ever).
 
 This is a common problem with speech recognition, especially when using the built-in speech engine provided with windows. The first thing to try is to train your speech engine. [Here are the instructions provided by Microsoft for doing so.](https://support.microsoft.com/en-us/help/4027176/windows-10-use-voice-recognition)
 
@@ -91,15 +91,15 @@ I have some issues with failed recognition myself due to living in a noisy apart
 
 If you're still having trouble with your voice recognition I suggest reading over this [post on the VoiceAttack forums](https://forum.voiceattack.com/smf/index.php?topic=1635.0) which covers more advanced troubleshooting methods better than I ever could.
 
-##### Sometimes the companion responds several seconds late, or not at all.
+#### Sometimes the companion responds several seconds late, or not at all.
 
 I have found that on occasion the companion responses may get quite laggy. I'm continuing to look in to the issue, though I'm honestly not sure how much control I have over this. So far it seems that the speech engine gets less priority than the running game, and if the game is taxing your system the speech engine is high on the list of processes which get delayed or dropped.
 
 One thing I would suggest is to open the "[Config] General" profile command under Configuration and reduce the number of weapon group names (>>weaponGroupNameList) and ship names (>>shipNameListStr) included in the profile. Each weapon group added to the list increases the total number of commands the speech engine has to search for by 40 per individual group, which can adversely affect performance. Ship names have less of an impact, but can help nonetheless. Also consider changing the number of weapon groups available under each group name (>>maxWeaponGroupNum). I've set this value to 3 by default, which I find to be a good compromise between performance and usability. Setting it to 2, or even 1 would be less taxing on your system.
 
-***After changing the above configuration settings you will have to reload your profile before using it further. Do so by switching to another profile and back, or closing and re-starting voice attack.***
+*After changing the above configuration settings you will have to reload your profile before using it further. Do so by switching to another profile and back, or closing and re-starting voice attack.*
 
-##### The companion says it engaged hyperspace (or other such command) even though it really didn't.
+#### The companion says it engaged hyperspace (or other such command) even though it really didn't.
 
 There currently is no direct tie-in with Starfighter: Infinity. This companion doesn't actually know what's going on in game. It is simply taking your commands and attempting to perform them in game, with no idea of whether they succeeded or failed. So if you ask to engage hyperspace with no course plotted, or without auto-pilot active, it will fail with no verbal warning from the companion. The same goes for trying to fire a weapon with no ammo or not enough energy.
 
