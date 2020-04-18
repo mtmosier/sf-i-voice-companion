@@ -18,7 +18,7 @@
 
 My primary focus has been on streamlining weapon usage during battle. Weapons can be set up in groups, and groups can be fired as a one-off or in a continuous barrage. Beyond that most ship functions can be accessed verbally using the companion. The companion also has some limited chatting options, though I plan to flesh them out more in the future.
 
-Please note that I am not currently distributing any pre-recorded voice files for this companion. As such all interactions are currently done via text-to-speech.
+Please note that I am not currently distributing any prerecorded voice files for this companion. As such all interactions are currently done via text-to-speech.
 
 <a name="prereq"></a>
 ## Prerequisites
@@ -30,7 +30,7 @@ In order to make use of this ship's companion you must have the full version of 
 
 Currently installation is as simple as downloading a zip from [Releases page](https://github.com/mtmosier/sf-i-voice-companion/releases), extracting the sf-i_companion.vap file (located under sf-i-voice-companion\VoiceAttack\Profile) and importing that profile in to VoiceAttack.
 
-In the future I plan to add some basic voice mp3s and a VA plugin, but for now the profile alone is all that's required.
+In the future I plan to add some basic voice mp3s and a VA plug-in, but for now the profile alone is all that's required.
 
 If you own an HCS Voice Pack you can also import voice files from your existing pack. See the [Import](import/) section for instructions.
 
@@ -59,7 +59,7 @@ Here's an example of a typical interaction, from configuring a weapon group to f
 > Pause 2
   # Fourth?
 > Finished
-  # Weapon group missile 3 will fire slot 3, slot 4, pause for 2 seconds
+  # Weapon group missile 3 will fire slot 3, slot 4, pause for 2 seconds.
   # Do you want to save these settings?
 > Commit
   # Configuration saved.
@@ -111,12 +111,11 @@ I hope to add some game log parsing to get feedback directly from the companion 
 
 1. Can you make this work with [some other game]?
   * I don't have time to port to other projects at the moment.  However, you are more than welcome to clone the project and update it for use with any game you want.
-  * Depending on your desired game you might be able to change the keybind configuration to make the profile work with it with minimal changes.
+  * Depending on your desired game you might be able to change the key bind configuration to make the profile work with it with minimal changes.
 2. Why are there no voice files included?
   * I plan to record the default companion voice, Null, myself when I have time. I don't know when I'll have that done, but it's safe to assume it'll take me a while.
 3. I already own an HCS Voice Pack.  Can I use my existing sound files with this project?
   * Yes, you can.  Check the [Import](import/) section for instructions.
-  * Even when using an HCS Voice Pack, any speech which is not covered by HCS will still use the text-to-speech engine. This mostly applies to the configuration interactions.
   * Please note that this project is in no way affiliated with HCS, and is not authorized to use these voice files in any capacity. Use at your own risk!
 4. Can I use this voice companion in VR?
   * Yes, this project was designed with the idea that the user would be in VR. To that end most weapon and ship configuration is done via voice interface. You can also ask for details about existing configurations to get a verbal description.
@@ -124,5 +123,7 @@ I hope to add some game log parsing to get feedback directly from the companion 
 5. Can I use the VoiceAttack demo with this companion?
   * No, you cannot. The VA demo only allows up to 20 voice commands. At the time of this writing this profile is using over 1,300 (mostly derived) commands. It would be very difficult to compress it down to only 20.
 6. I don't like the weapon group names or ship names you selected.  Can I change them?
-  * Yes, absolutely. Open the profile in VoiceAttack and edit the command labeled "[Config] General" under the "Configuration" category. Edit the variables ">>weaponGroupNameList" and/or ">>shipNameListStr" to better reflect your play style.  These must be formatted as a semi-colon (;) separated list.
+  * Yes, absolutely. Open the profile in VoiceAttack and edit the command labeled "**[Config] General**" under the "*Configuration*" category. Edit the variables "**>>weaponGroupNameList**" and/or "**>>shipNameListStr**" to better reflect your play style.  These must be formatted as a semi-colon (;) separated list.
   * **After making changes to these variables you must reload the profile before they will take affect. You can do this by switching to another profile and switching back, or by restarting VoiceAttack.**
+7. My question wasn't answered here. How do I get further help?
+  * Either report [your issue on GitHub](issues/), or [just email me](mailto:m.t.m.o.s.i.e.r@gmail.com). If this project becomes at all popular I'll set up some forums or similar.

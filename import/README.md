@@ -11,7 +11,7 @@ I've tested using Vega [ED], Jazz [ED], and Carina [SC]. In theory any HCS Voice
 
 Note that none of the voice packs contain the proper recordings needed for weapon configuration. If you do use a voice pack you should expect to still hear some text-to-speech generated voice being used in these areas.
 
-If you do use end up using a voice pack and you hear some text-to-speech generated voices where you think there shouldn't be (outside of configuration or querying ship/weapon status), please let me know. I may be able to make some adjustments to get your particular voice pack working.
+If you do use end up using a voice pack and you hear some text-to-speech generated voices where you think there shouldn't be (outside of configuration or querying ship/weapon status), [please let me know](mailto:m.t.m.o.s.i.e.r@gmail.com). I may be able to make some adjustments to get your particular voice pack working.
 
 ### How do I get my voice pack to work with this companion?
 
