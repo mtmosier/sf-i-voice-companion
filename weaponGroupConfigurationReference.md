@@ -124,7 +124,7 @@ During configuration you will be asked which weapon to fire. The following is a 
 Why yes, it would.  But due to the difficulty in VoiceAttack recognizing such a short input properly, I've added a number of alternative inputs. Hopefully you will never need this, but in case you do here's the list.
 
 | Input | Alternatives |
-| -----------------------------------|
+| ---------------------|
 | yes | confirm, positive, affirmative, absolutely, please, please do, yeah, yes sir, commit, save, please save |
 | no | nah, nope, negative, cancel, nevermind, abort |
 
