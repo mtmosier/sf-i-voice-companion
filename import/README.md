@@ -27,7 +27,7 @@ Once you've updated the "*copyHCSVoiceFiles.cmd*" batch file you need to run it.
 
 ![copyHCSVoiceFiles.cmd setup](../images/copyHCSVoiceFiles_output.png?raw=true)
 
-Now you want to copy the "companionsFound" data from the output and add use it to update the "**[Config] General**" command found in the VoiceAttack profile under the "*Configuration*" category.
+Now you want to copy the "companionsFound" section from the output and add use it to update the "**[Config] General**" command found in the VoiceAttack profile under the "*Configuration*" category.
 
 ![copyHCSVoiceFiles.cmd setup](../images/Config_-_General.png?raw=true)
 
