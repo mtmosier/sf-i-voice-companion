@@ -97,7 +97,7 @@ I have found that on occasion the companion responses may get quite laggy. I'm c
 
 One thing I would suggest is to open the "[Config] General" profile command under Configuration and reduce the number of weapon group names (>>weaponGroupNameList) and ship names (>>shipNameListStr) included in the profile. Each weapon group added to the list increases the total number of commands the speech engine has to search for by 40 per individual group, which can adversely affect performance. Ship names have less of an impact, but can help nonetheless. Also consider changing the number of weapon groups available under each group name (>>maxWeaponGroupNum). I've set this value to 3 by default, which I find to be a good compromise between performance and usability. Setting it to 2, or even 1 would be less taxing on your system.
 
-*After changing the above configuration settings you will have to reload your profile before using it further. Do so by switching to another profile and back, or closing and re-starting voice attack.*
+***After changing the above configuration settings you will have to reload your profile before using it further. Do so by switching to another profile and back, or closing and re-starting voice attack.***
 
 ##### The companion says it engaged hyperspace (or other such command) even though it really didn't.
 
@@ -124,6 +124,6 @@ I hope to add some game log parsing to get feedback directly from the companion 
   * No, you cannot. The VA demo only allows up to 20 voice commands. At the time of this writing this profile is using over 1,300 (mostly derived) commands. It would be very difficult to compress it down to only 20.
 6. **I don't like the weapon group names or ship names you selected.  Can I change them?**
   * Yes, absolutely. Open the profile in VoiceAttack and edit the command labeled "**[Config] General**" under the "*Configuration*" category. Edit the variables "**>>weaponGroupNameList**" and/or "**>>shipNameListStr**" to better reflect your play style.  These must be formatted as a semi-colon (;) separated list.
-  * **After making changes to these variables you must reload the profile before they will take affect. You can do this by switching to another profile and switching back, or by restarting VoiceAttack.**
+  * ***After making changes to these variables you must reload the profile before they will take affect. You can do this by switching to another profile and switching back, or by restarting VoiceAttack.***
 7. **My question wasn't answered here. How do I get further help?**
   * Either report [your issue on GitHub](issues/), or [just email me](mailto:m.t.m.o.s.i.e.r@gmail.com). If this project becomes at all popular I'll set up some forums or similar.
