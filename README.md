@@ -69,7 +69,7 @@ The weapon group firing system is somewhat robust. [Read a more detailed descrip
 <a name="issues"></a>
 ## Troubleshooting
 
-##### The companion doesn't respond correctly more often than not.
+##### The companion doesn't respond consistently (or ever).
 
 This is a common problem with speech recognition, especially when using the built-in speech engine provided with windows. The first thing to try is to train your speech engine. [Here are the instructions provided by Microsoft for doing so.](https://support.microsoft.com/en-us/help/4027176/windows-10-use-voice-recognition)
 
