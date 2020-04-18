@@ -15,7 +15,7 @@ If you do use end up using a voice pack and you hear some text-to-speech generat
 
 ### How do I get my voice pack to work with this companion?
 
-I assume you've already downloaded a release version of this companion and have extracted the files on your hard drive. I also assume you have the HCS Voice Pack(s) you want to use full installed.  Look in the "sf-i-*voice-companion/import*" folder for a batch file named "*copyHCSVoiceFiles.cmd*". You will want to **edit** the file and make sure that the VoiceAttack Sounds directory is set up correctly.
+I assume you've already downloaded a release version of this companion and have extracted the files on your hard drive. I also assume you have the HCS Voice Pack(s) you want to use fully installed.  Look in the "sf-i-*voice-companion/import*" folder for a batch file named "*copyHCSVoiceFiles.cmd*". You will want to **edit** the file and make sure that the VoiceAttack Sounds directory is set up correctly.
 
 ![copyHCSVoiceFiles.cmd setup](../images/copyHCSVoiceFiles_config.png?raw=true)
 
