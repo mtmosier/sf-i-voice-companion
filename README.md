@@ -126,4 +126,4 @@ I hope to add some game log parsing to get feedback directly from the companion 
   * Yes, absolutely. Open the profile in VoiceAttack and edit the command labeled "**[Config] General**" under the "*Configuration*" category. Edit the variables "**>>weaponGroupNameList**" and/or "**>>shipNameListStr**" to better reflect your play style.  These must be formatted as a semi-colon (;) separated list.
   * ***After making changes to these variables you must reload the profile before they will take affect. You can do this by switching to another profile and switching back, or by restarting VoiceAttack.***
 7. **My question wasn't answered here. How do I get further help?**
-  * Either report [your issue on GitHub](issues/), or [just email me](mailto:m.t.m.o.s.i.e.r@gmail.com). If this project becomes at all popular I'll set up some forums or similar.
+  * Either report [your issue on GitHub](https://github.com/mtmosier/sf-i-voice-companion/issues), or [just email me](mailto:m.t.m.o.s.i.e.r@gmail.com). If this project becomes at all popular I'll set up some forums or similar.
