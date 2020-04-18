@@ -37,27 +37,41 @@ If you own an HCS Voice Pack you can also import voice files from your existing 
 <a name="howToUse"></a>
 ## Basic usage
 
-Here's an example of a typical interaction.  Assume all requests and responses are verbal.
+Here's an example of a typical interaction, from configuring a weapon group to firing one. All requests and responses below are verbal.
 
 ```
+> Hello
+  # Greetings
+> Who are you?
+  # I am your ship's companion. You can call me Null.
 > What is my current ship?
   # Currently using explorer ship
 > Switch to battle ship
-  # Configuration updated
-> List active weapon Groups
-  # No groups are currently in use
-> Configure missile 1
-  # Which weapon would you like to fire first?
-> Slot 1
-  # second?
-> Slot 2
-  # third?
-> Complete
-  # Group missile 1 will fire slot 1, slot 2.  Do you want to save this weapon group?
+  # Configuration loaded
+> List active weapon groups
+  # No active weapon groups found
+> Configure missile 3
+  # Which weapon do you want to activate first?
+> Slot 3
+  # Second?
+> Slot 4
+  # Third?
+> Pause 2
+  # Fourth?
+> Finished
+  # Weapon group missile 3 will fire slot 3, slot 4, pause for 2 seconds
+  # Do you want to save these settings?
 > Commit
-  # Group saved. Configuration Complete.
-> Configure evasive maneuvers
-  #
+  # Configuration saved.
+> Engines to max
+  # Engaging full burn
+> Unload missile 3
+  # Launching missiles
+[...]
+> Cease fire
+  # Holding fire
+> All stop
+  # Cutting engines
 ```
 
 To see a full list of voice commands available please check the [voice command reference guide](https://htmlpreview.github.io/?https://github.com/mtmosier/sf-i-voice-companion/blob/master/VoiceAttack/Reference/Starfighter%20Infinity%20Companion%20Reference.html).
@@ -73,15 +87,15 @@ The weapon group firing system is somewhat robust. [Read a more detailed descrip
 
 This is a common problem with speech recognition, especially when using the built-in speech engine provided with windows. The first thing to try is to train your speech engine. [Here are the instructions provided by Microsoft for doing so.](https://support.microsoft.com/en-us/help/4027176/windows-10-use-voice-recognition)
 
-I have some issues with failed recognition myself due to living in a noisy apartment. That's the reason why many voice commands in this profile have multiple methods of calling them. For example, you can say "Switch to battle ship" or "Swap to battle" or "Change to battle ship", all of which do the same thing. [View the voice command reference guide](https://htmlpreview.github.io/?https://github.com/mtmosier/sf-i-voice-companion/blob/master/VoiceAttack/Reference/Starfighter%20Infinity%20Companion%20Reference.html) to see all commands, and command variations available.
+I have some issues with failed recognition myself due to living in a noisy apartment. That's the reason why many voice commands in this profile have multiple methods of calling them. For example, you can say "Switch to battle ship" or "Swap to battle" or "Change to battle ship", all of which do the same thing. [View the voice command reference guide](https://htmlpreview.github.io/?https://github.com/mtmosier/sf-i-voice-companion/blob/master/VoiceAttack/Reference/Starfighter%20Infinity%20Companion%20Reference.html) to see all commands and command variations available.
 
-If you're still having trouble with your voice recognition I suggest reading over this [post on the VoiceAttack forums](https://forum.voiceattack.com/smf/index.php?topic=1635.0), which covers more advanced troubleshooting methods better than I ever could.
+If you're still having trouble with your voice recognition I suggest reading over this [post on the VoiceAttack forums](https://forum.voiceattack.com/smf/index.php?topic=1635.0) which covers more advanced troubleshooting methods better than I ever could.
 
 ##### Sometimes the companion responds several seconds late, or not at all.
 
-I have found that on occasion companion responses may get quite laggy. I'm continuing to look in to the issue, though I'm honestly not sure how much control I have over this. So far it seems that the speech engine gets less priority than the running game, and if the game is taxing your system the speech engine is high on the list of processes which get delayed.
+I have found that on occasion the companion responses may get quite laggy. I'm continuing to look in to the issue, though I'm honestly not sure how much control I have over this. So far it seems that the speech engine gets less priority than the running game, and if the game is taxing your system the speech engine is high on the list of processes which get delayed or dropped.
 
-One thing I would suggest is to open the "[Config] General" profile command under Configuration and reduce the number of weapon group names (>>weaponGroupNameList) and ship names (>>shipNameListStr) included in the profile. Each weapon group added to the list increases the total number of commands the speech engine has to search for by over a dozen per, which can adversely affect performance. Ship names have less of an impact, but can help nonetheless. Also consider changing the number of weapon groups available under each group name (>>maxWeaponGroupNum). I've set this value to 3 by default, which I find to be a good compromise between performance and usability. Setting it to 2, or even 1 would be less taxing on your system.
+One thing I would suggest is to open the "[Config] General" profile command under Configuration and reduce the number of weapon group names (>>weaponGroupNameList) and ship names (>>shipNameListStr) included in the profile. Each weapon group added to the list increases the total number of commands the speech engine has to search for by 40 per individual group, which can adversely affect performance. Ship names have less of an impact, but can help nonetheless. Also consider changing the number of weapon groups available under each group name (>>maxWeaponGroupNum). I've set this value to 3 by default, which I find to be a good compromise between performance and usability. Setting it to 2, or even 1 would be less taxing on your system.
 
 *After changing the above configuration settings you will have to reload your profile before using it further. Do so by switching to another profile and back, or closing and re-starting voice attack.*
 
@@ -99,13 +113,14 @@ I hope to add some game log parsing to get feedback directly from the companion 
   * I don't have time to port to other projects at the moment.  However, you are more than welcome to clone the project and update it for use with any game you want.
   * Depending on your desired game you might be able to change the keybind configuration to make the profile work with it with minimal changes.
 2. Why are there no voice files included?
-  * I plan to record the default companion voice, Null, myself when I have time. I don't know when I'll have that done, but assume it'll be a while.
+  * I plan to record the default companion voice, Null, myself when I have time. I don't know when I'll have that done, but it's safe to assume it'll take me a while.
 3. I already own an HCS Voice Pack.  Can I use my existing sound files with this project?
   * Yes, you can.  Check the [Import](import/) section for instructions.
+  * Even when using an HCS Voice Pack, any speech which is not covered by HCS will still use the text-to-speech engine. This mostly applies to the configuration interactions.
   * Please note that this project is in no way affiliated with HCS, and is not authorized to use these voice files in any capacity. Use at your own risk!
 4. Can I use this voice companion in VR?
   * Yes, this project was designed with the idea that the user would be in VR. To that end most weapon and ship configuration is done via voice interface. You can also ask for details about existing configurations to get a verbal description.
-  * Note that VR is in no way necessary to make use of this companion.
+  * Note that VR is in no way necessary to make use of this companion.  A headset with a decent quality mic is recommended though.
 5. Can I use the VoiceAttack demo with this companion?
   * No, you cannot. The VA demo only allows up to 20 voice commands. At the time of this writing this profile is using over 1,300 (mostly derived) commands. It would be very difficult to compress it down to only 20.
 6. I don't like the weapon group names or ship names you selected.  Can I change them?
