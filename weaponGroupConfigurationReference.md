@@ -10,7 +10,7 @@
 6. [Firing multiple groups](#advancedFiring)
 
 
-<a href="intro"></a>
+<a name="intro"></a>
 ## Introduction
 
 Weapon groups are broken down by name and number. By default this companion is set up to allow up to 3 of each group. So you can have groups set up for **Missile 1**, **Missile 3**, **Mine 2** and **Counter 3** if you like. You can also have them all firing at the same time. (See the [Firing multiple groups](#advancedFiring) section.)
@@ -19,7 +19,7 @@ If you want to reference the first group you can address it by name only. "*Fire
 
 A weapon group can include up to 20 individual [actions](#actionList). (More would be possible, but I can't imagine needing to set more than that for a single group.)
 
-<a href="definedShips"></a>
+<a name="definedShips"></a>
 ## Default ships
 
 ```
@@ -34,7 +34,7 @@ War
 
 When selecting your current ship you can use just the ship name, or add ship to it.  "*Swap to battle*" and "*Swap to battle ship*" will both function the same.
 
-<a href="definedGroups"></a>
+<a name="definedGroups"></a>
 ## Default weapon groups
 
 ```
@@ -49,7 +49,7 @@ Capitol
 Highlight
 ```
 
-<a href="emergencyGroups"></a>
+<a name="emergencyGroups"></a>
 ## Emergency groups
 
 In addition to the weapon groups described, you can also set up a few emergency groups. These differ in that you can only set up one of each, and you activate them simply by saying their name as a full command. (no need to say "Fire Red Alert", instead just say "Red Alert")
@@ -85,7 +85,7 @@ You would configure and use one like this...
 Unlike normal weapon groups, emergency groups do not need the "fire" or "unlock" prefix, and they will always fire only once per command.
 
 
-<a href="actionList"></a>
+<a name="actionList"></a>
 ## List of actions available when configuring weapon groups.
 
 During configuration you will be asked which weapon to fire. The following is a list of allowed inputs. When you're done adding weapons to the list use the "complete" command to move on.
@@ -115,7 +115,7 @@ During configuration you will be asked which weapon to fire. The following is a 
 | release reverse | Release the turn reverse button | N/A |
 
 
-<a href="advancedFiring"></a>
+<a name="advancedFiring"></a>
 ## Firing multiple weapon groups at once
 
 If you fire multiple weapon groups at once all the actions contained within will be added to a weapon firing queue. The individual fire groups will be processed as separate queues, with the system switching between them in priority.
