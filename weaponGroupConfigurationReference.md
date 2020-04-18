@@ -7,7 +7,8 @@
 3. [Default weapon groups](#definedGroups)
 4. [Emergency groups](#emergencyGroups)
 5. [List of actions](#actionList)
-6. [Firing multiple groups](#advancedFiring)
+6. [Confirmation prompt](#confirmation)
+7. [Firing multiple groups](#advancedFiring)
 
 
 <a name="intro"></a>
@@ -113,6 +114,19 @@ During configuration you will be asked which weapon to fire. The following is a 
 | release right | Release the turn left button | N/A |
 | release forward | Release the turn accelerate button | N/A |
 | release reverse | Release the turn reverse button | N/A |
+
+
+<a name="confirmation"></a>
+## Valid confirmation prompt responses
+
+***"Wouldn't a simple yes or no do?"***
+
+Why yes, it would.  But due to the difficulty in VoiceAttack recognizing such a short input properly, I've added a number of alternative inputs. Hopefully you will never need this, but in case you do here's the list.
+
+| Input | Alternatives |
+| -----------------------------------|
+| yes | confirm, positive, affirmative, absolutely, please, please do, yeah, yes sir, commit, save, please save |
+| no | nah, nope, negative, cancel, nevermind, abort |
 
 
 <a name="advancedFiring"></a>
