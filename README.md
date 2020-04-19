@@ -74,6 +74,47 @@ Here's an example of a typical interaction, from configuring a weapon group to f
   # Cutting engines
 ```
 
+#### Common commands
+
+| Command | Description |
+|:------- |:----------- |
+| **List available ships** | Responds with a list of valid ship names. |
+| **List active ships** | Responds with a list of ships which have previously been used. |
+| **Copy war ship to battle ship** | Overwrites any configuration **Battle** ship may have, replacing it with configuration from **War** ship. |
+| **Delete war ship** | Deletes any configuration saved for **War** ship. |
+| **Switch to battle ship** | Loads the configuration for **Battle** ship. |
+| **List available weapon groups** | Responds with a list of valid weapon group names. |
+| **List active weapon groups** | Responds with a list of weapon groups which have been configured for your current ship. |
+| **Configure counter 1** | Initiate weapon configuration for group **Counter 1**. |
+| **Delete mining laser** | Deletes any configuration saved for **Mining Laser 1**. |
+| **Equip slot 6** | Activates (but does not fire) **Slot 6**. Will also return to this weapon slot when finished performing firing actions. |
+| **Fire missile 2** | Single fire group **missile 2**. |
+| **Unload mine** | Continuous fire group **mine 1**. |
+| **Unload beacon 1** | Continuous fire group **beacon 1**. |
+| **Cancel beam 3** | Stop firing group **beam 3**. |
+| **Unload primary** | Continuous fire primary weapon. |
+| **Cease fire** | Stops firing any active weapon groups as well as the primary weapon. |
+| **Configure red alert** | Initiate configuration for the emergency group **Red Alert**. |
+| **Yellow Alert** | Activate **Yellow Alert** emergency group. If configured with actions they will be carried out. |
+| **Evasive Maneuvers** | Activate **Evasive Maneuvers** emergency group. If configured with actions they will be carried out. |
+| **Next Target** | Switch between locked targets. |
+| **Engines to full** | Holds down the accelerate key. |
+| **Engines to max** | Holds down the accelerate and propulsion keys. |
+| **All stop** | Releases the accelerate and propulsion keys. |
+| **Cruise control** | Toggles cruise control. |
+| **Engage autopilot** | Engages autopilot. |
+| **Engage hyperspace** | Engages hyperspace. |
+| **Show system map** | Activates the system map dialog. |
+| **Show ship info** | Activates the ship information dialog. |
+| **Show mission log** | Activates the objectives dialog. |
+| **Cargo hold** | Activates the inventory dialog. |
+| **Expand chat** | Expand in game chat. Add 2 or 3 to expand the chat multiple times. |
+| **Take a screenshot** | Takes a screenshot. |
+| **Promote Jazz** | Will switch to a new ship's companion, assuming you have multiple. |
+| **What time is it** | Responds with the current time. |
+| **Stop listening** | Set VoiceAttack to not listen. |
+| **Start listening** | Set VoiceAttack to begin listening again. |
+
 To see a full list of voice commands available please check the [voice command reference guide](https://htmlpreview.github.io/?https://github.com/mtmosier/sf-i-voice-companion/blob/master/reference/Starfighter%20Infinity%20Companion%20Reference.html).
 
 The weapon group firing system is somewhat robust. [Read a more detailed description of what you can do with weapon groups.](weaponGroupConfigurationReference.md)
