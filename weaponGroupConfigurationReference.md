@@ -99,9 +99,9 @@ During configuration you will be asked which weapon to fire. The following is a 
 | 1..10 | Fire the specified secondary weapon | slot 1..10, weapon slot 1..10 |
 | augmentation | Press the augmentation key | augment |
 | propulsion | Press the propulsion enhancer key | propulsion enhancer |
+| radar | Bring up the ship's radar | activate radar, open radar, display radar |
 | corkscrew | Perform a corkscrew | None |
 | action | Press the action button | None |
-| radar | Bring up the ship's radar | activate radar, open radar, display radar |
 | left | Press the turn left button | None |
 | right | Press the turn left button | None |
 | forward | Press the turn accelerate button | None |
