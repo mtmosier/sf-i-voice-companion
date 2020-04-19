@@ -121,12 +121,13 @@ During configuration you will be asked which weapon to fire. The following is a 
 
 ***"Wouldn't a simple yes or no do?"***
 
-Why yes, it would.  But due to the difficulty in VoiceAttack recognizing such a short input properly, I've added a number of alternatives. Hopefully you will never need this, but in case you do here's the list.
+Why yes, normally it would.  But due to the difficulty in VoiceAttack recognizing such a short input properly, I've added a number of alternatives. Hopefully you will never need this, but in case you do here's the list.
 
-| Input | Alternatives |
-| --- | ---|
-| yes | confirm, positive, affirmative, absolutely, please, please do, yeah, yes sir, commit, save, please save |
-| no | nah, nope, negative, cancel, nevermind, abort |
+| Input | Alternatives | Notes |
+| --- | --- | --- |
+| complete | done, finished, stop there, stop now | Used when asked for next action in order to stop input loop. |
+| yes | confirm, positive, affirmative, absolutely, please, please do, yeah, yes sir, commit, save, please save | Response when asked if you want to save the information. |
+| no | nah, nope, negative, cancel, nevermind, abort | Response when asked if you want to save the information. |
 
 
 <a name="advancedFiring"></a>
