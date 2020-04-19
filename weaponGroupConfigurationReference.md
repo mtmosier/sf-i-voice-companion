@@ -121,7 +121,7 @@ During configuration you will be asked which weapon to fire. The following is a 
 
 ***"Wouldn't a simple yes or no do?"***
 
-Why yes, it would.  But due to the difficulty in VoiceAttack recognizing such a short input properly, I've added a number of alternative inputs. Hopefully you will never need this, but in case you do here's the list.
+Why yes, it would.  But due to the difficulty in VoiceAttack recognizing such a short input properly, I've added a number of alternatives. Hopefully you will never need this, but in case you do here's the list.
 
 | Input | Alternatives |
 | --- | ---|
