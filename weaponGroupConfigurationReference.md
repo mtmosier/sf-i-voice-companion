@@ -99,21 +99,21 @@ During configuration you will be asked which weapon to fire. The following is a 
 | 1..10 | Fire the specified secondary weapon | slot 1..10, weapon slot 1..10 |
 | augmentation | Press the augmentation key | augment |
 | propulsion | Press the propulsion enhancer key | propulsion enhancer |
-| corkscrew | Perform a corkscrew | N/A |
-| action | Press the action button | N/A |
+| corkscrew | Perform a corkscrew | None |
+| action | Press the action button | None |
 | radar | Bring up the ship's radar | activate radar, open radar, display radar |
-| left | Press the turn left button | N/A |
-| right | Press the turn left button | N/A |
-| forward | Press the turn accelerate button | N/A |
-| reverse | Press the turn reverse button | N/A |
-| hold left | Press and hold the turn left button | N/A |
-| hold right | Press and hold the turn left button | N/A |
-| hold forward | Press and hold the turn accelerate button | N/A |
-| hold reverse | Press and hold the turn reverse button | N/A |
-| release left | Release the turn left button | N/A |
-| release right | Release the turn left button | N/A |
-| release forward | Release the turn accelerate button | N/A |
-| release reverse | Release the turn reverse button | N/A |
+| left | Press the turn left button | None |
+| right | Press the turn left button | None |
+| forward | Press the turn accelerate button | None |
+| reverse | Press the turn reverse button | None |
+| hold left | Press and hold the turn left button | None |
+| hold right | Press and hold the turn left button | None |
+| hold forward | Press and hold the turn accelerate button | None |
+| hold reverse | Press and hold the turn reverse button | None |
+| release left | Release the turn left button | None |
+| release right | Release the turn left button | None |
+| release forward | Release the turn accelerate button | None |
+| release reverse | Release the turn reverse button | None |
 
 
 <a name="confirmation"></a>
@@ -124,7 +124,7 @@ During configuration you will be asked which weapon to fire. The following is a 
 Why yes, it would.  But due to the difficulty in VoiceAttack recognizing such a short input properly, I've added a number of alternative inputs. Hopefully you will never need this, but in case you do here's the list.
 
 | Input | Alternatives |
-| ---------------------|
+|----------------------|
 | yes | confirm, positive, affirmative, absolutely, please, please do, yeah, yes sir, commit, save, please save |
 | no | nah, nope, negative, cancel, nevermind, abort |
 
