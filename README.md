@@ -6,8 +6,9 @@
 2. [Prerequisites](#prereq)
 3. [Installation](#install)
 4. [Basic usage](#howToUse)
-5. [Troubleshooting](#issues)
-6. [Frequently Asked Questions](#faq)
+5. [Command list](#commandList)
+6. [Troubleshooting](#issues)
+7. [Frequently Asked Questions](#faq)
 
 
 
@@ -18,12 +19,14 @@
 
 My primary focus has been on streamlining weapon usage during battle. Weapons can be set up in groups, and groups can be fired as a one-off or in a continuous barrage. Beyond that most ship functions can be accessed verbally using the companion. The companion also has some limited chatting options, though I plan to flesh them out more in the future.
 
-Please note that I am not currently distributing any prerecorded voice files for this companion. As such all interactions are currently done via text-to-speech.
+Please note that I am not currently distributing any prerecorded voice files for this companion. As such all interactions are currently done via text-to-speech (unless you import your own voice files).
+
 
 <a name="prereq"></a>
 ## Prerequisites
 
 In order to make use of this ship's companion you must have the full version of [VoiceAttack](https://voiceattack.com/) in addition to [Starfighter: Infinity](http://www.starfighterinfinity.com/). Note - the demo version of VoiceAttack **will not work** with this project.
+
 
 <a name="install"></a>
 ## Installation
@@ -33,6 +36,7 @@ Currently installation is as simple as downloading a zip from [Releases page](ht
 In the future I plan to add some basic voice mp3s and a VA plug-in, but for now the profile alone is all that's required.
 
 If you own an HCS Voice Pack you can also import voice files from your existing pack. See the [Import](import/) section for instructions.
+
 
 <a name="howToUse"></a>
 ## Basic usage
@@ -74,7 +78,13 @@ Here's an example of a typical interaction, from configuring a weapon group to f
   # Cutting engines
 ```
 
-#### Common commands
+[Read a more detailed description of what you can do with weapon groups.](weaponGroupConfigurationReference.md)
+
+
+<a name="commandList"></a>
+## Command list
+
+This command list may be incomplete. To see a full list of voice commands available please check the [voice command reference guide](https://htmlpreview.github.io/?https://github.com/mtmosier/sf-i-voice-companion/blob/master/reference/Starfighter%20Infinity%20Companion%20Reference.html).
 
 | Command | Description |
 |:------- |:----------- |
@@ -115,10 +125,7 @@ Here's an example of a typical interaction, from configuring a weapon group to f
 | **Stop listening** | Set VoiceAttack to not listen. |
 | **Start listening** | Set VoiceAttack to begin listening again. |
 
-To see a full list of voice commands available please check the [voice command reference guide](https://htmlpreview.github.io/?https://github.com/mtmosier/sf-i-voice-companion/blob/master/reference/Starfighter%20Infinity%20Companion%20Reference.html).
-
-The weapon group firing system is somewhat robust. [Read a more detailed description of what you can do with weapon groups.](weaponGroupConfigurationReference.md)
-
+[Read a more detailed description of what you can do with weapon groups.](weaponGroupConfigurationReference.md)
 
 
 <a name="issues"></a>
@@ -134,9 +141,11 @@ If you're still having trouble with your voice recognition I suggest reading ove
 
 #### Sometimes the companion responds several seconds late, or not at all.
 
-I have found that on occasion the companion responses may get quite laggy. I'm continuing to look in to the issue, though I'm honestly not sure how much control I have over this. So far it seems that the speech engine gets less priority than the running game, and if the game is taxing your system the speech engine is high on the list of processes which get delayed or dropped.
+I have found that on occasion the companion responses may get quite laggy. I'm continuing to look in to the issue. So far it seems that the speech engine gets less priority than the running game, and if the game is taxing your system the speech engine is high on the list of processes which get delayed or dropped.
 
-One thing I would suggest is to open the "[Config] General" profile command under Configuration and reduce the number of weapon group names (>>weaponGroupNameList) and ship names (>>shipNameListStr) included in the profile. Each weapon group added to the list increases the total number of commands the speech engine has to search for by 40 per individual group, which can adversely affect performance. Ship names have less of an impact, but can help nonetheless. Also consider changing the number of weapon groups available under each group name (>>maxWeaponGroupNum). I've set this value to 3 by default, which I find to be a good compromise between performance and usability. Setting it to 2, or even 1 would be less taxing on your system.
+I plan to change the way the configuration commands work to accept group/ship names after the command has already been initiated. I expect this to help the situation as the speech engine will have a much smaller amount of expected commands.
+
+In the mean time I suggest you try reducing the number of weapon group names allowed in the profile. You can do this by opening the SF:I companion profile in VoiceAttack and editing the "**[Config] General**" command under the "*Configuration*" group header. Then look for the line labeled "**>>weaponGroupNameList**". This is a list of semi-colon separated valid weapon group names. Remove any which you think you can live without. Also consider changing the number of weapon groups available under each group name (**>>maxWeaponGroupNum**). I've set this value to 3 by default, which I find to be a good compromise between performance and usability. Setting it to 2, or even 1 would be less taxing on your system.
 
 *After changing the above configuration settings you will have to reload your profile before using it further. Do so by switching to another profile and back, or closing and re-starting voice attack.*
 
@@ -147,8 +156,8 @@ There currently is no direct tie-in with Starfighter: Infinity. This companion d
 I hope to add some game log parsing to get feedback directly from the companion at some point, but for the moment all I can offer is this somewhat-blind companion.
 
 
-<a name="faq"></a>
 ## Frequently Asked Questions
+<a name="faq"></a>
 
 1. **Can you make this work with [some other game]?**
   * I don't have time to port to other projects at the moment.  However, you are more than welcome to clone the project and update it for use with any game you want.
