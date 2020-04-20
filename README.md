@@ -157,15 +157,13 @@ I have some issues with failed recognition myself due to living in a noisy apart
 
 If you're still having trouble with your voice recognition I suggest reading over this [post on the VoiceAttack forums](https://forum.voiceattack.com/smf/index.php?topic=1635.0) which covers more advanced troubleshooting methods better than I ever could.
 
+
 #### Sometimes the companion responds several seconds late, or not at all.
 
 I have found that on occasion the companion responses may get quite laggy. I'm continuing to look in to the issue. So far it seems that the speech engine gets less priority than the running game, and if the game is taxing your system the speech engine is high on the list of processes which get delayed or dropped.
 
-I plan to change the way the configuration commands work to accept group/ship names after the command has already been initiated. I expect this to help the situation as the speech engine will have a much smaller amount of expected commands.
+If you do experience this issue I'd appreciate it if you would report [your issue on GitHub](https://github.com/mtmosier/sf-i-voice-companion/issues), or [email me](mailto:m.t.m.o.s.i.e.r@gmail.com) letting me know what you were doing at the time of the lag, your system specs, version of the profile you are using, and whether any voice packs are in use.
 
-In the mean time I suggest you try reducing the number of weapon group names allowed in the profile. You can do this by opening the SF:I companion profile in VoiceAttack and editing the "**[Config] General**" command under the "*Configuration*" group header. Then look for the line labeled "**>>weaponGroupNameList**". This is a list of semi-colon separated valid weapon group names. Remove any which you think you can live without. Also consider changing the number of weapon groups available under each group name (**>>maxWeaponGroupNum**). I've set this value to 3 by default, which I find to be a good compromise between performance and usability. Setting it to 2, or even 1 would be less taxing on your system.
-
-*After changing the above configuration settings you will have to reload your profile before using it further. Do so by switching to another profile and back, or closing and re-starting voice attack.*
 
 #### The companion says it engaged hyperspace (or other such command) even though it really didn't.
 
