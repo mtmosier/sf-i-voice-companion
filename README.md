@@ -53,6 +53,7 @@ Here's a very basic, no config needed, I-just-want-to-kill-stuff example of usag
 > Engines to max    # holds accelerate and propulsion keys
 [...]
 > All stop    # releases accelerate and propulsion keys
+> Show system map    # display the system map dialog
 ```
 
 
