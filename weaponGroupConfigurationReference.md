@@ -83,7 +83,7 @@ You would configure and use one like this...
   # Executing evasive maneuvers
 ```
 
-Unlike normal weapon groups, emergency groups do not need the "fire" or "unlock" prefix, and they will always fire only once per command.
+Unlike normal weapon groups, emergency groups do not need the "fire" or "unload" prefix, and they will always fire only once per command.
 
 
 <a name="actionList"></a>
