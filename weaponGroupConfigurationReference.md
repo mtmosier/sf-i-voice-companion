@@ -94,7 +94,7 @@ During configuration you will be asked which weapon to fire. The following is a 
 | Input | Description | Alternatives |
 | ----- | ----------- | ------------ |
 | complete | End the input | done, stop here, finished |
-| pause 1..10 | Pause processing this group | delay 1..10 |
+| pause 1..60 | Pause processing this group for N seconds | delay 1..60 |
 | primary | Fire the primary weapon (once) | primary weapon |
 | 1..10 | Fire the specified secondary weapon | slot 1..10, weapon slot 1..10 |
 | augmentation | Press the augmentation key | augment |
@@ -102,16 +102,16 @@ During configuration you will be asked which weapon to fire. The following is a 
 | radar | Bring up the ship's radar | activate radar, open radar, display radar |
 | corkscrew | Perform a corkscrew | None |
 | action | Press the action button | None |
-| left | Press the turn left button | None |
-| right | Press the turn left button | None |
+| left | Press the turn left button | turn left |
+| right | Press the turn right button | turn right |
 | forward | Press the turn accelerate button | None |
 | reverse | Press the turn reverse button | None |
-| hold left | Press and hold the turn left button | None |
-| hold right | Press and hold the turn left button | None |
+| hold left | Press and hold the turn left button | hold turn left |
+| hold right | Press and hold the turn right button | hold turn right |
 | hold forward | Press and hold the turn accelerate button | None |
 | hold reverse | Press and hold the turn reverse button | None |
-| release left | Release the turn left button | None |
-| release right | Release the turn left button | None |
+| release left | Release the turn left button | release turn left |
+| release right | Release the turn right button | release turn right |
 | release forward | Release the turn accelerate button | None |
 | release reverse | Release the turn reverse button | None |
 
