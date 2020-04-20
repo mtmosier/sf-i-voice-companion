@@ -47,12 +47,12 @@ Here's a very basic, no config needed, I-just-want-to-kill-stuff example of usag
 > Unload weapon slot 1    # continuous fire weapon slot 1
 > Unload slot 2    # continuous fire weapon slot 2  (will alternate with slot 1)
 > Fire weapon slot 6    # single fire weapon slot 6  (after which slots 1 and 2 will continue to alternate)
-> Fire primary    # Primary weapon will continuous fire
+> Fire primary    # continuous fire primary
 [...]
-> Cease fire    # Stop firing both secondary and primary weapons
-> Engines to max    # Holds accelerate and propulsion keys
+> Cease fire    # stop firing both secondary and primary weapons
+> Engines to max    # holds accelerate and propulsion keys
 [...]
-> All stop    # Releases accelerate and propulsion keys
+> All stop    # releases accelerate and propulsion keys
 ```
 
 
