@@ -96,7 +96,7 @@ During configuration you will be asked which weapon to fire. The following is a 
 | complete | End the input | done, stop here, finished |
 | pause 1..60 | Pause processing this group for N seconds | delay 1..60 |
 | primary | Fire the primary weapon (once) | primary weapon |
-| 1..10 | Fire the specified secondary weapon | slot 1..10, weapon slot 1..10 |
+| 0..9 | Fire the specified secondary weapon | slot 0..9, weapon slot 0..9 |
 | augmentation | Press the augmentation key | augment |
 | propulsion | Press the propulsion enhancer key | propulsion enhancer |
 | radar | Bring up the ship's radar | activate radar, open radar, display radar |
