@@ -41,7 +41,22 @@ If you own an HCS Voice Pack you can also import voice files from your existing 
 <a name="howToUse"></a>
 ## Basic usage
 
-Here's an example of a typical interaction, from configuring a weapon group to firing one. All requests and responses below are verbal.
+Here's a very basic, no config needed, I-just-want-to-kill-stuff example of usage.
+
+```
+> Unload weapon slot 1    # continuous fire weapon slot 1
+> Unload slot 2    # continuous fire weapon slot 2  (will alternate with slot 1)
+> Fire weapon slot 6    # single fire weapon slot 6  (after which slots 1 and 2 will continue to alternate)
+> Fire primary    # Primary weapon will continuous fire
+[...]
+> Cease fire    # Stop firing both secondary and primary weapons
+> Engines to max    # Holds accelerate and propulsion keys
+[...]
+> All stop    # Releases accelerate and propulsion keys
+```
+
+
+Here's a longer example, including configuring and firing weapon groups. All requests and responses below are verbal.
 
 ```
 > Hello
@@ -98,6 +113,8 @@ This command list may be incomplete. To see a full list of voice commands availa
 | **Configure counter 1** | Initiate weapon configuration for group **Counter 1**. |
 | **Delete mining laser** | Deletes any configuration saved for **Mining Laser 1**. |
 | **Equip slot 6** | Activates (but does not fire) **Slot 6**. Will also return to this weapon slot when finished performing firing actions. |
+| **Fire weapon slot 3** | Single fire **Slot 3**. |
+| **Unload slot 1** | Continuous fire **Slot 1**. |
 | **Fire missile 2** | Single fire group **missile 2**. |
 | **Unload mine** | Continuous fire group **mine 1**. |
 | **Unload beacon 1** | Continuous fire group **beacon 1**. |
