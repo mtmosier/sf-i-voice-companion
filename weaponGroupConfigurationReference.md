@@ -91,29 +91,21 @@ Unlike normal weapon groups, emergency groups do not need the "fire" or "unload"
 
 During configuration you will be asked which weapon to fire. The following is a list of allowed inputs. When you're done adding weapons to the list use the "complete" command to move on.
 
-| Input | Description | Alternatives |
-| ----- | ----------- | ------------ |
-| complete | End the input | done, stop here, finished |
-| pause 1..60 | Pause processing this group for N seconds | delay 1..60 |
-| primary | Fire the primary weapon (once) | primary weapon |
-| 0..9 | Fire the specified secondary weapon | slot 0..9, weapon slot 0..9 |
-| augmentation | Press the augmentation key | augment |
-| propulsion | Press the propulsion enhancer key | propulsion enhancer |
-| radar | Bring up the ship's radar | activate radar, open radar, display radar |
-| corkscrew | Perform a corkscrew | None |
-| action | Press the action button | None |
-| left | Press the turn left button | turn left |
-| right | Press the turn right button | turn right |
-| forward | Press the turn accelerate button | None |
-| reverse | Press the turn reverse button | None |
-| hold left | Press and hold the turn left button | hold turn left |
-| hold right | Press and hold the turn right button | hold turn right |
-| hold forward | Press and hold the turn accelerate button | None |
-| hold reverse | Press and hold the turn reverse button | None |
-| release left | Release the turn left button | release turn left |
-| release right | Release the turn right button | release turn right |
-| release forward | Release the turn accelerate button | None |
-| release reverse | Release the turn reverse button | None |
+| Input | Description | Alternatives | Hold/Release Allowed |
+| ----- | ----------- | ------------ | -------------------- |
+| complete | End the input | done, stop here, finished | No |
+| pause 1..60 | Pause processing this group for N seconds | delay 1..60 | No |
+| primary | Fire the primary weapon (once) | primary weapon | Yes |
+| 0..9 | Fire the specified secondary weapon | slot 0..9, weapon slot 0..9 | No |
+| augmentation | Press the augmentation key | augment | Yes |
+| propulsion | Press the propulsion enhancer key | propulsion enhancer | Yes |
+| radar | Bring up the ship's radar | activate radar, open radar, display radar | No |
+| corkscrew | Perform a corkscrew | None | Yes |
+| action | Press the action button | None | Yes |
+| left | Press the turn left button | turn left | Yes |
+| right | Press the turn right button | turn right | Yes |
+| forward | Press the turn accelerate button | None | Yes |
+| reverse | Press the turn reverse button | None | Yes |
 
 
 <a name="confirmation"></a>

@@ -27,11 +27,7 @@ Once you've updated the "*copyHCSVoiceFiles.cmd*" batch file you need to run it.
 
 ![copyHCSVoiceFiles.cmd setup](../images/copyHCSVoiceFiles_output.png?raw=true)
 
-Now you want to copy the "companionsFound" section from the output and add use it to update the "**[Config] General**" command found in the VoiceAttack profile under the "*Configuration*" category.
-
-![copyHCSVoiceFiles.cmd setup](../images/Config_-_General.png?raw=true)
-
-Once all that is done you will need to reload your companion profile. You can do so by switching to a different profile and switching back, or by restarting VoiceAttack.
+Next you will need to reload your companion profile. You can do so by switching to a different profile and switching back, or by restarting VoiceAttack.
 
 To use the companion of your choice run the "**Promote**" command.
 
