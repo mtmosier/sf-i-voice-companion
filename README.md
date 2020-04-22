@@ -116,11 +116,13 @@ This command list may be incomplete. To see a full list of voice commands availa
 | **Equip slot 6** | Activates (but does not fire) **Slot 6**. Will also return to this weapon slot when finished performing firing actions. |
 | **Fire weapon slot 3** | Single fire **Slot 3**. |
 | **Unload slot 1** | Continuous fire **Slot 1**. |
+| **Cancel slot 1** | Stop firing **Slot 1**. |
 | **Fire missile 2** | Single fire group **missile 2**. |
 | **Unload mine** | Continuous fire group **mine 1**. |
 | **Unload beacon 1** | Continuous fire group **beacon 1**. |
 | **Cancel beam 3** | Stop firing group **beam 3**. |
 | **Unload primary** | Continuous fire primary weapon. |
+| **Cancel primary** | Stop firing primary weapon. |
 | **Cease fire** | Stops firing any active weapon groups as well as the primary weapon. |
 | **Configure red alert** | Initiate configuration for the emergency group **Red Alert**. |
 | **Yellow Alert** | Activate **Yellow Alert** emergency group. If configured with actions they will be carried out. |
