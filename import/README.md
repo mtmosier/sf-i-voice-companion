@@ -27,9 +27,7 @@ Once you've updated the "*copyHCSVoiceFiles.cmd*" batch file you need to run it.
 
 ![copyHCSVoiceFiles.cmd setup](../images/copyHCSVoiceFiles_output.png?raw=true)
 
-Next you will need to reload your companion profile. You can do so by switching to a different profile and switching back, or by restarting VoiceAttack.
-
-To use the companion of your choice run the "**Promote**" command.
+Next you will need to reload your companion profile. You can do so by switching to a different profile and switching back, or by restarting VoiceAttack. To use the companion of your choice run the "**Promote**" command.
 
 ```
 > Promote Jazz
