@@ -6,8 +6,8 @@ public class VAInline
 {
 
 	private List<WeaponGroup> WeaponGroupList = new List<WeaponGroup>();
-	private decimal skippedKeypressPauseTime = 0m;
-	private decimal defaultPauseTime = 0.05m;
+	private decimal skippedKeypressPauseTime = 0.3m;
+	private decimal defaultPauseTime = 0.2m;
 	private decimal defaultKeyHoldTime = 0.1m;
 	private bool isInitialRun = false;
 	private string secondaryFireKey;
@@ -90,7 +90,8 @@ public class VAInline
 
 						if (keybind.HoldKey) {
 							Parent.VA.SetText("~~nextAction", "Hold Key");
-							Parent.addKeybindToHeldKeyList(keybind.KeybindName);
+							if (!String.IsNullOrEmpty(keybind.KeybindName))
+								Parent.addKeybindToHeldKeyList(keybind.KeybindName);
 						} else if (keybind.ReleaseKey) {
 							Parent.VA.SetText("~~nextAction", "Release Key");
 							Parent.removeKeybindFromHeldKeyList(keybind.KeybindName);
