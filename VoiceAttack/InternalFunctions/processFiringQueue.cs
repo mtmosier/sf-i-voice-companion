@@ -355,9 +355,21 @@ public class VAInline
 			isInitialRun = false;
 
 		} else {
-			//*** No weapon groups ready to fire. Pause while we wait.
-			VA.SetText("~~nextAction", "Pause");
-			VA.SetDecimal("~~pauseTime", skippedKeypressPauseTime + defaultPauseTime);
+
+			if (!string.IsNullOrEmpty(secondaryFireKey) && VA.State.KeyDown(secondaryFireKey)) {
+
+				//*** Nothing to fire. Release the secondary fire key.
+				VA.SetText("~~keybindName", secondaryFireKey);
+				VA.SetDecimal("~~pauseTime", 0m);
+				VA.SetText("~~nextAction", "Release Key");
+				removeKeybindFromHeldKeyList(secondaryFireKey);
+
+			} else {
+
+				//*** No weapon groups ready to fire. Pause while we wait.
+				VA.SetText("~~nextAction", "Pause");
+				VA.SetDecimal("~~pauseTime", skippedKeypressPauseTime + defaultPauseTime);
+			}
 		}
 	}
 
