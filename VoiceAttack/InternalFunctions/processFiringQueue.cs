@@ -471,10 +471,10 @@ public class VAInline
 	}
 
 	void setCurrentlyHeldKeybindList(List<string> currentlyHeldKeybindList) {
-		VA.SetInt(">>currentlyHeldKeybindList.len", currentlyHeldKeybindList.Count);
 		for (int i = 0; i < currentlyHeldKeybindList.Count; i++) {
 			VA.SetText(">>currentlyHeldKeybindList[" + i + "]", currentlyHeldKeybindList[i]);
 		}
+		VA.SetInt(">>currentlyHeldKeybindList.len", currentlyHeldKeybindList.Count);
 	}
 
 	void addKeybindToHeldKeyList(string keybindName) {
