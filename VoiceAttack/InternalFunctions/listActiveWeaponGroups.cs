@@ -81,7 +81,7 @@ public class VAInline
 					if (groupCount != 1)  output += "s";
 					output += ", ";
 				} else {
-					output += wgName + " is active, ";
+					output += wgName + " has been configured, ";
 				}
 			}
 		}
