@@ -1,56 +1,13 @@
-//***  System.Web.Extensions.dll
+//***  System.Web.Extensions.dll;System.Linq.dll;System.Core.dll
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Web.Script.Serialization;
+using System.Linq;
 
 public class VAInline
 {
-
-	private string getSettingsPath(bool includeFilename = true) {
-		string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-		path = Path.Combine(path, "VoiceAttack SF-I Companion");
-
-		try {
-			Directory.CreateDirectory(path);
-			if (includeFilename)  path = Path.Combine(path, "settings.json");
-		} catch (Exception e) {
-			path = null;
-		}
-
-		return path;
-	}
-
-	private bool writeSettingsToFile(Dictionary<string,object> settings) {
-		bool rtnVal = false;
-		string filePath = getSettingsPath(true);
-
-		if (!string.IsNullOrEmpty(filePath)) {
-			try {
-				string json = new JavaScriptSerializer().Serialize(settings);
-				System.IO.File.WriteAllText(filePath, json);
-				rtnVal = true;
-			} catch (Exception e) {}
-		}
-
-		return rtnVal;
-	}
-
-	private Dictionary<string,object> readSettingsFromFile() {
-		Dictionary<string,object> rtnVal = null;
-		string filePath = getSettingsPath(true);
-
-		try {
-			string json = System.IO.File.ReadAllText(filePath);
-			if (!string.IsNullOrEmpty(json)) {
-				rtnVal = new JavaScriptSerializer().Deserialize<Dictionary<string,object>>(json);
-			}
-		} catch (Exception e) {}
-
-		return rtnVal;
-	}
-
 	public void main() {
 
 		//*** Init
@@ -180,5 +137,48 @@ public class VAInline
 		//*** Write settings to a file
 		bool success = writeSettingsToFile(settings);
 		VA.WriteToLog("writeSettingsToFile: " + (success ? "success" : "fail"), "Red");
+	}
+
+	private string getSettingsPath(bool includeFilename = true) {
+		string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+		path = Path.Combine(path, "VoiceAttack SF-I Companion");
+
+		try {
+			Directory.CreateDirectory(path);
+			if (includeFilename)  path = Path.Combine(path, "settings.json");
+		} catch (Exception e) {
+			path = null;
+		}
+
+		return path;
+	}
+
+	private bool writeSettingsToFile(Dictionary<string,object> settings) {
+		bool rtnVal = false;
+		string filePath = getSettingsPath(true);
+
+		if (!string.IsNullOrEmpty(filePath)) {
+			try {
+				string json = new JavaScriptSerializer().Serialize(settings);
+				System.IO.File.WriteAllText(filePath, json);
+				rtnVal = true;
+			} catch (Exception e) {}
+		}
+
+		return rtnVal;
+	}
+
+	private Dictionary<string,object> readSettingsFromFile() {
+		Dictionary<string,object> rtnVal = null;
+		string filePath = getSettingsPath(true);
+
+		try {
+			string json = System.IO.File.ReadAllText(filePath);
+			if (!string.IsNullOrEmpty(json)) {
+				rtnVal = new JavaScriptSerializer().Deserialize<Dictionary<string,object>>(json);
+			}
+		} catch (Exception e) {}
+
+		return rtnVal;
 	}
 }
