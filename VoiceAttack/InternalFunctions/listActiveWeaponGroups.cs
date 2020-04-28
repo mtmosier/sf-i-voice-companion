@@ -64,9 +64,7 @@ public class VAInline
 								output += "Group ";
 							}
 							if (!isStaticGroupList)  output += n + " ";
-							output += "has " + lenN.Value;
-							if (!isStaticGroupList)  output += " weapon";
-							else output += " action";
+							output += "has " + lenN.Value + " action";
 							output += (lenN.Value == 1 ? "" : "s") + ", ";
 						} else {
 							groupCount++;
