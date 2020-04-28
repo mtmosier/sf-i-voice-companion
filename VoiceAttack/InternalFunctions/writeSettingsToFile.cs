@@ -136,7 +136,7 @@ public class VAInline
 
 		//*** Write settings to a file
 		bool success = writeSettingsToFile(settings);
-		VA.WriteToLog("writeSettingsToFile: " + (success ? "success" : "fail"), "Red");
+		//VA.WriteToLog("writeSettingsToFile: " + (success ? "success" : "fail"), "Black");
 	}
 
 	private string getSettingsPath(bool includeFilename = true) {

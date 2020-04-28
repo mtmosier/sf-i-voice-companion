@@ -9,19 +9,6 @@ public class VAInline
 	private Guid requestVerbalUserInputGuid;
 	private Guid writeSettingsToFileGuid;
 
-	private void cancelConfiguration() {
-		playRandomSound("Cancelling Configuration", "Cancel", false);
-	}
-
-	private void configurationError() {
-		cancelConfiguration();
-//		playRandomSound("Configuration error. Cancelling", "General Error", false);
-	}
-
-	private void timeoutError() {
-		playRandomSound("Configuration error. Timed out.", "General Error", false);
-	}
-
 	public void main()
 	{
 		//*** INITIALIZE
@@ -339,5 +326,18 @@ VA.WriteToLog("Heard " + response, "Red");
 		if (writeSettingsToFileGuid == null)  return false;
 		VA.Command.Execute(writeSettingsToFileGuid, true, true);
 		return true;
+	}
+
+	private void cancelConfiguration() {
+		playRandomSound("Cancelling Configuration", "Cancel", false);
+	}
+
+	private void configurationError() {
+		cancelConfiguration();
+//		playRandomSound("Configuration error. Cancelling", "General Error", false);
+	}
+
+	private void timeoutError() {
+		playRandomSound("Configuration error. Timed out.", "General Error", false);
 	}
 }
