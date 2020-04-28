@@ -306,7 +306,7 @@ public class VAInline
 		if (WeaponGroupList.Count == 0) {
 
 			//*** Make sure the secondary fire key is held down. If it is not
-			//*** we can assume a single keystroke queue ran and the dealyed
+			//*** we can assume a single keystroke queue ran and the delayed
 			//*** secondary fire button has not yet occured. Press the secondary
 			//*** fire button before exiting proper next loop.
 			if (!isInitialRun && !string.IsNullOrEmpty(secondaryFireKey) && !VA.State.KeyDown(secondaryFireKey)) {
@@ -328,15 +328,13 @@ public class VAInline
 		//*** Make sure the secondary fire key is held down. If not allow one
 		//*** queue keypress (which is presumably a secondary weapon slot)
 		//*** first then send the hold secondary fire key next
-		if (!isInitialRun) {
-			if (!string.IsNullOrEmpty(secondaryFireKey) && !VA.State.KeyDown(secondaryFireKey)) {
-				if (!string.IsNullOrEmpty(prevKeybindName)) {
-					VA.SetText("~~keybindName", "SecondaryFire");
-					VA.SetDecimal("~~pauseTime", 0.05m);
-					VA.SetText("~~nextAction", "Hold Key");
-					addKeybindToHeldKeyList("SecondaryFire");
-					return;
-				}
+		if (!isInitialRun && !string.IsNullOrEmpty(secondaryFireKey) && !VA.State.KeyDown(secondaryFireKey)) {
+			if (!string.IsNullOrEmpty(prevKeybindName)) {
+				VA.SetText("~~keybindName", "SecondaryFire");
+				VA.SetDecimal("~~pauseTime", 0.05m);
+				VA.SetText("~~nextAction", "Hold Key");
+				addKeybindToHeldKeyList("SecondaryFire");
+				return;
 			}
 		}
 
