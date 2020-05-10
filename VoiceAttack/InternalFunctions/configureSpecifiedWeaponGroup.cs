@@ -21,7 +21,8 @@ public class VAInline
 		string[] saveList = { "save", "please save" };
 		string[] disagreeList = { "no", "nah", "nope", "negative" };
 		string[] cancelList = { "cancel", "nevermind", "never mind", "abort" };
-		string[] inputCompleteList = { "stop here", "stop there", "done", "finished", "complete" };
+		string[] restartList = { "restart", "start over", "do over" };
+		string[] inputCompleteList = { "stop here", "stop there", "done", "finished", "complete", "completed" };
 
 
 		//*** GET RELEVANT SETTINGS
@@ -57,16 +58,23 @@ public class VAInline
 
 		if (string.IsNullOrEmpty(groupNum))
 			groupNum = "1";
-		if (groupName.Equals("eighths", StringComparison.OrdinalIgnoreCase))
+		if (groupNum.Equals("eighths", StringComparison.OrdinalIgnoreCase))
 			groupNum = "8";
-		if (groupName.Equals("ate", StringComparison.OrdinalIgnoreCase))
+		if (groupNum.Equals("ate", StringComparison.OrdinalIgnoreCase))
 			groupNum = "8";
 
 		VA.WriteToLog("Configuring group: " + groupName + " " + groupNum, "Green");
 
+
 		//*** START PLAYER INTERACTION
-		if (quickConfig != true)
+		string tmpVarName = ">>shipInfo[" + activeShipName + "].weaponGroup[" + groupName + "][" + groupNum + "]";
+		int? lenN = VA.GetInt(tmpVarName + ".weaponKeyPress.len");
+
+		if (VA.GetBoolean(tmpVarName + ".isActive") == true && lenN.HasValue && lenN.Value > 0) {
+			playRandomSound(groupName + " " + groupNum + " already has a configuration saved. Say abort to cancel configuration at any prompt.", "Weapon Group Already Configured", true);
+		} else if (quickConfig != true) {
 			playRandomSound(null, "Configure Weapon Group", true);
+		}
 
 
 		string request = "";
@@ -102,6 +110,7 @@ public class VAInline
 				+ "[hold;release;] action;"
 				+ "[activate;open;display;] radar;"
 				+ "[pause;delay] [1..60;ate;eighths];"
+				+ string.Join(";", restartList) + ";"
 				+ string.Join(";", cancelList) + ";"
 				+ string.Join(";", inputCompleteList),
 				request,
@@ -114,11 +123,18 @@ public class VAInline
 				timeoutError();
 				return;
 			}
-VA.WriteToLog("Heard " + response, "Red");
+			// VA.WriteToLog("Heard " + response, "Red");
 
 			if (Array.IndexOf(cancelList, response) != -1) {
 				VA.WriteToLog("Cancelled " + response, "Red");
 				cancelConfiguration();
+				return;
+			}
+
+			if (Array.IndexOf(restartList, response) != -1) {
+				VA.WriteToLog("Restart weapon group configuration.", "Orange");
+				playRandomSound("Restarting configuration", "Restart Configuration", true);
+				main();
 				return;
 			}
 
@@ -249,6 +265,7 @@ VA.WriteToLog("Heard " + response, "Red");
 		response = getUserInput(
 			string.Join(";", agreeList)
 				+ ";" + string.Join(";", saveList)
+				+ ";" + string.Join(";", restartList)
 				+ ";" + string.Join(";", disagreeList)
 				+ ";" + string.Join(";", cancelList),
 			request,
@@ -262,6 +279,12 @@ VA.WriteToLog("Heard " + response, "Red");
 		}
 		if (Array.IndexOf(cancelList, response) != -1 || Array.IndexOf(disagreeList, response) != -1) {
 			cancelConfiguration();
+			return;
+		}
+		if (Array.IndexOf(restartList, response) != -1) {
+			VA.WriteToLog("Restart weapon group configuration.", "Orange");
+			playRandomSound("Restarting configuration", "Restart Configuration", true);
+			main();
 			return;
 		}
 
