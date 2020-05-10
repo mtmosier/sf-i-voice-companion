@@ -179,6 +179,7 @@ I hope to add some game log parsing to get feedback directly from the companion 
 
 1. **I use custom keybinds in SF:I. Do I really need to configure my kebinds manually in the VoiceAttack profile?**
   * There should be no keybind configuration required. Keybinds are automatically read from the game configuration data upon profile initialization.
+  * The keybind configuration included in the profile are the defaults. These will be used if the profile is unable to load some (or all) keybinds from the game configuration data.
   * ***If you change your keybinds while running VoiceAttack you may need to reload the profile before the changes will take affect. You can do this by switching to another profile and switching back, or by restarting VoiceAttack.***
 2. **Can you make this work with [some other game]?**
   * I don't have time to port to other projects at the moment.  However, you are more than welcome to clone the project and update it for use with any game you want.
