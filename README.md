@@ -177,21 +177,24 @@ I hope to add some game log parsing to get feedback directly from the companion 
 ## Frequently Asked Questions
 <a name="faq"></a>
 
-1. **Can you make this work with [some other game]?**
+1. **I use custom keybinds in SF:I. Do I really need to configure my kebinds manually in the VoiceAttack profile?**
+  * There should be no keybind configuration required. Keybinds are automatically read from the game configuration data upon profile initialization.
+  * ***If you change your keybinds while running VoiceAttack you may need to reload the profile before the changes will take affect. You can do this by switching to another profile and switching back, or by restarting VoiceAttack.***
+2. **Can you make this work with [some other game]?**
   * I don't have time to port to other projects at the moment.  However, you are more than welcome to clone the project and update it for use with any game you want.
   * Depending on your desired game you might be able to change the key bind configuration to make the profile work with it with minimal changes.
-2. **Why are there no voice files included?**
+3. **Why are there no voice files included?**
   * I plan to record the default companion voice, Null, myself when I have time. I don't know when I'll have that done, but it's safe to assume it'll take me a while.
-3. **I already own an HCS Voice Pack.  Can I use my existing sound files with this project?**
+4. **I already own an HCS Voice Pack.  Can I use my existing sound files with this project?**
   * Yes, you can.  Check the [Import](import/) section for instructions.
   * Please note that this project is in no way affiliated with HCS, and is not authorized to use these voice files in any capacity. Use at your own risk!
-4. **Can I use this voice companion in VR?**
+5. **Can I use this voice companion in VR?**
   * Yes, this project was designed with the idea that the user would be in VR. To that end most weapon and ship configuration is done via voice interface. You can also ask for details about existing configurations to get a verbal description.
   * Note that VR is in no way necessary to make use of this companion.  A headset with a decent quality mic is recommended though.
-5. **Can I use the VoiceAttack demo with this companion?**
+6. **Can I use the VoiceAttack demo with this companion?**
   * No, you cannot. The VA demo only allows up to 20 voice commands. At the time of this writing this profile is using over 1,300 (mostly derived) commands. It would be very difficult to compress it down to only 20.
-6. **I don't like the weapon group names or ship names you selected.  Can I change them?**
+7. **I don't like the weapon group names or ship names you selected.  Can I change them?**
   * Yes, absolutely. Open the profile in VoiceAttack and edit the command labeled "**[Config] General**" under the "*Configuration*" category. Edit the variables "**>>weaponGroupNameList**" and/or "**>>shipNameListStr**" to better reflect your play style.  These must be formatted as a semi-colon (;) separated list.
   * ***After making changes to these variables you must reload the profile before they will take affect. You can do this by switching to another profile and switching back, or by restarting VoiceAttack.***
-7. **My question wasn't answered here. How do I get further help?**
+8. **My question wasn't answered here. How do I get further help?**
   * Either report [your issue on GitHub](https://github.com/mtmosier/sf-i-voice-companion/issues), or [just email me](mailto:m.t.m.o.s.i.e.r@gmail.com). If this project becomes at all popular I'll set up some forums or similar.
