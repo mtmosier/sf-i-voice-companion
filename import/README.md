@@ -1,15 +1,15 @@
 # Importing HCS Voice Pack Files
 
-### TL;DR
-
-1. Run the "*copyHCSVoiceFiles.cmd*" file
-2. Reload the sf:i companion voice attack profile
-3. Say "Promote Jazz"  (substitute "Jazz" with your favorite companion)
-
 ### Here there be Dragons
 Please note that this project is in no way affiliated with HCS, and is not authorized to use these voice files in any capacity. By using these files with Starfighter: Infinity you may be in violation of your HCS terms and conditions. Due to this I cannot recommended nor officially support usage of these files.
 
 #### Use at your own risk!
+
+### TL;DR
+
+1. Run the "*copyHCSVoiceFiles.cmd*" file
+2. Reload the SF:I Companion VoiceAttack profile
+3. Say "Promote Jazz"  (substitute "Jazz" with your favorite companion)
 
 ### Which voice packs work with this companion?
 
@@ -19,7 +19,7 @@ Note that none of the voice packs contain the proper recordings needed for weapo
 
 If you do use end up using a voice pack and you hear some text-to-speech generated voices where you think there shouldn't be (outside of configuration or querying ship/weapon status), [please let me know](mailto:m.t.m.o.s.i.e.r@gmail.com). I may be able to make some adjustments to get your particular voice pack working.
 
-### How do I get my voice pack to work with this companion?
+### How do I get my voice pack to work?
 
 Make sure you already have your HCS Voice Pack(s) you want to use fully installed. [Download the "*copyHCSVoiceFiles.cmd*" file from the releases page.](https://github.com/mtmosier/sf-i-voice-companion/releases/latest)
 
