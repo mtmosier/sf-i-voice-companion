@@ -15,7 +15,7 @@
 <a name="intro"></a>
 ## What Is This?
 
-**This project is a simple voice companion which will help you on your journeys while playing [Starfighter: Infinity](http://www.starfighterinfinity.com/).** *Starfighter: Infinity* is a space based MMORPG with a focus on ‘dogfighting’ style action and exploration.  It is in currently in early access on [Steam](https://store.steampowered.com/app/967330/Starfighter_Infinity/).
+**This project is a simple voice companion which will help you on your journeys while playing [Starfighter: Infinity](http://www.starfighterinfinity.com/).** *Starfighter: Infinity* is a space based MMORPG with a focus on ‘dogfighting’ style action and exploration. It is in currently in early access on [Steam](https://store.steampowered.com/app/967330/Starfighter_Infinity/).
 
 My primary focus has been on streamlining weapon usage during battle. Weapons can be set up in groups, and groups can be fired as a one-off or in a continuous barrage. Beyond that most ship functions can be accessed verbally using the companion. The companion also has some limited chatting options, though I plan to flesh them out more in the future.
 
@@ -45,8 +45,8 @@ Here's a very basic, no config needed, I-just-want-to-kill-stuff example of usag
 
 ```
 > Unload weapon slot 1    # continuous fire weapon slot 1
-> Unload slot 2    # continuous fire weapon slot 2  (will alternate with slot 1)
-> Fire weapon slot 6    # single fire weapon slot 6  (after which slots 1 and 2 will continue to alternate)
+> Unload slot 2    # continuous fire weapon slot 2 (will alternate with slot 1)
+> Fire weapon slot 6    # single fire weapon slot 6 (after which slots 1 and 2 will continue to alternate)
 > Fire primary    # continuous fire primary
 [...]
 > Cease fire    # stop firing both secondary and primary weapons
@@ -182,20 +182,20 @@ I hope to add some game log parsing to get feedback directly from the companion 
   * The keybind configuration included in the profile are the defaults. These will be used if the profile is unable to load some (or all) keybinds from the game configuration data.
   * ***If you change your keybinds while running VoiceAttack you may need to reload the profile before the changes will take affect. You can do this by switching to another profile and switching back, or by restarting VoiceAttack.***
 2. **Can you make this work with [some other game]?**
-  * I don't have time to port to other projects at the moment.  However, you are more than welcome to clone the project and update it for use with any game you want.
+  * I don't have time to port to other projects at the moment. However, you are more than welcome to clone the project and update it for use with any game you want.
   * Depending on your desired game you might be able to change the key bind configuration to make the profile work with it with minimal changes.
 3. **Why are there no voice files included?**
   * I plan to record the default companion voice, Null, myself when I have time. I don't know when I'll have that done, but it's safe to assume it'll take me a while.
-4. **I already own an HCS Voice Pack.  Can I use my existing sound files with this project?**
-  * Yes, you can.  Check the [Import](import/) section for instructions.
+4. **I already own an HCS Voice Pack. Can I use my existing sound files with this project?**
+  * Yes, you can. Check the [Import](import/) section for instructions.
   * Please note that this project is in no way affiliated with HCS, and is not authorized to use these voice files in any capacity. Use at your own risk!
 5. **Can I use this voice companion in VR?**
   * Yes, this project was designed with the idea that the user would be in VR. To that end most weapon and ship configuration is done via voice interface. You can also ask for details about existing configurations to get a verbal description.
-  * Note that VR is in no way necessary to make use of this companion.  A headset with a decent quality mic is recommended though.
+  * Note that VR is in no way necessary to make use of this companion. A headset with a decent quality mic is recommended though.
 6. **Can I use the VoiceAttack demo with this companion?**
   * No, you cannot. The VA demo only allows up to 20 voice commands. At the time of this writing this profile is using over 1,300 (mostly derived) commands. It would be very difficult to compress it down to only 20.
-7. **I don't like the weapon group names or ship names you selected.  Can I change them?**
-  * Yes, absolutely. Open the profile in VoiceAttack and edit the command labeled "**[Config] General**" under the "*Configuration*" category. Edit the variables "**>>weaponGroupNameList**" and/or "**>>shipNameListStr**" to better reflect your play style.  These must be formatted as a semi-colon (;) separated list.
+7. **I don't like the weapon group names or ship names you selected. Can I change them?**
+  * Yes, absolutely. Open the profile in VoiceAttack and edit the command labeled "**[Config] General**" under the "*Configuration*" category. Edit the variables "**>>weaponGroupNameList**" and/or "**>>shipNameListStr**" to better reflect your play style. These must be formatted as a semi-colon (;) separated list.
   * ***After making changes to these variables you must reload the profile before they will take affect. You can do this by switching to another profile and switching back, or by restarting VoiceAttack.***
 8. **My question wasn't answered here. How do I get further help?**
   * Either report [your issue on GitHub](https://github.com/mtmosier/sf-i-voice-companion/issues), or [just email me](mailto:m.t.m.o.s.i.e.r@gmail.com). If this project becomes at all popular I'll set up some forums or similar.
