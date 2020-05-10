@@ -1,5 +1,11 @@
 # Importing HCS Voice Pack Files
 
+### TL;DR
+
+1. Run the "*copyHCSVoiceFiles.cmd*" file
+2. Reload the sf:i companion voice attack profile
+3. Say "Promote Jazz"  (substitute "Jazz" with your favorite companion)
+
 ### Here there be Dragons
 Please note that this project is in no way affiliated with HCS, and is not authorized to use these voice files in any capacity. By using these files with Starfighter: Infinity you may be in violation of your HCS terms and conditions. Due to this I cannot recommended nor officially support usage of these files.
 
@@ -15,7 +21,15 @@ If you do use end up using a voice pack and you hear some text-to-speech generat
 
 ### How do I get my voice pack to work with this companion?
 
-I assume you've already downloaded a release version of this companion and have extracted the files on your hard drive. I also assume you have the HCS Voice Pack(s) you want to use fully installed.  Look in the "sf-i-*voice-companion/import*" folder for a batch file named "*copyHCSVoiceFiles.cmd*". You will want to **edit the file** and make sure that the VoiceAttack Sounds directory is set up correctly.
+Make sure you already have your HCS Voice Pack(s) you want to use fully installed. [Download the "*copyHCSVoiceFiles.cmd*" file from the releases page.](https://github.com/mtmosier/sf-i-voice-companion/releases/latest)
+
+For most people the import process will be as simple as running the batch file then reloading the VoiceAttack SF:I Companion profile.  To reload the profile either switch to a different profile and then back, or close and reopen VoiceAttack.
+
+### It didn't work! Now what?
+
+The import script will search through the most common VoiceAttack installation directories trying to find where the relevant files are stored.  If you've specified a custom install/sounds path, or if you've moved VoiceAttack to a different location after installing, this can cause the import to fail.
+
+If having trouble you should try editing the import script and adding the correct directory to paths being searched. I'd suggest adding your path as the first one in order to avoid old files being loaded by mistake.
 
 ![copyHCSVoiceFiles.cmd setup](../images/copyHCSVoiceFiles_config.png?raw=true)
 

@@ -1,12 +1,29 @@
 @ECHO OFF
-SET vaSoundDir=C:\Program Files (x86)\Steam\steamapps\common\VoiceAttack\Sounds
+SET vaSoundDir1=C:\ProgramFiles (x86)\VoiceAttack\Sounds
+SET vaSoundDir2=C:\Program Files (x86)\Steam\steamapps\common\VoiceAttack\Sounds
+SET vaSoundDir3=D:\ProgramFiles (x86)\VoiceAttack\Sounds
+SET vaSoundDir4=D:\Program Files (x86)\Steam\steamapps\common\VoiceAttack\Sounds
+SET vaSoundDir5=E:\ProgramFiles (x86)\VoiceAttack\Sounds
+SET vaSoundDir6=E:\Program Files (x86)\Steam\steamapps\common\VoiceAttack\Sounds
+SET vaSoundDir=""
+
+FOR %%i IN (1 2 3 4 5 6) DO CALL :checkSoundDir "%%vaSoundDir%%i%%"
+SET vaSoundDir=%vaSoundDir:"=%
+IF "%vaSoundDir%" == "" (
+  echo Unable to find VoiceAttack Sounds directory. Please refer to the documentation for instructions on configuring the path correctly.
+  echo https://github.com/mtmosier/sf-i-voice-companion/tree/master/import
+  pause
+  @ECHO ON
+  @exit /b
+) else echo Found VA Sounds directory at %vaSoundDir%
 
 SET companionsFound=Null
 
 IF NOT EXIST "%vaSoundDir%" (
   echo "%vaSoundDir%" not found
   pause
-  exit
+  @ECHO ON
+  @exit /b
 )
 
 cd "%vaSoundDir%"
@@ -15,7 +32,7 @@ FOR /D %%G IN (hcspack-*) do call :processDir %%G
 SET companionsFound
 
 pause
-ECHO ON
+@ECHO ON
 @exit /b
 
 
@@ -33,6 +50,12 @@ ECHO ON
   SET first=%str:~0,1%
   CALL :strToUpper first
   CALL SET "%1=%first%%str:~1%"
+  exit /b
+
+:checkSoundDir
+  IF %vaSoundDir% == "" (
+    IF EXIST %1 SET vaSoundDir=%1
+  )
   exit /b
 
 :processDir

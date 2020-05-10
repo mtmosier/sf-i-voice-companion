@@ -541,14 +541,27 @@ public class VAInline
 		soundFileGroupContents += "private string[] getSoundFileGroupList() {\n";
 		soundFileGroupContents += "\treturn new string[] {\n";
 
-
-
 		batchFileContents = "@ECHO OFF\n";
-		batchFileContents += "SET vaSoundDir=" + VA.ParseTokens(@"{VA_SOUNDS}") + "\n\n";
+		batchFileContents += @"SET vaSoundDir1=C:\ProgramFiles (x86)\VoiceAttack\Sounds" + "\n";
+		batchFileContents += @"SET vaSoundDir2=C:\Program Files (x86)\Steam\steamapps\common\VoiceAttack\Sounds" + "\n";
+		batchFileContents += @"SET vaSoundDir3=D:\ProgramFiles (x86)\VoiceAttack\Sounds" + "\n";
+		batchFileContents += @"SET vaSoundDir4=D:\Program Files (x86)\Steam\steamapps\common\VoiceAttack\Sounds" + "\n";
+		batchFileContents += @"SET vaSoundDir5=E:\ProgramFiles (x86)\VoiceAttack\Sounds" + "\n";
+		batchFileContents += @"SET vaSoundDir6=E:\Program Files (x86)\Steam\steamapps\common\VoiceAttack\Sounds" + "\n";
+		batchFileContents += "SET vaSoundDir=\"\"\n\n";
+
+		batchFileContents += "FOR %%i IN (1 2 3 4 5 6) DO CALL :checkSoundDir \"%%vaSoundDir%%i%%\"\n";
+		batchFileContents += "SET vaSoundDir=%vaSoundDir:\"=%\n";
+		batchFileContents += "IF \"%vaSoundDir%\" == \"\" (\n";
+		batchFileContents += "  echo Unable to find VoiceAttack Sounds directory. Please refer to the documentation for instructions on configuring the path correctly.\n";
+		batchFileContents += "  echo https://github.com/mtmosier/sf-i-voice-companion/tree/master/import\n";
+		batchFileContents += "  pause\n";
+		batchFileContents += "  @ECHO ON\n";
+		batchFileContents += "  @exit /b\n";
+		batchFileContents += ") else echo Found VA Sounds directory at %vaSoundDir%\n\n";
 
 		batchFileContents += "SET companionsFound=Null\n\n";
-
-		batchFileContents += "IF NOT EXIST \"%vaSoundDir%\" (\n  echo \"%vaSoundDir%\" not found\n  pause\n  exit\n)\n\n";
+		batchFileContents += "IF NOT EXIST \"%vaSoundDir%\" (\n  echo \"%vaSoundDir%\" not found\n  pause\n  @ECHO ON\n  @exit /b\n)\n\n";
 
 		batchFileContents += "cd \"%vaSoundDir%\"\n";
 		batchFileContents += "FOR /D %%G IN (hcspack-*) do call :processDir %%G\n\n";
@@ -556,7 +569,7 @@ public class VAInline
 		batchFileContents += "SET companionsFound\n\n";
 
 		batchFileContents += "pause\n";
-		batchFileContents += "ECHO ON\n";
+		batchFileContents += "@ECHO ON\n";
 		batchFileContents += "@exit /b\n\n\n";
 
 		batchFileContents += ":strToLower\n";
@@ -575,6 +588,12 @@ public class VAInline
 		batchFileContents += "  CALL SET \"%1=%first%%str:~1%\"\n";
 		batchFileContents += "  exit /b\n\n";
 
+		batchFileContents += ":checkSoundDir\n";
+		batchFileContents += "  IF %vaSoundDir% == \"\" (\n";
+		batchFileContents += "    IF EXIST %1 SET vaSoundDir=%1\n";
+		batchFileContents += "  )\n";
+		batchFileContents += "  exit /b\n\n";
+
 		batchFileContents += ":processDir\n";
 		batchFileContents += "  SET curDir=%1\n";
 		batchFileContents += "  SET companionName=%curDir:hcspack-=%\n";
@@ -584,9 +603,6 @@ public class VAInline
 		batchFileContents += "  SET companionsFound=%companionsFound%;%companionName%\n";
 
 		batchFileContents += "  IF NOT EXIST \"%vaSoundDir%\\%newDir%\\\" mkdir \"%vaSoundDir%\\%newDir%\"\n";
-
-
-
 
 		foreach(KeyValuePair<string, string[]> soundGroup in soundFileGroupList) {
 			soundFileGroupContents += "\t\t\"" + soundGroup.Key + "\",\n";
@@ -604,7 +620,6 @@ public class VAInline
 			}
 			batchFileContents += "  IF \"%filesFound%\"==\"0\" (\n";
 			batchFileContents += "    echo " + soundGroup.Key + " is empty.\n";
-//			batchFileContents += "    rmdir \"%vaSoundDir%\\%newDir%\\" + soundGroup.Key + "\"\n";
 			batchFileContents += "  )\n";
 		}
 
