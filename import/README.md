@@ -25,6 +25,8 @@ Make sure you already have your HCS Voice Pack(s) you want to use fully installe
 
 For most people the import process will be as simple as running the batch file then reloading the VoiceAttack SF:I Companion profile.  To reload the profile either switch to a different profile and then back, or close and reopen VoiceAttack.
 
+Once installed use the "Promote" command to enable the campanion of your choice.
+
 ### It didn't work! Now what?
 
 The import script will search through the most common VoiceAttack installation directories trying to find where the relevant files are stored.  If you've specified a custom install/sounds path, or if you've moved VoiceAttack to a different location after installing, this can cause the import to fail.

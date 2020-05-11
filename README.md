@@ -31,11 +31,9 @@ In order to make use of this ship's companion you must have the full version of 
 <a name="install"></a>
 ## Installation
 
-Currently installation is as simple as downloading a zip from [Releases page](https://github.com/mtmosier/sf-i-voice-companion/releases), extracting the sf-i_companion.vap file (located under sf-i-voice-companion\VoiceAttack\Profile) and importing that profile in to VoiceAttack.
+Currently installation is as simple as [downloading the "*sf-i_companion.vap*" file from the releases page](https://github.com/mtmosier/sf-i-voice-companion/releases/latest) and importing it in to VoiceAttack.
 
-In the future I plan to add some basic voice mp3s and a VA plug-in, but for now the profile alone is all that's required.
-
-If you own an HCS Voice Pack you can also import voice files from your existing pack. See the [Import](import/) section for instructions.
+In the future I plan to add some basic voice mp3s and a VA plug-in, but for now the profile alone is all that's required. If you own an HCS Voice Pack you can also import voice files from your existing pack. See the [Import](import/) section for instructions.
 
 
 <a name="howToUse"></a>
