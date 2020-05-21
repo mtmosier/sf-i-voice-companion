@@ -1,41 +1,13 @@
-//***  System.Web.Extensions.dll
+//***  System.Web.Extensions.dll;System.Linq.dll;System.Core.dll;System.Text.RegularExpressions.dll;System.dll
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Web.Script.Serialization;
+using System.Text.RegularExpressions;
 
 public class VAInline
 {
-
-	private string getSettingsPath(bool includeFilename = true) {
-		string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-		path = Path.Combine(path, "VoiceAttack SF-I Companion");
-
-		try {
-			Directory.CreateDirectory(path);
-			if (includeFilename)  path = Path.Combine(path, "settings.json");
-		} catch (Exception e) {
-			path = null;
-		}
-
-		return path;
-	}
-
-	private Dictionary<string,object> readSettingsFromFile() {
-		Dictionary<string,object> rtnVal = null;
-		string filePath = getSettingsPath(true);
-
-		try {
-			string json = System.IO.File.ReadAllText(filePath);
-			if (!string.IsNullOrEmpty(json)) {
-				rtnVal = new JavaScriptSerializer().Deserialize<Dictionary<string,object>>(json);
-			}
-		} catch (Exception e) {}
-
-		return rtnVal;
-	}
-
 	public void main() {
 
 		//*** Init
@@ -251,5 +223,44 @@ public class VAInline
 
 		//*** Done
 		//VA.WriteToLog("restoreSavedSettings done", "Black");
+	}
+
+
+
+	private string getSettingsPath(bool includeFilename = true) {
+		string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+		path = Path.Combine(path, "VoiceAttack SF-I Companion");
+
+		try {
+			Directory.CreateDirectory(path);
+			if (includeFilename)  path = Path.Combine(path, "settings.json");
+		} catch (Exception e) {
+			path = null;
+		}
+
+		return path;
+	}
+
+	private string updateSettingsJson(string jsonStr) {
+		string pattern = @"weaponGroup\[([^\]]+)\]\[(\d+)\]";
+		string replacement = "[$1 $2]";
+		Regex rgx = new Regex(pattern);
+
+		return rgx.Replace(jsonStr, replacement);
+	}
+
+	private Dictionary<string,object> readSettingsFromFile() {
+		Dictionary<string,object> rtnVal = null;
+		string filePath = getSettingsPath(true);
+
+		try {
+			string json = System.IO.File.ReadAllText(filePath);
+			// json = updateSettingsJson(json);
+			if (!string.IsNullOrEmpty(json)) {
+				rtnVal = new JavaScriptSerializer().Deserialize<Dictionary<string,object>>(json);
+			}
+		} catch (Exception e) {}
+
+		return rtnVal;
 	}
 }
