@@ -71,7 +71,19 @@ public class VAInline
 		int? lenN = VA.GetInt(tmpVarName + ".weaponKeyPress.len");
 
 		if (VA.GetBoolean(tmpVarName + ".isActive") == true && lenN.HasValue && lenN.Value > 0) {
-			playRandomSound(groupName + " " + groupNum + " already has a configuration saved. Say abort to cancel configuration at any prompt.", "Weapon Group Already Configured", true);
+			bool? extendedWeaponConfigPlayed = VA.GetBoolean(">>extendedWeaponConfigPlayed");
+			string voiceGroupName = "Weapon Group Already Configured";
+			string msg = groupName + " ";
+			if (Array.IndexOf(staticGroupList, groupName) == -1) {
+				msg = groupNum + " ";
+			}
+			msg += "is already configured.";
+
+			if (!extendedWeaponConfigPlayed.HasValue || !extendedWeaponConfigPlayed.Value == false) {
+				msg += " Say abort to cancel configuration at any prompt.";
+				VA.SetBoolean(">>extendedWeaponConfigPlayed", true);
+			}
+			playRandomSound(msg, voiceGroupName, true);
 		} else if (quickConfig != true) {
 			playRandomSound(null, "Configure Weapon Group", true);
 		}
@@ -106,6 +118,7 @@ public class VAInline
 				+ "[hold;release;] propulsion [enhancer;];"
 				+ "[hold;release;] primary [weapon;];"
 				+ "[hold;release;] [left;turn left;left turn;right;turn right;right turn;forward;reverse];"
+				+ "[hold;release;] fine aiming;"
 				+ "[hold;release;] corkscrew;"
 				+ "[hold;release;] action;"
 				+ "[activate;open;display;] radar;"
@@ -209,6 +222,10 @@ public class VAInline
 						case "primary":
 							keyPress = "PrimaryFire";
 							weapon = "primary weapon";
+			                break;
+						case "fine aiming":
+							keyPress = "FineAiming";
+							weapon = "fine aiming";
 			                break;
 			            default:
 							response = response.Replace("eighths", "8");
