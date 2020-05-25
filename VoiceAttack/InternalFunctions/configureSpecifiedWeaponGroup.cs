@@ -75,11 +75,11 @@ public class VAInline
 			string voiceGroupName = "Weapon Group Already Configured";
 			string msg = groupName + " ";
 			if (Array.IndexOf(staticGroupList, groupName) == -1) {
-				msg = groupNum + " ";
+				msg += groupNum + " ";
 			}
 			msg += "is already configured.";
 
-			if (!extendedWeaponConfigPlayed.HasValue || !extendedWeaponConfigPlayed.Value == false) {
+			if (!extendedWeaponConfigPlayed.HasValue || extendedWeaponConfigPlayed.Value == false) {
 				msg += " Say abort to cancel configuration at any prompt.";
 				VA.SetBoolean(">>extendedWeaponConfigPlayed", true);
 			}
