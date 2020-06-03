@@ -309,8 +309,10 @@ public class VAInline
 		else  logMessage = "Saving group " + (groupName == "Default" ? "" : groupName) + " " + groupNum;
 		VA.WriteToLog(logMessage, "Blue");
 
+
 		string wgDefVarName = ">>shipInfo["+activeShipName+"].weaponGroup["+groupName+"]["+groupNum+"]";
 
+		VA.SetBoolean(">>shipInfo[" + activeShipName + "].isInUse", true);
 		VA.SetBoolean(wgDefVarName+".isActive", true);
 		VA.SetInt(wgDefVarName+".weaponKeyPress.len", keyPressList.Count);
 
