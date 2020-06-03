@@ -13,14 +13,10 @@ public class VAInline
 		//*** Init
 		bool? boolValueN;
 		int? intValueN;
-		string strValue;
+		string strValue, variable;
 		string keybind;
 		string settingName;
 
-
-		//*** Ship variables
-		string variable = VA.GetText(">>shipNameListStr");
-		string[] shipNameList = variable.Split(';');
 
 		//*** Weapon group variables
 		string wgNameListStr = VA.GetText(">>weaponGroupNameList");
@@ -37,6 +33,47 @@ public class VAInline
 
 		//*** Load the settings from file
 		Dictionary<string, Object> settings = readSettingsFromFile();
+		if (settings == null) {
+			return;
+		}
+
+
+		//*** Set list of ship names
+		List<string> fullShipList = new List<string>();
+		variable = VA.GetText(">>shipNameListStr");
+		if (!String.IsNullOrEmpty(variable)) {
+			string[] shipNameList = variable.Split(';');
+			foreach (string sn in shipNameList)
+				fullShipList.Add(sn);
+		}
+
+		string pattern;
+		pattern = "^" + Regex.Escape(@">>shipInfo[");
+		pattern += @"(.*?)";
+		pattern += Regex.Escape(@"].isInUse") + "$";
+
+		//*** Instantiate the regular expression object.
+		Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
+
+		foreach (string loopSn in settings.Keys) {
+	  		Match match = regex.Match(loopSn);
+			if (match.Success) {
+				string sn = match.Groups[1].ToString();
+
+				boolValueN = (Boolean) settings[loopSn];
+				if (boolValueN.HasValue && boolValueN.Value)
+					if (!fullShipList.Contains(sn))
+						fullShipList.Add(sn);
+			}
+  		}
+
+		string shipNameInput = "[" + string.Join<string>(";", fullShipList) + "] [ship;]";
+		VA.SetText(">>configShipNameInput", shipNameInput);
+
+		shipNameInput = "[" + string.Join<string>(";", fullShipList) + ";current;active] [ship;]";
+		VA.SetText(">>shipNameInput", shipNameInput);
+
+		VA.SetText(">>shipNameListStr", string.Join<string>(";", fullShipList));
 
 		//*** Prepare global settings
 		string[] boolSettingsList = { ">>enableSpeech", ">>gameVoiceEnabled", ">>gameVoiceActionsQuiet", ">>headphonesInUse" };
@@ -46,7 +83,6 @@ public class VAInline
 					boolValueN = (Boolean) settings[sn];
 					if (boolValueN.HasValue) {
 						VA.SetBoolean(sn, boolValueN.Value);
-						//VA.WriteToLog("Loaded bool " + sn + " from json [" + boolValueN.Value + "]", "Green");
 					}
 				} catch (Exception e) {
 					VA.WriteToLog("Unabled to read bool " + sn + " from json.", "Red");
@@ -55,13 +91,16 @@ public class VAInline
 		}
 
 		string[] stringSettingsList = { ">>voiceDir", ">>companionName", ">>title", ">>activeShipName" };
+		string activeShipName = "";
 		foreach (string sn in stringSettingsList) {
 			if (settings.ContainsKey(sn)) {
 				try {
 					strValue = settings[sn].ToString();
 					if (strValue != null) {
 						VA.SetText(sn, strValue);
-						//VA.WriteToLog("Loaded str " + sn + " from json [" + strValue + "]", "Green");
+
+						if (sn == ">>activeShipName")
+							activeShipName = strValue;
 					}
 				} catch (Exception e) {
 					VA.WriteToLog("Unabled to read str " + sn + " from json.", "Red");
@@ -70,15 +109,23 @@ public class VAInline
 		}
 
 
+		//*** Make sure an active ship name is selected
+		if (string.IsNullOrEmpty(activeShipName)) {
+			if (fullShipList.Count > 0) {
+				activeShipName = fullShipList[0];
+				VA.SetText(">>activeShipName", activeShipName);
+			}
+		}
+
 
 		//*** Prepare ship settings
 		bool wgIsActive = false;
 		int wgLen = 0;
 		string tmpVarName;
 		string[] settingNameList = new string[2];
-		for (short s = 0; s < shipNameList.Length; s++) {
+		for (short s = 0; s < fullShipList.Count; s++) {
 			bool shipInUse = false;
-			settingName = ">>shipInfo[" + shipNameList[s] + "].isInUse";
+			settingName = ">>shipInfo[" + fullShipList[s] + "].isInUse";
 
 			if (settings.ContainsKey(settingName)) {
 				try {
@@ -97,7 +144,7 @@ public class VAInline
 			if (shipInUse) {
 				for (short w = 0; w < wgNameList.Length; w++) {
 					for (short n = 1; n <= wgNumMax; n++) {
-						tmpVarName = ">>shipInfo[" + shipNameList[s] + "].weaponGroup[" + wgNameList[w] + "][" + n + "]";
+						tmpVarName = ">>shipInfo[" + fullShipList[s] + "].weaponGroup[" + wgNameList[w] + "][" + n + "]";
 
 						wgIsActive = false;
 						settingName = tmpVarName + ".isActive";
@@ -163,7 +210,7 @@ public class VAInline
 
 
 				foreach (string gName in staticGroupList) {
-					tmpVarName = ">>shipInfo[" + shipNameList[s] + "].weaponGroup[" + gName + "][1]";
+					tmpVarName = ">>shipInfo[" + fullShipList[s] + "].weaponGroup[" + gName + "][1]";
 
 					wgIsActive = false;
 					settingName = tmpVarName + ".isActive";
@@ -221,6 +268,10 @@ public class VAInline
 			}
 		}
 
+		//*** Ensure the active ship is marked as in use
+		if (!string.IsNullOrEmpty(activeShipName))
+			VA.SetBoolean(">>shipInfo[" + activeShipName + "].isInUse", true);
+
 		//*** Done
 		//VA.WriteToLog("restoreSavedSettings done", "Black");
 	}
@@ -243,7 +294,7 @@ public class VAInline
 
 	private string updateSettingsJson(string jsonStr) {
 		string pattern = @"weaponGroup\[([^\]]+)\]\[(\d+)\]";
-		string replacement = "[$1 $2]";
+		string replacement = "weaponGroup[$1 $2]";
 		Regex rgx = new Regex(pattern);
 
 		return rgx.Replace(jsonStr, replacement);
