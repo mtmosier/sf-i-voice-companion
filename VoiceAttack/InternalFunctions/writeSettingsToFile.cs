@@ -3,8 +3,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Web.Script.Serialization;
 using System.Linq;
+using System.Web.Script.Serialization;
+
 
 public class VAInline
 {
@@ -67,9 +68,9 @@ public class VAInline
 			boolValueN = VA.GetBoolean(settingName);
 			if (boolValueN.HasValue)  shipInUse = boolValueN.Value;
 
-			settings.Add(settingName, shipInUse);
-
 			if (shipInUse) {
+				settings.Add(settingName, shipInUse);
+
 				for (short w = 0; w < wgNameList.Length; w++) {
 					for (short n = 1; n <= maxWGNum; n++) {
 						tmpVarName = ">>shipInfo[" + shipNameList[s] + "].weaponGroup[" + wgNameList[w] + "][" + n + "]";
@@ -79,9 +80,9 @@ public class VAInline
 						wgIsActive = false;
 						if (boolValueN.HasValue)  wgIsActive = boolValueN.Value;
 
-						settings.Add(settingName, wgIsActive);
-
 						if (wgIsActive) {
+							settings.Add(settingName, wgIsActive);
+
 							settingName = tmpVarName + ".weaponKeyPress.len";
 							intValueN = VA.GetInt(settingName);
 							wgLen = 0;
@@ -110,9 +111,9 @@ public class VAInline
 					wgIsActive = false;
 					if (boolValueN.HasValue)  wgIsActive = boolValueN.Value;
 
-					settings.Add(settingName, wgIsActive);
-
 					if (wgIsActive) {
+						settings.Add(settingName, wgIsActive);
+
 						settingName = tmpVarName + ".weaponKeyPress.len";
 						intValueN = VA.GetInt(settingName);
 						wgLen = 0;
