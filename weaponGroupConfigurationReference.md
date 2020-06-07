@@ -26,14 +26,10 @@ A weapon group can include up to 20 individual [actions](#actionList). (More wou
 ```
 Explorer
 Sniper
-Dog Fighter
-Mining
-Minelayer
-Battle
-War
 ```
 
-When selecting your current ship you can use just the ship name, or add ship to it.  "*Swap to battle*" and "*Swap to battle ship*" will both function the same.
+You can add additional ships with any name you want by using the command "*Register new ship*".
+
 
 <a name="definedGroups"></a>
 ## Default weapon groups
@@ -41,14 +37,18 @@ When selecting your current ship you can use just the ship name, or add ship to 
 ```
 Counter
 Missile
-Reverse
 Mine
 Beam
 Mining Laser
 Beacon
-Capitol
 Highlight
+Ambush
+Reverse
+Large
 ```
+
+Weapon group names can be changed by editing the command labeled "**[Config] General**" under the "*Configuration*" category in the VoiceAttack profile.
+
 
 <a name="emergencyGroups"></a>
 ## Emergency groups
@@ -94,6 +94,7 @@ During configuration you will be asked which weapon to fire. The following is a 
 | Input | Description | Alternatives | Hold/Release Allowed |
 | ----- | ----------- | ------------ | -------------------- |
 | complete | End the input | done, stop here, finished | No |
+| restart | Cancel configuration so far and start over | start over, do over | No |
 | pause 1..60 | Pause processing this group for N seconds | delay 1..60 | No |
 | primary | Fire the primary weapon (once) | primary weapon | Yes |
 | 0..9 | Fire the specified secondary weapon | slot 0..9, weapon slot 0..9 | No |
@@ -102,6 +103,7 @@ During configuration you will be asked which weapon to fire. The following is a 
 | radar | Bring up the ship's radar | activate radar, open radar, display radar | No |
 | corkscrew | Perform a corkscrew | None | Yes |
 | action | Press the action button | None | Yes |
+| fine aiming | Use with hold/release to activate fine aiming | None | Yes |
 | left | Press the turn left button | turn left | Yes |
 | right | Press the turn right button | turn right | Yes |
 | forward | Press the turn accelerate button | None | Yes |
@@ -120,6 +122,7 @@ Why yes, normally it would.  But due to the difficulty in VoiceAttack recognizin
 | complete | done, finished, stop there, stop now | Used when asked for next action in order to stop input loop. |
 | yes | confirm, positive, affirmative, absolutely, please, please do, yeah, yes sir, commit, save, please save | Response when asked if you want to save the information. |
 | no | nah, nope, negative, cancel, nevermind, abort | Response when asked if you want to save the information. |
+| restart | Cancel configuration so far and start over | start over, do over |
 
 
 <a name="advancedFiring"></a>

@@ -104,9 +104,8 @@ This command list may be incomplete. To see a full list of voice commands availa
 |:------- |:----------- |
 | **List available ships** | Responds with a list of valid ship names. |
 | **List active ships** | Responds with a list of ships which have previously been used. |
-| **Copy war ship to battle ship** | Overwrites any configuration **Battle** ship may have, replacing it with configuration from **War** ship. |
-| **Delete war ship** | Deletes any configuration saved for **War** ship. |
-| **Switch to battle ship** | Loads the configuration for **Battle** ship. |
+| **Register new ship** | You will be asked for a new ship name. The ship will be added and made active. |
+| **Switch to sniper ship** | Loads the configuration for **Sniper** ship. |
 | **List available weapon groups** | Responds with a list of valid weapon group names. |
 | **List active weapon groups** | Responds with a list of weapon groups which have been configured for your current ship. |
 | **Configure counter 1** | Initiate weapon configuration for group **Counter 1**. |
