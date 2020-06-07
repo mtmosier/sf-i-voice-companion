@@ -16,6 +16,8 @@ public class VAInline
 		string strValue, variable;
 		string keybind;
 		string settingName;
+		string shipNameInput;
+		string activeShipName = "";
 
 
 		//*** Weapon group variables
@@ -31,12 +33,6 @@ public class VAInline
 		variable = VA.GetText(">>staticGroupList");
 		string[] staticGroupList = variable.Split(';');
 
-		//*** Load the settings from file
-		Dictionary<string, Object> settings = readSettingsFromFile();
-		if (settings == null) {
-			return;
-		}
-
 
 		//*** Set list of ship names
 		List<string> fullShipList = new List<string>();
@@ -49,110 +45,162 @@ public class VAInline
 				fullShipList.Add(sn);
 		}
 
-		string pattern;
-		pattern = "^" + Regex.Escape(@">>shipInfo[");
-		pattern += @"(.*?)";
-		pattern += Regex.Escape(@"].isInUse") + "$";
 
-		//*** Instantiate the regular expression object.
-		Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
+		//*** Load the settings from file
+		Dictionary<string, Object> settings = readSettingsFromFile();
+		if (settings != null) {
 
-		foreach (string loopSn in settings.Keys) {
-	  		Match match = regex.Match(loopSn);
-			if (match.Success) {
-				string sn = match.Groups[1].ToString();
+			//*** Add additional ship information found in the settings
 
-				boolValueN = (Boolean) settings[loopSn];
-				if (boolValueN.HasValue && boolValueN.Value) {
-					if (!fullShipList.Contains(sn))
-						fullShipList.Add(sn);
-					if (!activeShipList.Contains(sn))
-						activeShipList.Add(sn);
-				}
-			}
-  		}
+			//*** Instantiate the regular expression object.
+			string pattern;
+			pattern = "^" + Regex.Escape(@">>shipInfo[");
+			pattern += @"(.*?)";
+			pattern += Regex.Escape(@"].isInUse") + "$";
 
-		string shipNameInput = "[" + string.Join<string>(";", fullShipList) + "] [ship;]";
-		VA.SetText(">>configShipNameInput", shipNameInput);
+			Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
 
-		shipNameInput = "[" + string.Join<string>(";", fullShipList) + ";current;active] [ship;]";
-		VA.SetText(">>shipNameInput", shipNameInput);
+			foreach (string loopSn in settings.Keys) {
+		  		Match match = regex.Match(loopSn);
+				if (match.Success) {
+					string sn = match.Groups[1].ToString();
 
-		shipNameInput = "[" + string.Join<string>(";", activeShipList) + ";current;active] [ship;]";
-		VA.SetText(">>activeShipNameInput", shipNameInput);
-
-		VA.SetText(">>shipNameListStr", string.Join<string>(";", fullShipList));
-
-		//*** Prepare global settings
-		string[] boolSettingsList = { ">>enableSpeech", ">>gameVoiceEnabled", ">>gameVoiceActionsQuiet", ">>headphonesInUse" };
-		foreach (string sn in boolSettingsList) {
-			if (settings.ContainsKey(sn)) {
-				try {
-					boolValueN = (Boolean) settings[sn];
-					if (boolValueN.HasValue) {
-						VA.SetBoolean(sn, boolValueN.Value);
+					boolValueN = (Boolean) settings[loopSn];
+					if (boolValueN.HasValue && boolValueN.Value) {
+						if (!fullShipList.Contains(sn))
+							fullShipList.Add(sn);
+						if (!activeShipList.Contains(sn))
+							activeShipList.Add(sn);
 					}
-				} catch (Exception e) {
-					VA.WriteToLog("Unabled to read bool " + sn + " from json.", "Red");
 				}
-			}
-		}
+	  		}
 
-		string[] stringSettingsList = { ">>voiceDir", ">>companionName", ">>title", ">>activeShipName" };
-		string activeShipName = "";
-		foreach (string sn in stringSettingsList) {
-			if (settings.ContainsKey(sn)) {
-				try {
-					strValue = settings[sn].ToString();
-					if (strValue != null) {
-						VA.SetText(sn, strValue);
-
-						if (sn == ">>activeShipName")
-							activeShipName = strValue;
+			//*** Prepare global settings
+			string[] boolSettingsList = { ">>enableSpeech", ">>gameVoiceEnabled", ">>gameVoiceActionsQuiet", ">>headphonesInUse" };
+			foreach (string sn in boolSettingsList) {
+				if (settings.ContainsKey(sn)) {
+					try {
+						boolValueN = (Boolean) settings[sn];
+						if (boolValueN.HasValue) {
+							VA.SetBoolean(sn, boolValueN.Value);
+						}
+					} catch (Exception e) {
+						VA.WriteToLog("Unabled to read bool " + sn + " from json.", "Red");
 					}
-				} catch (Exception e) {
-					VA.WriteToLog("Unabled to read str " + sn + " from json.", "Red");
 				}
 			}
-		}
 
+			string[] stringSettingsList = { ">>voiceDir", ">>companionName", ">>title", ">>activeShipName" };
+			foreach (string sn in stringSettingsList) {
+				if (settings.ContainsKey(sn)) {
+					try {
+						strValue = settings[sn].ToString();
+						if (strValue != null) {
+							VA.SetText(sn, strValue);
 
-		//*** Make sure an active ship name is selected
-		if (string.IsNullOrEmpty(activeShipName)) {
-			if (fullShipList.Count > 0) {
-				activeShipName = fullShipList[0];
-				VA.SetText(">>activeShipName", activeShipName);
-			}
-		}
-
-
-		//*** Prepare ship settings
-		bool wgIsActive = false;
-		int wgLen = 0;
-		string tmpVarName;
-		string[] settingNameList = new string[2];
-		for (short s = 0; s < fullShipList.Count; s++) {
-			bool shipInUse = false;
-			settingName = ">>shipInfo[" + fullShipList[s] + "].isInUse";
-
-			if (settings.ContainsKey(settingName)) {
-				try {
-					boolValueN = (Boolean) settings[settingName];
-					if (boolValueN.HasValue) {
-						shipInUse = boolValueN.Value;
-						//VA.WriteToLog("Loaded bool " + settingName + " from json [" + shipInUse + "]", "Green");
+							if (sn == ">>activeShipName")
+								activeShipName = strValue;
+						}
+					} catch (Exception e) {
+						VA.WriteToLog("Unabled to read str " + sn + " from json.", "Red");
 					}
-				} catch (Exception e) {
-					VA.WriteToLog("Unabled to read bool " + settingName + " from json.", "Red");
 				}
 			}
 
-			VA.SetBoolean(settingName, shipInUse);
 
-			if (shipInUse) {
-				for (short w = 0; w < wgNameList.Length; w++) {
-					for (short n = 1; n <= wgNumMax; n++) {
-						tmpVarName = ">>shipInfo[" + fullShipList[s] + "].weaponGroup[" + wgNameList[w] + " " + n + "]";
+			//*** Prepare ship settings
+			bool wgIsActive = false;
+			int wgLen = 0;
+			string tmpVarName;
+			string[] settingNameList = new string[2];
+			for (short s = 0; s < fullShipList.Count; s++) {
+				bool shipInUse = false;
+				settingName = ">>shipInfo[" + fullShipList[s] + "].isInUse";
+
+				if (settings.ContainsKey(settingName)) {
+					try {
+						boolValueN = (Boolean) settings[settingName];
+						if (boolValueN.HasValue) {
+							shipInUse = boolValueN.Value;
+							//VA.WriteToLog("Loaded bool " + settingName + " from json [" + shipInUse + "]", "Green");
+						}
+					} catch (Exception e) {
+						VA.WriteToLog("Unabled to read bool " + settingName + " from json.", "Red");
+					}
+				}
+
+				VA.SetBoolean(settingName, shipInUse);
+
+				if (shipInUse) {
+					for (short w = 0; w < wgNameList.Length; w++) {
+						for (short n = 1; n <= wgNumMax; n++) {
+							tmpVarName = ">>shipInfo[" + fullShipList[s] + "].weaponGroup[" + wgNameList[w] + " " + n + "]";
+
+							wgIsActive = false;
+							settingName = tmpVarName + ".isActive";
+
+							if (settings.ContainsKey(settingName)) {
+								try {
+									boolValueN = (Boolean) settings[settingName];
+									if (boolValueN.HasValue) {
+										wgIsActive = boolValueN.Value;
+										//VA.WriteToLog("Loaded bool " + settingName + " from json [" + wgIsActive + "]", "Green");
+									}
+								} catch (Exception e) {
+									VA.WriteToLog("Unabled to read bool " + settingName + " from json.", "Red");
+								}
+							}
+
+							VA.SetBoolean(settingName, wgIsActive);
+
+							if (wgIsActive) {
+								wgLen = 0;
+								settingName = tmpVarName + ".weaponKeyPress.len";
+
+								if (settings.ContainsKey(settingName)) {
+									try {
+										intValueN = (int) settings[settingName];
+										if (intValueN.HasValue) {
+											wgLen = intValueN.Value;
+											//VA.WriteToLog("Loaded int " + settingName + " from json [" + wgLen + "]", "Green");
+										}
+									} catch (Exception e) {
+										VA.WriteToLog("Unabled to read int " + settingName + " from json.", "Red");
+									}
+								}
+
+								VA.SetInt(settingName, wgLen);
+
+								for (short l = 0; l < wgLen; l++) {
+									settingNameList[0] = tmpVarName + ".weaponKeyPress[" + l + "]";
+									settingNameList[1] = tmpVarName + ".weaponKeyPressFriendly[" + l + "]";
+
+									foreach (string sName in settingNameList) {
+										keybind = "";
+										if (settings.ContainsKey(sName)) {
+											try {
+												keybind = settings[sName].ToString();
+												//VA.WriteToLog("Loaded str " + sName + " from json [" + keybind + "]", "Green");
+											} catch (Exception e) {
+												if (sName.IndexOf("Friendly") == -1) {
+													VA.WriteToLog("Unabled to read str " + sName + " from json.", "Red");
+												}
+											}
+										}
+
+										if (!string.IsNullOrEmpty(keybind)) {
+											VA.SetText(sName, keybind);
+										}
+									}
+								}
+							}
+						}
+					}
+
+
+
+					foreach (string gName in staticGroupList) {
+						tmpVarName = ">>shipInfo[" + fullShipList[s] + "].weaponGroup[" + gName + " 1]";
 
 						wgIsActive = false;
 						settingName = tmpVarName + ".isActive";
@@ -160,10 +208,7 @@ public class VAInline
 						if (settings.ContainsKey(settingName)) {
 							try {
 								boolValueN = (Boolean) settings[settingName];
-								if (boolValueN.HasValue) {
-									wgIsActive = boolValueN.Value;
-									//VA.WriteToLog("Loaded bool " + settingName + " from json [" + wgIsActive + "]", "Green");
-								}
+								if (boolValueN.HasValue)  wgIsActive = boolValueN.Value;
 							} catch (Exception e) {
 								VA.WriteToLog("Unabled to read bool " + settingName + " from json.", "Red");
 							}
@@ -172,16 +217,13 @@ public class VAInline
 						VA.SetBoolean(settingName, wgIsActive);
 
 						if (wgIsActive) {
-							wgLen = 0;
 							settingName = tmpVarName + ".weaponKeyPress.len";
 
+							wgLen = 0;
 							if (settings.ContainsKey(settingName)) {
 								try {
 									intValueN = (int) settings[settingName];
-									if (intValueN.HasValue) {
-										wgLen = intValueN.Value;
-										//VA.WriteToLog("Loaded int " + settingName + " from json [" + wgLen + "]", "Green");
-									}
+									if (intValueN.HasValue)  wgLen = intValueN.Value;
 								} catch (Exception e) {
 									VA.WriteToLog("Unabled to read int " + settingName + " from json.", "Red");
 								}
@@ -214,71 +256,39 @@ public class VAInline
 						}
 					}
 				}
+			}
+		}
 
 
+		//*** Make sure an active ship name is selected
+		if (string.IsNullOrEmpty(activeShipName)) {
+			if (fullShipList.Count > 0) {
+				activeShipName = fullShipList[0];
+				VA.SetText(">>activeShipName", activeShipName);
 
-				foreach (string gName in staticGroupList) {
-					tmpVarName = ">>shipInfo[" + fullShipList[s] + "].weaponGroup[" + gName + " 1]";
-
-					wgIsActive = false;
-					settingName = tmpVarName + ".isActive";
-
-					if (settings.ContainsKey(settingName)) {
-						try {
-							boolValueN = (Boolean) settings[settingName];
-							if (boolValueN.HasValue)  wgIsActive = boolValueN.Value;
-						} catch (Exception e) {
-							VA.WriteToLog("Unabled to read bool " + settingName + " from json.", "Red");
-						}
-					}
-
-					VA.SetBoolean(settingName, wgIsActive);
-
-					if (wgIsActive) {
-						settingName = tmpVarName + ".weaponKeyPress.len";
-
-						wgLen = 0;
-						if (settings.ContainsKey(settingName)) {
-							try {
-								intValueN = (int) settings[settingName];
-								if (intValueN.HasValue)  wgLen = intValueN.Value;
-							} catch (Exception e) {
-								VA.WriteToLog("Unabled to read int " + settingName + " from json.", "Red");
-							}
-						}
-
-						VA.SetInt(settingName, wgLen);
-
-						for (short l = 0; l < wgLen; l++) {
-							settingNameList[0] = tmpVarName + ".weaponKeyPress[" + l + "]";
-							settingNameList[1] = tmpVarName + ".weaponKeyPressFriendly[" + l + "]";
-
-							foreach (string sName in settingNameList) {
-								keybind = "";
-								if (settings.ContainsKey(sName)) {
-									try {
-										keybind = settings[sName].ToString();
-										//VA.WriteToLog("Loaded str " + sName + " from json [" + keybind + "]", "Green");
-									} catch (Exception e) {
-										if (sName.IndexOf("Friendly") == -1) {
-											VA.WriteToLog("Unabled to read str " + sName + " from json.", "Red");
-										}
-									}
-								}
-
-								if (!string.IsNullOrEmpty(keybind)) {
-									VA.SetText(sName, keybind);
-								}
-							}
-						}
-					}
-				}
+				if (!activeShipList.Contains(activeShipName))
+					activeShipList.Add(activeShipName);
 			}
 		}
 
 		//*** Ensure the active ship is marked as in use
 		if (!string.IsNullOrEmpty(activeShipName))
 			VA.SetBoolean(">>shipInfo[" + activeShipName + "].isInUse", true);
+
+
+		//*** Export ship list settings
+		shipNameInput = "[" + string.Join<string>(";", fullShipList) + "] [ship;]";
+		VA.SetText(">>configShipNameInput", shipNameInput);
+
+		if (fullShipList.Count > 0)		shipNameInput = "[" + string.Join<string>(";", fullShipList) + ";current;active] [ship;]";
+		else							shipNameInput = "[current;active] [ship;]";
+		VA.SetText(">>shipNameInput", shipNameInput);
+
+		if (activeShipList.Count > 0)	shipNameInput = "[" + string.Join<string>(";", activeShipList) + ";current;active] [ship;]";
+		else							shipNameInput = "[current;active] [ship;]";
+		VA.SetText(">>activeShipNameInput", shipNameInput);
+
+		VA.SetText(">>shipNameListStr", string.Join<string>(";", fullShipList));
 
 		//*** Done
 		//VA.WriteToLog("restoreSavedSettings done", "Black");

@@ -242,13 +242,16 @@ public class VAInline
 					}
 
 					if (reloadRequired) {
+						//*** Export ship list settings
 						string shipNameInput = "[" + string.Join<string>(";", fullShipList) + "] [ship;]";
 						VA.SetText(">>configShipNameInput", shipNameInput);
 
-						shipNameInput = "[" + string.Join<string>(";", fullShipList) + ";current;active] [ship;]";
+						if (fullShipList.Count > 0)		shipNameInput = "[" + string.Join<string>(";", fullShipList) + ";current;active] [ship;]";
+						else							shipNameInput = "[current;active] [ship;]";
 						VA.SetText(">>shipNameInput", shipNameInput);
 
-						shipNameInput = "[" + string.Join<string>(";", activeShipList) + ";current;active] [ship;]";
+						if (activeShipList.Count > 0)	shipNameInput = "[" + string.Join<string>(";", activeShipList) + ";current;active] [ship;]";
+						else							shipNameInput = "[current;active] [ship;]";
 						VA.SetText(">>activeShipNameInput", shipNameInput);
 
 						VA.SetText(">>shipNameListStr", string.Join<string>(";", fullShipList));
