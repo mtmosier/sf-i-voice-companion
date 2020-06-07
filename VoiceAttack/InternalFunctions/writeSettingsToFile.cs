@@ -73,7 +73,7 @@ public class VAInline
 
 				for (short w = 0; w < wgNameList.Length; w++) {
 					for (short n = 1; n <= maxWGNum; n++) {
-						tmpVarName = ">>shipInfo[" + shipNameList[s] + "].weaponGroup[" + wgNameList[w] + "][" + n + "]";
+						tmpVarName = ">>shipInfo[" + shipNameList[s] + "].weaponGroup[" + wgNameList[w] + " " + n + "]";
 
 						settingName = tmpVarName + ".isActive";
 						boolValueN = VA.GetBoolean(settingName);
@@ -104,7 +104,7 @@ public class VAInline
 				}
 
 				foreach (string gName in staticGroupList) {
-					tmpVarName = ">>shipInfo[" + shipNameList[s] + "].weaponGroup[" + gName + "][1]";
+					tmpVarName = ">>shipInfo[" + shipNameList[s] + "].weaponGroup[" + gName + " 1]";
 
 					settingName = tmpVarName + ".isActive";
 					boolValueN = VA.GetBoolean(settingName);

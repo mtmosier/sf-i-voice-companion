@@ -52,7 +52,7 @@ public class VAInline
 			int groupCount = 0;
 
 			for (short n = 1; n <= maxWGNum; n++) {
-				string tmpVarName = ">>shipInfo[" + activeShipName + "].weaponGroup[" + wgName + "][" + n + "]";
+				string tmpVarName = ">>shipInfo[" + activeShipName + "].weaponGroup[" + wgName + " " + n + "]";
 
 				if (VA.GetBoolean(tmpVarName + ".isActive") == true) {
 					int? lenN = VA.GetInt(tmpVarName + ".weaponKeyPress.len");

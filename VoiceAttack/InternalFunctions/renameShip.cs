@@ -200,8 +200,8 @@ public class VAInline
 
 					for (short w = 0; w < wgNameList.Length; w++) {
 						for (short n = 1; n <= maxWGNum; n++) {
-							string fromVarName = ">>shipInfo[" + fromShip + "].weaponGroup[" + wgNameList[w] + "][" + n + "]";
-							string toVarName = ">>shipInfo[" + toShip + "].weaponGroup[" + wgNameList[w] + "][" + n + "]";
+							string fromVarName = ">>shipInfo[" + fromShip + "].weaponGroup[" + wgNameList[w] + " " + n + "]";
+							string toVarName = ">>shipInfo[" + toShip + "].weaponGroup[" + wgNameList[w] + " " + n + "]";
 
 							bool wgIsActive = false;
 							string settingName = fromVarName + ".isActive";

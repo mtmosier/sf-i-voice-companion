@@ -67,7 +67,7 @@ public class VAInline
 
 
 		//*** START PLAYER INTERACTION
-		string tmpVarName = ">>shipInfo[" + activeShipName + "].weaponGroup[" + groupName + "][" + groupNum + "]";
+		string tmpVarName = ">>shipInfo[" + activeShipName + "].weaponGroup[" + groupName + " " + groupNum + "]";
 		int? lenN = VA.GetInt(tmpVarName + ".weaponKeyPress.len");
 
 		if (VA.GetBoolean(tmpVarName + ".isActive") == true && lenN.HasValue && lenN.Value > 0) {
@@ -310,7 +310,7 @@ public class VAInline
 		VA.WriteToLog(logMessage, "Blue");
 
 
-		string wgDefVarName = ">>shipInfo["+activeShipName+"].weaponGroup["+groupName+"]["+groupNum+"]";
+		string wgDefVarName = ">>shipInfo["+activeShipName+"].weaponGroup["+groupName+" "+groupNum+"]";
 
 		VA.SetBoolean(">>shipInfo[" + activeShipName + "].isInUse", true);
 		VA.SetBoolean(wgDefVarName+".isActive", true);

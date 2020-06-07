@@ -52,7 +52,7 @@ public class VAInline
 		}
 		if (groupNum != "1")  output += groupNum + " ";
 
-		string tmpVarName = ">>shipInfo[" + activeShipName + "].weaponGroup[" + groupName + "][" + groupNum + "]";
+		string tmpVarName = ">>shipInfo[" + activeShipName + "].weaponGroup[" + groupName + " " + groupNum + "]";
 		int? lenN = VA.GetInt(tmpVarName + ".weaponKeyPress.len");
 		if (VA.GetBoolean(tmpVarName + ".isActive") == true && lenN.HasValue && lenN.Value > 0) {
 			output += "will fire ";

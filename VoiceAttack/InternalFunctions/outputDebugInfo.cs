@@ -71,7 +71,7 @@ public class VAInline
 			if (VA.GetBoolean(">>shipInfo[" + shipNameList[s] + "].isInUse") == true) {
 				for (short w = 0; w < wgNameList.Length; w++) {
 					for (short n = 1; n <= maxWGNum; n++) {
-						tmpVarName = ">>shipInfo[" + shipNameList[s] + "].weaponGroup[" + wgNameList[w] + "][" + n + "]";
+						tmpVarName = ">>shipInfo[" + shipNameList[s] + "].weaponGroup[" + wgNameList[w] + " " + n + "]";
 						if (VA.GetBoolean(tmpVarName + ".isActive") == true) {
 							int? lenN = VA.GetInt(tmpVarName + ".weaponKeyPress.len");
 							int len = lenN.HasValue ? lenN.Value : 0;
@@ -89,7 +89,7 @@ public class VAInline
 
 				foreach (string groupName in staticGroupList) {
 					short n = 1;
-					tmpVarName = ">>shipInfo[" + shipNameList[s] + "].weaponGroup[" + groupName + "][" + n + "]";
+					tmpVarName = ">>shipInfo[" + shipNameList[s] + "].weaponGroup[" + groupName + " " + n + "]";
 
 					if (VA.GetBoolean(tmpVarName + ".isActive") == true) {
 						int? lenN = VA.GetInt(tmpVarName + ".weaponKeyPress.len");

@@ -33,7 +33,7 @@ public class VAInline
 				activeWeaponCount = 0;
 				for (short w = 0; w < wgNameList.Length; w++) {
 					for (short n = 1; n < 10; n++) {
-						tmpVarName = ">>shipInfo[" + shipNameList[s] + "].weaponGroup[" + wgNameList[w] + "][" + n + "]";
+						tmpVarName = ">>shipInfo[" + shipNameList[s] + "].weaponGroup[" + wgNameList[w] + " " + n + "]";
 						if (VA.GetBoolean(tmpVarName + ".isActive") == true) {
 							int? lenN = VA.GetInt(tmpVarName + ".weaponKeyPress.len");
 							if (lenN.HasValue && lenN.Value > 0) {

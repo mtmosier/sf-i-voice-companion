@@ -159,7 +159,7 @@ public class VAInline
 				//*** Set each of the weapon groups for the ship as no longer in use
 				for (short w = 0; w < wgNameList.Length; w++) {
 					for (short n = 1; n <= maxWGNum; n++) {
-						VA.SetBoolean(">>shipInfo[" + shipName + "].weaponGroup[" + wgNameList[w] + "][" + n + "].isActive", false);
+						VA.SetBoolean(">>shipInfo[" + shipName + "].weaponGroup[" + wgNameList[w] + " " + n + "].isActive", false);
 					}
 				}
 

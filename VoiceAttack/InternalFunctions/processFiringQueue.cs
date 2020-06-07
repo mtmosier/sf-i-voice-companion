@@ -54,7 +54,7 @@ public class VAInline
 			string keybindName;
 
 			//*** Load weapon group information
-			string wgDefVarPrefix = ">>shipInfo[" + ActiveShipName + "].weaponGroup[" + Name + "][" + GroupNum + "]";
+			string wgDefVarPrefix = ">>shipInfo[" + ActiveShipName + "].weaponGroup[" + Name + " " + GroupNum + "]";
 			if (Parent.VA.GetBoolean(wgDefVarPrefix + ".isActive") == true) {
 				int? weaponCount = Parent.VA.GetInt(wgDefVarPrefix + ".weaponKeyPress.len");
 				if (weaponCount.HasValue) {

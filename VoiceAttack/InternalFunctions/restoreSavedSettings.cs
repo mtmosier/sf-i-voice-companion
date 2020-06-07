@@ -152,7 +152,7 @@ public class VAInline
 			if (shipInUse) {
 				for (short w = 0; w < wgNameList.Length; w++) {
 					for (short n = 1; n <= wgNumMax; n++) {
-						tmpVarName = ">>shipInfo[" + fullShipList[s] + "].weaponGroup[" + wgNameList[w] + "][" + n + "]";
+						tmpVarName = ">>shipInfo[" + fullShipList[s] + "].weaponGroup[" + wgNameList[w] + " " + n + "]";
 
 						wgIsActive = false;
 						settingName = tmpVarName + ".isActive";
@@ -218,7 +218,7 @@ public class VAInline
 
 
 				foreach (string gName in staticGroupList) {
-					tmpVarName = ">>shipInfo[" + fullShipList[s] + "].weaponGroup[" + gName + "][1]";
+					tmpVarName = ">>shipInfo[" + fullShipList[s] + "].weaponGroup[" + gName + " 1]";
 
 					wgIsActive = false;
 					settingName = tmpVarName + ".isActive";
@@ -314,7 +314,7 @@ public class VAInline
 
 		try {
 			string json = System.IO.File.ReadAllText(filePath);
-			// json = updateSettingsJson(json);
+			json = updateSettingsJson(json);
 			if (!string.IsNullOrEmpty(json)) {
 				rtnVal = new JavaScriptSerializer().Deserialize<Dictionary<string,object>>(json);
 			}
