@@ -57,6 +57,7 @@ public class VAInline
 
 		string[] fileList;
 		Dictionary<string, string[]> soundFileGroupList = new Dictionary<string, string[]>();
+		List<string> groupsToCopyFromNull = new List<string>();
 
 		string batchFileContents = "";
 		string soundFileGroupContents = "";
@@ -73,6 +74,10 @@ public class VAInline
 			@"{TXT:>>voiceDir}\Effects\Error beep\Error beep.mp3"
 		};
 		soundFileGroupList.Add("Non-Verbal Error", fileList);
+
+		fileList = new string[] {};
+		soundFileGroupList.Add("Non-Verbal Confirmation", fileList);
+		groupsToCopyFromNull.Add("Non-Verbal Confirmation");
 
 
 		//*** Companion
@@ -618,10 +623,20 @@ public class VAInline
 				batchFileContents += "    IF EXIST \"%vaSoundDir%\\%newDir%\\" + soundGroup.Key + "\\" + destFileName + "\"  SET filesFound=1\n";
 				batchFileContents += "  )\n";
 			}
-			batchFileContents += "  IF \"%filesFound%\"==\"0\" (\n";
-			batchFileContents += "    echo " + soundGroup.Key + " is empty.\n";
-			batchFileContents += "  )\n";
+			if (!groupsToCopyFromNull.Contains(soundGroup.Key)) {
+				batchFileContents += "  IF \"%filesFound%\"==\"0\" (\n";
+				batchFileContents += "    echo " + soundGroup.Key + " is empty.\n";
+				batchFileContents += "  )\n";
+			}
 		}
+
+		//*** Copy specified groups from Null to other companions
+		batchFileContents += "  SET filesFound=0\n";
+		batchFileContents += "  IF EXIST \"%vaSoundDir%\\sf-i_Null\\\" (\n";
+		foreach (string gn in groupsToCopyFromNull) {
+			batchFileContents += "    IF EXIST \"%vaSoundDir%\\sf-i_Null\\" + gn + "\\\" Xcopy /E /Y /Q \"%vaSoundDir%\\sf-i_Null\\" + gn + "\" \"%vaSoundDir%\\%newDir%\\" + gn + "\\\" > NUL\n";
+		}
+		batchFileContents += "  )\n";
 
 		batchFileContents += "  exit /b\n\n";
 		batchFileContents += "\n\n";

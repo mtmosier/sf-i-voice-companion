@@ -76,6 +76,8 @@ pause
     echo Non-Verbal Error is empty.
   )
   SET filesFound=0
+  IF NOT EXIST "%vaSoundDir%\%newDir%\Non-Verbal Confirmation\" mkdir "%vaSoundDir%\%newDir%\Non-Verbal Confirmation"
+  SET filesFound=0
   IF NOT EXIST "%vaSoundDir%\%newDir%\Switch Companion Target\" mkdir "%vaSoundDir%\%newDir%\Switch Companion Target"
   IF EXIST "%vaSoundDir%\%curDir%\Additional dialogue\A smidgen of power.mp3" (
     copy "%vaSoundDir%\%curDir%\Additional dialogue\A smidgen of power.mp3" "%vaSoundDir%\%newDir%\Switch Companion Target\A smidgen of power.mp3" >nul
@@ -1339,6 +1341,10 @@ pause
   )
   IF "%filesFound%"=="0" (
     echo Firing Hacking is empty.
+  )
+  SET filesFound=0
+  IF EXIST "%vaSoundDir%\sf-i_Null\" (
+    IF EXIST "%vaSoundDir%\sf-i_Null\Non-Verbal Confirmation\" Xcopy /E /Y /Q "%vaSoundDir%\sf-i_Null\Non-Verbal Confirmation" "%vaSoundDir%\%newDir%\Non-Verbal Confirmation\" > NUL
   )
   exit /b
 

@@ -9,7 +9,7 @@
 5. [Command list](#commandList)
 6. [Troubleshooting](#issues)
 7. [Frequently Asked Questions](#faq)
-
+8. [Credits](#credits)
 
 
 <a name="intro"></a>
@@ -95,8 +95,8 @@ Here's a longer example, including configuring and firing weapon groups. All req
 [Read a more detailed description of what you can do with weapon groups.](weaponGroupConfigurationReference.md)
 
 
-<a name="commandList"></a>
 ## Command list
+<a name="commandList"></a>
 
 This command list may be incomplete. To see a full list of voice commands available please check the [voice command reference guide](https://htmlpreview.github.io/?https://github.com/mtmosier/sf-i-voice-companion/blob/master/reference/Starfighter%20Infinity%20Companion%20Reference.html).
 
@@ -172,8 +172,8 @@ There currently is no direct tie-in with Starfighter: Infinity. This companion d
 I hope to add some game log parsing to get feedback directly from the companion at some point, but for the moment all I can offer is this somewhat-blind companion.
 
 
-## Frequently Asked Questions
 <a name="faq"></a>
+## Frequently Asked Questions
 
 1. **I use custom keybinds in SF:I. Do I really need to configure my kebinds manually in the VoiceAttack profile?**
   * There should be no keybind configuration required. Keybinds are automatically read from the game configuration data upon profile initialization.
@@ -197,3 +197,20 @@ I hope to add some game log parsing to get feedback directly from the companion 
   * ***After making changes to these variables you must reload the profile before they will take affect. You can do this by switching to another profile and switching back, or by restarting VoiceAttack.***
 8. **My question wasn't answered here. How do I get further help?**
   * Either report [your issue on GitHub](https://github.com/mtmosier/sf-i-voice-companion/issues), or [just email me](mailto:m.t.m.o.s.i.e.r@gmail.com). If this project becomes at all popular I'll set up some forums or similar.
+
+
+
+<a name="credits"></a>
+## Credits
+
+I've made use of a number of sound files from [Freesound.org](https://freesound.org/) as permitted by their licenses.
+
+* "UI Confirmation Alert, C1.wav" by InspectorJ (www.jshaw.co.uk) of [Freesound.org](https://freesound.org/)
+* "UI Confirmation Alert, C2.wav" by InspectorJ (www.jshaw.co.uk) of [Freesound.org](https://freesound.org/)
+* "UI Confirmation Alert, C3.wav" by InspectorJ (www.jshaw.co.uk) of [Freesound.org](https://freesound.org/)
+* "UI Confirmation Alert, C4.wav" by InspectorJ (www.jshaw.co.uk) of [Freesound.org](https://freesound.org/)
+* "UI Confirmation Alert, C5.wav" by InspectorJ (www.jshaw.co.uk) of [Freesound.org](https://freesound.org/)
+
+<!--
+* "Heartbeat, Regular, Single, 01-01, LOOP.wav" by InspectorJ (www.jshaw.co.uk) of [Freesound.org](https://freesound.org/)
+-->

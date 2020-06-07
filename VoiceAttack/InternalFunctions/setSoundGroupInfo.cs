@@ -15,6 +15,7 @@ public class VAInline
 
 	private string[] getSoundFileGroupList() {
 		return new string[] {
+			"Non-Verbal Confirmation",
 			"Non-Verbal Error",
 			"Switch Companion Target",
 			"Switch Companion Source",
@@ -107,6 +108,8 @@ public class VAInline
 			try {
 	            string[] files = Directory.GetFiles(realFilePath + soundGroup, "*.mp3");
 				fileCount = files.Length;
+				files = Directory.GetFiles(realFilePath + soundGroup, "*.wav");
+				fileCount += files.Length;
 	        } catch (Exception e) {
 //				VA.WriteToLog("Failed getting file list from directory " + realFilePath + soundGroup, "Red");
 			}

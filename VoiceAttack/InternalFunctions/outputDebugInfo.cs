@@ -44,7 +44,16 @@ public class VAInline
 		debugOutput += message + "\n";
 		VA.WriteToLog(message, "Pink");
 
-		message = VA.ParseTokens("RAM Usage: {STATE_RAMAVAILABLE} / {STATE_RAMTOTAL}");
+		string ramUsedStr = VA.ParseTokens("{EXP: {STATE_RAMTOTAL} - {STATE_RAMAVAILABLE}}");
+		string ramTotalStr = VA.ParseTokens("{STATE_RAMTOTAL}");
+		decimal ramUsed = 0, ramTotal = 0;
+
+		try {
+			ramUsed = decimal.Round(decimal.Parse(ramUsedStr) / 1024 / 1024, 0);
+			ramTotal = decimal.Round(decimal.Parse(ramTotalStr) / 1024 / 1024, 0);
+		} catch (Exception e) {}
+
+		message = String.Format("RAM Usage: {0:n0}mb/ {1:n0}mb", ramUsed, ramTotal);
 		debugOutput += message + "\n";
 		VA.WriteToLog(message, "Pink");
 
@@ -103,7 +112,19 @@ public class VAInline
 		debugOutput += message + "\n";
 		VA.WriteToLog(message, "Orange");
 
+		message = "Headphones in use: " + (VA.GetBoolean(">>headphonesInUse") == true ? "Yes" : "No");
+		debugOutput += message + "\n";
+		VA.WriteToLog(message, "Red");
+
 		message = "Ship Name List: " + String.Join(", ", shipNameList);
+		debugOutput += message + "\n";
+		VA.WriteToLog(message, "Red");
+
+		message = "Active Ship Name Input List: " + VA.GetText(">>activeShipNameInput");
+		debugOutput += message + "\n";
+		VA.WriteToLog(message, "Red");
+
+		message = "Config Ship Name Input List: " + VA.GetText(">>configShipNameInput");
 		debugOutput += message + "\n";
 		VA.WriteToLog(message, "Red");
 

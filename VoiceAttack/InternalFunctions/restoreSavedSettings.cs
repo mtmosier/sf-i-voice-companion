@@ -40,6 +40,8 @@ public class VAInline
 
 		//*** Set list of ship names
 		List<string> fullShipList = new List<string>();
+		List<string> activeShipList = new List<string>();
+
 		variable = VA.GetText(">>shipNameListStr");
 		if (!String.IsNullOrEmpty(variable)) {
 			string[] shipNameList = variable.Split(';');
@@ -61,9 +63,12 @@ public class VAInline
 				string sn = match.Groups[1].ToString();
 
 				boolValueN = (Boolean) settings[loopSn];
-				if (boolValueN.HasValue && boolValueN.Value)
+				if (boolValueN.HasValue && boolValueN.Value) {
 					if (!fullShipList.Contains(sn))
 						fullShipList.Add(sn);
+					if (!activeShipList.Contains(sn))
+						activeShipList.Add(sn);
+				}
 			}
   		}
 
@@ -72,6 +77,9 @@ public class VAInline
 
 		shipNameInput = "[" + string.Join<string>(";", fullShipList) + ";current;active] [ship;]";
 		VA.SetText(">>shipNameInput", shipNameInput);
+
+		shipNameInput = "[" + string.Join<string>(";", activeShipList) + ";current;active] [ship;]";
+		VA.SetText(">>activeShipNameInput", shipNameInput);
 
 		VA.SetText(">>shipNameListStr", string.Join<string>(";", fullShipList));
 

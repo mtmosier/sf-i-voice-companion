@@ -78,7 +78,7 @@ public class VAInline
 
 
 		//*** Get source ship name
-		fromShip = VA.Command.Segment(1);
+		fromShip = VA.Command.Segment(2);
 
 		fromShip = fromShip.Trim();
 
@@ -115,7 +115,7 @@ public class VAInline
 				+ string.Join(";", restartList),  //*** inputOptionListStr
 				request,  //*** playbackText
 				null,  //*** playbackFileGroupName
-				(headphonesInUse != true),  //*** pauseForPlayback
+				(headphonesInUse != true), //*** pauseForPlayback
 				false, //*** shortPause
 				allowFreeFormShipNames   //*** returnOnAnyInput
 			);
@@ -127,7 +127,7 @@ public class VAInline
 				}
 
 				if (Array.IndexOf(restartList, response) != -1) {
-					VA.WriteToLog("Restart copy ship.", "Orange");
+					VA.WriteToLog("Restart rename ship.", "Orange");
 					continue;
 				}
 
@@ -153,10 +153,9 @@ public class VAInline
 
 
 			if (!String.IsNullOrEmpty(toShip)) {
-				VA.WriteToLog("Heard: [" + toShip + "]", "black");
 
 				if (comparer.Compare(fromShip, toShip) == 0) {
-					playRandomSound("Cannot copy " + toShip + " ship to itself.", null, true);
+					playRandomSound("Cannot copy " + toShip + " to itself.", null, true);
 					continue;
 
 				} else {
@@ -167,7 +166,7 @@ public class VAInline
 
 
 					//*** Confirm the user really wants to perform the copy
-					request = "Are you sure you want to copy " + fromShip + " ship to " + toShip + " ship?";
+					request = "Are you sure you want to rename " + fromShip + " ship to " + toShip + " ship?";
 					if (toShipInUse)  request += " This will replace the configuration currently in " + toShip + " ship";
 					response = getUserInput(
 						string.Join(";", agreeList)
@@ -190,12 +189,13 @@ public class VAInline
 					}
 
 					if (Array.IndexOf(restartList, response) != -1) {
-						VA.WriteToLog("Restart copy ship.", "Orange");
+						VA.WriteToLog("Restart rename ship.", "Orange");
 						continue;
 					}
 
 
-					//*** Perform ship copy
+					//*** Perform ship rename
+					VA.SetBoolean(">>shipInfo[" + fromShip + "].isInUse", false);
 					VA.SetBoolean(">>shipInfo[" + toShip + "].isInUse", true);
 
 					for (short w = 0; w < wgNameList.Length; w++) {
@@ -208,6 +208,7 @@ public class VAInline
 							boolValueN = VA.GetBoolean(settingName);
 							if (boolValueN.HasValue)  wgIsActive = boolValueN.Value;
 
+							VA.SetBoolean(fromVarName + ".isActive", false);
 							VA.SetBoolean(toVarName + ".isActive", wgIsActive);
 
 							if (wgIsActive) {
@@ -229,34 +230,31 @@ public class VAInline
 					}
 
 					VA.SetText(">>activeShipName", toShip);
-					VA.WriteToLog("Active ship set to " + toShip, "Orange");
 
-					bool reloadRequired = false;
-					if (!fullShipList.Contains(toShip)) {
-						reloadRequired = true;
+					if (!fullShipList.Contains(toShip))
 						fullShipList.Add(toShip);
-					}
-					if (!activeShipList.Contains(toShip)) {
-						reloadRequired = true;
+					if (fullShipList.Contains(fromShip))
+						fullShipList.Remove(fromShip);
+
+					if (!activeShipList.Contains(toShip))
 						activeShipList.Add(toShip);
-					}
+					if (activeShipList.Contains(fromShip))
+						activeShipList.Remove(fromShip);
 
-					if (reloadRequired) {
-						string shipNameInput = "[" + string.Join<string>(";", fullShipList) + "] [ship;]";
-						VA.SetText(">>configShipNameInput", shipNameInput);
+					string shipNameInput = "[" + string.Join<string>(";", fullShipList) + "] [ship;]";
+					VA.SetText(">>configShipNameInput", shipNameInput);
 
-						shipNameInput = "[" + string.Join<string>(";", fullShipList) + ";current;active] [ship;]";
-						VA.SetText(">>shipNameInput", shipNameInput);
+					shipNameInput = "[" + string.Join<string>(";", fullShipList) + ";current;active] [ship;]";
+					VA.SetText(">>shipNameInput", shipNameInput);
 
-						shipNameInput = "[" + string.Join<string>(";", activeShipList) + ";current;active] [ship;]";
-						VA.SetText(">>activeShipNameInput", shipNameInput);
+					shipNameInput = "[" + string.Join<string>(";", activeShipList) + ";current;active] [ship;]";
+					VA.SetText(">>activeShipNameInput", shipNameInput);
 
-						VA.SetText(">>shipNameListStr", string.Join<string>(";", fullShipList));
-					}
+					VA.SetText(">>shipNameListStr", string.Join<string>(";", fullShipList));
 
 					if (writeSettings()) {
-						playRandomSound("Copy complete", "Configuration Complete");
-						if (reloadRequired)  reloadProfile();
+						playRandomSound("Rename complete", "Configuration Complete");
+						reloadProfile();
 					} else {
 						playRandomSound("Problem writing ship settings", "Settings Write Error");
 					}
