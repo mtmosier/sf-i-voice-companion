@@ -28,7 +28,7 @@ Explorer
 Sniper
 ```
 
-You can add additional ships with any name you want by using the command "*Register new ship*".
+You can add additional ships with any name you want by using the command "*Register new ship*".  Alternatively you can edit the ship list by editing the command labeled "**[Config] General**" under the "*Configuration*" category in the VoiceAttack profile.
 
 
 <a name="definedGroups"></a>
@@ -119,10 +119,10 @@ Why yes, normally it would.  But due to the difficulty in VoiceAttack recognizin
 
 | Input | Alternatives | Notes |
 | --- | --- | --- |
-| complete | done, finished, stop there, stop now | Used when asked for next action in order to stop input loop. |
-| yes | confirm, positive, affirmative, absolutely, please, please do, yeah, yes sir, commit, save, please save | Response when asked if you want to save the information. |
-| no | nah, nope, negative, cancel, nevermind, abort | Response when asked if you want to save the information. |
-| restart | Cancel configuration so far and start over | start over, do over |
+| complete | done, finished, stop now, stop there | Used when asked for next action in order to stop input loop. |
+| yes | absolutely, affirmative, commit, confirm, please, please do, please save, positive, save, yeah, yes sir | Response when asked if you want to save the information. |
+| no | abort, cancel, nah, negative, nevermind, nope  | Response when asked if you want to save the information. |
+| restart | do over, start over | Cancel configuration so far and start over |
 
 
 <a name="advancedFiring"></a>
