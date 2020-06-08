@@ -28,7 +28,9 @@ Explorer
 Sniper
 ```
 
-You can add additional ships with any name you want by using the command "*Register new ship*".  Alternatively you can edit the ship list by editing the command labeled "**[Config] General**" under the "*Configuration*" category in the VoiceAttack profile.
+You can add additional ships with any name you want by using the command "*Register new ship*".
+
+Alternatively you can edit the ship list by editing the command labeled "**[Config] General**" under the "*Configuration*" category in the VoiceAttack profile.
 
 
 <a name="definedGroups"></a>
