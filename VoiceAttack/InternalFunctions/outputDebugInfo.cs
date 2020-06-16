@@ -36,7 +36,7 @@ public class VAInline
 		debugOutput += message + "\n";
 		VA.WriteToLog(message, "Pink");
 
-		message = typeof(string).Assembly.ImageRuntimeVersion;
+		message = "Environment version: " + Environment.Version.ToString();
 		debugOutput += message + "\n";
 		VA.WriteToLog(message, "Pink");
 
@@ -129,6 +129,10 @@ public class VAInline
 		VA.WriteToLog(message, "Red");
 
 		message = "Weapon Group Name List: " + String.Join(", ", wgNameList);
+		debugOutput += message + "\n";
+		VA.WriteToLog(message, "Red");
+
+		message = "Active Weapon Group Input: " + VA.GetText(">>activeWeaponGroupInput");
 		debugOutput += message + "\n";
 		VA.WriteToLog(message, "Red");
 

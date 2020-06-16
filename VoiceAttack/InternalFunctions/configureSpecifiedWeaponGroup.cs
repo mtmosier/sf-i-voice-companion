@@ -8,6 +8,7 @@ public class VAInline
 	private Guid playRandomSoundGuid;
 	private Guid requestVerbalUserInputGuid;
 	private Guid writeSettingsToFileGuid;
+	private bool restart = false;
 
 	public void main()
 	{
@@ -70,11 +71,11 @@ public class VAInline
 		string tmpVarName = ">>shipInfo[" + activeShipName + "].weaponGroup[" + groupName + " " + groupNum + "]";
 		int? lenN = VA.GetInt(tmpVarName + ".weaponKeyPress.len");
 
-		if (VA.GetBoolean(tmpVarName + ".isActive") == true && lenN.HasValue && lenN.Value > 0) {
+		if (!restart && VA.GetBoolean(tmpVarName + ".isActive") == true && lenN.HasValue && lenN.Value > 0) {
 			bool? extendedWeaponConfigPlayed = VA.GetBoolean(">>extendedWeaponConfigPlayed");
 			string voiceGroupName = "Weapon Group Already Configured";
 			string msg = groupName + " ";
-			if (Array.IndexOf(staticGroupList, groupName) == -1) {
+			if (Array.IndexOf(staticGroupList, groupName) == -1 && getIntFromStr(groupNum, 0) > 1) {
 				msg += groupNum + " ";
 			}
 			msg += "is already configured.";
@@ -147,6 +148,7 @@ public class VAInline
 			if (Array.IndexOf(restartList, response) != -1) {
 				VA.WriteToLog("Restart weapon group configuration.", "Orange");
 				playRandomSound("Restarting configuration", "Restart Configuration", true);
+				restart = true;
 				main();
 				return;
 			}
@@ -301,6 +303,7 @@ public class VAInline
 		if (Array.IndexOf(restartList, response) != -1) {
 			VA.WriteToLog("Restart weapon group configuration.", "Orange");
 			playRandomSound("Restarting configuration", "Restart Configuration", true);
+			restart = true;
 			main();
 			return;
 		}
@@ -333,14 +336,14 @@ public class VAInline
 
 
 
-	private int getIntFromStr(string input)
+	private int getIntFromStr(string input, int defaultValue = -1)
 	{
 		if (input == null || input == "") {
-			return -1;
+			return defaultValue;
 		} else {
 			try { return Convert.ToInt32(input); }
-			catch (FormatException) { return -1; }
-			catch (OverflowException) { return -1; }
+			catch (FormatException) { return defaultValue; }
+			catch (OverflowException) { return defaultValue; }
 		}
 	}
 

@@ -47,6 +47,7 @@ public class VAInline
 			"Firing Group 1",
 			"Firing Group 2",
 			"Firing Group 3",
+			"Firing Ambush",
 			"Firing Counter",
 			"Firing Missile",
 			"Firing Torpedo",

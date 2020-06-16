@@ -1110,6 +1110,35 @@ pause
     echo Firing Group 3 is empty.
   )
   SET filesFound=0
+  IF NOT EXIST "%vaSoundDir%\%newDir%\Firing Ambush\" mkdir "%vaSoundDir%\%newDir%\Firing Ambush"
+  IF EXIST "%vaSoundDir%\%curDir%\Power Management\Configuring for attack.mp3" (
+    copy "%vaSoundDir%\%curDir%\Power Management\Configuring for attack.mp3" "%vaSoundDir%\%newDir%\Firing Ambush\Configuring for attack.mp3" >nul
+    IF EXIST "%vaSoundDir%\%newDir%\Firing Ambush\Configuring for attack.mp3"  SET filesFound=1
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\NMS\((RS - Strike Target))\non-verbose\Attacking.mp3" (
+    copy "%vaSoundDir%\%curDir%\Profile Sounds\NMS\((RS - Strike Target))\non-verbose\Attacking.mp3" "%vaSoundDir%\%newDir%\Firing Ambush\Attacking.mp3" >nul
+    IF EXIST "%vaSoundDir%\%newDir%\Firing Ambush\Attacking.mp3"  SET filesFound=1
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Targeting\((RS - Target Previous Hostile))\Verbose\Target locked.mp3" (
+    copy "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Targeting\((RS - Target Previous Hostile))\Verbose\Target locked.mp3" "%vaSoundDir%\%newDir%\Firing Ambush\Target locked.mp3" >nul
+    IF EXIST "%vaSoundDir%\%newDir%\Firing Ambush\Target locked.mp3"  SET filesFound=1
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\ED\Fighters\((RS - Eliminate the threat))\Verbose\Engage the target.mp3" (
+    copy "%vaSoundDir%\%curDir%\Profile Sounds\ED\Fighters\((RS - Eliminate the threat))\Verbose\Engage the target.mp3" "%vaSoundDir%\%newDir%\Firing Ambush\Engage the target.mp3" >nul
+    IF EXIST "%vaSoundDir%\%newDir%\Firing Ambush\Engage the target.mp3"  SET filesFound=1
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\ED\Fighters\((RS - Eliminate the threat))\Verbose\Engaging target.mp3" (
+    copy "%vaSoundDir%\%curDir%\Profile Sounds\ED\Fighters\((RS - Eliminate the threat))\Verbose\Engaging target.mp3" "%vaSoundDir%\%newDir%\Firing Ambush\Engaging target.mp3" >nul
+    IF EXIST "%vaSoundDir%\%newDir%\Firing Ambush\Engaging target.mp3"  SET filesFound=1
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\ED\Course Headings\((RS - CH setting course))\Verbose\Locking target and setting course.mp3" (
+    copy "%vaSoundDir%\%curDir%\Profile Sounds\ED\Course Headings\((RS - CH setting course))\Verbose\Locking target and setting course.mp3" "%vaSoundDir%\%newDir%\Firing Ambush\Locking target and setting course.mp3" >nul
+    IF EXIST "%vaSoundDir%\%newDir%\Firing Ambush\Locking target and setting course.mp3"  SET filesFound=1
+  )
+  IF "%filesFound%"=="0" (
+    echo Firing Ambush is empty.
+  )
+  SET filesFound=0
   IF NOT EXIST "%vaSoundDir%\%newDir%\Firing Counter\" mkdir "%vaSoundDir%\%newDir%\Firing Counter"
   IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Combat\((RS - Chaff))\Verbose\Countermeasures.mp3" (
     copy "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Combat\((RS - Chaff))\Verbose\Countermeasures.mp3" "%vaSoundDir%\%newDir%\Firing Counter\Countermeasures.mp3" >nul

@@ -1,13 +1,16 @@
+//  System.dll;System.Core.dll;System.Text.RegularExpressions.dll
+
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 public class VAInline
 {
 
 	private List<WeaponGroup> WeaponGroupList = new List<WeaponGroup>();
-	private decimal skippedKeypressPauseTime = 0.3m;
-	private decimal defaultPauseTime = 0.2m;
+	private decimal skippedKeypressPauseTime = 0.5m;
+	private decimal defaultPauseTime = 0.3m;
 	private decimal defaultKeyHoldTime = 0.1m;
 	private bool isInitialRun = false;
 	private string secondaryFireKey;
@@ -54,7 +57,9 @@ public class VAInline
 			string keybindName;
 
 			//*** Load weapon group information
-			string wgDefVarPrefix = ">>shipInfo[" + ActiveShipName + "].weaponGroup[" + Name + " " + GroupNum + "]";
+			string wgDefVarPrefix;
+			if (GroupNum > 0)	wgDefVarPrefix = ">>shipInfo[" + ActiveShipName + "].weaponGroup[" + Name + " " + GroupNum + "]";
+			else				wgDefVarPrefix = ">>shipInfo[" + ActiveShipName + "].weaponGroup[" + Name + "]";
 			if (Parent.VA.GetBoolean(wgDefVarPrefix + ".isActive") == true) {
 				int? weaponCount = Parent.VA.GetInt(wgDefVarPrefix + ".weaponKeyPress.len");
 				if (weaponCount.HasValue) {
@@ -142,7 +147,7 @@ public class VAInline
 
 		public bool hasQueueEntries() { return KeyPressQueue.Count > 0; }
 		public int getQueueEntryCount() { return KeyPressQueue.Count; }
-		public string ToString() { return (!string.IsNullOrEmpty(Name) ? Name : "Keybind") + " " + GroupNum; }
+		public string ToString() { return (!string.IsNullOrEmpty(Name) ? Name : "Keybind") + (GroupNum > 0 ? " " + GroupNum : ""); }
 	}
 
 
@@ -401,10 +406,12 @@ public class VAInline
 		}
 
 		//*** Get weapon group to add parameters
+		string fullGroupNameToAdd = VA.GetText(">secondaryFireFullGroupNameToAdd");
 		string groupNameToAdd = VA.GetText(">secondaryFireGroupNameToAdd");
 		int? groupNumToAddNull = VA.GetInt(">secondaryFireGroupNumToAdd");
 		int? groupExecuteNull = VA.GetInt(">secondaryFireGroupExecuteCount");
-		if (!string.IsNullOrEmpty(groupNameToAdd)) {
+		if (!string.IsNullOrEmpty(groupNameToAdd) || !string.IsNullOrEmpty(fullGroupNameToAdd)) {
+			VA.SetText(">secondaryFireFullGroupNameToAdd", null);
 			VA.SetText(">secondaryFireGroupNameToAdd", null);
 			VA.SetInt(">secondaryFireGroupNumToAdd", null);
 			VA.SetInt(">secondaryFireGroupExecuteCount", null);
@@ -415,9 +422,11 @@ public class VAInline
 		VA.SetText(">secondaryFireKeybindToCancel", null);
 
 		//*** Get weapon group to cancel parameters
+		string fullGroupNameToCancel = VA.GetText(">secondaryFireFullGroupNameToCancel");
 		string groupNameToCancel = VA.GetText(">secondaryFireGroupNameToCancel");
 		int? groupNumToCancelNull = VA.GetInt(">secondaryFireGroupNumToCancel");
-		if (!string.IsNullOrEmpty(groupNameToCancel)) {
+		if (!string.IsNullOrEmpty(groupNameToCancel) || !string.IsNullOrEmpty(fullGroupNameToCancel)) {
+			VA.SetText(">secondaryFireFullGroupNameToCancel", null);
 			VA.SetText(">secondaryFireGroupNameToCancel", null);
 			VA.SetInt(">secondaryFireGroupNumToCancel", null);
 		}
@@ -432,9 +441,11 @@ public class VAInline
 		//*** Debug
 		// VA.WriteToLog("keybindToAdd: " + keybindToAdd, "Pink");
 		// VA.WriteToLog("keybindExecuteCount: " + keybindExecuteCount, "Pink");
+		// VA.WriteToLog("fullGroupNameToAdd: " + fullGroupNameToAdd, "Pink");
 		// VA.WriteToLog("groupNameToAdd: " + groupNameToAdd, "Pink");
 		// VA.WriteToLog("groupNumToAdd: " + groupNumToAdd, "Pink");
 		// VA.WriteToLog("groupExecuteCount: " + groupExecuteCount, "Pink");
+		// VA.WriteToLog("fullGroupNameToCancel: " + fullGroupNameToCancel, "Pink");
 		// VA.WriteToLog("groupNameToCancel: " + groupNameToCancel, "Pink");
 		// VA.WriteToLog("groupNumToCancel: " + groupNumToCancel, "Pink");
 		// VA.WriteToLog("activeShipName: " + activeShipName, "Pink");
@@ -452,6 +463,15 @@ public class VAInline
 		if (!string.IsNullOrEmpty(groupNameToCancel))
 			purgeWeaponGroup(groupNameToCancel, groupNumToCancel);
 
+		else if (!string.IsNullOrEmpty(fullGroupNameToCancel)) {
+
+			Match match = Regex.Match(fullGroupNameToCancel, @" (\d+)$");
+			if (match.Success)	groupNumToCancel = 0;
+			else				groupNumToCancel = 1;
+
+			purgeWeaponGroup(fullGroupNameToAdd, groupNumToCancel);
+		}
+
 		//*** Add passed in keybind to the queue
 		if (!string.IsNullOrEmpty(keybindToAdd))
 			addKeybindToQueue(keybindToAdd, activeShipName, keybindExecuteCount);
@@ -460,9 +480,30 @@ public class VAInline
 		if (!string.IsNullOrEmpty(groupNameToAdd))
 			addWeaponGroupToQueue(groupNameToAdd, groupNumToAdd, activeShipName, groupExecuteCount);
 
+		else if (!string.IsNullOrEmpty(fullGroupNameToAdd)) {
+
+			Match match = Regex.Match(fullGroupNameToAdd, @" (\d+)$");
+			if (match.Success)	groupNumToAdd = 0;
+			else				groupNumToAdd = 1;
+
+			addWeaponGroupToQueue(fullGroupNameToAdd, groupNumToAdd, activeShipName, groupExecuteCount);
+		}
+
 
 		//*** Data management done - Now execute the next loop action
 		exportNextLoopAction();
+	}
+
+
+	private int getIntFromStr(string input, int defaultValue = -1)
+	{
+		if (input == null || input == "") {
+			return defaultValue;
+		} else {
+			try { return Convert.ToInt32(input); }
+			catch (FormatException) { return defaultValue; }
+			catch (OverflowException) { return defaultValue; }
+		}
 	}
 
 	List<string> getCurrentlyHeldKeybindList() {

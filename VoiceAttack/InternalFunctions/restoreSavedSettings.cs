@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Web.Script.Serialization;
 using System.Text.RegularExpressions;
+using System.Globalization;
 
 public class VAInline
 {
@@ -18,7 +19,8 @@ public class VAInline
 		string settingName;
 		string shipNameInput;
 		string activeShipName = "";
-
+		List<string> activeWeaponGroupList = new List<string>();
+		StringComparer comparer = StringComparer.CurrentCultureIgnoreCase;
 
 		//*** Weapon group variables
 		string wgNameListStr = VA.GetText(">>weaponGroupNameList");
@@ -154,6 +156,15 @@ public class VAInline
 							VA.SetBoolean(settingName, wgIsActive);
 
 							if (wgIsActive) {
+
+								if (comparer.Compare(fullShipList[s], activeShipName) == 0) {
+									string activeWGName = wgNameList[w] + " " + n;
+									if (n == 1)  activeWGName = wgNameList[w];
+
+									if (!activeWeaponGroupList.Contains(activeWGName))
+										activeWeaponGroupList.Add(activeWGName);
+								}
+
 								wgLen = 0;
 								settingName = tmpVarName + ".weaponKeyPress.len";
 
@@ -289,6 +300,13 @@ public class VAInline
 		VA.SetText(">>activeShipNameInput", shipNameInput);
 
 		VA.SetText(">>shipNameListStr", string.Join<string>(";", fullShipList));
+
+		//*** Export active weapon group list
+		string weaponGroupInput = "";
+		if (activeWeaponGroupList.Count > 0)	weaponGroupInput = "[" + string.Join<string>(";", activeWeaponGroupList) + "]";
+		else									weaponGroupInput = "";
+		VA.SetText(">>activeWeaponGroupInput", weaponGroupInput);
+
 
 		//*** Done
 		//VA.WriteToLog("restoreSavedSettings done", "Black");

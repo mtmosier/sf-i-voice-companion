@@ -452,6 +452,16 @@ public class VAInline
 		soundFileGroupList.Add("Firing Group 3", fileList);
 
 		fileList = new string[] {
+			@"{TXT:>>voiceDir}\Power Management\Configuring for attack.mp3",
+			@"{TXT:>>voiceDir}\Profile Sounds\NMS\((RS - Strike Target))\non-verbose\Attacking.mp3",
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Targeting\((RS - Target Previous Hostile))\Verbose\Target locked.mp3",
+			@"{TXT:>>voiceDir}\Profile Sounds\ED\Fighters\((RS - Eliminate the threat))\Verbose\Engage the target.mp3",
+			@"{TXT:>>voiceDir}\Profile Sounds\ED\Fighters\((RS - Eliminate the threat))\Verbose\Engaging target.mp3",
+			@"{TXT:>>voiceDir}\Profile Sounds\ED\Course Headings\((RS - CH setting course))\Verbose\Locking target and setting course.mp3"
+		};
+		soundFileGroupList.Add("Firing Ambush", fileList);
+
+		fileList = new string[] {
 			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Combat\((RS - Chaff))\Verbose\Countermeasures.mp3",
 			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Combat\((RS - Chaff))\Verbose\Deploying countermeasure.mp3",
 			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Combat\((RS - Chaff))\Verbose\Deploying countermeasures.mp3",
