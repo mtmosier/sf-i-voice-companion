@@ -15,12 +15,15 @@ public class VAInline
 		if (tmpCmdId != null && tmpCmdId != "")  playRandomSoundGuid = new Guid(tmpCmdId);
 
 		//*** Ship variables
-		string variable = VA.GetText(">>weaponGroupNameList");
+		string variable = VA.GetText(">>fullWeaponGroupNameList");
+		if (variable == null)  variable = "";
 		string[] wgNameList = variable.Split(';');
 
 		//*** Static Group List
 		variable = VA.GetText(">>staticGroupList");
+		if (variable == null)  variable = "";
 		string[] staticGroupList = variable.Split(';');
+
 
 		if (wgNameList.Count() > 0) {
 			output = "Available weapon groups: ";

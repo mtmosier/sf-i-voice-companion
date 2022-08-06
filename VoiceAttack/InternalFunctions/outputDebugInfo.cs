@@ -14,22 +14,30 @@ public class VAInline
 
 		//*** Ship variables
 		string shipNameListStr = VA.GetText(">>shipNameListStr");
+		if (shipNameListStr == null)  shipNameListStr = "";
 		string[] shipNameList = shipNameListStr.Split(';');
 
 		//*** Weapon group variables
-		string wgNameListStr = VA.GetText(">>weaponGroupNameList");
-		string[] wgNameList = wgNameListStr.Split(';');
+		string variable = VA.GetText(">>activeStaticGroupList");
+		if (variable == null)  variable = "";
+		List<string> activeStaticGroupList = new List<string>(variable.Split(';'));
 
-		//*** Number of weapon groups in use
-		int? maxWGNum_N = VA.GetInt(">maxWeaponGroupNum");
-		int maxWGNum = maxWGNum_N.HasValue ? maxWGNum_N.Value : 9;
+		variable = VA.GetText(">>activeWeaponGroupList");
+		if (variable == null)  variable = "";
+		List<string> activeWeaponGroupList = new List<string>(variable.Split(';'));
+
+		variable = VA.GetText(">>fullWeaponGroupNameList");
+		if (variable == null)  variable = "";
+		List<string> fullWeaponGroupList = new List<string>(variable.Split(';'));
 
 		//*** Static Group List
-		string variable = VA.GetText(">>staticGroupList");
+		variable = VA.GetText(">>staticGroupList");
+		if (variable == null)  variable = "";
 		string[] staticGroupList = variable.Split(';');
 
 		//*** Static Group List
 		variable = VA.GetText(">>companionNameList");
+		if (variable == null)  variable = "";
 		string[] companionNameList = variable.Split(';');
 
 		message = localDate.ToString("u");
@@ -69,21 +77,19 @@ public class VAInline
 			VA.WriteToLog(message, "Orange");
 
 			if (VA.GetBoolean(">>shipInfo[" + shipNameList[s] + "].isInUse") == true) {
-				for (short w = 0; w < wgNameList.Length; w++) {
-					for (short n = 1; n <= maxWGNum; n++) {
-						tmpVarName = ">>shipInfo[" + shipNameList[s] + "].weaponGroup[" + wgNameList[w] + " " + n + "]";
-						if (VA.GetBoolean(tmpVarName + ".isActive") == true) {
-							int? lenN = VA.GetInt(tmpVarName + ".weaponKeyPress.len");
-							int len = lenN.HasValue ? lenN.Value : 0;
+				foreach (string wgName in activeWeaponGroupList) {
+					tmpVarName = ">>shipInfo[" + shipNameList[s] + "].weaponGroup[" + wgName + "]";
+					if (VA.GetBoolean(tmpVarName + ".isActive") == true) {
+						int? lenN = VA.GetInt(tmpVarName + ".weaponKeyPress.len");
+						int len = lenN.HasValue ? lenN.Value : 0;
 
-							List<string> keyPressList = new List<string>();
-							for (short l = 0; l < len; l++) {
-								keyPressList.Add(VA.GetText(tmpVarName + ".weaponKeyPress[" + l + "]"));
-							}
-							message = shipNameList[s] + " >" + wgNameList[w] + " " + n + " > weaponKeyPressList:  " + String.Join(",", keyPressList);
-							debugOutput += message + "\n";
-							VA.WriteToLog(message, "Orange");
+						List<string> keyPressList = new List<string>();
+						for (short l = 0; l < len; l++) {
+							keyPressList.Add(VA.GetText(tmpVarName + ".weaponKeyPress[" + l + "]"));
 						}
+						message = shipNameList[s] + " >" + wgName + " > weaponKeyPressList:  " + String.Join(",", keyPressList);
+						debugOutput += message + "\n";
+						VA.WriteToLog(message, "Orange");
 					}
 				}
 
@@ -128,7 +134,7 @@ public class VAInline
 		debugOutput += message + "\n";
 		VA.WriteToLog(message, "Red");
 
-		message = "Weapon Group Name List: " + String.Join(", ", wgNameList);
+		message = "Weapon Group Name List: " + String.Join(", ", fullWeaponGroupList);
 		debugOutput += message + "\n";
 		VA.WriteToLog(message, "Red");
 

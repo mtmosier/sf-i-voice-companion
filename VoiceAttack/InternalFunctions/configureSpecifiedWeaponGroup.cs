@@ -8,12 +8,14 @@ public class VAInline
 	private Guid playRandomSoundGuid;
 	private Guid requestVerbalUserInputGuid;
 	private Guid writeSettingsToFileGuid;
+	private Guid reloadProfileGuid;
 	private bool restart = false;
+	private TextInfo ti;
 
 	public void main()
 	{
 		//*** INITIALIZE
-		TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
+		ti = CultureInfo.CurrentCulture.TextInfo;
 		string groupName, groupNum;
 		string response, logMessage;
 		string[] inputKeywordsToIgnore = new string[] { "turn", "activate", "weapon", "slot", "enhancer", "open", "display" };
@@ -38,6 +40,9 @@ public class VAInline
 
 		tmpCmdId = VA.GetText(">writeSettingsToFileCommandId");
 		if (!string.IsNullOrEmpty(tmpCmdId))  writeSettingsToFileGuid = new Guid(tmpCmdId);
+
+		tmpCmdId = VA.GetText(">reloadProfileCommandId");
+		if (!string.IsNullOrEmpty(tmpCmdId))  reloadProfileGuid = new Guid(tmpCmdId);
 
 		//*** Static Group List
 		string variable = VA.GetText(">>staticGroupList");
@@ -328,6 +333,7 @@ public class VAInline
 
 		if (writeSettings()) {
 			playRandomSound("Configuration [saved;complete]", "Configuration Complete");
+			reloadProfile();
 		} else {
 			configurationError();
 		}
@@ -374,15 +380,46 @@ public class VAInline
 	}
 
 	private void cancelConfiguration() {
-		playRandomSound("Cancelling Configuration", "Cancel", false);
+		playRandomSound("Cancelling Configuration", "Cancel", true);
 	}
 
 	private void configurationError() {
 		cancelConfiguration();
-//		playRandomSound("Configuration error. Cancelling", "General Error", false);
+//		playRandomSound("Configuration error. Cancelling", "General Error", true);
+	}
+
+	private void reloadProfile() {
+		if (reloadProfileGuid == null)  return;
+		VA.Command.Execute(reloadProfileGuid, false, false);
 	}
 
 	private void timeoutError() {
-		playRandomSound("Configuration error. Timed out.", "General Error", false);
+		playRandomSound("Configuration error. Timed out.", "General Error", true);
+	}
+
+	private List<string> readWeaponGroupList(bool activeGroups = false)
+	{
+		string variable;
+		if (activeGroups)	variable = VA.GetText(">>activeWeaponGroupInput");
+		else				variable = VA.GetText(">>fullWeaponGroupNameInput");
+
+		List<string> weaponGroupList = new List<string>();
+
+		if (!String.IsNullOrEmpty(variable)) {
+			string[] wgList = variable.Split(';');
+			foreach (string wg in wgList) {
+				string group = ti.ToTitleCase(wg.Trim());
+				if (!weaponGroupList.Contains(group))
+					weaponGroupList.Add(group);
+			}
+		}
+
+		return weaponGroupList;
+	}
+
+	private void saveWeaponGroupList(List<string> weaponGroupList, bool activeGroups = false)
+	{
+		if (activeGroups)	VA.SetText(">>activeWeaponGroupInput", String.Join(";", weaponGroupList));
+		else				VA.SetText(">>fullWeaponGroupNameInput", String.Join(";", weaponGroupList));
 	}
 }

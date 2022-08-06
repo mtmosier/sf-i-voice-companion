@@ -11,6 +11,7 @@ public class VAInline
 			"Switch Companion Source",
 			"Listening Enabled",
 			"Listening Disabled",
+			"Annoyed Response",
 			"Hello",
 			"My name is",
 			"I am",

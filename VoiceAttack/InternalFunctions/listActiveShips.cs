@@ -21,9 +21,11 @@ public class VAInline
 		string[] shipNameList = variable.Split(';');
 		Dictionary<string, int> shipActiveWeaponCount = new Dictionary<string, int>();
 
-		//*** Weapon group variables
-		string wgNameListStr = VA.GetText(">>weaponGroupNameList");
-		string[] wgNameList = wgNameListStr.Split(';');
+		//*** Get list of Weapon group names
+		variable = VA.GetText(">>activeWeaponGroupList");
+		if (string.IsNullOrEmpty(variable))  variable = "";
+		List<string> activeWeaponGroupList = new List<string>(variable.Split(';'));
+
 
 		//*** Loop through the ships and get a coupon of active weapon groups for each
 		for (short s = 0; s < shipNameList.Length; s++) {
@@ -31,14 +33,12 @@ public class VAInline
 				VA.WriteToLog(shipNameList[s] + " > isInUse: " + VA.GetBoolean(">>shipInfo[" + shipNameList[s] + "].isInUse"), "Orange");
 
 				activeWeaponCount = 0;
-				for (short w = 0; w < wgNameList.Length; w++) {
-					for (short n = 1; n < 10; n++) {
-						tmpVarName = ">>shipInfo[" + shipNameList[s] + "].weaponGroup[" + wgNameList[w] + " " + n + "]";
-						if (VA.GetBoolean(tmpVarName + ".isActive") == true) {
-							int? lenN = VA.GetInt(tmpVarName + ".weaponKeyPress.len");
-							if (lenN.HasValue && lenN.Value > 0) {
-								activeWeaponCount++;
-							}
+				foreach (string wgName in activeWeaponGroupList) {
+					tmpVarName = ">>shipInfo[" + shipNameList[s] + "].weaponGroup[" + wgName + "]";
+					if (VA.GetBoolean(tmpVarName + ".isActive") == true) {
+						int? lenN = VA.GetInt(tmpVarName + ".weaponKeyPress.len");
+						if (lenN.HasValue && lenN.Value > 0) {
+							activeWeaponCount++;
 						}
 					}
 				}

@@ -144,9 +144,13 @@ public class VAInline
 		string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 		path = Path.Combine(path, "VoiceAttack SF-I Companion");
 
+		string settingsFileName = VA.GetText(">settingsFileName");
+		if (String.IsNullOrEmpty(settingsFileName))
+			settingsFileName = "settings.json";
+
 		try {
 			Directory.CreateDirectory(path);
-			if (includeFilename)  path = Path.Combine(path, "settings.json");
+			if (includeFilename)  path = Path.Combine(path, settingsFileName);
 		} catch (Exception e) {
 			path = null;
 		}

@@ -13,8 +13,9 @@ public class VAInline
 	private decimal defaultPauseTime = 0.3m;
 	private decimal defaultKeyHoldTime = 0.1m;
 	private bool isInitialRun = false;
+	private bool isPaused = false;
 	private string secondaryFireKey;
-	public string prevKeybindName;
+	public string prevSlotKeybindName;
 
 
 	private class WeaponGroup
@@ -22,6 +23,7 @@ public class VAInline
 		public VAInline Parent;
 		public string ActiveShipName;
 		public string Name;
+		public string LastKeybindName;
 		public int GroupNum;
 		private List<QueueEntry> KeyPressQueue = new List<QueueEntry>();
 
@@ -32,6 +34,7 @@ public class VAInline
 			ActiveShipName = activeShipName;
 			Name = name;
 			GroupNum = groupNum;
+			LastKeybindName = "";
 
 			if (!string.IsNullOrEmpty(Name) && (Name.Length <= 7 || Name.Substring(0, 7) != "keyBind")) {
 				loadKeybindList(executeCount);
@@ -89,7 +92,9 @@ public class VAInline
 			if (keybind != null) {
 
 				if (!keybind.PauseQueue && !keybind.IsNoop) {
-					if (Parent.prevKeybindName != keybind.KeybindName) {
+					LastKeybindName = keybind.KeybindName;
+
+					if (Parent.prevSlotKeybindName != keybind.KeybindName) {
 						Parent.VA.SetText("~~keybindName", keybind.KeybindName);
 						Parent.VA.SetDecimal("~~pauseTime", keybind.PauseTime);
 
@@ -106,7 +111,7 @@ public class VAInline
 						}
 
 						if (keybind.KeybindName.Substring(0, 4) == "Slot")
-							Parent.prevKeybindName = keybind.KeybindName;
+							Parent.prevSlotKeybindName = keybind.KeybindName;
 
 					} else {
 
@@ -130,7 +135,8 @@ public class VAInline
 
 				if (keybind.PauseQueue) {
 					if (KeyPressQueue.Count == 0) {
-						addKeybind("Noop");
+						//*** TURNS OUT KEEPING SECONDARY FIRE BUTTON HELD DOWN ISN'T WORKING OUT SO GREAT IN PRACTICE
+						// addKeybind("Noop");
 					}
 
 					// Parent.VA.WriteToLog("Pausing for " + keybind.PauseTime + " seconds", "Black");
@@ -314,13 +320,13 @@ public class VAInline
 			//*** we can assume a single keystroke queue ran and the delayed
 			//*** secondary fire button has not yet occured. Press the secondary
 			//*** fire button before exiting proper next loop.
-			if (!isInitialRun && !string.IsNullOrEmpty(secondaryFireKey) && !VA.State.KeyDown(secondaryFireKey)) {
-				if (!string.IsNullOrEmpty(prevKeybindName)) {
+			if (!isInitialRun && !isPaused && !string.IsNullOrEmpty(secondaryFireKey) && !VA.State.KeyDown(secondaryFireKey)) {
+				if (!string.IsNullOrEmpty(prevSlotKeybindName)) {
 					VA.SetText("~~keybindName", "SecondaryFire");
 					VA.SetDecimal("~~pauseTime", defaultPauseTime);
 					VA.SetDecimal("~~keyHoldTime", defaultKeyHoldTime);
 					VA.SetText("~~nextAction", "Press Key");
-					prevKeybindName = null;
+					prevSlotKeybindName = null;
 					return;
 				}
 			}
@@ -333,8 +339,8 @@ public class VAInline
 		//*** Make sure the secondary fire key is held down. If not allow one
 		//*** queue keypress (which is presumably a secondary weapon slot)
 		//*** first then send the hold secondary fire key next
-		if (!isInitialRun && !string.IsNullOrEmpty(secondaryFireKey) && !VA.State.KeyDown(secondaryFireKey)) {
-			if (!string.IsNullOrEmpty(prevKeybindName)) {
+		if (!isInitialRun && !isPaused && !string.IsNullOrEmpty(secondaryFireKey) && !VA.State.KeyDown(secondaryFireKey)) {
+			if (!string.IsNullOrEmpty(prevSlotKeybindName)) {
 				VA.SetText("~~keybindName", "SecondaryFire");
 				VA.SetDecimal("~~pauseTime", 0.05m);
 				VA.SetText("~~nextAction", "Hold Key");
@@ -355,17 +361,22 @@ public class VAInline
 			//*** Put the weapon group which fired at the end of the queue list
 			WeaponGroupList.Remove(executedWeaponGroup);
 			WeaponGroupList.Add(executedWeaponGroup);
-			isInitialRun = false;
+			if (executedWeaponGroup.LastKeybindName.Substring(0, 4) == "Slot") {
+				isInitialRun = false;
+			}
+			isPaused = false;
 
 		} else {
+
+			isPaused = true;
 
 			if (!string.IsNullOrEmpty(secondaryFireKey) && VA.State.KeyDown(secondaryFireKey)) {
 
 				//*** Nothing to fire. Release the secondary fire key.
-				VA.SetText("~~keybindName", secondaryFireKey);
+				VA.SetText("~~keybindName", "SecondaryFire");
 				VA.SetDecimal("~~pauseTime", 0m);
 				VA.SetText("~~nextAction", "Release Key");
-				removeKeybindFromHeldKeyList(secondaryFireKey);
+				removeKeybindFromHeldKeyList("SecondaryFire");
 
 			} else {
 
@@ -389,7 +400,8 @@ public class VAInline
 		if (VA.GetBoolean("~~reset") == true) {
 			WeaponGroupList = new List<WeaponGroup>();
 			isInitialRun = true;
-			prevKeybindName = null;
+			isPaused = false;
+			prevSlotKeybindName = null;
 			VA.SetBoolean("~~reset", null);
 		}
 
@@ -469,7 +481,7 @@ public class VAInline
 			if (match.Success)	groupNumToCancel = 0;
 			else				groupNumToCancel = 1;
 
-			purgeWeaponGroup(fullGroupNameToAdd, groupNumToCancel);
+			purgeWeaponGroup(fullGroupNameToCancel, groupNumToCancel);
 		}
 
 		//*** Add passed in keybind to the queue

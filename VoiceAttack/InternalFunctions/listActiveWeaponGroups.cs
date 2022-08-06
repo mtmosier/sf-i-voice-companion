@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 public class VAInline
 {
@@ -12,74 +13,56 @@ public class VAInline
 		string tmpCmdId = VA.GetText(">playRandomSoundCommandId");
 		if (tmpCmdId != null && tmpCmdId != "")  playRandomSoundGuid = new Guid(tmpCmdId);
 
-		//*** Weapon group variables
-		string wgNameListStr = VA.GetText(">>weaponGroupNameList");
-		string[] wgNameList = wgNameListStr.Split(';');
+		string variable = VA.GetText(">>activeStaticGroupList");
+		if (string.IsNullOrEmpty(variable))  variable = "";
+		List<string> activeStaticGroupList = new List<string>(variable.Split(';'));
 
-		//*** Number of weapon groups in use
-		int? maxWGNum_N = VA.GetInt(">maxWeaponGroupNum");
-		int maxWGNum = maxWGNum_N.HasValue ? maxWGNum_N.Value : 9;
+		variable = VA.GetText(">>activeWeaponGroupList");
+		if (string.IsNullOrEmpty(variable))  variable = "";
+		List<string> activeWeaponGroupList = new List<string>(variable.Split(';'));
 
-		//*** Static Group List
-		string variable = VA.GetText(">>staticGroupList");
-		string[] staticGroupList = variable.Split(';');
 
 		//*** CHECK COMMAND PARAMETERS
 		bool verbose = false;
 		string testStr = VA.Command.Segment(3);
-		if (!String.IsNullOrEmpty(testStr)) {
+		if (!string.IsNullOrEmpty(testStr)) {
 			verbose = true;
 		}
 
-		string output = getWeaponGroupListDescription(activeShipName, wgNameList, maxWGNum, verbose);
-		output += getWeaponGroupListDescription(activeShipName, staticGroupList, 1, verbose, true);
+		string output = "";
+		if (verbose) {
+			output += getWeaponGroupListDescription(activeShipName, activeWeaponGroupList);
+			output += getWeaponGroupListDescription(activeShipName, activeStaticGroupList, true);
+		} else {
+			if (activeWeaponGroupList.Count > 0)
+				output += string.Join<string>(", ", activeWeaponGroupList);
+			if (activeStaticGroupList.Count > 0)
+				output += string.Join<string>(", ", activeStaticGroupList);
+		}
 
-		if (String.IsNullOrEmpty(output)) {
+		if (string.IsNullOrEmpty(output)) {
 			output = "No active weapon groups found.";
 		} else {
 			output = output.Substring(0, output.Length - 2);
 		}
 
 		VA.WriteToLog(output, "Black");
-		playRandomSound(output, null, true);
+		playRandomSound(output, null, false);
 	}
 
 
-	private string getWeaponGroupListDescription(string activeShipName, string[] wgNameList, int maxWGNum = 10, bool verbose = false, bool isStaticGroupList = false) {
+	private string getWeaponGroupListDescription(string activeShipName, List<string> weaponGroupList, bool isStaticGroupList = false)
+	{
 
 		string output = "";
-		foreach (string wgName in wgNameList) {
-			int groupCount = 0;
+		foreach (string wgName in weaponGroupList) {
+			string tmpVarName = ">>shipInfo[" + activeShipName + "].weaponGroup[" + wgName + "]";
 
-			for (short n = 1; n <= maxWGNum; n++) {
-				string tmpVarName = ">>shipInfo[" + activeShipName + "].weaponGroup[" + wgName + " " + n + "]";
-
-				if (VA.GetBoolean(tmpVarName + ".isActive") == true) {
-					int? lenN = VA.GetInt(tmpVarName + ".weaponKeyPress.len");
-					if (lenN.HasValue && lenN.Value > 0) {
-						if (verbose) {
-							if (wgName != "Default") {
-								output += wgName + " ";
-							} else {
-								output += "Group ";
-							}
-							if (!isStaticGroupList)  output += n + " ";
-							output += "has " + lenN.Value + " action";
-							output += (lenN.Value == 1 ? "" : "s") + ", ";
-						} else {
-							groupCount++;
-						}
-					}
-				}
-			}
-
-			if (!verbose && groupCount > 0) {
-				if (!isStaticGroupList) {
-					output += wgName + " has " + groupCount + " group";
-					if (groupCount != 1)  output += "s";
-					output += ", ";
-				} else {
-					output += wgName + " has been configured, ";
+			if (VA.GetBoolean(tmpVarName + ".isActive") == true) {
+				int? lenN = VA.GetInt(tmpVarName + ".weaponKeyPress.len");
+				if (lenN.HasValue && lenN.Value > 0) {
+					output += wgName + " has " + lenN.Value + " action";
+					output += (lenN.Value == 1 ? "" : "s") + ", ";
 				}
 			}
 		}

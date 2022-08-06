@@ -100,6 +100,7 @@ public class VAInline
 		soundFileGroupList.Add("Switch Companion Source", fileList);
 
 		fileList = new string[] {
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Profile\((RS - Voice On 1))\non-verbose\Voice control on.mp3",
 			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Profile\((RS - Voice On 1))\Verbose\Carina Online.mp3",
 			@"{TXT:>>voiceDir}\Applications\Vega online.mp3",
 			@"{TXT:>>voiceDir}\Applications\Jazz online.mp3"
@@ -112,6 +113,22 @@ public class VAInline
 			@"{TXT:>>voiceDir}\Applications\Jazz offline.mp3"
 		};
 		soundFileGroupList.Add("Listening Disabled", fileList);
+
+		fileList = new string[] {
+			@"{TXT:>>voiceDir}\Role\fine.mp3",
+			@"{TXT:>>voiceDir}\Role\Fine I won't disturb you again.mp3",
+			@"{TXT:>>voiceDir}\Role\Losing your temper with things.mp3",
+			@"{TXT:>>voiceDir}\Role\Losing your temper with things alt.mp3",
+			@"{TXT:>>voiceDir}\Role\How rude.mp3",
+			@"{TXT:>>voiceDir}\Role\I'm not laughing.mp3",
+			@"{TXT:>>voiceDir}\Role\I'm not laughing 2.mp3",
+			@"{TXT:>>voiceDir}\Role\I'm not sure what to say to that.mp3",
+			@"{TXT:>>voiceDir}\Role\I'm not sure what to say to that 2.mp3",
+			@"{TXT:>>voiceDir}\Role\Oh do grow up.mp3",
+			@"{TXT:>>voiceDir}\Role\Oh grow up.mp3",
+			@"{TXT:>>voiceDir}\Additional dialogue\Sorry what did you say I was watching the football.mp3"
+		};
+		soundFileGroupList.Add("Annoyed Response", fileList);
 
 		fileList = new string[] {
 			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Extra Content\((RS - Hello))\non-verbose\Hello.mp3",

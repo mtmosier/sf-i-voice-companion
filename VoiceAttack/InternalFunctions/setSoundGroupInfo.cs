@@ -21,6 +21,7 @@ public class VAInline
 			"Switch Companion Source",
 			"Listening Enabled",
 			"Listening Disabled",
+			"Annoyed Response",
 			"Hello",
 			"My name is",
 			"I am",
@@ -84,7 +85,8 @@ public class VAInline
 		Dictionary<string, string> soundGroupSynonymList = getSynonymList();
 
 		//*** Weapon group variables
-		string wgNameListStr = VA.GetText(">>weaponGroupNameList");
+		string wgNameListStr = VA.GetText(">>activeWeaponGroupList");
+		if (wgNameListStr == null)  wgNameListStr = "";
 		string[] wgNameList = wgNameListStr.Split(';');
 
 

@@ -5,40 +5,37 @@ using System.Collections.Generic;
 
 public class VAInline
 {
+	private bool headphonesInUse;
+	private string activeShipName;
+	private StringComparer comparer;
+	private TextInfo ti;
+
+	//*** References to other VA Commands
 	private Guid requestVerbalUserInputGuid;
 	private Guid writeSettingsToFileGuid;
 	private Guid reloadProfileGuid;
 	private Guid playRandomSoundGuid;
 
+	//*** Valid responses
+	private string[] cancelList = { "cancel", "nevermind", "never mind", "abort" };
+	private string[] restartList = { "restart", "start over", "do over" };
+	private string[] agreeList = { "confirm", "positive", "affirmative", "absolutely", "please", "please do", "yeah", "yes", "yessir", "yes sir", "commit" };
+	private string[] saveList = { "save", "please save" };
+
+
 	public void main()
 	{
-		//*** INITIALIZE
-		StringComparer comparer = StringComparer.CurrentCultureIgnoreCase;
-		TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
+		//*** Initialize
+		initialize();
+
 		string response, request, shipName, last4;
+		bool? bVar;
 
-		string[] cancelList = { "cancel", "nevermind", "never mind", "abort" };
-		string[] restartList = { "restart", "start over", "do over" };
-		string[] agreeList = { "confirm", "positive", "affirmative", "absolutely", "please", "please do", "yeah", "yes", "yessir", "yes sir", "commit" };
-		string[] saveList = { "save", "please save" };
+		//*** Get list of Weapon group names
+		string variable = VA.GetText(">>activeWeaponGroupList");
+		if (variable == null)  variable = "";
+		List<string> activeWeaponGroupList = new List<string>(variable.Split(';'));
 
-		//*** GET RELEVANT SETTINGS
-		string activeShipName = VA.GetText(">>activeShipName");
-
-		string tmpCmdId = VA.GetText(">requestVerbalUserInputCommandId");
-		if (!string.IsNullOrEmpty(tmpCmdId))  requestVerbalUserInputGuid = new Guid(tmpCmdId);
-
-		bool? bVar = VA.GetBoolean(">>headphonesInUse");
-		bool headphonesInUse = bVar.HasValue ? bVar.Value : false;
-
-		tmpCmdId = VA.GetText(">writeSettingsToFileCommandId");
-		if (!string.IsNullOrEmpty(tmpCmdId))  writeSettingsToFileGuid = new Guid(tmpCmdId);
-
-		tmpCmdId = VA.GetText(">reloadProfileCommandId");
-		if (!string.IsNullOrEmpty(tmpCmdId))  reloadProfileGuid = new Guid(tmpCmdId);
-
-		tmpCmdId = VA.GetText(">playRandomSoundCommandId");
-		if (!string.IsNullOrEmpty(tmpCmdId))  playRandomSoundGuid = new Guid(tmpCmdId);
 
 		//*** Get list of ship names
 		List<string> fullShipList = new List<string>();
@@ -60,16 +57,8 @@ public class VAInline
 			shipNameInputStr = String.Format("[{0};active;current] [ship;];", shipNameInputStr);
 		}
 
-		//*** Number of weapon groups in use
-		int? maxWGNumN = VA.GetInt(">maxWeaponGroupNum");
-		int maxWGNum = maxWGNumN.HasValue ? maxWGNumN.Value : 9;
-
-		//*** Get list of Weapon group names
-		string variable = VA.GetText(">>weaponGroupNameList");
-		string[] wgNameList = variable.Split(';');
-
 		//*** Get the ship name given
-		shipName = VA.Command.Segment(3);
+		shipName = VA.Command.Segment(4);
 
 		while (true) {
 			if (String.IsNullOrEmpty(shipName)) {
@@ -157,10 +146,8 @@ public class VAInline
 				VA.SetBoolean(">>shipInfo[" + shipName + "].isInUse", false);
 
 				//*** Set each of the weapon groups for the ship as no longer in use
-				for (short w = 0; w < wgNameList.Length; w++) {
-					for (short n = 1; n <= maxWGNum; n++) {
-						VA.SetBoolean(">>shipInfo[" + shipName + "].weaponGroup[" + wgNameList[w] + " " + n + "].isActive", false);
-					}
+				foreach (string wgName in activeWeaponGroupList) {
+					VA.SetBoolean(">>shipInfo[" + shipName + "].weaponGroup[" + wgName + "].isActive", false);
 				}
 
 				//*** Remove from the locally stored ship list
@@ -220,6 +207,30 @@ public class VAInline
 		}
 	}
 
+
+	private void initialize()
+	{
+		comparer = StringComparer.CurrentCultureIgnoreCase;
+		ti = CultureInfo.CurrentCulture.TextInfo;
+
+		//*** GET RELEVANT SETTINGS
+		activeShipName = VA.GetText(">>activeShipName");
+
+		bool? bVar = VA.GetBoolean(">>headphonesInUse");
+		headphonesInUse = bVar.HasValue ? bVar.Value : false;
+
+		string tmpCmdId = VA.GetText(">requestVerbalUserInputCommandId");
+		if (!string.IsNullOrEmpty(tmpCmdId))  requestVerbalUserInputGuid = new Guid(tmpCmdId);
+
+		tmpCmdId = VA.GetText(">writeSettingsToFileCommandId");
+		if (!string.IsNullOrEmpty(tmpCmdId))  writeSettingsToFileGuid = new Guid(tmpCmdId);
+
+		tmpCmdId = VA.GetText(">reloadProfileCommandId");
+		if (!string.IsNullOrEmpty(tmpCmdId))  reloadProfileGuid = new Guid(tmpCmdId);
+
+		tmpCmdId = VA.GetText(">playRandomSoundCommandId");
+		if (!string.IsNullOrEmpty(tmpCmdId))  playRandomSoundGuid = new Guid(tmpCmdId);
+	}
 
 	private string getUserInput(string inputOptionListStr, string playbackText, string playbackFileGroupName, bool pauseForPlayback = false, bool shortPause = true, bool returnOnAnyInput = false) {
 		if (requestVerbalUserInputGuid == null)  return "";

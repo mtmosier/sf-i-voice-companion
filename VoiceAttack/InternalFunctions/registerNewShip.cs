@@ -44,7 +44,7 @@ public class VAInline
 		if (!string.IsNullOrEmpty(tmpCmdId))  playRandomSoundGuid = new Guid(tmpCmdId);
 
 
-		shipName = VA.Command.After();
+		shipName = null;
 		while (true) {
 			if (String.IsNullOrEmpty(shipName)) {
 				request = "New ship name?";

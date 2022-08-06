@@ -47,13 +47,10 @@ public class VAInline
 		if (!string.IsNullOrEmpty(tmpCmdId))  playRandomSoundGuid = new Guid(tmpCmdId);
 
 
-		//*** Number of weapon groups in use
-		int? maxWGNumN = VA.GetInt(">maxWeaponGroupNum");
-		int maxWGNum = maxWGNumN.HasValue ? maxWGNumN.Value : 9;
-
 		//*** Get list of Weapon group names
-		variable = VA.GetText(">>weaponGroupNameList");
-		string[] wgNameList = variable.Split(';');
+		variable = VA.GetText(">>activeWeaponGroupList");
+		if (variable == null)  variable = "";
+		List<string> activeWeaponGroupList = new List<string>(variable.Split(';'));
 
 
 		//*** Get list of ship names
@@ -198,33 +195,31 @@ public class VAInline
 					VA.SetBoolean(">>shipInfo[" + fromShip + "].isInUse", false);
 					VA.SetBoolean(">>shipInfo[" + toShip + "].isInUse", true);
 
-					for (short w = 0; w < wgNameList.Length; w++) {
-						for (short n = 1; n <= maxWGNum; n++) {
-							string fromVarName = ">>shipInfo[" + fromShip + "].weaponGroup[" + wgNameList[w] + " " + n + "]";
-							string toVarName = ">>shipInfo[" + toShip + "].weaponGroup[" + wgNameList[w] + " " + n + "]";
+					foreach (string wgName in activeWeaponGroupList) {
+						string fromVarName = ">>shipInfo[" + fromShip + "].weaponGroup[" + wgName + "]";
+						string toVarName = ">>shipInfo[" + toShip + "].weaponGroup[" + wgName + "]";
 
-							bool wgIsActive = false;
-							string settingName = fromVarName + ".isActive";
-							boolValueN = VA.GetBoolean(settingName);
-							if (boolValueN.HasValue)  wgIsActive = boolValueN.Value;
+						bool wgIsActive = false;
+						string settingName = fromVarName + ".isActive";
+						boolValueN = VA.GetBoolean(settingName);
+						if (boolValueN.HasValue)  wgIsActive = boolValueN.Value;
 
-							VA.SetBoolean(fromVarName + ".isActive", false);
-							VA.SetBoolean(toVarName + ".isActive", wgIsActive);
+						VA.SetBoolean(fromVarName + ".isActive", false);
+						VA.SetBoolean(toVarName + ".isActive", wgIsActive);
 
-							if (wgIsActive) {
-								int wgLen = 0;
-								settingName = fromVarName + ".weaponKeyPress.len";
-								int? intValueN = VA.GetInt(settingName);
-								if (intValueN.HasValue)  wgLen = intValueN.Value;
+						if (wgIsActive) {
+							int wgLen = 0;
+							settingName = fromVarName + ".weaponKeyPress.len";
+							int? intValueN = VA.GetInt(settingName);
+							if (intValueN.HasValue)  wgLen = intValueN.Value;
 
-								VA.SetInt(toVarName + ".weaponKeyPress.len", wgLen);
+							VA.SetInt(toVarName + ".weaponKeyPress.len", wgLen);
 
-								for (short l = 0; l < wgLen; l++) {
-									settingName = fromVarName + ".weaponKeyPress[" + l + "]";
-									string keybind = VA.GetText(settingName);
+							for (short l = 0; l < wgLen; l++) {
+								settingName = fromVarName + ".weaponKeyPress[" + l + "]";
+								string keybind = VA.GetText(settingName);
 
-									VA.SetText(toVarName + ".weaponKeyPress[" + l + "]", keybind);
-								}
+								VA.SetText(toVarName + ".weaponKeyPress[" + l + "]", keybind);
 							}
 						}
 					}
