@@ -1,3 +1,5 @@
+// System.Core.dll
+
 using System.Linq;
 
 public class VAInline
