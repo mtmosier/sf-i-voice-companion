@@ -164,7 +164,6 @@ public class VAInline
 		if (configureWeaponGroupGuid == null)  return;
 
 		VA.SetText("~~wgGroupNameExtStr", weaponGroupName);
-		VA.SetText("~~wgGroupNumExtStr", null);
 		VA.Command.Execute(configureWeaponGroupGuid, true, true);
 	}
 

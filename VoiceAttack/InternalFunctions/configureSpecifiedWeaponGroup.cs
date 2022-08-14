@@ -16,7 +16,7 @@ public class VAInline
 	{
 		//*** INITIALIZE
 		ti = CultureInfo.CurrentCulture.TextInfo;
-		string groupName, groupNum;
+		string groupName;
 		string response, logMessage;
 		string[] inputKeywordsToIgnore = new string[] { "turn", "activate", "weapon", "slot", "enhancer", "open", "display" };
 
@@ -52,37 +52,25 @@ public class VAInline
 		//*** GET PARAMETERS
 		bool? quickConfig = VA.GetBoolean("~~quickConfig");
 		groupName = VA.GetText("~~wgGroupNameExtStr");
-		groupNum = VA.GetText("~~wgGroupNumExtStr");
 		if (String.IsNullOrEmpty(groupName)) {
 			groupName = VA.Command.Segment(1);
-			groupNum = VA.Command.Segment(2);
 		}
 
 		if (string.IsNullOrEmpty(groupName) || groupName.Equals("Group", StringComparison.OrdinalIgnoreCase) || groupName.Equals("Weapon Group", StringComparison.OrdinalIgnoreCase))
 			groupName = "Default";
 		groupName = ti.ToTitleCase(groupName);
 
-		if (string.IsNullOrEmpty(groupNum))
-			groupNum = "1";
-		if (groupNum.Equals("eighths", StringComparison.OrdinalIgnoreCase))
-			groupNum = "8";
-		if (groupNum.Equals("ate", StringComparison.OrdinalIgnoreCase))
-			groupNum = "8";
-
-		VA.WriteToLog("Configuring group: " + groupName + " " + groupNum, "Green");
+		VA.WriteToLog("Configuring group: " + groupName, "Green");
 
 
 		//*** START PLAYER INTERACTION
-		string tmpVarName = ">>shipInfo[" + activeShipName + "].weaponGroup[" + groupName + " " + groupNum + "]";
+		string tmpVarName = ">>shipInfo[" + activeShipName + "].weaponGroup[" + groupName + "]";
 		int? lenN = VA.GetInt(tmpVarName + ".weaponKeyPress.len");
 
 		if (!restart && VA.GetBoolean(tmpVarName + ".isActive") == true && lenN.HasValue && lenN.Value > 0) {
 			bool? extendedWeaponConfigPlayed = VA.GetBoolean(">>extendedWeaponConfigPlayed");
 			string voiceGroupName = "Weapon Group Already Configured";
 			string msg = groupName + " ";
-			if (Array.IndexOf(staticGroupList, groupName) == -1 && getIntFromStr(groupNum, 0) > 1) {
-				msg += groupNum + " ";
-			}
 			msg += "is already configured.";
 
 			if (!extendedWeaponConfigPlayed.HasValue || extendedWeaponConfigPlayed.Value == false) {
@@ -274,7 +262,7 @@ public class VAInline
 			if (Array.IndexOf(staticGroupList, groupName) >= 0) {
 				request = groupName + " will fire ";
 			} else {
-				request = "Group " + (groupName == "Default" ? "" : groupName) + " " + groupNum + " will fire ";
+				request = "Group " + groupName + " will fire ";
 			}
 			request += string.Join(", ", weaponList);
 			request += ". Do you want to save these settings?";
@@ -282,7 +270,7 @@ public class VAInline
 			if (Array.IndexOf(staticGroupList, groupName) != -1) {
 				request = "Save " + groupName + "?";
 			} else {
-				request = "Save group " + (groupName == "Default" ? "" : groupName) + " " + groupNum + "?";
+				request = "Save group " + groupName + "?";
 			}
  		}
 
@@ -314,11 +302,11 @@ public class VAInline
 		}
 
 		if (Array.IndexOf(staticGroupList, groupName) != -1)  logMessage = "Saving " + groupName;
-		else  logMessage = "Saving group " + (groupName == "Default" ? "" : groupName) + " " + groupNum;
+		else  logMessage = "Saving group " + groupName;
 		VA.WriteToLog(logMessage, "Blue");
 
 
-		string wgDefVarName = ">>shipInfo["+activeShipName+"].weaponGroup["+groupName+" "+groupNum+"]";
+		string wgDefVarName = ">>shipInfo["+activeShipName+"].weaponGroup["+groupName+"]";
 
 		VA.SetBoolean(">>shipInfo[" + activeShipName + "].isInUse", true);
 		VA.SetBoolean(wgDefVarName+".isActive", true);

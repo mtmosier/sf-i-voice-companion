@@ -1,4 +1,5 @@
 //  System.dll;System.Core.dll;System.Text.RegularExpressions.dll
+//  Enable Retain Instance
 
 using System;
 using System.Linq;
@@ -477,10 +478,7 @@ public class VAInline
 
 		else if (!string.IsNullOrEmpty(fullGroupNameToCancel)) {
 
-			Match match = Regex.Match(fullGroupNameToCancel, @" (\d+)$");
-			if (match.Success)	groupNumToCancel = 0;
-			else				groupNumToCancel = 1;
-
+			groupNumToCancel = 0;
 			purgeWeaponGroup(fullGroupNameToCancel, groupNumToCancel);
 		}
 
@@ -493,11 +491,6 @@ public class VAInline
 			addWeaponGroupToQueue(groupNameToAdd, groupNumToAdd, activeShipName, groupExecuteCount);
 
 		else if (!string.IsNullOrEmpty(fullGroupNameToAdd)) {
-
-			Match match = Regex.Match(fullGroupNameToAdd, @" (\d+)$");
-			if (match.Success)	groupNumToAdd = 0;
-			else				groupNumToAdd = 1;
-
 			addWeaponGroupToQueue(fullGroupNameToAdd, groupNumToAdd, activeShipName, groupExecuteCount);
 		}
 

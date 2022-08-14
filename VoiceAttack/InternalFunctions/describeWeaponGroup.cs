@@ -9,7 +9,7 @@ public class VAInline
 	{
 		//*** INITIALIZE
 		TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
-		string groupName, groupNum;
+		string groupName;
 		string keybind;
 		bool isStaticGroup = false;
 
@@ -25,10 +25,8 @@ public class VAInline
 
 		//*** GET PARAMETERS
 		groupName = VA.GetText("~~wgGroupNameExtStr");
-		groupNum = VA.GetText("~~wgGroupNumExtStr");
 		if (String.IsNullOrEmpty(groupName)) {
 			groupName = VA.Command.Segment(1);
-			groupNum = VA.Command.Segment(2);
 		}
 
 		if (String.IsNullOrEmpty(groupName) || groupName.Equals("Group", StringComparison.OrdinalIgnoreCase) || groupName.Equals("Weapon Group", StringComparison.OrdinalIgnoreCase))
@@ -37,22 +35,10 @@ public class VAInline
 
 		if (Array.IndexOf(staticGroupList, groupName) >= 0) {
 			isStaticGroup = true;
-			groupNum = "1";
-		} else if (String.IsNullOrEmpty(groupNum)) {
-			groupNum = "1";
-		} else if (groupName.Equals("eighths", StringComparison.OrdinalIgnoreCase) || groupName.Equals("ate", StringComparison.OrdinalIgnoreCase)) {
-			groupNum = "8";
 		}
 
-		string output = "";
-		if (groupName != "Default") {
-			output += groupName + " ";
-		} else {
-			output += "Group ";
-		}
-		if (groupNum != "1")  output += groupNum + " ";
-
-		string tmpVarName = ">>shipInfo[" + activeShipName + "].weaponGroup[" + groupName + " " + groupNum + "]";
+		string output = groupName + " ";
+		string tmpVarName = ">>shipInfo[" + activeShipName + "].weaponGroup[" + groupName + "]";
 		int? lenN = VA.GetInt(tmpVarName + ".weaponKeyPress.len");
 		if (VA.GetBoolean(tmpVarName + ".isActive") == true && lenN.HasValue && lenN.Value > 0) {
 			output += "will fire ";
