@@ -19,26 +19,18 @@ public class VAInline
 		string settingName;
 		string shipNameInput;
 		string activeShipName = "";
-		List<string> activeWeaponGroupList = new List<string>();
 		StringComparer comparer = StringComparer.CurrentCultureIgnoreCase;
-
-		//*** Weapon group variables
-		string wgNameListStr = VA.GetText(">>weaponGroupNameList");
-		string[] wgNameList = wgNameListStr.Split(';');
-
-		//*** Max weapon group num
-		int wgNumMax = 9;
-		intValueN = VA.GetInt(">maxWeaponGroupNum");
-		if (intValueN.HasValue)  wgNumMax = intValueN.Value;
 
 		//*** Static Group List
 		variable = VA.GetText(">>staticGroupList");
+		if (string.IsNullOrEmpty(variable)) variable = "";
 		List<string> staticGroupList = new List<string>(variable.Split(';'));
 
 
 		//*** Set list of ship / weapon group names
 		List<string> activeShipList = new List<string>();
 		List<string> activeWeaponGroupList = new List<string>();
+		List<string> activeStaticGroupList = new List<string>();
 
 		variable = VA.GetText(">>shipNameList");
 		if (string.IsNullOrEmpty(variable))  variable = "";
@@ -160,7 +152,7 @@ public class VAInline
 				VA.SetBoolean(settingName, shipInUse);
 
 				if (shipInUse) {
-					for (short w = 0; w < fullWeaponGroupList.Length; w++) {
+					for (short w = 0; w < fullWeaponGroupList.Count; w++) {
 						tmpVarName = ">>shipInfo[" + fullShipList[s] + "].weaponGroup[" + fullWeaponGroupList[w] + "]";
 
 						wgIsActive = false;
@@ -251,6 +243,9 @@ public class VAInline
 						VA.SetBoolean(settingName, wgIsActive);
 
 						if (wgIsActive) {
+							if (!activeStaticGroupList.Contains(gName))
+								activeStaticGroupList.Add(gName);
+
 							settingName = tmpVarName + ".weaponKeyPress.len";
 
 							wgLen = 0;
@@ -332,6 +327,7 @@ public class VAInline
 			weaponGroupInput = "[" + weaponGroupInput + "]";
 		VA.SetText(">>activeWeaponGroupInput", weaponGroupInput);
 
+		VA.SetText(">>weaponGroupListStr", string.Join<string>(";", fullWeaponGroupList));
 
 		//*** Export active static group list
 		string staticGroupInput = string.Join<string>(";", activeStaticGroupList);
@@ -374,7 +370,7 @@ public class VAInline
 
 		pattern = @"weaponGroup\[(.+?) 1\]";
 		replacement = "weaponGroup[$1]";
-		Regex rgx = new Regex(pattern);
+		rgx = new Regex(pattern);
 		jsonStr = rgx.Replace(jsonStr, replacement);
 
 		return jsonStr;

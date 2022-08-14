@@ -114,6 +114,12 @@ public class VAInline
 						}
 					}
 
+					weaponGroupList.Add(groupName);
+					saveWeaponGroupList(weaponGroupList, false);
+
+					activeWeaponGroupList.Add(groupName);
+					saveWeaponGroupList(activeWeaponGroupList, true);
+
 					configureWeaponGroup(groupName);
 					return;
 				}
@@ -219,7 +225,7 @@ public class VAInline
 	{
 		string variable;
 		if (activeGroups)	variable = VA.GetText(">>activeWeaponGroupInput");
-		else				variable = VA.GetText(">>fullWeaponGroupNameInput");
+		else				variable = VA.GetText(">>weaponGroupListStr");
 
 		List<string> weaponGroupList = new List<string>();
 
@@ -238,6 +244,6 @@ public class VAInline
 	private void saveWeaponGroupList(List<string> weaponGroupList, bool activeGroups = false)
 	{
 		if (activeGroups)	VA.SetText(">>activeWeaponGroupInput", String.Join(";", weaponGroupList));
-		else				VA.SetText(">>fullWeaponGroupNameInput", String.Join(";", weaponGroupList));
+		else				VA.SetText(">>weaponGroupListStr", String.Join(";", weaponGroupList));
 	}
 }

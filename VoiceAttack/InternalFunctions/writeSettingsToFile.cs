@@ -26,7 +26,7 @@ public class VAInline
 		string[] shipNameList = variable.Split(';');
 
 		//*** Weapon group variables
-		string wgNameListStr = VA.GetText(">>weaponGroupNameList");
+		string wgNameListStr = VA.GetText(">>weaponGroupListStr");
 		string[] wgNameList = wgNameListStr.Split(';');
 
 		//*** Number of weapon groups in use

@@ -331,6 +331,13 @@ public class VAInline
 			i++;
 		}
 
+
+		List<string> activeWeaponGroupList = readWeaponGroupList(true);
+		if (!activeWeaponGroupList.Contains(groupName)) {
+			activeWeaponGroupList.Add(groupName);
+			saveWeaponGroupList(activeWeaponGroupList, true);
+		}
+
 		if (writeSettings()) {
 			playRandomSound("Configuration [saved;complete]", "Configuration Complete");
 			reloadProfile();
@@ -401,7 +408,7 @@ public class VAInline
 	{
 		string variable;
 		if (activeGroups)	variable = VA.GetText(">>activeWeaponGroupInput");
-		else				variable = VA.GetText(">>fullWeaponGroupNameInput");
+		else				variable = VA.GetText(">>weaponGroupListStr");
 
 		List<string> weaponGroupList = new List<string>();
 
@@ -420,6 +427,6 @@ public class VAInline
 	private void saveWeaponGroupList(List<string> weaponGroupList, bool activeGroups = false)
 	{
 		if (activeGroups)	VA.SetText(">>activeWeaponGroupInput", String.Join(";", weaponGroupList));
-		else				VA.SetText(">>fullWeaponGroupNameInput", String.Join(";", weaponGroupList));
+		else				VA.SetText(">>weaponGroupListStr", String.Join(";", weaponGroupList));
 	}
 }

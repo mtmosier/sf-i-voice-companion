@@ -26,7 +26,7 @@ public class VAInline
 		if (variable == null)  variable = "";
 		List<string> activeWeaponGroupList = new List<string>(variable.Split(';'));
 
-		variable = VA.GetText(">>fullWeaponGroupNameList");
+		variable = VA.GetText(">>weaponGroupListStr");
 		if (variable == null)  variable = "";
 		List<string> fullWeaponGroupList = new List<string>(variable.Split(';'));
 

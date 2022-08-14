@@ -17,7 +17,7 @@ public class VAInline
 		if (tmpCmdId != null && tmpCmdId != "")  playRandomSoundGuid = new Guid(tmpCmdId);
 
 		//*** Ship variables
-		string variable = VA.GetText(">>fullWeaponGroupNameList");
+		string variable = VA.GetText(">>weaponGroupListStr");
 		if (variable == null)  variable = "";
 		string[] wgNameList = variable.Split(';');
 
