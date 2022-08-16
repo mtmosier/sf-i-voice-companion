@@ -92,7 +92,7 @@ public class VAInline
 						request, //*** playbackText
 						null,    //*** playbackFileGroupName
 						(headphonesInUse != true),  //*** pauseForPlayback
-						false  //*** shortPause
+						true  //*** shortPause
 					);
 
 					if (!string.IsNullOrEmpty(response)) {
@@ -175,6 +175,7 @@ public class VAInline
 		VA.SetText("~~viPlaybackText", playbackText);
 		VA.SetText("~~viPlaybackFileGroupName", playbackFileGroupName);
 		VA.SetBoolean("~~viPauseForPlayback", pauseForPlayback);
+		//VA.SetBoolean("~~viVeryShortInputPause", shortPause);
 		VA.SetBoolean("~~viShortInputPause", shortPause);
 		VA.SetBoolean("~~viReturnOnAnyInput", returnOnAnyInput);
 		VA.Command.Execute(requestVerbalUserInputGuid, true, true);
@@ -223,7 +224,7 @@ public class VAInline
 	private List<string> readWeaponGroupList(bool activeGroups = false)
 	{
 		string variable;
-		if (activeGroups)	variable = VA.GetText(">>activeWeaponGroupInput");
+		if (activeGroups)	variable = VA.GetText(">>activeWeaponGroupList");
 		else				variable = VA.GetText(">>weaponGroupListStr");
 
 		List<string> weaponGroupList = new List<string>();
@@ -242,7 +243,11 @@ public class VAInline
 
 	private void saveWeaponGroupList(List<string> weaponGroupList, bool activeGroups = false)
 	{
-		if (activeGroups)	VA.SetText(">>activeWeaponGroupInput", String.Join(";", weaponGroupList));
-		else				VA.SetText(">>weaponGroupListStr", String.Join(";", weaponGroupList));
+		if (activeGroups) {
+			VA.SetText(">>activeWeaponGroupList", String.Join(";", weaponGroupList));
+			VA.SetText(">>activeWeaponGroupInput", "[" + String.Join(";", weaponGroupList) + "]");
+		} else {
+			VA.SetText(">>weaponGroupListStr", String.Join(";", weaponGroupList));
+		}
 	}
 }

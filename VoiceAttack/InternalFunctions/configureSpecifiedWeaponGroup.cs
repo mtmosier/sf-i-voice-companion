@@ -9,6 +9,7 @@ public class VAInline
 	private Guid requestVerbalUserInputGuid;
 	private Guid writeSettingsToFileGuid;
 	private Guid reloadProfileGuid;
+	private Guid registerNewWeaponGroupGuid;
 	private bool restart = false;
 	private TextInfo ti;
 
@@ -44,9 +45,12 @@ public class VAInline
 		tmpCmdId = VA.GetText(">reloadProfileCommandId");
 		if (!string.IsNullOrEmpty(tmpCmdId))  reloadProfileGuid = new Guid(tmpCmdId);
 
+		tmpCmdId = VA.GetText(">registerNewWeagonGroupCommandId");
+		if (!string.IsNullOrEmpty(tmpCmdId))  registerNewWeaponGroupGuid = new Guid(tmpCmdId);
+
 		//*** Static Group List
 		string variable = VA.GetText(">>staticGroupList");
-		string[] staticGroupList = variable.Split(';');
+		List<string> staticGroupList = new List<string>(variable.Split(';'));
 
 
 		//*** GET PARAMETERS
@@ -56,9 +60,13 @@ public class VAInline
 			groupName = VA.Command.Segment(1);
 		}
 
-		if (string.IsNullOrEmpty(groupName) || groupName.Equals("Group", StringComparison.OrdinalIgnoreCase) || groupName.Equals("Weapon Group", StringComparison.OrdinalIgnoreCase))
-			groupName = "Default";
+		if (String.IsNullOrEmpty(groupName)) {
+			//runRegisterWeaponGroup();  //*** Errors due to multiple commands running at once
+			return;
+		}
+
 		groupName = ti.ToTitleCase(groupName);
+
 
 		VA.WriteToLog("Configuring group: " + groupName, "Green");
 
@@ -259,7 +267,7 @@ public class VAInline
 		}
 
 		if (quickConfig != true) {
-			if (Array.IndexOf(staticGroupList, groupName) >= 0) {
+			if (staticGroupList.Contains(groupName)) {
 				request = groupName + " will fire ";
 			} else {
 				request = "Group " + groupName + " will fire ";
@@ -267,7 +275,7 @@ public class VAInline
 			request += string.Join(", ", weaponList);
 			request += ". Do you want to save these settings?";
 		} else {
-			if (Array.IndexOf(staticGroupList, groupName) != -1) {
+			if (staticGroupList.Contains(groupName)) {
 				request = "Save " + groupName + "?";
 			} else {
 				request = "Save group " + groupName + "?";
@@ -301,10 +309,9 @@ public class VAInline
 			return;
 		}
 
-		if (Array.IndexOf(staticGroupList, groupName) != -1)  logMessage = "Saving " + groupName;
+		if (staticGroupList.Contains(groupName))  logMessage = "Saving " + groupName;
 		else  logMessage = "Saving group " + groupName;
 		VA.WriteToLog(logMessage, "Blue");
-
 
 		string wgDefVarName = ">>shipInfo["+activeShipName+"].weaponGroup["+groupName+"]";
 
@@ -319,11 +326,16 @@ public class VAInline
 			i++;
 		}
 
-
 		List<string> activeWeaponGroupList = readWeaponGroupList(true);
 		if (!activeWeaponGroupList.Contains(groupName)) {
 			activeWeaponGroupList.Add(groupName);
 			saveWeaponGroupList(activeWeaponGroupList, true);
+		}
+
+		List<string> fullWeaponGroupList = readWeaponGroupList(false);
+		if (!fullWeaponGroupList.Contains(groupName) && !staticGroupList.Contains(groupName)) {
+			fullWeaponGroupList.Add(groupName);
+			saveWeaponGroupList(fullWeaponGroupList, false);
 		}
 
 		if (writeSettings()) {
@@ -383,6 +395,11 @@ public class VAInline
 //		playRandomSound("Configuration error. Cancelling", "General Error", true);
 	}
 
+	private void runRegisterWeaponGroup() {
+		if (registerNewWeaponGroupGuid == null)  return;
+		VA.Command.Execute(registerNewWeaponGroupGuid, false, false);
+	}
+
 	private void reloadProfile() {
 		if (reloadProfileGuid == null)  return;
 		VA.Command.Execute(reloadProfileGuid, false, false);
@@ -395,7 +412,7 @@ public class VAInline
 	private List<string> readWeaponGroupList(bool activeGroups = false)
 	{
 		string variable;
-		if (activeGroups)	variable = VA.GetText(">>activeWeaponGroupInput");
+		if (activeGroups)	variable = VA.GetText(">>activeWeaponGroupList");
 		else				variable = VA.GetText(">>weaponGroupListStr");
 
 		List<string> weaponGroupList = new List<string>();
@@ -414,7 +431,11 @@ public class VAInline
 
 	private void saveWeaponGroupList(List<string> weaponGroupList, bool activeGroups = false)
 	{
-		if (activeGroups)	VA.SetText(">>activeWeaponGroupInput", String.Join(";", weaponGroupList));
-		else				VA.SetText(">>weaponGroupListStr", String.Join(";", weaponGroupList));
+		if (activeGroups) {
+			VA.SetText(">>activeWeaponGroupList", String.Join(";", weaponGroupList));
+			VA.SetText(">>activeWeaponGroupInput", "[" + String.Join(";", weaponGroupList) + "]");
+		} else {
+			VA.SetText(">>weaponGroupListStr", String.Join(";", weaponGroupList));
+		}
 	}
 }

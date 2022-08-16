@@ -29,10 +29,6 @@ public class VAInline
 		string wgNameListStr = VA.GetText(">>weaponGroupListStr");
 		string[] wgNameList = wgNameListStr.Split(';');
 
-		//*** Number of weapon groups in use
-		int? maxWGNum_N = VA.GetInt(">maxWeaponGroupNum");
-		int maxWGNum = maxWGNum_N.HasValue ? maxWGNum_N.Value : 9;
-
 		//*** Static Group List
 		variable = VA.GetText(">>staticGroupList");
 		string[] staticGroupList = variable.Split(';');
@@ -72,39 +68,37 @@ public class VAInline
 				settings.Add(settingName, shipInUse);
 
 				for (short w = 0; w < wgNameList.Length; w++) {
-					for (short n = 1; n <= maxWGNum; n++) {
-						tmpVarName = ">>shipInfo[" + shipNameList[s] + "].weaponGroup[" + wgNameList[w] + " " + n + "]";
+					tmpVarName = ">>shipInfo[" + shipNameList[s] + "].weaponGroup[" + wgNameList[w] + "]";
 
-						settingName = tmpVarName + ".isActive";
-						boolValueN = VA.GetBoolean(settingName);
-						wgIsActive = false;
-						if (boolValueN.HasValue)  wgIsActive = boolValueN.Value;
+					settingName = tmpVarName + ".isActive";
+					boolValueN = VA.GetBoolean(settingName);
+					wgIsActive = false;
+					if (boolValueN.HasValue)  wgIsActive = boolValueN.Value;
 
-						if (wgIsActive) {
-							settings.Add(settingName, wgIsActive);
+					if (wgIsActive) {
+						settings.Add(settingName, wgIsActive);
 
-							settingName = tmpVarName + ".weaponKeyPress.len";
-							intValueN = VA.GetInt(settingName);
-							wgLen = 0;
-							if (intValueN.HasValue)  wgLen = intValueN.Value;
+						settingName = tmpVarName + ".weaponKeyPress.len";
+						intValueN = VA.GetInt(settingName);
+						wgLen = 0;
+						if (intValueN.HasValue)  wgLen = intValueN.Value;
 
-							settings.Add(settingName, wgLen);
+						settings.Add(settingName, wgLen);
 
-							for (short l = 0; l < wgLen; l++) {
-								settingNameList[0] = tmpVarName + ".weaponKeyPress[" + l + "]";
-								settingNameList[1] = tmpVarName + ".weaponKeyPressFriendly[" + l + "]";
+						for (short l = 0; l < wgLen; l++) {
+							settingNameList[0] = tmpVarName + ".weaponKeyPress[" + l + "]";
+							settingNameList[1] = tmpVarName + ".weaponKeyPressFriendly[" + l + "]";
 
-								foreach (string sName in settingNameList) {
-									keybind = VA.GetText(sName);
-									settings.Add(sName, keybind);
-								}
+							foreach (string sName in settingNameList) {
+								keybind = VA.GetText(sName);
+								settings.Add(sName, keybind);
 							}
 						}
 					}
 				}
 
 				foreach (string gName in staticGroupList) {
-					tmpVarName = ">>shipInfo[" + shipNameList[s] + "].weaponGroup[" + gName + " 1]";
+					tmpVarName = ">>shipInfo[" + shipNameList[s] + "].weaponGroup[" + gName + "]";
 
 					settingName = tmpVarName + ".isActive";
 					boolValueN = VA.GetBoolean(settingName);

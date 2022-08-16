@@ -77,7 +77,7 @@ public class VAInline
 			VA.WriteToLog(message, "Orange");
 
 			if (VA.GetBoolean(">>shipInfo[" + shipNameList[s] + "].isInUse") == true) {
-				foreach (string wgName in activeWeaponGroupList) {
+				foreach (string wgName in fullWeaponGroupList) {
 					tmpVarName = ">>shipInfo[" + shipNameList[s] + "].weaponGroup[" + wgName + "]";
 					if (VA.GetBoolean(tmpVarName + ".isActive") == true) {
 						int? lenN = VA.GetInt(tmpVarName + ".weaponKeyPress.len");
@@ -85,17 +85,16 @@ public class VAInline
 
 						List<string> keyPressList = new List<string>();
 						for (short l = 0; l < len; l++) {
-							keyPressList.Add(VA.GetText(tmpVarName + ".weaponKeyPress[" + l + "]"));
+							keyPressList.Add(VA.GetText(tmpVarName + ".weaponKeyPressFriendly[" + l + "]"));
 						}
-						message = shipNameList[s] + " >" + wgName + " > weaponKeyPressList:  " + String.Join(",", keyPressList);
+						message = shipNameList[s] + " >" + wgName + " > weaponKeyPressList:  " + String.Join(", ", keyPressList);
 						debugOutput += message + "\n";
 						VA.WriteToLog(message, "Orange");
 					}
 				}
 
 				foreach (string groupName in staticGroupList) {
-					short n = 1;
-					tmpVarName = ">>shipInfo[" + shipNameList[s] + "].weaponGroup[" + groupName + " " + n + "]";
+					tmpVarName = ">>shipInfo[" + shipNameList[s] + "].weaponGroup[" + groupName + "]";
 
 					if (VA.GetBoolean(tmpVarName + ".isActive") == true) {
 						int? lenN = VA.GetInt(tmpVarName + ".weaponKeyPress.len");
@@ -103,10 +102,10 @@ public class VAInline
 
 						List<string> keyPressList = new List<string>();
 						for (short l = 0; l < len; l++) {
-							keyPressList.Add(VA.GetText(tmpVarName + ".weaponKeyPress[" + l + "]"));
+							keyPressList.Add(VA.GetText(tmpVarName + ".weaponKeyPressFriendly[" + l + "]"));
 						}
 
-						message = shipNameList[s] + " >" + groupName + " > weaponKeyPressList:  " + String.Join(",", keyPressList);
+						message = shipNameList[s] + " >" + groupName + " > weaponKeyPressList:  " + String.Join(", ", keyPressList);
 						debugOutput += message + "\n";
 						VA.WriteToLog(message, "Orange");
 					}
