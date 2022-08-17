@@ -491,7 +491,7 @@ public class VAInline
 			addWeaponGroupToQueue(groupNameToAdd, groupNumToAdd, activeShipName, groupExecuteCount);
 
 		else if (!string.IsNullOrEmpty(fullGroupNameToAdd)) {
-			addWeaponGroupToQueue(fullGroupNameToAdd, groupNumToAdd, activeShipName, groupExecuteCount);
+			addWeaponGroupToQueue(fullGroupNameToAdd, 0, activeShipName, groupExecuteCount);
 		}
 
 
