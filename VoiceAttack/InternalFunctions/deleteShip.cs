@@ -21,7 +21,7 @@ public class VAInline
 	//*** Valid responses
 	private string[] cancelList = { "cancel", "nevermind", "never mind", "abort" };
 	private string[] restartList = { "restart", "start over", "do over" };
-	private string[] agreeList = { "confirm", "positive", "affirmative", "absolutely", "please", "please do", "yeah", "yes", "yessir", "yes sir", "commit" };
+	private string[] agreeList = { "confirm", "confirmed", "positive", "affirmative", "absolutely", "please", "please do", "yeah", "yes", "yessir", "yes sir", "commit" };
 	private string[] saveList = { "save", "please save" };
 
 

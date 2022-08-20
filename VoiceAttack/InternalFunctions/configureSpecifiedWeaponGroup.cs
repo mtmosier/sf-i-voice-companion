@@ -21,7 +21,7 @@ public class VAInline
 		string response, logMessage;
 		string[] inputKeywordsToIgnore = new string[] { "turn", "activate", "weapon", "slot", "enhancer", "open", "display" };
 
-		string[] agreeList = { "confirm", "positive", "affirmative", "absolutely", "please", "please do", "yeah", "yes", "yessir", "yes sir", "commit" };
+		string[] agreeList = { "confirm", "confirmed", "positive", "affirmative", "absolutely", "please", "please do", "yeah", "yes", "yessir", "yes sir", "commit" };
 		string[] saveList = { "save", "please save" };
 		string[] disagreeList = { "no", "nah", "nope", "negative" };
 		string[] cancelList = { "cancel", "nevermind", "never mind", "abort" };

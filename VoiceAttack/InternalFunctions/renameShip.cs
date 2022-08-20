@@ -23,7 +23,7 @@ public class VAInline
 
 		string[] cancelList = { "cancel", "nevermind", "never mind", "abort" };
 		string[] restartList = { "restart", "start over", "do over" };
-		string[] agreeList = { "confirm", "positive", "affirmative", "absolutely", "please", "please do", "yeah", "yes", "yessir", "yes sir", "commit" };
+		string[] agreeList = { "confirm", "confirmed", "positive", "affirmative", "absolutely", "please", "please do", "yeah", "yes", "yessir", "yes sir", "commit" };
 		string[] saveList = { "save", "please save" };
 		string[] disagreeList = { "no", "nah", "nope", "negative" };
 
