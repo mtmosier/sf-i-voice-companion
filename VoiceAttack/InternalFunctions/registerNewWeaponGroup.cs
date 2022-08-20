@@ -120,6 +120,7 @@ public class VAInline
 					activeWeaponGroupList.Add(groupName);
 					saveWeaponGroupList(activeWeaponGroupList, true);
 
+					VA.SetBoolean("~~newGroupConfig", true);
 					configureWeaponGroup(groupName);
 					return;
 				}
@@ -175,8 +176,8 @@ public class VAInline
 		VA.SetText("~~viPlaybackText", playbackText);
 		VA.SetText("~~viPlaybackFileGroupName", playbackFileGroupName);
 		VA.SetBoolean("~~viPauseForPlayback", pauseForPlayback);
-		//VA.SetBoolean("~~viVeryShortInputPause", shortPause);
-		VA.SetBoolean("~~viShortInputPause", shortPause);
+		VA.SetBoolean("~~viVeryShortInputPause", shortPause);
+		//VA.SetBoolean("~~viShortInputPause", shortPause);
 		VA.SetBoolean("~~viReturnOnAnyInput", returnOnAnyInput);
 		VA.Command.Execute(requestVerbalUserInputGuid, true, true);
 
