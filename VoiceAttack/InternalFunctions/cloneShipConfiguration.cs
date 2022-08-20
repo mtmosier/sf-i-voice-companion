@@ -39,7 +39,8 @@ public class VAInline
 
 
 		//*** Get list of Weapon group names
-		variable = VA.GetText(">>activeWeaponGroupList");
+		variable = VA.GetText(">>activeWeaponGroupInput");
+		variable = variable.Trim({'[', ']'};
 		if (string.IsNullOrEmpty(variable))  variable = "";
 		List<string> activeWeaponGroupList = new List<string>(variable.Split(';'));
 
