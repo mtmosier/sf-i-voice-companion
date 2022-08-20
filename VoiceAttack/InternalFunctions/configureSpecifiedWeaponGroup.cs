@@ -53,14 +53,17 @@ public class VAInline
 		List<string> staticGroupList = new List<string>(variable.Split(';'));
 
 
-		//*** GET PARAMETERS
+		//*** Get parameters
 		bool? quickConfig = VA.GetBoolean("~~quickConfig");
+		bool? newGroupConfig = VA.GetBoolean("~~newGroupConfig");
+
 		groupName = VA.GetText("~~wgGroupNameExtStr");
 		if (String.IsNullOrEmpty(groupName)) {
 			groupName = VA.Command.Segment(1);
 		}
 
 		if (String.IsNullOrEmpty(groupName)) {
+			playRandomSound(null, "Non-Verbal Error", true);
 			//runRegisterWeaponGroup();  //*** Errors due to multiple commands running at once
 			return;
 		}
@@ -86,7 +89,7 @@ public class VAInline
 				VA.SetBoolean(">>extendedWeaponConfigPlayed", true);
 			}
 			playRandomSound(msg, voiceGroupName, true);
-		} else if (quickConfig != true) {
+		} else if (quickConfig != true && newGroupConfig != true) {
 			playRandomSound(null, "Configure Weapon Group", true);
 		}
 
