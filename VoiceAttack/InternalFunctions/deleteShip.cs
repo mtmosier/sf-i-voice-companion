@@ -33,22 +33,13 @@ public class VAInline
 		string response, request, shipName, last4;
 		bool? bVar;
 
-		//*** Get list of Weapon group names
-		string variable = VA.GetText(">>activeWeaponGroupList");
-		if (variable == null)  variable = "";
-		List<string> activeWeaponGroupList = new List<string>(variable.Split(';'));
-
-
 		//*** Get list of ship names
-		List<string> fullShipList = new List<string>();
 		List<string> activeShipList = new List<string>();
 
 		string shipNameInputStr = VA.GetText(">>shipNameListStr");
 		if (!String.IsNullOrEmpty(shipNameInputStr)) {
 			string[] shipNameList = shipNameInputStr.Split(';');
 			foreach (string sn in shipNameList) {
-				if (!fullShipList.Contains(sn))
-					fullShipList.Add(sn);
 				if (VA.GetBoolean(">>shipInfo[" + sn + "].isInUse") == true) {
 					if (!activeShipList.Contains(sn)) {
 						activeShipList.Add(sn);
@@ -147,36 +138,16 @@ public class VAInline
 				//*** Set the ship to be no longer in use
 				VA.SetBoolean(">>shipInfo[" + shipName + "].isInUse", false);
 
-				//*** Set each of the weapon groups for the ship as no longer in use
-				foreach (string wgName in activeWeaponGroupList) {
-					VA.SetBoolean(">>shipInfo[" + shipName + "].weaponGroup[" + wgName + "].isActive", false);
-				}
-
 				//*** Remove from the locally stored ship list
-				if (fullShipList.Contains(shipName))
-					fullShipList.Remove(shipName);
 				if (activeShipList.Contains(shipName))
 					activeShipList.Remove(shipName);
 
-				//*** Export ship list settings
-				string shipNameInput = "[" + string.Join<string>(";", fullShipList) + "] [ship;]";
-				VA.SetText(">>configShipNameInput", shipNameInput);
-
-				if (fullShipList.Count > 0)		shipNameInput = "[" + string.Join<string>(";", fullShipList) + ";current;active] [ship;]";
-				else							shipNameInput = "[current;active] [ship;]";
-				VA.SetText(">>shipNameInput", shipNameInput);
-
-				if (activeShipList.Count > 0)	shipNameInput = "[" + string.Join<string>(";", activeShipList) + ";current;active] [ship;]";
-				else							shipNameInput = "[current;active] [ship;]";
-				VA.SetText(">>activeShipNameInput", shipNameInput);
-
-				VA.SetText(">>shipNameListStr", string.Join<string>(";", fullShipList));
-
+				//*** Update the active ship name if current ship was deleted
 				if (comparer.Compare(activeShipName, shipName) == 0) {
 					bool found = false;
 					string firstShip = "";
 
-					foreach (string sn in fullShipList) {
+					foreach (string sn in activeShipList) {
 						if (String.IsNullOrEmpty(firstShip))
 							firstShip = sn;
 
