@@ -13,11 +13,11 @@ Please note that this project is in no way affiliated with HCS, and is not autho
 
 ### Which voice packs work with this companion?
 
-I have personally tested using Vega [ED], Jazz [ED], and Carina [SC]. In theory any HCS Voice Pack should work, though I can't promise that.
+I have personally tested using Vega [ED], Jazz [ED], Orion [ED], Kate [ED], Legion [SWS], and Carina [SC]. In theory any HCS Voice Pack should work, though I can't promise that.
 
 Note that none of the voice packs contain the proper recordings needed for weapon configuration. If you do use a voice pack you should expect to still hear some text-to-speech generated voice being used in these areas.
 
-If you do use end up using a voice pack and you hear some text-to-speech generated voices where you think there shouldn't be (outside of configuration or querying ship/weapon status), [please let me know](mailto:m.t.m.o.s.i.e.r@gmail.com). I may be able to make some adjustments to get your particular voice pack working.
+If you end up using a voice pack and you hear some text-to-speech generated voices where you think there shouldn't be (outside of configuration or querying ship/weapon status), [please let me know](mailto:m.t.m.o.s.i.e.r@gmail.com). I may be able to make some adjustments to get your particular voice pack working better.
 
 ### How do I get my voice pack to work?
 
@@ -25,7 +25,7 @@ Make sure you already have your HCS Voice Pack(s) you want to use fully installe
 
 For most people the import process will be as simple as running the batch file then reloading the VoiceAttack SF:I Companion profile.  To reload the profile either switch to a different profile and then back, or close and reopen VoiceAttack.
 
-Once installed use the "Promote" command to enable the campanion of your choice.
+Once installed use the "Promote" command to enable the companion of your choice.
 
 ### It didn't work! Now what?
 
