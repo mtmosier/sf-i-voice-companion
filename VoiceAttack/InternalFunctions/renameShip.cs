@@ -50,9 +50,17 @@ public class VAInline
 
 
 		//*** Get list of Weapon group names
-		variable = VA.GetText(">>activeWeaponGroupList");
-		if (variable == null)  variable = "";
-		List<string> activeWeaponGroupList = new List<string>(variable.Split(';'));
+		variable = VA.GetText(">>weaponGroupListStr");
+		if (string.IsNullOrEmpty(variable))  variable = "";
+		List<string> weaponGroupList = new List<string>(variable.Split(';'));
+
+		//*** Get static group list
+		variable = VA.GetText(">>staticGroupList");
+		if (string.IsNullOrEmpty(variable))  variable = "";
+		List<string> staticGroupList = new List<string>(variable.Split(';'));
+
+		weaponGroupList.AddRange(staticGroupList);
+
 
 
 		//*** Get list of ship names
@@ -200,7 +208,7 @@ public class VAInline
 					VA.SetBoolean(">>shipInfo[" + fromShip + "].isInUse", false);
 					VA.SetBoolean(">>shipInfo[" + toShip + "].isInUse", true);
 
-					foreach (string wgName in activeWeaponGroupList) {
+					foreach (string wgName in weaponGroupList) {
 						string fromVarName = ">>shipInfo[" + fromShip + "].weaponGroup[" + wgName + "]";
 						string toVarName = ">>shipInfo[" + toShip + "].weaponGroup[" + wgName + "]";
 
