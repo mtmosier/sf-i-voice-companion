@@ -88,7 +88,10 @@ public class VAInline
 			@"{TXT:>>voiceDir}\Additional dialogue\A smidgen of power.mp3",
 			@"{TXT:>>voiceDir}\Additional dialogue\I’m number one does this mean I can boss the crew around.mp3",
 			@"{TXT:>>voiceDir}\Applications\Vega online.mp3",
-			@"{TXT:>>voiceDir}\Applications\Jazz online.mp3"
+			@"{TXT:>>voiceDir}\Applications\Jazz online.mp3",
+			@"{TXT:>>voiceDir}\Crew commands\Reporting.mp3",
+			@"{TXT:>>voiceDir}\Crew commands\Reporting for duty.mp3",
+			@"{TXT:>>voiceDir}\Crew commands\Reporting for duty 2.mp3"
 		};
 		dirList = new string[] {
 			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Profile\((RS - Voice On 1))\Verbose"
@@ -99,6 +102,8 @@ public class VAInline
 		fileList = new string[] {
 			@"{TXT:>>voiceDir}\Additional dialogue\I'm afraid I can't do that Dave Just kidding.mp3",
 			@"{TXT:>>voiceDir}\Additional dialogue\Relinquishing command reluctantly.mp3",
+			@"{TXT:>>voiceDir}\Crew commands\Relinquishing command.mp3",
+			@"{TXT:>>voiceDir}\Additional dialogue\Additional dialogue extra\That's a wrap.mp3",
 			@"{TXT:>>voiceDir}\Applications\Vega offline.mp3",
 			@"{TXT:>>voiceDir}\Applications\Jazz offline.mp3"
 		};
@@ -130,6 +135,12 @@ public class VAInline
 		soundDirGroupList.Add("Listening Disabled", dirList);
 
 		fileList = new string[] {
+			@"{TXT:>>voiceDir}\Targeting\Wise guys detected.mp3",
+			@"{TXT:>>voiceDir}\Additional dialogue\You need to relax my friend.mp3",
+			@"{TXT:>>voiceDir}\Additional dialogue\You need to relax.mp3",
+			@"{TXT:>>voiceDir}\Additional dialogue\Additional dialogue extra\Was that French or something.mp3",
+			@"{TXT:>>voiceDir}\Additional dialogue\Additional dialogue extra\Was that French for something.mp3",
+			@"{TXT:>>voiceDir}\Additional dialogue\Additional dialogue extra\What was that I didn't hear you.mp3",
 			@"{TXT:>>voiceDir}\Role\fine.mp3",
 			@"{TXT:>>voiceDir}\Role\Fine I won't disturb you again.mp3",
 			@"{TXT:>>voiceDir}\Role\Losing your temper with things.mp3",
@@ -217,10 +228,13 @@ public class VAInline
 		soundDirGroupList.Add("Yellow Alert", dirList);
 
 		fileList = new string[] {
+			@"{TXT:>>voiceDir}\Fighter\Watch our six.mp3",
 			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Acknowledgements\((RS - Concur))\non-verbose\I concur.mp3",
 			@"{TXT:>>voiceDir}\Configuration Commands\Engaging evasive manoeuvres.mp3",
 			@"{TXT:>>voiceDir}\Configuration Commands\Evasive manoeuvres alt.mp3",
 			@"{TXT:>>voiceDir}\Configuration Commands\Evasive manoeuvres.mp3",
+			@"{TXT:>>voiceDir}\Configuration Commands\Manoeuvring.mp3",
+			@"{TXT:>>voiceDir}\Configuration Commands\Manoeuvring alt.mp3",
 			@"{TXT:>>voiceDir}\Configuration Commands\Executing evasive manoeuvres.mp3"
 		};
 		soundFileGroupList.Add("Evasive Maneuvers", fileList);
@@ -274,17 +288,19 @@ public class VAInline
 		soundFileGroupList.Add("Loading Configuration", fileList);
 
 		fileList = new string[] {
-			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Targeting\((RS - Target Highest Threat))\Verbose\Target next hostile.mp3",
-			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Targeting\((RS - Target Highest Threat))\Verbose\Targeting now nobody likes him.mp3",
-			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Targeting\((RS - Target Highest Threat))\Verbose\Targeting now nobody likes this one.mp3",
-			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Targeting\((RS - Target Highest Threat))\non-verbose\Targeting.mp3",
+			@"{TXT:>>voiceDir}\Targeting\Targeting wise guy.mp3",
 			@"{TXT:>>voiceDir}\Targeting\Next target.mp3",
+			@"{TXT:>>voiceDir}\Targeting\Target next hostile.mp3",
 			@"{TXT:>>voiceDir}\Targeting\Targeting next hostile.mp3",
 			@"{TXT:>>voiceDir}\Targeting\Next hostile.mp3",
 			@"{TXT:>>voiceDir}\Targeting\Next hostile selected.mp3",
 			@"{TXT:>>voiceDir}\Targeting\Selecting target.mp3",
 			@"{TXT:>>voiceDir}\Targeting\Switching targets.mp3",
 			@"{TXT:>>voiceDir}\Targeting\Switching targets alt.mp3"
+		};
+		dirList = new string[] {
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Targeting\((RS - Target Highest Threat))\Verbose",
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Targeting\((RS - Target Highest Threat))\non-verbose"
 		};
 		soundFileGroupList.Add("Next Target", fileList);
 
@@ -361,14 +377,16 @@ public class VAInline
 		soundFileGroupList.Add("Autopilot", fileList);
 
 		fileList = new string[] {
-			@"{TXT:>>voiceDir}\Profile Sounds\NMS\((RS - Pulse Engine Engage))\non-verbose\Engaging jump drive.mp3",
-			@"{TXT:>>voiceDir}\Profile Sounds\NMS\((RS - Pulse Engine Engage))\non-verbose\Hyperspace jump engaging.mp3",
+			@"{TXT:>>voiceDir}\Acknowledgements\Executing now.mp3",
+			@"{TXT:>>voiceDir}\Acknowledgements\Getting us out of here.mp3",
 			@"{TXT:>>voiceDir}\Engines Thrusters and Drives\Drives\Hyperspace.mp3",
 			@"{TXT:>>voiceDir}\Engines Thrusters and Drives\Drives\Hyperspace jump.mp3",
 			@"{TXT:>>voiceDir}\Engines Thrusters and Drives\Drives\Hyperspace jump 2.mp3",
 			@"{TXT:>>voiceDir}\Engines Thrusters and Drives\Drives\Hyperspace jump engaging.mp3"
 		};
 		dirList = new string[] {
+			@"{TXT:>>voiceDir}\Profile Sounds\NMS\((RS - Pulse Engine Engage))\non-verbose",
+			@"{TXT:>>voiceDir}\Profile Sounds\NMS\((RS - Pulse Engine Engage))\non-verbose",
 			@"{TXT:>>voiceDir}\Profile sounds\SWS\((RS - Power Boost Engines))\non-verbose",
 			@"{TXT:>>voiceDir}\Profile sounds\SWS\((RS - Power Boost Engines))\Verbose"
 		};
@@ -431,6 +449,9 @@ public class VAInline
 		soundFileGroupList.Add("General Error", fileList);
 
 		fileList = new string[] {
+			@"{TXT:>>voiceDir}\Weapons\Next weapon.mp3",
+			@"{TXT:>>voiceDir}\Weapons\Weapon changed.mp3",
+			@"{TXT:>>voiceDir}\Weapons\Weapons deployed.mp3",
 			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Combat\((RS - Hardpoints Deploy))\Verbose\Weapons deployed.mp3",
 			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Combat\((RS - Hardpoints Deploy))\Verbose\Deploying weapons.mp3",
 			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Combat\((RS - Hardpoints Deploy))\Verbose\Deploying and readying weapons.mp3",
@@ -471,13 +492,19 @@ public class VAInline
 			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Combat\((RS - Hardpoints Retract))\non-verbose\Retracting weapons.mp3",
 			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Combat\((RS - Hardpoints Retract))\non-verbose\Retracting all weapons.mp3",
 			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Power Management\((RS - Weapons Off))\Verbose\Weapons offline.mp3",
+			@"{TXT:>>voiceDir}\Weapons\Retracting armaments.mp3",
 			@"{TXT:>>voiceDir}\Weapons\Retracting weapons.mp3",
-			@"{TXT:>>voiceDir}\Power Management\Weapons offline.mp3",
-			@"{TXT:>>voiceDir}\Weapons\Retracting all weapons.mp3"
+			@"{TXT:>>voiceDir}\Weapons\Retract weapons.mp3",
+			@"{TXT:>>voiceDir}\Weapons\Retracting all weapons.mp3",
+			@"{TXT:>>voiceDir}\Weapons\Weapons retracted.mp3",
+			@"{TXT:>>voiceDir}\Weapons\Weapons offline.mp3",
+			@"{TXT:>>voiceDir}\Power Management\Weapons offline.mp3"
 		};
 		soundFileGroupList.Add("Cease Fire", fileList);
 
 		fileList = new string[] {
+			@"{TXT:>>voiceDir}\Weapons\Weapons hot.mp3",
+			@"{TXT:>>voiceDir}\Targeting\Fire at will.mp3",
 			@"{TXT:>>voiceDir}\Fighter\Firing volley.mp3"
 		};
 		dirList = new string[] {
@@ -608,6 +635,8 @@ public class VAInline
 		soundFileGroupList.Add("Firing Escape", fileList);
 
 		fileList = new string[] {
+			@"{TXT:>>voiceDir}\Targeting\Locking on to target.mp3",
+			@"{TXT:>>voiceDir}\Targeting\Focusing target.mp3",
 			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Targeting\((RS - Target Highest Threat))\Verbose\Targeting now nobody likes this one.mp3",
 			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Targeting\((RS - Target Highest Threat))\Verbose\Targeting now nobody likes him.mp3",
 			@"{TXT:>>voiceDir}\Weapons\Flare.mp3",
