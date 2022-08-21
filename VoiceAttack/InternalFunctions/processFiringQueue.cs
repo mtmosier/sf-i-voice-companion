@@ -263,7 +263,7 @@ public class VAInline
 
 		//*** Create a dummy weapon group containing only the single keybind
 		WeaponGroup wg = new WeaponGroup(this, "keyBind(" + keybindToAdd + ")", 0, activeShipName);
-		wg.addKeybind(keybindToAdd, executeCount, 0, 0.1m, 1.2m);
+		wg.addKeybind(keybindToAdd, executeCount, 0, 0.1m, 0.2m);
 
 		//*** Insert at the top of the queue
 		WeaponGroupList.Insert(0, wg);
