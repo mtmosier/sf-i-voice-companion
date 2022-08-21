@@ -80,10 +80,12 @@ public class VAInline
 			if (!String.IsNullOrEmpty(shipName)) {
 				shipName = shipName.Trim();
 
-				last4 = shipName.Substring(shipName.Length - 4);
-				if (shipName.Length > 6 && comparer.Compare(last4, "ship") == 0) {
-					shipName = shipName.Substring(0, shipName.Length - 4);
-					shipName = shipName.Trim();
+				if (shipName.Length > 6) {
+					last4 = shipName.Substring(shipName.Length - 4);
+					if (comparer.Compare(last4, "ship") == 0) {
+						shipName = shipName.Substring(0, shipName.Length - 4);
+						shipName = shipName.Trim();
+					}
 				}
 				shipName = ti.ToTitleCase(shipName);
 			}

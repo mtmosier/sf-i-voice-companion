@@ -78,13 +78,14 @@ public class VAInline
 
 		//*** Get source ship name
 		fromShip = VA.Command.Segment(2);
-
 		fromShip = fromShip.Trim();
 
-		last4 = fromShip.Substring(fromShip.Length - 4);
-		if (fromShip.Length > 6 && comparer.Compare(last4, "ship") == 0) {
-			fromShip = fromShip.Substring(0, fromShip.Length - 4);
-			fromShip = fromShip.Trim();
+		if (fromShip.Length > 6) {
+			last4 = fromShip.Substring(fromShip.Length - 4);
+			if (comparer.Compare(last4, "ship") == 0) {
+				fromShip = fromShip.Substring(0, fromShip.Length - 4);
+				fromShip = fromShip.Trim();
+			}
 		}
 
 		if (comparer.Compare(fromShip, "current") == 0 || comparer.Compare(fromShip, "active") == 0) {
@@ -137,10 +138,12 @@ public class VAInline
 			if (!String.IsNullOrEmpty(toShip)) {
 				toShip = toShip.Trim();
 
-				last4 = toShip.Substring(toShip.Length - 4);
-				if (toShip.Length > 6 && comparer.Compare(last4, "ship") == 0) {
-					toShip = toShip.Substring(0, toShip.Length - 4);
-					toShip = toShip.Trim();
+				if (toShip.Length > 6) {
+					last4 = toShip.Substring(toShip.Length - 4);
+					if (comparer.Compare(last4, "ship") == 0) {
+						toShip = toShip.Substring(0, toShip.Length - 4);
+						toShip = toShip.Trim();
+					}
 				}
 
 				if (comparer.Compare(toShip, "current") == 0 || comparer.Compare(toShip, "active") == 0) {
