@@ -15,8 +15,8 @@ public class VAInline
 
 	private string[] getSoundFileGroupList() {
 		return new string[] {
-			"Non-Verbal Confirmation",
 			"Non-Verbal Error",
+			"Non-Verbal Confirmation",
 			"Switch Companion Target",
 			"Switch Companion Source",
 			"Listening Enabled",
