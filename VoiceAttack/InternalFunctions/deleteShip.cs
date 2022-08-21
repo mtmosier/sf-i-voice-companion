@@ -50,6 +50,17 @@ public class VAInline
 			shipNameInputStr = String.Format("[{0};active;current] [ship;];", shipNameInputStr);
 		}
 
+		//*** Weapon group variables
+		string wgNameListStr = VA.GetText(">>weaponGroupListStr");
+		List<string> wgNameList = new List<string>(wgNameListStr.Split(';'));
+
+		//*** Get static group list
+		string variable = VA.GetText(">>staticGroupList");
+		if (string.IsNullOrEmpty(variable))  variable = "";
+		List<string> staticGroupList = new List<string>(variable.Split(';'));
+
+		wgNameList.AddRange(staticGroupList);
+
 		//*** Get the ship name given
 		shipName = VA.Command.Segment(4);
 
@@ -87,10 +98,12 @@ public class VAInline
 			if (!String.IsNullOrEmpty(shipName)) {
 				shipName = shipName.Trim();
 
-				last4 = shipName.Substring(shipName.Length - 4);
-				if (comparer.Compare(last4, "ship") == 0) {
-					shipName = shipName.Substring(0, shipName.Length - 4);
-					shipName = shipName.Trim();
+				if (shipName.Length > 6) {
+					last4 = shipName.Substring(shipName.Length - 4);
+					if (comparer.Compare(last4, "ship") == 0) {
+						shipName = shipName.Substring(0, shipName.Length - 4);
+						shipName = shipName.Trim();
+					}
 				}
 
 				if (comparer.Compare(shipName, "current") == 0 || comparer.Compare(shipName, "active") == 0) {
@@ -137,6 +150,16 @@ public class VAInline
 
 				//*** Set the ship to be no longer in use
 				VA.SetBoolean(">>shipInfo[" + shipName + "].isInUse", false);
+
+				for (short w = 0; w < wgNameList.Count; w++) {
+					string tmpVarName = ">>shipInfo[" + shipName + "].weaponGroup[" + wgNameList[w] + "]";
+					string settingName = tmpVarName + ".isActive";
+					VA.SetBoolean(settingName, false);
+
+					settingName = tmpVarName + ".weaponKeyPress.len";
+					VA.SetInt(settingName, 0);
+				}
+
 
 				//*** Remove from the locally stored ship list
 				if (activeShipList.Contains(shipName))
@@ -212,7 +235,7 @@ public class VAInline
 		VA.SetText("~~viPlaybackText", playbackText);
 		VA.SetText("~~viPlaybackFileGroupName", playbackFileGroupName);
 		VA.SetBoolean("~~viPauseForPlayback", pauseForPlayback);
-		VA.SetBoolean("~~viShortInputPause", shortPause);
+		VA.SetBoolean("~~viVeryShortInputPause", shortPause);
 		VA.SetBoolean("~~viReturnOnAnyInput", returnOnAnyInput);
 		VA.Command.Execute(requestVerbalUserInputGuid, true, true);
 
