@@ -231,8 +231,11 @@ public class VAInline
 							for (short l = 0; l < wgLen; l++) {
 								settingName = fromVarName + ".weaponKeyPress[" + l + "]";
 								string keybind = VA.GetText(settingName);
-
 								VA.SetText(toVarName + ".weaponKeyPress[" + l + "]", keybind);
+
+								settingName = fromVarName + ".weaponKeyPressFriendly[" + l + "]";
+								keybind = VA.GetText(settingName);
+								VA.SetText(toVarName + ".weaponKeyPressFriendly[" + l + "]", keybind);
 							}
 						}
 					}
