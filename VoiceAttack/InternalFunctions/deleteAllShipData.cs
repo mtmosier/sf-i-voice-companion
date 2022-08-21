@@ -28,14 +28,26 @@ public class VAInline
 		string response, request;
 
 		//*** Get list of ship names
-		string[] shipNameList = {};
 		string shipNameListStr = VA.GetText(">>shipNameListStr");
-		if (!String.IsNullOrEmpty(shipNameListStr)) {
-			shipNameList = shipNameListStr.Split(';');
-		} else {
+		if (String.IsNullOrEmpty(shipNameListStr)) {
 			configurationError();
 			return;
 		}
+		string[] shipNameList = shipNameListStr.Split(';');
+
+		//*** Weapon group variables
+		string wgNameListStr = VA.GetText(">>weaponGroupListStr");
+		List<string> wgNameList = new List<string>(wgNameListStr.Split(';'));
+
+		//*** Get static group list
+		string variable = VA.GetText(">>staticGroupList");
+		if (string.IsNullOrEmpty(variable))  variable = "";
+		List<string> staticGroupList = new List<string>(variable.Split(';'));
+
+		wgNameList.AddRange(staticGroupList);
+
+
+
 
 		//*** Confirm the action
 		request = "Deleting all ship data.";
@@ -65,6 +77,15 @@ public class VAInline
 		//*** Set all ships to be no longer in use
 		foreach (string shipName in shipNameList) {
 			VA.SetBoolean(">>shipInfo[" + shipName + "].isInUse", false);
+
+			for (short w = 0; w < wgNameList.Count; w++) {
+				string tmpVarName = ">>shipInfo[" + shipName + "].weaponGroup[" + wgNameList[w] + "]";
+				string settingName = tmpVarName + ".isActive";
+				VA.SetBoolean(settingName, false);
+
+				settingName = tmpVarName + ".weaponKeyPress.len";
+				VA.SetInt(settingName, 0);
+			}
 		}
 
 		VA.SetText(">>activeShipName", "");
