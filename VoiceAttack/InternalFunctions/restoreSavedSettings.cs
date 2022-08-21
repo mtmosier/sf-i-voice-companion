@@ -261,8 +261,10 @@ public class VAInline
 						VA.SetBoolean(settingName, wgIsActive);
 
 						if (wgIsActive) {
-							if (!activeStaticGroupList.Contains(gName))
-								activeStaticGroupList.Add(gName);
+							if (comparer.Compare(fullShipList[s], activeShipName) == 0) {
+								if (!activeStaticGroupList.Contains(gName))
+									activeStaticGroupList.Add(gName);
+							}
 
 							settingName = tmpVarName + ".weaponKeyPress.len";
 
