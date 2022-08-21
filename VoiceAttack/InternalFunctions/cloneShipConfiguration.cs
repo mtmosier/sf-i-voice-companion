@@ -39,12 +39,14 @@ public class VAInline
 
 
 		//*** Get list of Weapon group names
-		variable = VA.GetText(">>activeWeaponGroupInput");
-		char[] charsToStrip = {'[', ']'};
-		variable = variable.Trim(charsToStrip);
+		variable = VA.GetText(">>weaponGroupListStr");
 		if (string.IsNullOrEmpty(variable))  variable = "";
-		List<string> activeWeaponGroupList = new List<string>(variable.Split(';'));
+		List<string> weaponGroupList = new List<string>(variable.Split(';'));
 
+		//*** Get static group list
+		variable = VA.GetText(">>staticGroupList");
+		if (string.IsNullOrEmpty(variable))  variable = "";
+		List<string> staticGroupList = new List<string>(variable.Split(';'));
 
 		//*** Get list of ship names
 		List<string> fullShipList = new List<string>();
@@ -66,16 +68,16 @@ public class VAInline
 			shipNameInputStr = String.Format("[{0};active;current] [ship;];", shipNameInputStr);
 		}
 
-
 		//*** Get source ship name
 		fromShip = VA.Command.Segment(1);
-
 		fromShip = fromShip.Trim();
 
-		last4 = fromShip.Substring(fromShip.Length - 4);
-		if (fromShip.Length > 6 && comparer.Compare(last4, "ship") == 0) {
-			fromShip = fromShip.Substring(0, fromShip.Length - 4);
-			fromShip = fromShip.Trim();
+		if (fromShip.Length > 6) {
+			last4 = fromShip.Substring(fromShip.Length - 4);
+			if (comparer.Compare(last4, "ship") == 0) {
+				fromShip = fromShip.Substring(0, fromShip.Length - 4);
+				fromShip = fromShip.Trim();
+			}
 		}
 
 		if (comparer.Compare(fromShip, "current") == 0 || comparer.Compare(fromShip, "active") == 0) {
@@ -128,10 +130,12 @@ public class VAInline
 			if (!String.IsNullOrEmpty(toShip)) {
 				toShip = toShip.Trim();
 
-				last4 = toShip.Substring(toShip.Length - 4);
-				if (toShip.Length > 6 && comparer.Compare(last4, "ship") == 0) {
-					toShip = toShip.Substring(0, toShip.Length - 4);
-					toShip = toShip.Trim();
+				if (toShip.Length > 6) {
+					last4 = toShip.Substring(toShip.Length - 4);
+					if (comparer.Compare(last4, "ship") == 0) {
+						toShip = toShip.Substring(0, toShip.Length - 4);
+						toShip = toShip.Trim();
+					}
 				}
 
 				if (comparer.Compare(toShip, "current") == 0 || comparer.Compare(toShip, "active") == 0) {
@@ -188,7 +192,9 @@ public class VAInline
 					//*** Perform ship copy
 					VA.SetBoolean(">>shipInfo[" + toShip + "].isInUse", true);
 
-					foreach (string wgName in activeWeaponGroupList) {
+
+					weaponGroupList.AddRange(staticGroupList);
+					foreach (string wgName in weaponGroupList) {
 						string fromVarName = ">>shipInfo[" + fromShip + "].weaponGroup[" + wgName + "]";
 						string toVarName = ">>shipInfo[" + toShip + "].weaponGroup[" + wgName + "]";
 
@@ -210,8 +216,11 @@ public class VAInline
 							for (short l = 0; l < wgLen; l++) {
 								settingName = fromVarName + ".weaponKeyPress[" + l + "]";
 								string keybind = VA.GetText(settingName);
-
 								VA.SetText(toVarName + ".weaponKeyPress[" + l + "]", keybind);
+
+								settingName = fromVarName + ".weaponKeyPressFriendly[" + l + "]";
+								keybind = VA.GetText(settingName);
+								VA.SetText(toVarName + ".weaponKeyPressFriendly[" + l + "]", keybind);
 							}
 						}
 					}
