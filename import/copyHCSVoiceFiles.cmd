@@ -91,6 +91,15 @@ pause
   IF EXIST "%vaSoundDir%\%curDir%\Applications\Jazz online.mp3" (
     copy "%vaSoundDir%\%curDir%\Applications\Jazz online.mp3" "%vaSoundDir%\%newDir%\Switch Companion Target\Jazz online.mp3" >nul
   )
+  IF EXIST "%vaSoundDir%\%curDir%\Crew commands\Reporting.mp3" (
+    copy "%vaSoundDir%\%curDir%\Crew commands\Reporting.mp3" "%vaSoundDir%\%newDir%\Switch Companion Target\Reporting.mp3" >nul
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Crew commands\Reporting for duty.mp3" (
+    copy "%vaSoundDir%\%curDir%\Crew commands\Reporting for duty.mp3" "%vaSoundDir%\%newDir%\Switch Companion Target\Reporting for duty.mp3" >nul
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Crew commands\Reporting for duty 2.mp3" (
+    copy "%vaSoundDir%\%curDir%\Crew commands\Reporting for duty 2.mp3" "%vaSoundDir%\%newDir%\Switch Companion Target\Reporting for duty 2.mp3" >nul
+  )
   >nul 2>nul dir /a-d "%vaSoundDir%\%newDir%\Switch Companion Target\*" || (
     echo - Missing Switch Companion Target
   )
@@ -103,6 +112,12 @@ pause
   )
   IF EXIST "%vaSoundDir%\%curDir%\Additional dialogue\Relinquishing command reluctantly.mp3" (
     copy "%vaSoundDir%\%curDir%\Additional dialogue\Relinquishing command reluctantly.mp3" "%vaSoundDir%\%newDir%\Switch Companion Source\Relinquishing command reluctantly.mp3" >nul
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Crew commands\Relinquishing command.mp3" (
+    copy "%vaSoundDir%\%curDir%\Crew commands\Relinquishing command.mp3" "%vaSoundDir%\%newDir%\Switch Companion Source\Relinquishing command.mp3" >nul
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Additional dialogue\Additional dialogue extra\That's a wrap.mp3" (
+    copy "%vaSoundDir%\%curDir%\Additional dialogue\Additional dialogue extra\That's a wrap.mp3" "%vaSoundDir%\%newDir%\Switch Companion Source\That's a wrap.mp3" >nul
   )
   IF EXIST "%vaSoundDir%\%curDir%\Applications\Vega offline.mp3" (
     copy "%vaSoundDir%\%curDir%\Applications\Vega offline.mp3" "%vaSoundDir%\%newDir%\Switch Companion Source\Vega offline.mp3" >nul
@@ -143,6 +158,24 @@ pause
     echo - Missing Listening Disabled
   )
   IF NOT EXIST "%vaSoundDir%\%newDir%\Annoyed Response\" mkdir "%vaSoundDir%\%newDir%\Annoyed Response"
+  IF EXIST "%vaSoundDir%\%curDir%\Targeting\Wise guys detected.mp3" (
+    copy "%vaSoundDir%\%curDir%\Targeting\Wise guys detected.mp3" "%vaSoundDir%\%newDir%\Annoyed Response\Wise guys detected.mp3" >nul
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Additional dialogue\You need to relax my friend.mp3" (
+    copy "%vaSoundDir%\%curDir%\Additional dialogue\You need to relax my friend.mp3" "%vaSoundDir%\%newDir%\Annoyed Response\You need to relax my friend.mp3" >nul
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Additional dialogue\You need to relax.mp3" (
+    copy "%vaSoundDir%\%curDir%\Additional dialogue\You need to relax.mp3" "%vaSoundDir%\%newDir%\Annoyed Response\You need to relax.mp3" >nul
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Additional dialogue\Additional dialogue extra\Was that French or something.mp3" (
+    copy "%vaSoundDir%\%curDir%\Additional dialogue\Additional dialogue extra\Was that French or something.mp3" "%vaSoundDir%\%newDir%\Annoyed Response\Was that French or something.mp3" >nul
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Additional dialogue\Additional dialogue extra\Was that French for something.mp3" (
+    copy "%vaSoundDir%\%curDir%\Additional dialogue\Additional dialogue extra\Was that French for something.mp3" "%vaSoundDir%\%newDir%\Annoyed Response\Was that French for something.mp3" >nul
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Additional dialogue\Additional dialogue extra\What was that I didn't hear you.mp3" (
+    copy "%vaSoundDir%\%curDir%\Additional dialogue\Additional dialogue extra\What was that I didn't hear you.mp3" "%vaSoundDir%\%newDir%\Annoyed Response\What was that I didn't hear you.mp3" >nul
+  )
   IF EXIST "%vaSoundDir%\%curDir%\Role\fine.mp3" (
     copy "%vaSoundDir%\%curDir%\Role\fine.mp3" "%vaSoundDir%\%newDir%\Annoyed Response\fine.mp3" >nul
   )
@@ -271,6 +304,9 @@ pause
     echo - Missing Yellow Alert
   )
   IF NOT EXIST "%vaSoundDir%\%newDir%\Evasive Maneuvers\" mkdir "%vaSoundDir%\%newDir%\Evasive Maneuvers"
+  IF EXIST "%vaSoundDir%\%curDir%\Fighter\Watch our six.mp3" (
+    copy "%vaSoundDir%\%curDir%\Fighter\Watch our six.mp3" "%vaSoundDir%\%newDir%\Evasive Maneuvers\Watch our six.mp3" >nul
+  )
   IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Acknowledgements\((RS - Concur))\non-verbose\I concur.mp3" (
     copy "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Acknowledgements\((RS - Concur))\non-verbose\I concur.mp3" "%vaSoundDir%\%newDir%\Evasive Maneuvers\I concur.mp3" >nul
   )
@@ -282,6 +318,12 @@ pause
   )
   IF EXIST "%vaSoundDir%\%curDir%\Configuration Commands\Evasive manoeuvres.mp3" (
     copy "%vaSoundDir%\%curDir%\Configuration Commands\Evasive manoeuvres.mp3" "%vaSoundDir%\%newDir%\Evasive Maneuvers\Evasive manoeuvres.mp3" >nul
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Configuration Commands\Manoeuvring.mp3" (
+    copy "%vaSoundDir%\%curDir%\Configuration Commands\Manoeuvring.mp3" "%vaSoundDir%\%newDir%\Evasive Maneuvers\Manoeuvring.mp3" >nul
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Configuration Commands\Manoeuvring alt.mp3" (
+    copy "%vaSoundDir%\%curDir%\Configuration Commands\Manoeuvring alt.mp3" "%vaSoundDir%\%newDir%\Evasive Maneuvers\Manoeuvring alt.mp3" >nul
   )
   IF EXIST "%vaSoundDir%\%curDir%\Configuration Commands\Executing evasive manoeuvres.mp3" (
     copy "%vaSoundDir%\%curDir%\Configuration Commands\Executing evasive manoeuvres.mp3" "%vaSoundDir%\%newDir%\Evasive Maneuvers\Executing evasive manoeuvres.mp3" >nul
@@ -375,20 +417,14 @@ pause
     echo - Missing Loading Configuration
   )
   IF NOT EXIST "%vaSoundDir%\%newDir%\Next Target\" mkdir "%vaSoundDir%\%newDir%\Next Target"
-  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Targeting\((RS - Target Highest Threat))\Verbose\Target next hostile.mp3" (
-    copy "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Targeting\((RS - Target Highest Threat))\Verbose\Target next hostile.mp3" "%vaSoundDir%\%newDir%\Next Target\Target next hostile.mp3" >nul
-  )
-  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Targeting\((RS - Target Highest Threat))\Verbose\Targeting now nobody likes him.mp3" (
-    copy "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Targeting\((RS - Target Highest Threat))\Verbose\Targeting now nobody likes him.mp3" "%vaSoundDir%\%newDir%\Next Target\Targeting now nobody likes him.mp3" >nul
-  )
-  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Targeting\((RS - Target Highest Threat))\Verbose\Targeting now nobody likes this one.mp3" (
-    copy "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Targeting\((RS - Target Highest Threat))\Verbose\Targeting now nobody likes this one.mp3" "%vaSoundDir%\%newDir%\Next Target\Targeting now nobody likes this one.mp3" >nul
-  )
-  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Targeting\((RS - Target Highest Threat))\non-verbose\Targeting.mp3" (
-    copy "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Targeting\((RS - Target Highest Threat))\non-verbose\Targeting.mp3" "%vaSoundDir%\%newDir%\Next Target\Targeting.mp3" >nul
+  IF EXIST "%vaSoundDir%\%curDir%\Targeting\Targeting wise guy.mp3" (
+    copy "%vaSoundDir%\%curDir%\Targeting\Targeting wise guy.mp3" "%vaSoundDir%\%newDir%\Next Target\Targeting wise guy.mp3" >nul
   )
   IF EXIST "%vaSoundDir%\%curDir%\Targeting\Next target.mp3" (
     copy "%vaSoundDir%\%curDir%\Targeting\Next target.mp3" "%vaSoundDir%\%newDir%\Next Target\Next target.mp3" >nul
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Targeting\Target next hostile.mp3" (
+    copy "%vaSoundDir%\%curDir%\Targeting\Target next hostile.mp3" "%vaSoundDir%\%newDir%\Next Target\Target next hostile.mp3" >nul
   )
   IF EXIST "%vaSoundDir%\%curDir%\Targeting\Targeting next hostile.mp3" (
     copy "%vaSoundDir%\%curDir%\Targeting\Targeting next hostile.mp3" "%vaSoundDir%\%newDir%\Next Target\Targeting next hostile.mp3" >nul
@@ -545,17 +581,23 @@ pause
     echo - Missing Autopilot
   )
   IF NOT EXIST "%vaSoundDir%\%newDir%\Hyperspace\" mkdir "%vaSoundDir%\%newDir%\Hyperspace"
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\NMS\((RS - Pulse Engine Engage))\non-verbose" (
+    Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Profile Sounds\NMS\((RS - Pulse Engine Engage))\non-verbose" "%vaSoundDir%\%newDir%\Hyperspace\" > NUL
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\NMS\((RS - Pulse Engine Engage))\non-verbose" (
+    Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Profile Sounds\NMS\((RS - Pulse Engine Engage))\non-verbose" "%vaSoundDir%\%newDir%\Hyperspace\" > NUL
+  )
   IF EXIST "%vaSoundDir%\%curDir%\Profile sounds\SWS\((RS - Power Boost Engines))\non-verbose" (
     Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Profile sounds\SWS\((RS - Power Boost Engines))\non-verbose" "%vaSoundDir%\%newDir%\Hyperspace\" > NUL
   )
   IF EXIST "%vaSoundDir%\%curDir%\Profile sounds\SWS\((RS - Power Boost Engines))\Verbose" (
     Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Profile sounds\SWS\((RS - Power Boost Engines))\Verbose" "%vaSoundDir%\%newDir%\Hyperspace\" > NUL
   )
-  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\NMS\((RS - Pulse Engine Engage))\non-verbose\Engaging jump drive.mp3" (
-    copy "%vaSoundDir%\%curDir%\Profile Sounds\NMS\((RS - Pulse Engine Engage))\non-verbose\Engaging jump drive.mp3" "%vaSoundDir%\%newDir%\Hyperspace\Engaging jump drive.mp3" >nul
+  IF EXIST "%vaSoundDir%\%curDir%\Acknowledgements\Executing now.mp3" (
+    copy "%vaSoundDir%\%curDir%\Acknowledgements\Executing now.mp3" "%vaSoundDir%\%newDir%\Hyperspace\Executing now.mp3" >nul
   )
-  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\NMS\((RS - Pulse Engine Engage))\non-verbose\Hyperspace jump engaging.mp3" (
-    copy "%vaSoundDir%\%curDir%\Profile Sounds\NMS\((RS - Pulse Engine Engage))\non-verbose\Hyperspace jump engaging.mp3" "%vaSoundDir%\%newDir%\Hyperspace\Hyperspace jump engaging.mp3" >nul
+  IF EXIST "%vaSoundDir%\%curDir%\Acknowledgements\Getting us out of here.mp3" (
+    copy "%vaSoundDir%\%curDir%\Acknowledgements\Getting us out of here.mp3" "%vaSoundDir%\%newDir%\Hyperspace\Getting us out of here.mp3" >nul
   )
   IF EXIST "%vaSoundDir%\%curDir%\Engines Thrusters and Drives\Drives\Hyperspace.mp3" (
     copy "%vaSoundDir%\%curDir%\Engines Thrusters and Drives\Drives\Hyperspace.mp3" "%vaSoundDir%\%newDir%\Hyperspace\Hyperspace.mp3" >nul
@@ -690,6 +732,15 @@ pause
     echo - Missing General Error
   )
   IF NOT EXIST "%vaSoundDir%\%newDir%\Equip Weapon\" mkdir "%vaSoundDir%\%newDir%\Equip Weapon"
+  IF EXIST "%vaSoundDir%\%curDir%\Weapons\Next weapon.mp3" (
+    copy "%vaSoundDir%\%curDir%\Weapons\Next weapon.mp3" "%vaSoundDir%\%newDir%\Equip Weapon\Next weapon.mp3" >nul
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Weapons\Weapon changed.mp3" (
+    copy "%vaSoundDir%\%curDir%\Weapons\Weapon changed.mp3" "%vaSoundDir%\%newDir%\Equip Weapon\Weapon changed.mp3" >nul
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Weapons\Weapons deployed.mp3" (
+    copy "%vaSoundDir%\%curDir%\Weapons\Weapons deployed.mp3" "%vaSoundDir%\%newDir%\Equip Weapon\Weapons deployed.mp3" >nul
+  )
   IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Combat\((RS - Hardpoints Deploy))\Verbose\Weapons deployed.mp3" (
     copy "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Combat\((RS - Hardpoints Deploy))\Verbose\Weapons deployed.mp3" "%vaSoundDir%\%newDir%\Equip Weapon\Weapons deployed.mp3" >nul
   )
@@ -778,14 +829,26 @@ pause
   IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Power Management\((RS - Weapons Off))\Verbose\Weapons offline.mp3" (
     copy "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Power Management\((RS - Weapons Off))\Verbose\Weapons offline.mp3" "%vaSoundDir%\%newDir%\Cease Fire\Weapons offline.mp3" >nul
   )
+  IF EXIST "%vaSoundDir%\%curDir%\Weapons\Retracting armaments.mp3" (
+    copy "%vaSoundDir%\%curDir%\Weapons\Retracting armaments.mp3" "%vaSoundDir%\%newDir%\Cease Fire\Retracting armaments.mp3" >nul
+  )
   IF EXIST "%vaSoundDir%\%curDir%\Weapons\Retracting weapons.mp3" (
     copy "%vaSoundDir%\%curDir%\Weapons\Retracting weapons.mp3" "%vaSoundDir%\%newDir%\Cease Fire\Retracting weapons.mp3" >nul
   )
-  IF EXIST "%vaSoundDir%\%curDir%\Power Management\Weapons offline.mp3" (
-    copy "%vaSoundDir%\%curDir%\Power Management\Weapons offline.mp3" "%vaSoundDir%\%newDir%\Cease Fire\Weapons offline.mp3" >nul
+  IF EXIST "%vaSoundDir%\%curDir%\Weapons\Retract weapons.mp3" (
+    copy "%vaSoundDir%\%curDir%\Weapons\Retract weapons.mp3" "%vaSoundDir%\%newDir%\Cease Fire\Retract weapons.mp3" >nul
   )
   IF EXIST "%vaSoundDir%\%curDir%\Weapons\Retracting all weapons.mp3" (
     copy "%vaSoundDir%\%curDir%\Weapons\Retracting all weapons.mp3" "%vaSoundDir%\%newDir%\Cease Fire\Retracting all weapons.mp3" >nul
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Weapons\Weapons retracted.mp3" (
+    copy "%vaSoundDir%\%curDir%\Weapons\Weapons retracted.mp3" "%vaSoundDir%\%newDir%\Cease Fire\Weapons retracted.mp3" >nul
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Weapons\Weapons offline.mp3" (
+    copy "%vaSoundDir%\%curDir%\Weapons\Weapons offline.mp3" "%vaSoundDir%\%newDir%\Cease Fire\Weapons offline.mp3" >nul
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Power Management\Weapons offline.mp3" (
+    copy "%vaSoundDir%\%curDir%\Power Management\Weapons offline.mp3" "%vaSoundDir%\%newDir%\Cease Fire\Weapons offline.mp3" >nul
   )
   >nul 2>nul dir /a-d "%vaSoundDir%\%newDir%\Cease Fire\*" || (
     echo - Missing Cease Fire
@@ -802,6 +865,12 @@ pause
   )
   IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Combat\((RS - Hardpoints Deploy))\non-verbose\Weapons free.mp3" (
     Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Combat\((RS - Hardpoints Deploy))\non-verbose\Weapons free.mp3" "%vaSoundDir%\%newDir%\Firing Group Generic\" > NUL
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Weapons\Weapons hot.mp3" (
+    copy "%vaSoundDir%\%curDir%\Weapons\Weapons hot.mp3" "%vaSoundDir%\%newDir%\Firing Group Generic\Weapons hot.mp3" >nul
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Targeting\Fire at will.mp3" (
+    copy "%vaSoundDir%\%curDir%\Targeting\Fire at will.mp3" "%vaSoundDir%\%newDir%\Firing Group Generic\Fire at will.mp3" >nul
   )
   IF EXIST "%vaSoundDir%\%curDir%\Fighter\Firing volley.mp3" (
     copy "%vaSoundDir%\%curDir%\Fighter\Firing volley.mp3" "%vaSoundDir%\%newDir%\Firing Group Generic\Firing volley.mp3" >nul
@@ -1058,6 +1127,12 @@ pause
     echo - Missing Firing Escape
   )
   IF NOT EXIST "%vaSoundDir%\%newDir%\Firing Highlight\" mkdir "%vaSoundDir%\%newDir%\Firing Highlight"
+  IF EXIST "%vaSoundDir%\%curDir%\Targeting\Locking on to target.mp3" (
+    copy "%vaSoundDir%\%curDir%\Targeting\Locking on to target.mp3" "%vaSoundDir%\%newDir%\Firing Highlight\Locking on to target.mp3" >nul
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Targeting\Focusing target.mp3" (
+    copy "%vaSoundDir%\%curDir%\Targeting\Focusing target.mp3" "%vaSoundDir%\%newDir%\Firing Highlight\Focusing target.mp3" >nul
+  )
   IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Targeting\((RS - Target Highest Threat))\Verbose\Targeting now nobody likes this one.mp3" (
     copy "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Targeting\((RS - Target Highest Threat))\Verbose\Targeting now nobody likes this one.mp3" "%vaSoundDir%\%newDir%\Firing Highlight\Targeting now nobody likes this one.mp3" >nul
   )
