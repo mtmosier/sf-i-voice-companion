@@ -35,9 +35,9 @@ public class VAInline
 			output += getWeaponGroupListDescription(activeShipName, activeStaticGroupList, true);
 		} else {
 			if (activeWeaponGroupList.Count > 0)
-				output += string.Join<string>(", ", activeWeaponGroupList);
+				output += string.Join<string>(", ", activeWeaponGroupList) + ", ";
 			if (activeStaticGroupList.Count > 0)
-				output += string.Join<string>(", ", activeStaticGroupList);
+				output += string.Join<string>(", ", activeStaticGroupList) + ", ";
 		}
 
 		if (string.IsNullOrEmpty(output)) {
