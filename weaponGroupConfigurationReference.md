@@ -14,18 +14,16 @@
 <a name="intro"></a>
 ## Introduction
 
-Weapon groups are broken down by name and number. By default this companion is set up to allow up to 3 of each group. So you can have groups set up for **Missile 1**, **Missile 3**, **Mine 2** and **Counter 3** if you like. You can also have them all firing at the same time. (See the [Firing multiple groups](#advancedFiring) section.)
+Weapon groups can be given almost any name you want. You can fire a group as a single volley, or have them endlessly fire in a loop.  You can also have multiple weapon groups firing at the same time. (See the [Firing multiple groups](#advancedFiring) section.)
 
-If you want to reference the first group you can address it by name only. "*Fire Missile*" and "*Fire Missile 1*" are interpreted exactly the same way.
-
-A weapon group can include up to 20 individual [actions](#actionList). (More would be possible, but I can't imagine needing to set more than that for a single group.)
+A weapon group can include up to 20 individual [actions](#actionList).
 
 <a name="definedShips"></a>
 ## Default ships
 
 ```
 Explorer
-Sniper
+Fighter
 ```
 
 You can add additional ships with any name you want by using the command "*Register new ship*".
@@ -39,23 +37,18 @@ Alternatively you can edit the ship list by editing the command labeled "**[Conf
 ```
 Counter
 Missile
-Mine
-Beam
-Mining Laser
 Beacon
-Highlight
-Ambush
-Reverse
-Large
 ```
 
-Weapon group names can be changed by editing the command labeled "**[Config] General**" under the "*Configuration*" category in the VoiceAttack profile.
+You can add additional weapon groups with any name you want by using the command "*Register new weapon group*".
+
+Alternatively you can edit the weapon group name list by editing the command labeled "**[Config] General**" under the "*Configuration*" category in the VoiceAttack profile.
 
 
 <a name="emergencyGroups"></a>
 ## Emergency groups
 
-In addition to the weapon groups described, you can also set up a few emergency groups. These differ in that you can only set up one of each, and you activate them simply by saying their name as a full command. (no need to say "Fire Red Alert", instead just say "Red Alert")
+In addition to the weapon groups described, you can also set up a few emergency groups. These differ in that you can activate them simply by saying their name as a full command. (no need to say "Fire Red Alert", instead just say "Red Alert" or "Activate Red Alert" if you prefer)
 
 ```
 Evasive Maneuvers
@@ -121,9 +114,9 @@ Why yes, normally it would.  But due to the difficulty in VoiceAttack recognizin
 
 | Input | Alternatives | Notes |
 | --- | --- | --- |
-| complete | done, finished, stop now, stop there | Used when asked for next action in order to stop input loop. |
-| yes | absolutely, affirmative, commit, confirm, please, please do, please save, positive, save, yeah, yes sir | Response when asked if you want to save the information. |
-| no | abort, cancel, nah, negative, nevermind, nope  | Response when asked if you want to save the information. |
+| complete | done, finished, stop now, stop there | Used when asked for next action in order to stop the input loop. |
+| yes | absolutely, affirmative, commit, confirm, please, please do, please save, positive, save, yeah, yes sir | Response when asked if you want to save information. |
+| no | abort, cancel, nah, negative, nevermind, nope  | Response when asked if you want to save information. |
 | restart | do over, start over | Cancel configuration so far and start over |
 
 

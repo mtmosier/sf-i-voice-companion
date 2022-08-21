@@ -19,7 +19,7 @@
 
 My primary focus has been on streamlining weapon usage during battle. Weapons can be set up in groups, and groups can be fired as a one-off or in a continuous barrage. Beyond that most ship functions can be accessed verbally using the companion. The companion also has some limited chatting options, though I plan to flesh them out more in the future.
 
-Please note that I am not currently distributing any prerecorded voice files for this companion. As such all interactions are currently done via text-to-speech (unless you import your own voice files).
+Please note that I am not currently distributing any prerecorded voice files for this companion. As such all interactions are currently done via text-to-speech (unless you [Import](import/) your own voice files).
 
 
 <a name="prereq"></a>
@@ -114,9 +114,9 @@ This command list may be incomplete. To see a full list of voice commands availa
 | **Fire weapon slot 3** | Single fire **Slot 3**. |
 | **Unload slot 1** | Continuous fire **Slot 1**. |
 | **Cancel slot 1** | Stop firing **Slot 1**. |
-| **Fire missile 2** | Single fire group **missile 2**. |
-| **Unload mine** | Continuous fire group **mine 1**. |
-| **Unload beacon 1** | Continuous fire group **beacon 1**. |
+| **Fire missile** | Single fire group **missile**. |
+| **Unload mine 2** | Continuous fire group **mine 2**. |
+| **Unload beacon** | Continuous fire group **beacon**. |
 | **Cancel beam 3** | Stop firing group **beam 3**. |
 | **Unload primary** | Continuous fire primary weapon. |
 | **Cancel primary** | Stop firing primary weapon. |
