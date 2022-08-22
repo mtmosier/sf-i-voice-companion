@@ -78,13 +78,16 @@ public class VAInline
 		};
 		soundFileGroupList.Add("Non-Verbal Error", fileList);
 
-		fileList = new string[] {};
+		fileList = new string[] {
+			@"{TXT:>>voiceDir}\Effects\Alerts\Beep.mp3"
+		};
 		soundFileGroupList.Add("Non-Verbal Confirmation", fileList);
 		groupsToCopyFromNull.Add("Non-Verbal Confirmation");
 
 
 		//*** Companion
 		fileList = new string[] {
+			@"{TXT:>>voiceDir}\Additional dialogue\Today is a good day to die short.mp3",
 			@"{TXT:>>voiceDir}\Additional dialogue\A smidgen of power.mp3",
 			@"{TXT:>>voiceDir}\Additional dialogue\I’m number one does this mean I can boss the crew around.mp3",
 			@"{TXT:>>voiceDir}\Applications\Vega online.mp3",
@@ -136,16 +139,24 @@ public class VAInline
 
 		fileList = new string[] {
 			@"{TXT:>>voiceDir}\Targeting\Wise guys detected.mp3",
+			@"{TXT:>>voiceDir}\Additional Dialogue\Dialogue 1\Tell me are you whining.mp3",
+			@"{TXT:>>voiceDir}\Additional Dialogue\Dialogue 1\Your discontent.mp3",
+			@"{TXT:>>voiceDir}\Additional Dialogue\Dialogue 1\Your discontent.mp3",
+			@"{TXT:>>voiceDir}\Additional Dialogue\Dialogue 2\You are becoming impatient.mp3",
 			@"{TXT:>>voiceDir}\Additional dialogue\You need to relax my friend.mp3",
 			@"{TXT:>>voiceDir}\Additional dialogue\You need to relax.mp3",
 			@"{TXT:>>voiceDir}\Additional dialogue\Additional dialogue extra\Was that French or something.mp3",
 			@"{TXT:>>voiceDir}\Additional dialogue\Additional dialogue extra\Was that French for something.mp3",
 			@"{TXT:>>voiceDir}\Additional dialogue\Additional dialogue extra\What was that I didn't hear you.mp3",
+			@"{TXT:>>voiceDir}\Role\Somebody should teach you some manners.mp3",
+			@"{TXT:>>voiceDir}\Role\Doing my best.mp3",
 			@"{TXT:>>voiceDir}\Role\fine.mp3",
 			@"{TXT:>>voiceDir}\Role\Fine I won't disturb you again.mp3",
 			@"{TXT:>>voiceDir}\Role\Losing your temper with things.mp3",
 			@"{TXT:>>voiceDir}\Role\Losing your temper with things alt.mp3",
 			@"{TXT:>>voiceDir}\Role\How rude.mp3",
+			@"{TXT:>>voiceDir}\Role\Please grow up.mp3",
+			@"{TXT:>>voiceDir}\Role\Please grow up 2.mp3",
 			@"{TXT:>>voiceDir}\Role\I'm not laughing.mp3",
 			@"{TXT:>>voiceDir}\Role\I'm not laughing 2.mp3",
 			@"{TXT:>>voiceDir}\Role\I'm not sure what to say to that.mp3",
@@ -189,6 +200,7 @@ public class VAInline
 		soundDirGroupList.Add("I am", dirList);
 
 		fileList = new string[] {
+			@"{TXT:>>voiceDir}\Role\You're welcome.mp3"
 		};
 		dirList = new string[] {
 			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Extra Content\((RS - You are welcome))\non-verbose",
@@ -200,6 +212,14 @@ public class VAInline
 
 		//*** General Sounds
 		fileList = new string[] {
+			@"{TXT:>>voiceDir}\Role\Obliging.mp3",
+			@"{TXT:>>voiceDir}\Acknowledgements\Accepted.mp3",
+			@"{TXT:>>voiceDir}\Acknowledgements\Acknowledged.mp3",
+			@"{TXT:>>voiceDir}\Acknowledgements\Acknowledged 2.mp3",
+			@"{TXT:>>voiceDir}\Acknowledgements\Certainly.mp3",
+			@"{TXT:>>voiceDir}\Acknowledgements\Complete.mp3",
+			@"{TXT:>>voiceDir}\Acknowledgements\Completed.mp3",
+			@"{TXT:>>voiceDir}\Acknowledgements\Complying.mp3"
 		};
 		dirList = new string[] {
 			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Acknowledgements\((RS - Acknowledgements))\Verbose",
@@ -209,6 +229,7 @@ public class VAInline
 		soundDirGroupList.Add("Acknowledged", dirList);
 
 		fileList = new string[] {
+			@"{TXT:>>voiceDir}\Role\Red alert.mp3"
 		};
 		dirList = new string[] {
 			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Combat\((RS - Red Alert 1))\non-verbose",
@@ -219,6 +240,8 @@ public class VAInline
 		soundDirGroupList.Add("Red Alert", dirList);
 
 		fileList = new string[] {
+			@"{TXT:>>voiceDir}\Role\Yellow alert.mp3",
+			@"{TXT:>>voiceDir}\Role\Yellow alert 2.mp3"
 		};
 		dirList = new string[] {
 			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Combat\((RS - Yellow Alert))\non-verbose",
@@ -230,6 +253,7 @@ public class VAInline
 		fileList = new string[] {
 			@"{TXT:>>voiceDir}\Fighter\Watch our six.mp3",
 			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Acknowledgements\((RS - Concur))\non-verbose\I concur.mp3",
+			@"{TXT:>>voiceDir}\Configuration Commands\Exit route engaged.mp3",
 			@"{TXT:>>voiceDir}\Configuration Commands\Engaging evasive manoeuvres.mp3",
 			@"{TXT:>>voiceDir}\Configuration Commands\Evasive manoeuvres alt.mp3",
 			@"{TXT:>>voiceDir}\Configuration Commands\Evasive manoeuvres.mp3",
@@ -303,6 +327,7 @@ public class VAInline
 			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Targeting\((RS - Target Highest Threat))\non-verbose"
 		};
 		soundFileGroupList.Add("Next Target", fileList);
+		soundDirGroupList.Add("Next Target", dirList);
 
 		fileList = new string[] {
 			@"{TXT:>>voiceDir}\Acknowledgements\Cancelled.mp3"
@@ -367,6 +392,9 @@ public class VAInline
 		fileList = new string[] {
 			@"{TXT:>>voiceDir}\Acknowledgements\Affirmative.mp3",
 			@"{TXT:>>voiceDir}\Acknowledgements\Confirmed.mp3",
+			@"{TXT:>>voiceDir}\Additional Dialogue\You want moi to helm controls.mp3",
+			@"{TXT:>>voiceDir}\Additional Dialogue\You want moi to helm controls 2.mp3",
+			@"{TXT:>>voiceDir}\Additional Dialogue\You want moi to helm controls 3.mp3",
 			@"{TXT:>>voiceDir}\Additional dialogue\Oh my god! I’m getting to drive the ship.mp3",
 			@"{TXT:>>voiceDir}\Additional dialogue\Oh my god! I’m getting to drive the ship don’t worry I won’t crash it.mp3",
 			@"{TXT:>>voiceDir}\Additional dialogue\Oh my god! I’m getting to drive the ship don’t worry I won’t crash it 2.mp3",
@@ -403,17 +431,27 @@ public class VAInline
 		soundFileGroupList.Add("Cruise Control", fileList);
 
 		fileList = new string[] {
-			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Main Engines\((RS - Afterburner))\Verbose\Boosting engines.mp3",
 			@"{TXT:>>voiceDir}\Engines Thrusters and Drives\Thrusters\Afterburners 2.mp3",
 			@"{TXT:>>voiceDir}\Engines Thrusters and Drives\Thrusters\Afterburners engaged.mp3",
 			@"{TXT:>>voiceDir}\Engines Thrusters and Drives\Thrusters\Afterburners.mp3"
 		};
+		dirList = new string[] {
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Main Engines\((RS - Afterburner))\non-verbose",
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Main Engines\((RS - Afterburner))\Verbose",
+			@"{TXT:>>voiceDir}\Profile sounds\SWS\((RS - APS))\non-verbose",
+			@"{TXT:>>voiceDir}\Profile sounds\SWS\((RS - APS))\Verbose"
+		};
 		soundFileGroupList.Add("Propulsion Enhancer", fileList);
+		soundDirGroupList.Add("Propulsion Enhancer", dirList);
 
 		fileList = new string[] {
 			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Main Engines\((RS - Afterburner))\Verbose\Afterburners maxing engines.mp3",
 			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Power Management\((RS - Power Engines))\Verbose\All power to engines.mp3",
 			@"{TXT:>>voiceDir}\Engines Thrusters and Drives\Engines full burn.mp3",
+			@"{TXT:>>voiceDir}\Engines Thrusters and Drives\Full burn.mp3",
+			@"{TXT:>>voiceDir}\Engines Thrusters and Drives\Full throttle.mp3",
+			@"{TXT:>>voiceDir}\Engines Thrusters and Drives\Drives engaging .mp3",
+			@"{TXT:>>voiceDir}\Engines Thrusters and Drives\Drives engaging.mp3",
 			@"{TXT:>>voiceDir}\Engines Thrusters and Drives\Thrusters\Afterburners maxing engines.mp3",
 			@"{TXT:>>voiceDir}\Power Management\Max engines.mp3"
 		};
@@ -421,45 +459,53 @@ public class VAInline
 
 		fileList = new string[] {
 			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Crew Commands\((RS - Power to Engines))\non-verbose\Power to engines.mp3",
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Crew Commands\((RS - Power to Engines))\non-verbose\Power to engines.mp3",
 			@"{TXT:>>voiceDir}\Engines Thrusters and Drives\Engines\Engaging Impulse engines.mp3",
 			@"{TXT:>>voiceDir}\Engines Thrusters and Drives\Engines\Impulse engines.mp3",
+			@"{TXT:>>voiceDir}\Engines Thrusters and Drives\Drives engaging .mp3",
+			@"{TXT:>>voiceDir}\Engines Thrusters and Drives\Drives engaging.mp3",
 			@"{TXT:>>voiceDir}\Power Management\All power to engines.mp3",
 			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Power Management\((RS - Power Engines))\non-verbose\Powering engines.mp3"
 		};
 		soundFileGroupList.Add("Engines Full Power", fileList);
 
 		fileList = new string[] {
-			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Main Engines\((RS - Full Stop))\Verbose\Affirmative slowing to a full engine stop.mp3",
-			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Main Engines\((RS - Full Stop))\Verbose\Affirmative full engine stop.mp3",
-			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Main Engines\((RS - Full Stop))\Verbose\Acknowledged full engine stop.mp3",
-			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Main Engines\((RS - Full Stop))\Verbose\Cutting engines stopping here.mp3",
 			@"{TXT:>>voiceDir}\Engines Thrusters and Drives\Engines\Cut engines stop here.mp3",
 			@"{TXT:>>voiceDir}\Engines Thrusters and Drives\Engines\Cutting engines stopping here alt.mp3",
 			@"{TXT:>>voiceDir}\Engines Thrusters and Drives\Engines\Cutting engines stopping here.mp3",
 			@"{TXT:>>voiceDir}\Engines Thrusters and Drives\Engines\Cutting engines.mp3"
 		};
+		dirList = new string[] {
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Main Engines\((RS - Full Stop))\non-verbose",
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Main Engines\((RS - Full Stop))\Verbose"
+		};
 		soundFileGroupList.Add("Engines Full Stop", fileList);
+		soundDirGroupList.Add("Engines Full Stop", dirList);
 
 		fileList = new string[] {
-			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Acknowledgements\((RS - Unable to comply))\non-verbose\Unable to comply.mp3",
 			@"{TXT:>>voiceDir}\Effects\Error beep\Error beep.mp3",
-			@"{TXT:>>voiceDir}\Acknowledgements\Unable to comply.mp3",
-			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Acknowledgements\((RS - Unable to comply))\Verbose\Not an option.mp3"
+			@"{TXT:>>voiceDir}\Acknowledgements\Unable to comply.mp3"
+		};
+		dirList = new string[] {
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Acknowledgements\((RS - Unable to comply))\non-verbose",
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Acknowledgements\((RS - Unable to comply))\Verbose"
 		};
 		soundFileGroupList.Add("General Error", fileList);
+		soundDirGroupList.Add("General Error", dirList);
 
 		fileList = new string[] {
 			@"{TXT:>>voiceDir}\Weapons\Next weapon.mp3",
 			@"{TXT:>>voiceDir}\Weapons\Weapon changed.mp3",
 			@"{TXT:>>voiceDir}\Weapons\Weapons deployed.mp3",
-			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Combat\((RS - Hardpoints Deploy))\Verbose\Weapons deployed.mp3",
-			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Combat\((RS - Hardpoints Deploy))\Verbose\Deploying weapons.mp3",
-			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Combat\((RS - Hardpoints Deploy))\Verbose\Deploying and readying weapons.mp3",
-			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Combat\((RS - Hardpoints Deploy))\Verbose\Arming weapons.mp3",
 			@"{TXT:>>voiceDir}\Power Management\Powering weapons.mp3",
 			@"{TXT:>>voiceDir}\Weapons\Arming weapons.mp3"
 		};
+		dirList = new string[] {
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Combat\((RS - Hardpoints Deploy))\non-verbose",
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Combat\((RS - Hardpoints Deploy))\Verbose"
+		};
 		soundFileGroupList.Add("Equip Weapon", fileList);
+		soundDirGroupList.Add("Equip Weapon", dirList);
 
 		fileList = new string[] {
 			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Power Management\((RS - Power 2 Systems))\Verbose\Loading configuration.mp3",
