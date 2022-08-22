@@ -59,7 +59,7 @@ public class VAInline
 
 		groupName = VA.GetText("~~wgGroupNameExtStr");
 		if (String.IsNullOrEmpty(groupName)) {
-			groupName = VA.Command.Segment(1);
+			groupName = VA.Command.Segment(2);
 		}
 
 		if (String.IsNullOrEmpty(groupName)) {
@@ -405,7 +405,7 @@ public class VAInline
 
 	private void reloadProfile() {
 		if (reloadProfileGuid == null)  return;
-		VA.Command.Execute(reloadProfileGuid, false, false);
+		VA.Command.Execute(reloadProfileGuid, false, true);
 	}
 
 	private void timeoutError() {
