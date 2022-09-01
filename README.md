@@ -6,10 +6,11 @@
 2. [Prerequisites](#prereq)
 3. [Installation](#install)
 4. [Basic usage](#howToUse)
-5. [Command list](#commandList)
-6. [Troubleshooting](#issues)
-7. [Frequently Asked Questions](#faq)
-8. [Credits](#credits)
+5. [Configuration](#config)
+6. [Command list](#commandList)
+7. [Troubleshooting](#issues)
+8. [Frequently Asked Questions](#faq)
+9. [Credits](#credits)
 
 
 <a name="intro"></a>
@@ -42,6 +43,8 @@ In the future I plan to add some basic voice mp3s and a VA plug-in, but for now 
 Here's a very basic, no config needed, I-just-want-to-kill-stuff example of usage.
 
 ```
+> Hello    # Greetings
+> Who are you?    # I am your ship's companion. You can call me Null.
 > Unload weapon slot 1    # continuous fire weapon slot 1
 > Unload slot 2    # continuous fire weapon slot 2 (will alternate with slot 1)
 > Fire weapon slot 6    # single fire weapon slot 6 (after which slots 1 and 2 will continue to alternate)
@@ -54,14 +57,14 @@ Here's a very basic, no config needed, I-just-want-to-kill-stuff example of usag
 > Show system map    # display the system map dialog
 ```
 
+<a name="config"></a>
+## Configuration
 
-Here's a longer example, including configuring and firing weapon groups. All requests and responses below are verbal.
+There is settings dialog which you can open using the command **"Show configuration dialog"** or keyboard shortcut [Left Ctrl + Left Alt + S].
+
+You can also do your configuration using voice commands, including setting up weapon groups.  All requests and responses below are verbal. 
 
 ```
-> Hello
-  # Greetings
-> Who are you?
-  # I am your ship's companion. You can call me Null.
 > What is my current ship?
   # Currently using explorer ship
 > Switch to battle ship
