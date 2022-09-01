@@ -226,6 +226,7 @@ public class VAInline
 							int? intValueN = VA.GetInt(settingName);
 							if (intValueN.HasValue)  wgLen = intValueN.Value;
 
+							VA.SetInt(fromVarName + ".weaponKeyPress.len", 0);
 							VA.SetInt(toVarName + ".weaponKeyPress.len", wgLen);
 
 							for (short l = 0; l < wgLen; l++) {
