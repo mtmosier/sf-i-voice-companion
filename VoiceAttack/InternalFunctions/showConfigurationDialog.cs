@@ -240,15 +240,16 @@ public class MainSettingsForm : Form
 
         dynamicTableLayoutPanel.Location = new Point(10, 10);
         dynamicTableLayoutPanel.Name = "OuterLayout";
-        dynamicTableLayoutPanel.Size = new Size(380, 330);
+        dynamicTableLayoutPanel.Size = new Size(480, 330);
         dynamicTableLayoutPanel.TabIndex = 0;
-        dynamicTableLayoutPanel.ColumnCount = 3;
+        dynamicTableLayoutPanel.ColumnCount = 4;
         dynamicTableLayoutPanel.RowCount = 12;
         dynamicTableLayoutPanel.BorderStyle = BorderStyle.FixedSingle;
 		//*** remove following line after setup complete
         // dynamicTableLayoutPanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.Inset;
         dynamicTableLayoutPanel.Padding = new Padding(10);
 
+        dynamicTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize, 0));
         dynamicTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize, 0));
         dynamicTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize, 0));
         dynamicTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 90));
@@ -457,7 +458,7 @@ public class MainSettingsForm : Form
         closeBtn.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
         closeBtn.Click += new System.EventHandler(closeBtn_Click);
         dynamicTableLayoutPanel.Controls.Add(closeBtn, 1, 11);
-		dynamicTableLayoutPanel.SetColumnSpan(closeBtn, 2);
+		dynamicTableLayoutPanel.SetColumnSpan(closeBtn, 3);
 
 
 
@@ -467,10 +468,10 @@ public class MainSettingsForm : Form
         this.AutoScaleDimensions = new SizeF(7F, 16F);
         this.AutoScaleMode = AutoScaleMode.Font;
         // this.BackColor = SystemColors.ActiveBorder;
-        this.ClientSize = new Size(400, 350);
+        this.ClientSize = new Size(500, 350);
         this.Controls.Add(dynamicTableLayoutPanel);
         this.Font = new Font("Euro Caps", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-        this.MinimumSize = new Size(400, 350);
+        this.MinimumSize = new Size(500, 350);
         this.Name = "MainSettingsForm";
         this.SizeGripStyle = SizeGripStyle.Hide;
         this.Text = "Configuration";
@@ -519,9 +520,9 @@ public class EditShipForm : Form
     {
         this.VA = vap;
         this.pf = pf;
-        this.shipName = shipName;
         this.ti = CultureInfo.CurrentCulture.TextInfo;
         this.comparer = StringComparer.CurrentCultureIgnoreCase;
+		this.shipName = ti.ToTitleCase(shipName);
 
 		this.keypressList = new List<ComboBox>();
 		this.keypressTypeList = new List<ComboBox>();
@@ -541,6 +542,12 @@ public class EditShipForm : Form
 			"Corkscrew", "Action", "FineAiming", "TurnLeft", "TurnRight",
 			"Accelerate", "Reverse", "Pause"
 		};
+
+		VA.SetBoolean(">>shipInfo[" + shipName + "].isInUse", true);
+        if (!pf.shipList.Contains(shipName)) {
+            pf.shipList.Add(shipName);
+			VA.SetText(">>shipNameListStr", string.Join<string>(";", pf.shipList));
+		}
 
         InitializeComponent();
     }
@@ -1080,6 +1087,62 @@ public class EditShipForm : Form
 	}
 
 
+    public void debugBtn_Click(object sender, EventArgs e)
+    {
+		String message = "";
+
+		string variable = VA.GetText(">>weaponGroupListStr");
+		if (variable == null)  variable = "";
+		List<string> fullWeaponGroupList = new List<string>(variable.Split(';'));
+
+		//*** Static Group List
+		variable = VA.GetText(">>staticGroupList");
+		if (variable == null)  variable = "";
+		string[] staticGroupList = variable.Split(';');
+
+		string tmpVarName;
+
+		message += shipName + " > isInUse: " + VA.GetBoolean(">>shipInfo[" + shipName + "].isInUse");
+		message += "\n";
+
+		if (VA.GetBoolean(">>shipInfo[" + shipName + "].isInUse") == true) {
+			foreach (string wgName in fullWeaponGroupList) {
+				tmpVarName = ">>shipInfo[" + shipName + "].weaponGroup[" + wgName + "]";
+				if (VA.GetBoolean(tmpVarName + ".isActive") == true) {
+					int? lenN = VA.GetInt(tmpVarName + ".weaponKeyPress.len");
+					int len = lenN.HasValue ? lenN.Value : 0;
+
+					List<string> keyPressList = new List<string>();
+					for (short l = 0; l < len; l++) {
+						keyPressList.Add(VA.GetText(tmpVarName + ".weaponKeyPressFriendly[" + l + "]"));
+					}
+					message += shipName + " >" + wgName + " > weaponKeyPressList:  " + String.Join(", ", keyPressList);
+					message += "\n";
+				}
+			}
+
+			foreach (string groupName in staticGroupList) {
+				tmpVarName = ">>shipInfo[" + shipName + "].weaponGroup[" + groupName + "]";
+
+				if (VA.GetBoolean(tmpVarName + ".isActive") == true) {
+					int? lenN = VA.GetInt(tmpVarName + ".weaponKeyPress.len");
+					int len = lenN.HasValue ? lenN.Value : 0;
+
+					List<string> keyPressList = new List<string>();
+					for (short l = 0; l < len; l++) {
+						keyPressList.Add(VA.GetText(tmpVarName + ".weaponKeyPressFriendly[" + l + "]"));
+					}
+
+					message += shipName + " >" + groupName + " > weaponKeyPressList:  " + String.Join(", ", keyPressList);
+					message += "\n";
+				}
+			}
+		}
+
+        MessageBox.Show(message);
+    }
+
+
     // Source: https://www.codegrepper.com/code-examples/csharp/c%23+message+box+with+text+input
     private static DialogResult ShowInputDialogBox(ref string input, string prompt, string title = "Title", int width = 300, int height = 200)
     {
@@ -1227,13 +1290,13 @@ public class EditShipForm : Form
 
 
         //*** Debug Button
-        /*
+		/*
         Button debugBtn = new Button();
         debugBtn.Text = "Debug";
         debugBtn.Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
-        debugBtn.Click += new System.EventHandler(pf.debugBtn_Click);
+        debugBtn.Click += new System.EventHandler(debugBtn_Click);
         dynamicTableLayoutPanel.Controls.Add(debugBtn, 0, 3);
-        */
+		*/
 
         //*** Close Button
         Button closeBtn = new Button();
