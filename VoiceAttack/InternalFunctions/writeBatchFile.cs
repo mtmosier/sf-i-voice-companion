@@ -58,8 +58,10 @@ public class VAInline
 
 		string[] fileList;
 		string[] dirList;
+		string[] backupDirList;
 		Dictionary<string, string[]> soundFileGroupList = new Dictionary<string, string[]>();
 		Dictionary<string, string[]> soundDirGroupList = new Dictionary<string, string[]>();
+		Dictionary<string, string[]> soundBackupDirGroupList = new Dictionary<string, string[]>();
 		List<string> groupsToCopyFromNull = new List<string>();
 
 		string batchFileContents = "";
@@ -208,6 +210,104 @@ public class VAInline
 		};
 		soundFileGroupList.Add("You're welcome", fileList);
 		soundDirGroupList.Add("You're welcome", dirList);
+
+
+		//*** Random Facts
+		fileList = new string[] {
+		};
+		dirList = new string[] {
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Extra Content\((RS - Handover))\non-verbose",
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Extra Content\((RS - Handover))\Verbose"
+		};
+		// backupDirList = new string[] {
+		// };
+		soundFileGroupList.Add("Handover", fileList);
+		soundDirGroupList.Add("Handover", dirList);
+		// soundBackupDirGroupList.Add("Handover", dirList);
+
+		fileList = new string[] {
+		};
+		dirList = new string[] {
+			@"{TXT:>>voiceDir}\Constellations"
+		};
+		soundFileGroupList.Add("Constellations", fileList);
+		soundDirGroupList.Add("Constellations", dirList);
+
+		fileList = new string[] {
+		};
+		dirList = new string[] {
+			@"{TXT:>>voiceDir}\Stars and planets\Planets"
+		};
+		soundFileGroupList.Add("Planets", fileList);
+		soundDirGroupList.Add("Planets", dirList);
+
+		fileList = new string[] {
+		};
+		dirList = new string[] {
+			@"{TXT:>>voiceDir}\Stars and planets\Stars"
+		};
+		soundFileGroupList.Add("Stars", fileList);
+		soundDirGroupList.Add("Stars", dirList);
+
+		fileList = new string[] {
+		};
+		dirList = new string[] {
+			@"{TXT:>>voiceDir}\Quantum Theory"
+		};
+		soundFileGroupList.Add("Quantum Theory", fileList);
+		soundDirGroupList.Add("Quantum Theory", dirList);
+
+		fileList = new string[] {
+		};
+		dirList = new string[] {
+			@"{TXT:>>voiceDir}\Galaxapedia"
+		};
+		soundFileGroupList.Add("Galaxapedia", fileList);
+		soundDirGroupList.Add("Galaxapedia", dirList);
+
+		fileList = new string[] {};
+		dirList = new string[] {
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Extra Content\((RS - Interaction mode on))\Verbose"
+		};
+		soundFileGroupList.Add("Enable Constellations", fileList);
+		soundDirGroupList.Add("Enable Constellations", dirList);
+
+		fileList = new string[] {};
+		dirList = new string[] {
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Extra Content\((RS - Interaction mode on))\Verbose"
+		};
+		soundFileGroupList.Add("Enable Quantum Theory", fileList);
+		soundDirGroupList.Add("Enable Quantum Theory", dirList);
+
+		fileList = new string[] {};
+		dirList = new string[] {
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Extra Content\((RS - Interaction mode on))\Verbose"
+		};
+		soundFileGroupList.Add("Enable Galaxapedia", fileList);
+		soundDirGroupList.Add("Enable Galaxapedia", dirList);
+
+		fileList = new string[] {};
+		dirList = new string[] {
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Extra Content\((RS - Interaction mode off))\Verbose"
+		};
+		soundFileGroupList.Add("Disable Constellations", fileList);
+		soundDirGroupList.Add("Disable Constellations", dirList);
+
+		fileList = new string[] {};
+		dirList = new string[] {
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Extra Content\((RS - Interaction mode off))\Verbose"
+		};
+		soundFileGroupList.Add("Disable Quantum Theory", fileList);
+		soundDirGroupList.Add("Disable Quantum Theory", dirList);
+
+		fileList = new string[] {};
+		dirList = new string[] {
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Extra Content\((RS - Interaction mode off))\Verbose"
+		};
+		soundFileGroupList.Add("Disable Galaxapedia", fileList);
+		soundDirGroupList.Add("Disable Galaxapedia", dirList);
+
+
 
 
 		//*** General Sounds
@@ -802,6 +902,18 @@ public class VAInline
 				batchFileContents += "    copy \"" + sourceFilePath + "\" \"%vaSoundDir%\\%newDir%\\" + soundGroup.Key + "\\" + destFileName + "\" >nul\n";
 				batchFileContents += "  )\n";
 			}
+
+			if (soundBackupDirGroupList.ContainsKey(soundGroup.Key)) {
+				batchFileContents += "  >nul 2>nul dir /a-d \"%vaSoundDir%\\%newDir%\\" + soundGroup.Key + "\\*\" || (\n";
+				foreach (string dirPath in soundBackupDirGroupList[soundGroup.Key]) {
+					sourceDirPath = dirPath.Replace("{TXT:>>voiceDir}\\", "%vaSoundDir%\\%curDir%\\");
+					batchFileContents += "    IF EXIST \"" + sourceDirPath + "\" (\n";
+					batchFileContents += "      Xcopy /E /Y /Q \"" + sourceDirPath + "\" \"%vaSoundDir%\\%newDir%\\" + soundGroup.Key + "\\\" > NUL\n";
+					batchFileContents += "    )\n";
+				}
+				batchFileContents += "  )\n";
+			}
+
 			if (!groupsToCopyFromNull.Contains(soundGroup.Key)) {
 				// Source - https://stackoverflow.com/questions/10813943/check-if-any-type-of-files-exist-in-a-directory-using-batch-script
 				batchFileContents += "  >nul 2>nul dir /a-d \"%vaSoundDir%\\%newDir%\\" + soundGroup.Key + "\\*\" || (\n";
@@ -820,6 +932,10 @@ public class VAInline
 			batchFileContents += "    IF EXIST \"%vaSoundDir%\\sf-i_Null\\" + gn + "\\\" Xcopy /E /Y /Q \"%vaSoundDir%\\sf-i_Null\\" + gn + "\" \"%vaSoundDir%\\%newDir%\\" + gn + "\\\" > NUL\n";
 		}
 		batchFileContents += "  )\n";
+
+
+
+
 
 		batchFileContents += "  IF %MISSING_COUNT% GTR 0 (\n";
 		batchFileContents += "    echo - Missing %MISSING_COUNT% entries\n";

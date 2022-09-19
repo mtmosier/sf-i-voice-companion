@@ -149,6 +149,18 @@ public class VAInline
 		debugOutput += message + "\n";
 		VA.WriteToLog(message, "Red");
 
+		message = "Galaxapedia List: " + VA.GetText(">>galaxapediaList");
+		debugOutput += message + "\n";
+		VA.WriteToLog(message, "Yellow");
+
+		message = "Constellation List: " + VA.GetText(">>constellationList");
+		debugOutput += message + "\n";
+		VA.WriteToLog(message, "Yellow");
+
+		message = "Quantum Theory List: " + VA.GetText(">>quantumTheoryList");
+		debugOutput += message + "\n";
+		VA.WriteToLog(message, "Yellow");
+
 		message = "Selected Weapon Slot: " + VA.GetInt(">>selectedWeaponSlot");
 		debugOutput += message + "\n";
 		VA.WriteToLog(message, "Green");
@@ -170,6 +182,18 @@ public class VAInline
 		VA.WriteToLog(message, "Blue");
 
 		message = "Companion: " + VA.GetText(">>companionName");
+		debugOutput += message + "\n";
+		VA.WriteToLog(message, "Blue");
+
+		message = "Individual Galaxapedia Facts Enabled: " + VA.GetBoolean(">>galaxapediaEnabled");
+		debugOutput += message + "\n";
+		VA.WriteToLog(message, "Blue");
+
+		message = "Individual Constellations Facts Enabled: " + VA.GetBoolean(">>constellationsEnabled");
+		debugOutput += message + "\n";
+		VA.WriteToLog(message, "Blue");
+
+		message = "Individual Quantum Theory Facts Enabled: " + VA.GetBoolean(">>quantumTheoryEnabled");
 		debugOutput += message + "\n";
 		VA.WriteToLog(message, "Blue");
 

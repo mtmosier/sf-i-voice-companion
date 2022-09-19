@@ -38,7 +38,11 @@ public class VAInline
 
 		//*** Prepare global settings
 
-		string[] boolSettingsList = { ">>enableSpeech", ">>gameVoiceEnabled", ">>gameVoiceActionsQuiet", ">>headphonesInUse" };
+		string[] boolSettingsList = { ">>enableSpeech", ">>gameVoiceEnabled",
+			">>gameVoiceActionsQuiet", ">>headphonesInUse",
+			">>galaxapediaEnabled", ">>constellationsEnabled",
+			">>quantumTheoryEnabled" 
+		};
 		foreach (string sn in boolSettingsList) {
 			boolValueN = VA.GetBoolean(sn);
 			boolValue = false;

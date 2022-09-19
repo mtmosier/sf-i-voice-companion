@@ -114,7 +114,11 @@ public class VAInline
 //VA.WriteToLog("ship count: " + fullShipList.Count.ToString(), "Orange");
 
 			//*** Prepare global settings
-			string[] boolSettingsList = { ">>enableSpeech", ">>gameVoiceEnabled", ">>gameVoiceActionsQuiet", ">>headphonesInUse" };
+			string[] boolSettingsList = { ">>enableSpeech", ">>gameVoiceEnabled",
+				">>gameVoiceActionsQuiet", ">>headphonesInUse",
+				">>galaxapediaEnabled", ">>constellationsEnabled",
+				">>quantumTheoryEnabled"
+			};
 			foreach (string sname in boolSettingsList) {
 				if (settings.ContainsKey(sname)) {
 					try {

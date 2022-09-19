@@ -303,6 +303,93 @@ pause
   >nul 2>nul dir /a-d "%vaSoundDir%\%newDir%\You're welcome\*" || (
     echo - Missing You're welcome
   )
+  IF NOT EXIST "%vaSoundDir%\%newDir%\Handover\" mkdir "%vaSoundDir%\%newDir%\Handover"
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Extra Content\((RS - Handover))\non-verbose" (
+    Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Extra Content\((RS - Handover))\non-verbose" "%vaSoundDir%\%newDir%\Handover\" > NUL
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Extra Content\((RS - Handover))\Verbose" (
+    Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Extra Content\((RS - Handover))\Verbose" "%vaSoundDir%\%newDir%\Handover\" > NUL
+  )
+  >nul 2>nul dir /a-d "%vaSoundDir%\%newDir%\Handover\*" || (
+    echo - Missing Handover
+  )
+  IF NOT EXIST "%vaSoundDir%\%newDir%\Constellations\" mkdir "%vaSoundDir%\%newDir%\Constellations"
+  IF EXIST "%vaSoundDir%\%curDir%\Constellations" (
+    Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Constellations" "%vaSoundDir%\%newDir%\Constellations\" > NUL
+  )
+  >nul 2>nul dir /a-d "%vaSoundDir%\%newDir%\Constellations\*" || (
+    echo - Missing Constellations
+  )
+  IF NOT EXIST "%vaSoundDir%\%newDir%\Planets\" mkdir "%vaSoundDir%\%newDir%\Planets"
+  IF EXIST "%vaSoundDir%\%curDir%\Stars and planets\Planets" (
+    Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Stars and planets\Planets" "%vaSoundDir%\%newDir%\Planets\" > NUL
+  )
+  >nul 2>nul dir /a-d "%vaSoundDir%\%newDir%\Planets\*" || (
+    echo - Missing Planets
+  )
+  IF NOT EXIST "%vaSoundDir%\%newDir%\Stars\" mkdir "%vaSoundDir%\%newDir%\Stars"
+  IF EXIST "%vaSoundDir%\%curDir%\Stars and planets\Stars" (
+    Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Stars and planets\Stars" "%vaSoundDir%\%newDir%\Stars\" > NUL
+  )
+  >nul 2>nul dir /a-d "%vaSoundDir%\%newDir%\Stars\*" || (
+    echo - Missing Stars
+  )
+  IF NOT EXIST "%vaSoundDir%\%newDir%\Quantum Theory\" mkdir "%vaSoundDir%\%newDir%\Quantum Theory"
+  IF EXIST "%vaSoundDir%\%curDir%\Quantum Theory" (
+    Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Quantum Theory" "%vaSoundDir%\%newDir%\Quantum Theory\" > NUL
+  )
+  >nul 2>nul dir /a-d "%vaSoundDir%\%newDir%\Quantum Theory\*" || (
+    echo - Missing Quantum Theory
+  )
+  IF NOT EXIST "%vaSoundDir%\%newDir%\Galaxapedia\" mkdir "%vaSoundDir%\%newDir%\Galaxapedia"
+  IF EXIST "%vaSoundDir%\%curDir%\Galaxapedia" (
+    Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Galaxapedia" "%vaSoundDir%\%newDir%\Galaxapedia\" > NUL
+  )
+  >nul 2>nul dir /a-d "%vaSoundDir%\%newDir%\Galaxapedia\*" || (
+    echo - Missing Galaxapedia
+  )
+  IF NOT EXIST "%vaSoundDir%\%newDir%\Enable Constellations\" mkdir "%vaSoundDir%\%newDir%\Enable Constellations"
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Extra Content\((RS - Interaction mode on))\Verbose" (
+    Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Extra Content\((RS - Interaction mode on))\Verbose" "%vaSoundDir%\%newDir%\Enable Constellations\" > NUL
+  )
+  >nul 2>nul dir /a-d "%vaSoundDir%\%newDir%\Enable Constellations\*" || (
+    echo - Missing Enable Constellations
+  )
+  IF NOT EXIST "%vaSoundDir%\%newDir%\Enable Quantum Theory\" mkdir "%vaSoundDir%\%newDir%\Enable Quantum Theory"
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Extra Content\((RS - Interaction mode on))\Verbose" (
+    Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Extra Content\((RS - Interaction mode on))\Verbose" "%vaSoundDir%\%newDir%\Enable Quantum Theory\" > NUL
+  )
+  >nul 2>nul dir /a-d "%vaSoundDir%\%newDir%\Enable Quantum Theory\*" || (
+    echo - Missing Enable Quantum Theory
+  )
+  IF NOT EXIST "%vaSoundDir%\%newDir%\Enable Galaxapedia\" mkdir "%vaSoundDir%\%newDir%\Enable Galaxapedia"
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Extra Content\((RS - Interaction mode on))\Verbose" (
+    Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Extra Content\((RS - Interaction mode on))\Verbose" "%vaSoundDir%\%newDir%\Enable Galaxapedia\" > NUL
+  )
+  >nul 2>nul dir /a-d "%vaSoundDir%\%newDir%\Enable Galaxapedia\*" || (
+    echo - Missing Enable Galaxapedia
+  )
+  IF NOT EXIST "%vaSoundDir%\%newDir%\Disable Constellations\" mkdir "%vaSoundDir%\%newDir%\Disable Constellations"
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Extra Content\((RS - Interaction mode off))\Verbose" (
+    Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Extra Content\((RS - Interaction mode off))\Verbose" "%vaSoundDir%\%newDir%\Disable Constellations\" > NUL
+  )
+  >nul 2>nul dir /a-d "%vaSoundDir%\%newDir%\Disable Constellations\*" || (
+    echo - Missing Disable Constellations
+  )
+  IF NOT EXIST "%vaSoundDir%\%newDir%\Disable Quantum Theory\" mkdir "%vaSoundDir%\%newDir%\Disable Quantum Theory"
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Extra Content\((RS - Interaction mode off))\Verbose" (
+    Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Extra Content\((RS - Interaction mode off))\Verbose" "%vaSoundDir%\%newDir%\Disable Quantum Theory\" > NUL
+  )
+  >nul 2>nul dir /a-d "%vaSoundDir%\%newDir%\Disable Quantum Theory\*" || (
+    echo - Missing Disable Quantum Theory
+  )
+  IF NOT EXIST "%vaSoundDir%\%newDir%\Disable Galaxapedia\" mkdir "%vaSoundDir%\%newDir%\Disable Galaxapedia"
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Extra Content\((RS - Interaction mode off))\Verbose" (
+    Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Extra Content\((RS - Interaction mode off))\Verbose" "%vaSoundDir%\%newDir%\Disable Galaxapedia\" > NUL
+  )
+  >nul 2>nul dir /a-d "%vaSoundDir%\%newDir%\Disable Galaxapedia\*" || (
+    echo - Missing Disable Galaxapedia
+  )
   IF NOT EXIST "%vaSoundDir%\%newDir%\Acknowledged\" mkdir "%vaSoundDir%\%newDir%\Acknowledged"
   IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Acknowledgements\((RS - Acknowledgements))\Verbose" (
     Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Acknowledgements\((RS - Acknowledgements))\Verbose" "%vaSoundDir%\%newDir%\Acknowledged\" > NUL

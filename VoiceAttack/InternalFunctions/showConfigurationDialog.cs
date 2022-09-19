@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,6 +25,9 @@ public class MainSettingsForm : Form
     private VoiceAttack.VoiceAttackInvokeProxyClass VA;
     public ComboBox activeShipNameComboBox = null;
     public ComboBox shipSelectionComboBox = null;
+	private CheckBox galaxapediaEnabledOption = null;
+	private CheckBox constellationsEnabledOption = null;
+	private CheckBox quantumTheoryEnabledOption = null;
     private Button editShipBtn;
     private Button deleteShipBtn;
 	public List<string> shipList;
@@ -77,6 +81,30 @@ public class MainSettingsForm : Form
     }
 
 
+    private void constellationsEnabled_CheckStateChanged(Object sender, EventArgs e)
+    {
+        bool isChecked = ((CheckBox)sender).CheckState == CheckState.Checked;
+        VA.SetBoolean(">>constellationsEnabled", isChecked);
+
+		changesMade = true;
+		reloadRequired = true;
+    }
+    private void galaxapediaEnabled_CheckStateChanged(Object sender, EventArgs e)
+    {
+        bool isChecked = ((CheckBox)sender).CheckState == CheckState.Checked;
+        VA.SetBoolean(">>galaxapediaEnabled", isChecked);
+
+		changesMade = true;
+		reloadRequired = true;
+    }
+    private void quantumTheoryEnabled_CheckStateChanged(Object sender, EventArgs e)
+    {
+        bool isChecked = ((CheckBox)sender).CheckState == CheckState.Checked;
+        VA.SetBoolean(">>quantumTheoryEnabled", isChecked);
+
+		changesMade = true;
+		reloadRequired = true;
+    }
     private void gameVoiceEnabled_CheckStateChanged(Object sender, EventArgs e)
     {
         bool isChecked = ((CheckBox)sender).CheckState == CheckState.Checked;
@@ -111,8 +139,56 @@ public class MainSettingsForm : Form
         VA.SetText(">>companionName", value);
         VA.SetText(">>voiceDir", "sf-i_" + value);
 
+		string realFilePath = VA.ParseTokens(@"{VA_SOUNDS}\{TXT:>>voiceDir}\");
+		string[] files;
+
+		if (Directory.Exists(realFilePath + "Constellations")) {
+			files = Directory.GetFiles(realFilePath + "Constellations", "*.mp3");
+			if (files.Length > 0) {
+				constellationsEnabledOption.Enabled = true;
+				if (VA.GetBoolean(">>constellationsEnabled") == true)
+					constellationsEnabledOption.Checked = true;
+				else
+					constellationsEnabledOption.Checked = false;
+			} else {
+				constellationsEnabledOption.Enabled = false;
+			}
+		} else {
+			constellationsEnabledOption.Enabled = false;
+		}
+
+		if (Directory.Exists(realFilePath + "Quantum Theory")) {
+			files = Directory.GetFiles(realFilePath + "Quantum Theory", "*.mp3");
+			if (files.Length > 0) {
+				quantumTheoryEnabledOption.Enabled = true;
+				if (VA.GetBoolean(">>quantumTheoryEnabled") == true)
+					quantumTheoryEnabledOption.Checked = true;
+				else
+					quantumTheoryEnabledOption.Checked = false;
+			} else {
+				quantumTheoryEnabledOption.Enabled = false;
+			}
+		} else {
+			quantumTheoryEnabledOption.Enabled = false;
+		}
+
+		if (Directory.Exists(realFilePath + "Galaxapedia")) {
+			files = Directory.GetFiles(realFilePath + "Galaxapedia", "*.mp3");
+			if (files.Length > 0) {
+				galaxapediaEnabledOption.Enabled = true;
+				if (VA.GetBoolean(">>galaxapediaEnabled") == true)
+					galaxapediaEnabledOption.Checked = true;
+				else
+					galaxapediaEnabledOption.Checked = false;
+			} else {
+				galaxapediaEnabledOption.Enabled = false;
+			}
+		} else {
+			galaxapediaEnabledOption.Enabled = false;
+		}
+
 		changesMade = true;
-		soundFilesChanged = true;
+		reloadRequired = true;
     }
     private void activeShipName_SelectedValueChanged(Object sender, EventArgs e)
     {
@@ -227,7 +303,7 @@ public class MainSettingsForm : Form
 
 	private void dynamicTableLayoutPanel_CellPaint(object sender, TableLayoutCellPaintEventArgs e)
 	{
-		if (e.Row == 5)
+		if (e.Row == 7)
 			e.Graphics.DrawLine(Pens.Black, e.CellBounds.Location, new Point(e.CellBounds.Right, e.CellBounds.Top));
 	}
 
@@ -240,10 +316,10 @@ public class MainSettingsForm : Form
 
         dynamicTableLayoutPanel.Location = new Point(10, 10);
         dynamicTableLayoutPanel.Name = "OuterLayout";
-        dynamicTableLayoutPanel.Size = new Size(480, 330);
+        dynamicTableLayoutPanel.Size = new Size(480, 380);
         dynamicTableLayoutPanel.TabIndex = 0;
         dynamicTableLayoutPanel.ColumnCount = 4;
-        dynamicTableLayoutPanel.RowCount = 12;
+        dynamicTableLayoutPanel.RowCount = 15;
         dynamicTableLayoutPanel.BorderStyle = BorderStyle.FixedSingle;
 		//*** remove following line after setup complete
         // dynamicTableLayoutPanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.Inset;
@@ -253,6 +329,9 @@ public class MainSettingsForm : Form
         dynamicTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize, 0));
         dynamicTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize, 0));
         dynamicTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 90));
+        dynamicTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize, 0));
+        dynamicTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize, 0));
+        dynamicTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize, 0));
         dynamicTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize, 0));
         dynamicTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize, 0));
         dynamicTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize, 0));
@@ -321,6 +400,69 @@ public class MainSettingsForm : Form
 		dynamicTableLayoutPanel.SetColumnSpan(companionNameOption, 2);
 
 
+        //*** galaxapediaEnabled Setting ***
+        bool? galaxapediaEnabled = VA.GetBoolean(">>galaxapediaEnabled");
+        Label galaxapediaEnabledOptionText = new Label();
+        galaxapediaEnabledOptionText.Text = "Individual Galaxapedia Facts";
+        galaxapediaEnabledOptionText.TextAlign = ContentAlignment.MiddleRight;
+        galaxapediaEnabledOptionText.Anchor = AnchorStyles.Right;
+        galaxapediaEnabledOptionText.Size = new Size(galaxapediaEnabledOptionText.PreferredWidth, galaxapediaEnabledOptionText.PreferredHeight);
+        dynamicTableLayoutPanel.Controls.Add(galaxapediaEnabledOptionText, 0, 1);
+
+        galaxapediaEnabledOption = new CheckBox();
+		if (VA.GetInt(">soundGroupDirList[Galaxapedia].fileCount") == 0) {
+			galaxapediaEnabledOption.Enabled = false;
+		} else {
+	        if (galaxapediaEnabled == true)
+	            galaxapediaEnabledOption.Checked = true;
+		}
+        galaxapediaEnabledOption.CheckStateChanged += new System.EventHandler(galaxapediaEnabled_CheckStateChanged);
+        dynamicTableLayoutPanel.Controls.Add(galaxapediaEnabledOption, 1, 1);
+		dynamicTableLayoutPanel.SetColumnSpan(galaxapediaEnabledOption, 2);
+
+
+        //*** constellationsEnabled Setting ***
+        bool? constellationsEnabled = VA.GetBoolean(">>constellationsEnabled");
+        Label constellationsEnabledOptionText = new Label();
+        constellationsEnabledOptionText.Text = "Individual Constellations Facts";
+        constellationsEnabledOptionText.TextAlign = ContentAlignment.MiddleRight;
+        constellationsEnabledOptionText.Anchor = AnchorStyles.Right;
+        constellationsEnabledOptionText.Size = new Size(constellationsEnabledOptionText.PreferredWidth, constellationsEnabledOptionText.PreferredHeight);
+        dynamicTableLayoutPanel.Controls.Add(constellationsEnabledOptionText, 0, 2);
+
+        constellationsEnabledOption = new CheckBox();
+		if (VA.GetInt(">soundGroupDirList[Constellations].fileCount") == 0) {
+			constellationsEnabledOption.Enabled = false;
+		} else {
+	        if (constellationsEnabled == true)
+	            constellationsEnabledOption.Checked = true;
+		}
+        constellationsEnabledOption.CheckStateChanged += new System.EventHandler(constellationsEnabled_CheckStateChanged);
+        dynamicTableLayoutPanel.Controls.Add(constellationsEnabledOption, 1, 2);
+		dynamicTableLayoutPanel.SetColumnSpan(constellationsEnabledOption, 2);
+
+
+        //*** quantumTheoryEnabled Setting ***
+        bool? quantumTheoryEnabled = VA.GetBoolean(">>quantumTheoryEnabled");
+        Label quantumTheoryEnabledOptionText = new Label();
+        quantumTheoryEnabledOptionText.Text = "Individual Quantum Theory Facts";
+        quantumTheoryEnabledOptionText.TextAlign = ContentAlignment.MiddleRight;
+        quantumTheoryEnabledOptionText.Anchor = AnchorStyles.Right;
+        quantumTheoryEnabledOptionText.Size = new Size(quantumTheoryEnabledOptionText.PreferredWidth, quantumTheoryEnabledOptionText.PreferredHeight);
+        dynamicTableLayoutPanel.Controls.Add(quantumTheoryEnabledOptionText, 0, 3);
+
+        quantumTheoryEnabledOption = new CheckBox();
+		if (VA.GetInt(">soundGroupDirList[Quantum Theory].fileCount") == 0) {
+			quantumTheoryEnabledOption.Enabled = false;
+		} else {
+	        if (quantumTheoryEnabled == true)
+	            quantumTheoryEnabledOption.Checked = true;
+		}
+        quantumTheoryEnabledOption.CheckStateChanged += new System.EventHandler(quantumTheoryEnabled_CheckStateChanged);
+        dynamicTableLayoutPanel.Controls.Add(quantumTheoryEnabledOption, 1, 3);
+		dynamicTableLayoutPanel.SetColumnSpan(quantumTheoryEnabledOption, 2);
+
+
         //*** gameVoiceEnabled Setting ***
         bool? gameVoiceEnabled = VA.GetBoolean(">>gameVoiceEnabled");
         Label gameVoiceEnabledOptionText = new Label();
@@ -328,15 +470,13 @@ public class MainSettingsForm : Form
         gameVoiceEnabledOptionText.TextAlign = ContentAlignment.MiddleRight;
         gameVoiceEnabledOptionText.Anchor = AnchorStyles.Right;
         gameVoiceEnabledOptionText.Size = new Size(gameVoiceEnabledOptionText.PreferredWidth, gameVoiceEnabledOptionText.PreferredHeight);
-        dynamicTableLayoutPanel.Controls.Add(gameVoiceEnabledOptionText, 0, 1);
+        dynamicTableLayoutPanel.Controls.Add(gameVoiceEnabledOptionText, 0, 4);
 
         CheckBox gameVoiceEnabledOption = new CheckBox();
         if (gameVoiceEnabled == true)
-        {
             gameVoiceEnabledOption.Checked = true;
-        }
         gameVoiceEnabledOption.CheckStateChanged += new System.EventHandler(gameVoiceEnabled_CheckStateChanged);
-        dynamicTableLayoutPanel.Controls.Add(gameVoiceEnabledOption, 1, 1);
+        dynamicTableLayoutPanel.Controls.Add(gameVoiceEnabledOption, 1, 4);
 		dynamicTableLayoutPanel.SetColumnSpan(gameVoiceEnabledOption, 2);
 
 
@@ -347,15 +487,13 @@ public class MainSettingsForm : Form
         gameVoiceActionsQuietOptionText.TextAlign = ContentAlignment.MiddleRight;
         gameVoiceActionsQuietOptionText.Anchor = AnchorStyles.Right;
         gameVoiceActionsQuietOptionText.Size = new Size(gameVoiceActionsQuietOptionText.PreferredWidth, gameVoiceActionsQuietOptionText.PreferredHeight);
-        dynamicTableLayoutPanel.Controls.Add(gameVoiceActionsQuietOptionText, 0, 2);
+        dynamicTableLayoutPanel.Controls.Add(gameVoiceActionsQuietOptionText, 0, 5);
 
         CheckBox gameVoiceActionsQuietOption = new CheckBox();
         if (gameVoiceActionsQuiet == true)
-        {
             gameVoiceActionsQuietOption.Checked = true;
-        }
         gameVoiceActionsQuietOption.CheckStateChanged += new System.EventHandler(gameVoiceActionsQuiet_CheckStateChanged);
-        dynamicTableLayoutPanel.Controls.Add(gameVoiceActionsQuietOption, 1, 2);
+        dynamicTableLayoutPanel.Controls.Add(gameVoiceActionsQuietOption, 1, 5);
 		dynamicTableLayoutPanel.SetColumnSpan(gameVoiceActionsQuietOption, 2);
 
 
@@ -366,14 +504,13 @@ public class MainSettingsForm : Form
         headphonesInUseOptionText.TextAlign = ContentAlignment.MiddleRight;
         headphonesInUseOptionText.Anchor = AnchorStyles.Right;
         headphonesInUseOptionText.Size = new Size(headphonesInUseOptionText.PreferredWidth, headphonesInUseOptionText.PreferredHeight);
-        dynamicTableLayoutPanel.Controls.Add(headphonesInUseOptionText, 0, 3);
+        dynamicTableLayoutPanel.Controls.Add(headphonesInUseOptionText, 0, 6);
 
         CheckBox headphonesInUseOption = new CheckBox();
-        if (headphonesInUse == true) {
+        if (headphonesInUse == true)
             headphonesInUseOption.Checked = true;
-        }
         headphonesInUseOption.CheckStateChanged += new System.EventHandler(headphonesInUse_CheckStateChanged);
-        dynamicTableLayoutPanel.Controls.Add(headphonesInUseOption, 1, 3);
+        dynamicTableLayoutPanel.Controls.Add(headphonesInUseOption, 1, 6);
 		dynamicTableLayoutPanel.SetColumnSpan(headphonesInUseOption, 2);
 
 
@@ -389,7 +526,7 @@ public class MainSettingsForm : Form
 		shipConfigSectionHeading.Font = new Font(shipConfigSectionHeading.Font.Name, shipConfigSectionHeading.Font.Size + 2.0F, shipConfigSectionHeading.Font.Style, shipConfigSectionHeading.Font.Unit);
 		shipConfigSectionHeading.Size = new Size(shipConfigSectionHeading.PreferredWidth, shipConfigSectionHeading.PreferredHeight);
 		shipConfigSectionHeading.Margin = new Padding(0, 10, 0, 10);
-        dynamicTableLayoutPanel.Controls.Add(shipConfigSectionHeading, 0, 5);
+        dynamicTableLayoutPanel.Controls.Add(shipConfigSectionHeading, 0, 8);
 		dynamicTableLayoutPanel.SetColumnSpan(shipConfigSectionHeading, 3);
 
 
@@ -402,7 +539,7 @@ public class MainSettingsForm : Form
         activeShipNameComboBoxText.Size = new Size(activeShipNameComboBoxText.PreferredWidth, activeShipNameComboBoxText.PreferredHeight);
         activeShipNameComboBoxText.TextAlign = ContentAlignment.MiddleRight;
         activeShipNameComboBoxText.Anchor = AnchorStyles.Right;
-        dynamicTableLayoutPanel.Controls.Add(activeShipNameComboBoxText, 0, 6);
+        dynamicTableLayoutPanel.Controls.Add(activeShipNameComboBoxText, 0, 9);
 
         activeShipNameComboBox = new ComboBox();
         activeShipNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -411,7 +548,7 @@ public class MainSettingsForm : Form
             activeShipNameComboBox.SelectedItem = activeShip;
         }
         activeShipNameComboBox.SelectedValueChanged += new System.EventHandler(activeShipName_SelectedValueChanged);
-        dynamicTableLayoutPanel.Controls.Add(activeShipNameComboBox, 1, 6);
+        dynamicTableLayoutPanel.Controls.Add(activeShipNameComboBox, 1, 9);
 		dynamicTableLayoutPanel.SetColumnSpan(activeShipNameComboBox, 2);
 
 
@@ -424,19 +561,19 @@ public class MainSettingsForm : Form
         }
 		shipSelectionComboBox.Anchor = AnchorStyles.Right;
         shipSelectionComboBox.TextChanged += new System.EventHandler(shipSelection_TextChanged);
-        dynamicTableLayoutPanel.Controls.Add(shipSelectionComboBox, 0, 7);
+        dynamicTableLayoutPanel.Controls.Add(shipSelectionComboBox, 0, 10);
 
 		editShipBtn = new Button();
         editShipBtn.Text = "Edit";
         editShipBtn.Anchor = AnchorStyles.Left;
         editShipBtn.Click += new System.EventHandler(editShipBtn_Click);
-		dynamicTableLayoutPanel.Controls.Add(editShipBtn, 1, 7);
+		dynamicTableLayoutPanel.Controls.Add(editShipBtn, 1, 10);
 
 		deleteShipBtn = new Button();
         deleteShipBtn.Text = "Delete";
         deleteShipBtn.Anchor = AnchorStyles.Left;
         deleteShipBtn.Click += new System.EventHandler(deleteShipBtn_Click);
-		dynamicTableLayoutPanel.Controls.Add(deleteShipBtn, 2, 7);
+		dynamicTableLayoutPanel.Controls.Add(deleteShipBtn, 2, 10);
 
 
 
@@ -448,7 +585,7 @@ public class MainSettingsForm : Form
         debugBtn.Text = "Debug";
         debugBtn.Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
         debugBtn.Click += new System.EventHandler(debugBtn_Click);
-        dynamicTableLayoutPanel.Controls.Add(debugBtn, 0, 11);
+        dynamicTableLayoutPanel.Controls.Add(debugBtn, 0, 13);
         */
 
 
@@ -457,7 +594,7 @@ public class MainSettingsForm : Form
         closeBtn.Text = "Close";
         closeBtn.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
         closeBtn.Click += new System.EventHandler(closeBtn_Click);
-        dynamicTableLayoutPanel.Controls.Add(closeBtn, 1, 11);
+        dynamicTableLayoutPanel.Controls.Add(closeBtn, 1, 14);
 		dynamicTableLayoutPanel.SetColumnSpan(closeBtn, 3);
 
 
@@ -468,10 +605,10 @@ public class MainSettingsForm : Form
         this.AutoScaleDimensions = new SizeF(7F, 16F);
         this.AutoScaleMode = AutoScaleMode.Font;
         // this.BackColor = SystemColors.ActiveBorder;
-        this.ClientSize = new Size(500, 350);
+        this.ClientSize = new Size(500, 400);
         this.Controls.Add(dynamicTableLayoutPanel);
         this.Font = new Font("Euro Caps", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-        this.MinimumSize = new Size(500, 350);
+        this.MinimumSize = new Size(500, 400);
         this.Name = "MainSettingsForm";
         this.SizeGripStyle = SizeGripStyle.Hide;
         this.Text = "Configuration";

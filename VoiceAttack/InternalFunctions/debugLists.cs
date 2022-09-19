@@ -40,5 +40,15 @@ public class VAInline
 
 		message = "companionNameList: " + VA.GetText(">>companionNameList");
 		VA.WriteToLog(message, "Purple");
+
+		message = "Galaxapedia List: " + VA.GetText(">>galaxapediaList");
+		VA.WriteToLog(message, "Yellow");
+
+		message = "Constellation List: " + VA.GetText(">>constellationList");
+		VA.WriteToLog(message, "Yellow");
+
+		message = "Quantum Theory List: " + VA.GetText(">>quantumTheoryList");
+		VA.WriteToLog(message, "Yellow");
+
 	}
 }
