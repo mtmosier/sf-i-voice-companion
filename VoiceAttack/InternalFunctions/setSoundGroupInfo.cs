@@ -1,7 +1,10 @@
+// System.Text.RegularExpressions.dll;System.dll
+
 using System;
 using System.IO;
 using System.Globalization;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 public class VAInline
 {
@@ -99,6 +102,8 @@ public class VAInline
 		List<string> galaxapediaList = new List<string>();
 		string[] soundGroupList = getSoundFileGroupList();
 		Dictionary<string, string> soundGroupSynonymList = getSynonymList();
+		Regex altRegex = new Regex(@"\balt\s*\d*\s*\.", RegexOptions.IgnoreCase);
+		Match m;
 
 		//*** Weapon group variables
 		string wgNameListStr = VA.GetText(">>activeWeaponGroupList");
@@ -129,15 +134,24 @@ public class VAInline
 				fileCount = files.Length;
 				if (soundGroup == "Constellations") {
 					foreach (string filePath in files) {
-						constellationList.Add(Path.GetFileNameWithoutExtension(filePath));
+						m = altRegex.Match(Path.GetFileName(filePath));
+						if (!m.Success) {
+							constellationList.Add(Path.GetFileNameWithoutExtension(filePath));
+						}
 					}
 				} else if (soundGroup == "Quantum Theory") {
 					foreach (string filePath in files) {
-						quantumTheoryList.Add(Path.GetFileNameWithoutExtension(filePath));
+						m = altRegex.Match(Path.GetFileName(filePath));
+						if (!m.Success) {
+							quantumTheoryList.Add(Path.GetFileNameWithoutExtension(filePath));
+						}
 					}
 				} else if (soundGroup == "Galaxapedia") {
 					foreach (string filePath in files) {
-						galaxapediaList.Add(Path.GetFileNameWithoutExtension(filePath));
+						m = altRegex.Match(Path.GetFileName(filePath));
+						if (!m.Success) {
+							galaxapediaList.Add(Path.GetFileNameWithoutExtension(filePath));
+						}
 					}
 				}
 				files = Directory.GetFiles(realFilePath + soundGroup, "*.wav");
