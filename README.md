@@ -43,9 +43,6 @@ In the future I plan to add some basic voice mp3s and a VA plug-in, but for now 
 Here's a very basic, no config needed, I-just-want-to-kill-stuff example of usage.
 
 ```
-> Promote Jazz    # Jazz Online  (only usable if you have imported voicepacks
-> Hello    # Greetings
-> Who are you?    # I am your ship's companion...
 > Unload weapon slot 1    # continuous fire weapon slot 1
 > Unload slot 2    # continuous fire weapon slot 2 (will alternate with slot 1)
 > Fire weapon slot 6    # single fire weapon slot 6 (after which slots 1 and 2 will continue to alternate)
@@ -57,6 +54,18 @@ Here's a very basic, no config needed, I-just-want-to-kill-stuff example of usag
 > All stop    # releases accelerate and propulsion keys
 > Show system map    # display the system map dialog
 ```
+
+If you are [importing a voice pack](import/) there will be a few additional commands available to you.
+```
+> Promote Jazz    # Jazz Online  (only usable if you have imported voicepacks
+> Hello    # Greetings
+> Who are you?    # I am your ship's companion...
+> Tell me a random constellation fact    # Pisces is a constellation. Its name is the latin..
+> Enable galaxy    # Interactive mode on
+> What is a black hole    # A black hole is a region of spacetime...
+> Give me a random quantum theory fact    # Hawking Radiation. In 1975 Steven Hawking showed...
+```
+
 
 <a name="config"></a>
 ## Configuration
