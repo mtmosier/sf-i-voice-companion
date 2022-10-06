@@ -95,13 +95,13 @@ public class VAInline
                     else  desc = name + ", " + desc;
 
                     // planetLocationDataLookup.Add(i, (Dictionary<string, Object>)planetInfo["location"]);
-                    VA.SetText(">>planetDescription[" + i.ToString() + "]", desc);
-                    VA.SetText(">>planetNameLookup[" + name + "]", i.ToString());
-                    VA.SetText(">>planetSectorLookup[" + GetDisplayLocation((Dictionary<string, Object>)planetInfo["location"]) + "]", i.ToString());
+                    VA.SetText(">>codexPlanetDescription[" + i.ToString() + "]", desc);
+                    VA.SetText(">>codexPlanetNameLookup[" + name + "]", i.ToString());
+                    VA.SetText(">>codexPlanetSectorLookup[" + GetDisplayLocation((Dictionary<string, Object>)planetInfo["location"]) + "]", i.ToString());
                     i++;
                 }
             }
-            VA.SetInt(">>planetDescription.len", i);
+            VA.SetInt(">>codexPlanetDescription.len", i);
 
             i = 0;
             foreach (Match match in objectRegex.Matches(json)) {
@@ -119,17 +119,16 @@ public class VAInline
                     else  desc = objectInfo["name"].ToString() + ", " + desc;
 
                     // objectLocationDataLookup.Add(i, (Dictionary<string, Object>)objectInfo["location"]);
-                    VA.SetText(">>objectDescription[" + i.ToString() + "]", desc);
-                    VA.SetText(">>objectNameLookup[" + name + "]", i.ToString());
-                    VA.SetText(">>objectSectorLookup[" + GetDisplayLocation((Dictionary<string, Object>)objectInfo["location"]) + "]", i.ToString());
+                    VA.SetText(">>codexObjectDescription[" + i.ToString() + "]", desc);
+                    VA.SetText(">>codexObjectNameLookup[" + name + "]", i.ToString());
+                    VA.SetText(">>codexObjectSectorLookup[" + GetDisplayLocation((Dictionary<string, Object>)objectInfo["location"]) + "]", i.ToString());
                     i++;
                 }
             }
-            VA.SetInt(">>objectDescription.len", i);
+            VA.SetInt(">>codexObjectDescription.len", i);
 
-            VA.WriteToLog("Remaining json size " + json.Length.ToString(), "Red");
-            VA.WriteToLog("Planets found " + VA.GetInt(">>planetDescription.len").ToString(), "Red");
-            VA.WriteToLog("Objects found " + VA.GetInt(">>objectDescription.len").ToString(), "Red");
+            VA.WriteToLog("Planets found " + VA.GetInt(">>codexPlanetDescription.len").ToString(), "Red");
+            VA.WriteToLog("Objects found " + VA.GetInt(">>codexObjectDescription.len").ToString(), "Red");
         }
         reader.Close();
         dataStream.Close();
