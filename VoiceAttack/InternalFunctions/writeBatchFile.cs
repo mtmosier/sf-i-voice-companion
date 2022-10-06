@@ -308,6 +308,11 @@ public class VAInline
 		soundDirGroupList.Add("Disable Galaxapedia", dirList);
 
 
+		//*** Non-Verbal Sounds
+		fileList = new string[] {
+		};
+		soundFileGroupList.Add("Songs", fileList);
+		groupsToCopyFromNull.Add("Songs");
 
 
 		//*** General Sounds

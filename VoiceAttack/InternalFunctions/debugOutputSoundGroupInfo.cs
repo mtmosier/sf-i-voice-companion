@@ -71,7 +71,8 @@ public class VAInline
 			"Firing Beacon",
 			"Firing Escape",
 			"Firing Highlight",
-			"Firing Hacking"
+			"Firing Hacking",
+			"Songs"
 		};
 	}
 
