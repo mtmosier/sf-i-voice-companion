@@ -10,6 +10,7 @@ using System.Globalization;
 
 public class VAInline
 {
+    private int totalCodexItemsFound;
     private Dictionary<string, string> systemPrefixLookup;
 
     private Dictionary<int, string> orgNameDataLookup;
@@ -23,8 +24,13 @@ public class VAInline
         orgNameDataLookup = new Dictionary<int, string>();
         objectLocationDataLookup = new Dictionary<int, Dictionary<string, Object>>();
         planetLocationDataLookup = new Dictionary<int, Dictionary<string, Object>>();
+        totalCodexItemsFound = 0;
 
         LoadStarSystemData();
+        LoadOrganizationData();
+
+        VA.SetInt(">>codexDescriptionsCombined.len", totalCodexItemsFound);
+        // VA.WriteToLog("Codex items found " + VA.GetInt(">>codexDescriptionsCombined.len").ToString(), "Red");
     }
 
 
@@ -39,7 +45,116 @@ public class VAInline
 
     private void LoadOrganizationData()
     {
+        int i = 0;
+        List<string> codexOrgList = new List<string>();
+
+        WebRequest request = WebRequest.Create("https://www.benoldinggames.co.uk/sfi/gamedata/files/races.jsonp");
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        Stream dataStream = response.GetResponseStream();
+        StreamReader reader = new StreamReader(dataStream);
+
+        string json = reader.ReadToEnd();
+
+        reader.Close();
+        dataStream.Close();
+        response.Close();
+
+        string jsonpRegexStr = ".*?\\(\\s*([\"']).*?\\1\\s*,\\s*(.*)\\)";
+        Regex jsonpRegex = new Regex(jsonpRegexStr, RegexOptions.IgnoreCase);
+
+        if (!string.IsNullOrEmpty(json)) {
+            Match m = jsonpRegex.Match(json);
+            if (m.Success) {
+                json = m.Groups[2].ToString();
+
+                List<Dictionary<string, object>> orgList = new JavaScriptSerializer().Deserialize<List<Dictionary<string, object>>>(json);
+                foreach (Dictionary<string, object> orgInfo in orgList) {
+                    string raceName = orgInfo["name"].ToString();
+                    string desc = orgInfo["info"].ToString();
+
+                    if ((int)orgInfo["race"] < 2 && string.IsNullOrEmpty(desc))
+                        continue;
+
+                    if (string.IsNullOrEmpty(desc))
+                        desc = "No Information Available";
+                    desc = raceName + ", " + desc;
+
+                    if (!codexOrgList.Contains(raceName))
+                        codexOrgList.Add(raceName);
+
+                    VA.SetText(">>codexOrgDescription[" + i.ToString() + "]", desc);
+                    VA.SetText(">>codexOrgNameLookup[" + raceName + "]", i.ToString());
+
+                    string plural = orgInfo["plural"].ToString();
+                    if (string.IsNullOrEmpty(plural))
+                        plural = raceName + "s";
+                    VA.SetText(">>codexOrgNameLookup[" + plural + "]", i.ToString());
+                    if (!codexOrgList.Contains(plural))
+                        codexOrgList.Add(plural);
+
+                    if (raceName.IndexOf("Ghost") > 0) {
+                        //*** This will actually happen twice, once for each ghost race.
+                        //*** But it doesn't matter, their descriptions are the same.
+                        VA.SetText(">>codexOrgNameLookup[Ghost]", i.ToString());
+                        if (!codexOrgList.Contains("Ghost"))
+                            codexOrgList.Add("Ghost");
+                    }
+
+                    i++;
+                    totalCodexItemsFound++;
+                }
+            }
+        }
+
+
+        WebRequest orgRequest = WebRequest.Create("https://www.benoldinggames.co.uk/sfi/gamedata/files/orgs.jsonp");
+        HttpWebResponse orgResponse = (HttpWebResponse)orgRequest.GetResponse();
+        Stream orgDataStream = orgResponse.GetResponseStream();
+        StreamReader orgReader = new StreamReader(orgDataStream);
+
+        json = orgReader.ReadToEnd();
+
+        orgReader.Close();
+        orgDataStream.Close();
+        orgResponse.Close();
+
+
+        if (!string.IsNullOrEmpty(json)) {
+            Match m = jsonpRegex.Match(json);
+            if (m.Success) {
+                json = m.Groups[2].ToString();
+
+                List<Dictionary<string, object>> orgList = new JavaScriptSerializer().Deserialize<List<Dictionary<string, object>>>(json);
+                foreach (Dictionary<string, object> orgInfo in orgList) {
+                    string raceName = orgInfo["name"].ToString();
+                    string desc = orgInfo["intro"].ToString();
+
+                    if (((int)orgInfo["race"] > 1 || raceName == "Nobody") && string.IsNullOrEmpty(desc))
+                        continue;
+
+                    if (string.IsNullOrEmpty(desc))
+                        desc = "No Information Available";
+                    desc = raceName + ", " + desc;
+
+                    if (!codexOrgList.Contains(raceName))
+                        codexOrgList.Add(raceName);
+
+                    VA.SetText(">>codexOrgDescription[" + i.ToString() + "]", desc);
+                    VA.SetText(">>codexOrgNameLookup[" + raceName + "]", i.ToString());
+
+                    i++;
+                    totalCodexItemsFound++;
+                }
+            }
+        }
+
+
+        VA.SetInt(">>codexOrgDescription.len", i);
+        VA.SetText(">>codexOrgList", string.Join<string>(";", codexOrgList));
+
+        // VA.WriteToLog("Orgs found " + VA.GetInt(">>codexOrgDescription.len").ToString(), "Red");
     }
+
 
     private void LoadStarSystemData()
     {
@@ -47,7 +162,7 @@ public class VAInline
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         Stream dataStream = response.GetResponseStream();
         StreamReader reader = new StreamReader(dataStream);
-        int i;
+        int i = 0;
 
         string json = reader.ReadToEnd();
         if (!string.IsNullOrEmpty(json)) {
@@ -79,6 +194,7 @@ public class VAInline
             }
 
 
+            List<string> codexPlanetList = new List<string>();
             i = 0;
             foreach (Match match in planetRegex.Matches(json)) {
                 List<Dictionary<string, object>> planetList = new JavaScriptSerializer().Deserialize<List<Dictionary<string, object>>>(match.Groups[1].ToString());
@@ -94,15 +210,20 @@ public class VAInline
                     if (String.IsNullOrEmpty(desc))  desc = name;
                     else  desc = name + ", " + desc;
 
-                    // planetLocationDataLookup.Add(i, (Dictionary<string, Object>)planetInfo["location"]);
+                    if (!codexPlanetList.Contains(name))
+                        codexPlanetList.Add(name);
+
                     VA.SetText(">>codexPlanetDescription[" + i.ToString() + "]", desc);
                     VA.SetText(">>codexPlanetNameLookup[" + name + "]", i.ToString());
                     VA.SetText(">>codexPlanetSectorLookup[" + GetDisplayLocation((Dictionary<string, Object>)planetInfo["location"]) + "]", i.ToString());
                     i++;
+                    totalCodexItemsFound++;
                 }
             }
             VA.SetInt(">>codexPlanetDescription.len", i);
+            VA.SetText(">>codexPlanetList", string.Join<string>(";", codexPlanetList));
 
+            List<string> codexObjectList = new List<string>();
             i = 0;
             foreach (Match match in objectRegex.Matches(json)) {
                 List<Dictionary<string, object>> objectList = new JavaScriptSerializer().Deserialize<List<Dictionary<string, object>>>(match.Groups[1].ToString());
@@ -115,20 +236,24 @@ public class VAInline
                     try {
                         if (String.IsNullOrEmpty(desc))  desc = objectInfo["scanText"].ToString();
                     } catch (KeyNotFoundException) {}
-                    if (String.IsNullOrEmpty(desc))  desc = objectInfo["name"].ToString();
-                    else  desc = objectInfo["name"].ToString() + ", " + desc;
+                    if (String.IsNullOrEmpty(desc))  desc = name;
+                    else  desc = name + ", " + desc;
 
-                    // objectLocationDataLookup.Add(i, (Dictionary<string, Object>)objectInfo["location"]);
+                    if (!codexObjectList.Contains(name))
+                        codexObjectList.Add(name);
+
                     VA.SetText(">>codexObjectDescription[" + i.ToString() + "]", desc);
                     VA.SetText(">>codexObjectNameLookup[" + name + "]", i.ToString());
                     VA.SetText(">>codexObjectSectorLookup[" + GetDisplayLocation((Dictionary<string, Object>)objectInfo["location"]) + "]", i.ToString());
                     i++;
+                    totalCodexItemsFound++;
                 }
             }
             VA.SetInt(">>codexObjectDescription.len", i);
+            VA.SetText(">>codexObjectList", string.Join<string>(";", codexObjectList));
 
-            VA.WriteToLog("Planets found " + VA.GetInt(">>codexPlanetDescription.len").ToString(), "Red");
-            VA.WriteToLog("Objects found " + VA.GetInt(">>codexObjectDescription.len").ToString(), "Red");
+            // VA.WriteToLog("Planets found " + VA.GetInt(">>codexPlanetDescription.len").ToString(), "Red");
+            // VA.WriteToLog("Objects found " + VA.GetInt(">>codexObjectDescription.len").ToString(), "Red");
         }
         reader.Close();
         dataStream.Close();

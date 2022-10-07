@@ -236,22 +236,6 @@ public class VAInline
 		fileList = new string[] {
 		};
 		dirList = new string[] {
-			@"{TXT:>>voiceDir}\Stars and planets\Planets"
-		};
-		soundFileGroupList.Add("Planets", fileList);
-		soundDirGroupList.Add("Planets", dirList);
-
-		fileList = new string[] {
-		};
-		dirList = new string[] {
-			@"{TXT:>>voiceDir}\Stars and planets\Stars"
-		};
-		soundFileGroupList.Add("Stars", fileList);
-		soundDirGroupList.Add("Stars", dirList);
-
-		fileList = new string[] {
-		};
-		dirList = new string[] {
 			@"{TXT:>>voiceDir}\Quantum Theory"
 		};
 		soundFileGroupList.Add("Quantum Theory", fileList);
@@ -288,6 +272,13 @@ public class VAInline
 
 		fileList = new string[] {};
 		dirList = new string[] {
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Extra Content\((RS - Interaction mode on))\Verbose"
+		};
+		soundFileGroupList.Add("Enable Codex", fileList);
+		soundDirGroupList.Add("Enable Codex", dirList);
+
+		fileList = new string[] {};
+		dirList = new string[] {
 			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Extra Content\((RS - Interaction mode off))\Verbose"
 		};
 		soundFileGroupList.Add("Disable Constellations", fileList);
@@ -306,6 +297,45 @@ public class VAInline
 		};
 		soundFileGroupList.Add("Disable Galaxapedia", fileList);
 		soundDirGroupList.Add("Disable Galaxapedia", dirList);
+
+		fileList = new string[] {};
+		dirList = new string[] {
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Extra Content\((RS - Interaction mode off))\Verbose"
+		};
+		soundFileGroupList.Add("Disable Codex", fileList);
+		soundDirGroupList.Add("Disable Codex", dirList);
+
+
+		//*** Somewhat Related To Random Facts - Scanning Codex Objects
+		fileList = new string[] {
+			@"{TXT:>>voiceDir}\Sensors Radar\Scanning now.mp3",
+			@"{TXT:>>voiceDir}\Sensors Radar\Scanning for information.mp3"
+		};
+		dirList = new string[] {
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Ship Functions\((RS - System Scan))\non-verbose",
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Acknowledgements\((RS - Acknowledgements))\Verbose",
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Acknowledgements\((RS - Acknowledgements))\non-verbose"
+		};
+		soundFileGroupList.Add("Scanning", fileList);
+		soundDirGroupList.Add("Scanning", dirList);
+
+		fileList = new string[] {
+			@"{TXT:>>voiceDir}\Sensors Radar\Scanning planet.mp3",
+			@"{TXT:>>voiceDir}\Sensors Radar\Scanning planet alt.mp3"
+		};
+		dirList = new string[] {
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Ship Functions\((RS - Target Scan Planet))\non-verbose",
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Ship Functions\((RS - Target Scan Planet))\Verbose"
+		};
+		backupDirList = new string[] {
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Acknowledgements\((RS - Acknowledgements))\Verbose",
+			@"{TXT:>>voiceDir}\Profile Sounds\Generic\Acknowledgements\((RS - Acknowledgements))\non-verbose"
+		};
+		soundFileGroupList.Add("Scanning Planet", fileList);
+		soundDirGroupList.Add("Scanning Planet", dirList);
+		soundBackupDirGroupList.Add("Scanning Planet", backupDirList);
+
+
 
 
 		//*** Non-Verbal Sounds

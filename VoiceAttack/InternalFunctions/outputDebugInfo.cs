@@ -161,6 +161,27 @@ public class VAInline
 		debugOutput += message + "\n";
 		VA.WriteToLog(message, "Yellow");
 
+		message = "Codex Planet List: " + VA.GetText(">>codexPlanetList");
+		VA.WriteToLog(message, "Yellow");
+
+		message = "Codex Object List: " + VA.GetText(">>codexObjectList");
+		VA.WriteToLog(message, "Yellow");
+
+		message = "Codex Org List: " + VA.GetText(">>codexOrgList");
+		VA.WriteToLog(message, "Yellow");
+
+		message = "Codex Planets Found: " + VA.GetInt(">>codexPlanetDescription.len").ToString();
+		VA.WriteToLog(message, "Purple");
+
+		message = "Codex Objects Found: " + VA.GetInt(">>codexObjectDescription.len").ToString();
+		VA.WriteToLog(message, "Purple");
+
+		message = "Codex Orgs Found: " + VA.GetInt(">>codexOrgDescription.len").ToString();
+		VA.WriteToLog(message, "Purple");
+
+		message = "Codex Entries Found, Total: " + VA.GetInt(">>codexDescriptionsCombined.len").ToString();
+		VA.WriteToLog(message, "Purple");
+
 		message = "Selected Weapon Slot: " + VA.GetInt(">>selectedWeaponSlot");
 		debugOutput += message + "\n";
 		VA.WriteToLog(message, "Green");

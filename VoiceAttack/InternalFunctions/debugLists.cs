@@ -50,5 +50,13 @@ public class VAInline
 		message = "Quantum Theory List: " + VA.GetText(">>quantumTheoryList");
 		VA.WriteToLog(message, "Yellow");
 
+		message = "Codex Planet List: " + VA.GetText(">>codexPlanetList");
+		VA.WriteToLog(message, "Yellow");
+
+		message = "Codex Object List: " + VA.GetText(">>codexObjectList");
+		VA.WriteToLog(message, "Yellow");
+
+		message = "Codex Org List: " + VA.GetText(">>codexOrgList");
+		VA.WriteToLog(message, "Yellow");
 	}
 }
