@@ -320,20 +320,6 @@ pause
   >nul 2>nul dir /a-d "%vaSoundDir%\%newDir%\Constellations\*" || (
     echo - Missing Constellations
   )
-  IF NOT EXIST "%vaSoundDir%\%newDir%\Planets\" mkdir "%vaSoundDir%\%newDir%\Planets"
-  IF EXIST "%vaSoundDir%\%curDir%\Stars and planets\Planets" (
-    Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Stars and planets\Planets" "%vaSoundDir%\%newDir%\Planets\" > NUL
-  )
-  >nul 2>nul dir /a-d "%vaSoundDir%\%newDir%\Planets\*" || (
-    echo - Missing Planets
-  )
-  IF NOT EXIST "%vaSoundDir%\%newDir%\Stars\" mkdir "%vaSoundDir%\%newDir%\Stars"
-  IF EXIST "%vaSoundDir%\%curDir%\Stars and planets\Stars" (
-    Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Stars and planets\Stars" "%vaSoundDir%\%newDir%\Stars\" > NUL
-  )
-  >nul 2>nul dir /a-d "%vaSoundDir%\%newDir%\Stars\*" || (
-    echo - Missing Stars
-  )
   IF NOT EXIST "%vaSoundDir%\%newDir%\Quantum Theory\" mkdir "%vaSoundDir%\%newDir%\Quantum Theory"
   IF EXIST "%vaSoundDir%\%curDir%\Quantum Theory" (
     Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Quantum Theory" "%vaSoundDir%\%newDir%\Quantum Theory\" > NUL
@@ -369,6 +355,13 @@ pause
   >nul 2>nul dir /a-d "%vaSoundDir%\%newDir%\Enable Galaxapedia\*" || (
     echo - Missing Enable Galaxapedia
   )
+  IF NOT EXIST "%vaSoundDir%\%newDir%\Enable Codex\" mkdir "%vaSoundDir%\%newDir%\Enable Codex"
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Extra Content\((RS - Interaction mode on))\Verbose" (
+    Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Extra Content\((RS - Interaction mode on))\Verbose" "%vaSoundDir%\%newDir%\Enable Codex\" > NUL
+  )
+  >nul 2>nul dir /a-d "%vaSoundDir%\%newDir%\Enable Codex\*" || (
+    echo - Missing Enable Codex
+  )
   IF NOT EXIST "%vaSoundDir%\%newDir%\Disable Constellations\" mkdir "%vaSoundDir%\%newDir%\Disable Constellations"
   IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Extra Content\((RS - Interaction mode off))\Verbose" (
     Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Extra Content\((RS - Interaction mode off))\Verbose" "%vaSoundDir%\%newDir%\Disable Constellations\" > NUL
@@ -390,6 +383,57 @@ pause
   >nul 2>nul dir /a-d "%vaSoundDir%\%newDir%\Disable Galaxapedia\*" || (
     echo - Missing Disable Galaxapedia
   )
+  IF NOT EXIST "%vaSoundDir%\%newDir%\Disable Codex\" mkdir "%vaSoundDir%\%newDir%\Disable Codex"
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Extra Content\((RS - Interaction mode off))\Verbose" (
+    Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Extra Content\((RS - Interaction mode off))\Verbose" "%vaSoundDir%\%newDir%\Disable Codex\" > NUL
+  )
+  >nul 2>nul dir /a-d "%vaSoundDir%\%newDir%\Disable Codex\*" || (
+    echo - Missing Disable Codex
+  )
+  IF NOT EXIST "%vaSoundDir%\%newDir%\Scanning\" mkdir "%vaSoundDir%\%newDir%\Scanning"
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Ship Functions\((RS - System Scan))\non-verbose" (
+    Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Ship Functions\((RS - System Scan))\non-verbose" "%vaSoundDir%\%newDir%\Scanning\" > NUL
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Acknowledgements\((RS - Acknowledgements))\Verbose" (
+    Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Acknowledgements\((RS - Acknowledgements))\Verbose" "%vaSoundDir%\%newDir%\Scanning\" > NUL
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Acknowledgements\((RS - Acknowledgements))\non-verbose" (
+    Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Acknowledgements\((RS - Acknowledgements))\non-verbose" "%vaSoundDir%\%newDir%\Scanning\" > NUL
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Sensors Radar\Scanning now.mp3" (
+    copy "%vaSoundDir%\%curDir%\Sensors Radar\Scanning now.mp3" "%vaSoundDir%\%newDir%\Scanning\Scanning now.mp3" >nul
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Sensors Radar\Scanning for information.mp3" (
+    copy "%vaSoundDir%\%curDir%\Sensors Radar\Scanning for information.mp3" "%vaSoundDir%\%newDir%\Scanning\Scanning for information.mp3" >nul
+  )
+  >nul 2>nul dir /a-d "%vaSoundDir%\%newDir%\Scanning\*" || (
+    echo - Missing Scanning
+  )
+  IF NOT EXIST "%vaSoundDir%\%newDir%\Scanning Planet\" mkdir "%vaSoundDir%\%newDir%\Scanning Planet"
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Ship Functions\((RS - Target Scan Planet))\non-verbose" (
+    Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Ship Functions\((RS - Target Scan Planet))\non-verbose" "%vaSoundDir%\%newDir%\Scanning Planet\" > NUL
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Ship Functions\((RS - Target Scan Planet))\Verbose" (
+    Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Ship Functions\((RS - Target Scan Planet))\Verbose" "%vaSoundDir%\%newDir%\Scanning Planet\" > NUL
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Sensors Radar\Scanning planet.mp3" (
+    copy "%vaSoundDir%\%curDir%\Sensors Radar\Scanning planet.mp3" "%vaSoundDir%\%newDir%\Scanning Planet\Scanning planet.mp3" >nul
+  )
+  IF EXIST "%vaSoundDir%\%curDir%\Sensors Radar\Scanning planet alt.mp3" (
+    copy "%vaSoundDir%\%curDir%\Sensors Radar\Scanning planet alt.mp3" "%vaSoundDir%\%newDir%\Scanning Planet\Scanning planet alt.mp3" >nul
+  )
+  >nul 2>nul dir /a-d "%vaSoundDir%\%newDir%\Scanning Planet\*" || (
+    IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Acknowledgements\((RS - Acknowledgements))\Verbose" (
+      Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Acknowledgements\((RS - Acknowledgements))\Verbose" "%vaSoundDir%\%newDir%\Scanning Planet\" > NUL
+    )
+    IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Acknowledgements\((RS - Acknowledgements))\non-verbose" (
+      Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Acknowledgements\((RS - Acknowledgements))\non-verbose" "%vaSoundDir%\%newDir%\Scanning Planet\" > NUL
+    )
+  )
+  >nul 2>nul dir /a-d "%vaSoundDir%\%newDir%\Scanning Planet\*" || (
+    echo - Missing Scanning Planet
+  )
+  IF NOT EXIST "%vaSoundDir%\%newDir%\Songs\" mkdir "%vaSoundDir%\%newDir%\Songs"
   IF NOT EXIST "%vaSoundDir%\%newDir%\Acknowledged\" mkdir "%vaSoundDir%\%newDir%\Acknowledged"
   IF EXIST "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Acknowledgements\((RS - Acknowledgements))\Verbose" (
     Xcopy /E /Y /Q "%vaSoundDir%\%curDir%\Profile Sounds\Generic\Acknowledgements\((RS - Acknowledgements))\Verbose" "%vaSoundDir%\%newDir%\Acknowledged\" > NUL
@@ -1370,6 +1414,7 @@ pause
   )
   IF EXIST "%vaSoundDir%\sf-i_Null\" (
     IF EXIST "%vaSoundDir%\sf-i_Null\Non-Verbal Confirmation\" Xcopy /E /Y /Q "%vaSoundDir%\sf-i_Null\Non-Verbal Confirmation" "%vaSoundDir%\%newDir%\Non-Verbal Confirmation\" > NUL
+    IF EXIST "%vaSoundDir%\sf-i_Null\Songs\" Xcopy /E /Y /Q "%vaSoundDir%\sf-i_Null\Songs" "%vaSoundDir%\%newDir%\Songs\" > NUL
   )
   IF %MISSING_COUNT% GTR 0 (
     echo - Missing %MISSING_COUNT% entries
