@@ -46,6 +46,7 @@ public class VAInline
     private void LoadOrganizationData()
     {
         int i = 0;
+        int orgNameCount = 0;
         List<string> codexOrgList = new List<string>();
 
         WebRequest request = WebRequest.Create("https://www.benoldinggames.co.uk/sfi/gamedata/files/races.jsonp");
@@ -77,18 +78,21 @@ public class VAInline
 
                     if (string.IsNullOrEmpty(desc))
                         desc = "No Information Available";
-                    desc = raceName + ", " + desc;
+                    desc = raceName + ",, " + desc;
 
                     if (!codexOrgList.Contains(raceName))
                         codexOrgList.Add(raceName);
 
                     VA.SetText(">>codexOrgDescription[" + i.ToString() + "]", desc);
                     VA.SetText(">>codexOrgNameLookup[" + raceName + "]", i.ToString());
+                    orgNameCount++;
 
                     string plural = orgInfo["plural"].ToString();
                     if (string.IsNullOrEmpty(plural))
                         plural = raceName + "s";
                     VA.SetText(">>codexOrgNameLookup[" + plural + "]", i.ToString());
+                    orgNameCount++;
+
                     if (!codexOrgList.Contains(plural))
                         codexOrgList.Add(plural);
 
@@ -96,6 +100,8 @@ public class VAInline
                         //*** This will actually happen twice, once for each ghost race.
                         //*** But it doesn't matter, their descriptions are the same.
                         VA.SetText(">>codexOrgNameLookup[Ghost]", i.ToString());
+                        orgNameCount++;
+
                         if (!codexOrgList.Contains("Ghost"))
                             codexOrgList.Add("Ghost");
                     }
@@ -134,13 +140,14 @@ public class VAInline
 
                     if (string.IsNullOrEmpty(desc))
                         desc = "No Information Available";
-                    desc = raceName + ", " + desc;
+                    desc = raceName + ",, " + desc;
 
                     if (!codexOrgList.Contains(raceName))
                         codexOrgList.Add(raceName);
 
                     VA.SetText(">>codexOrgDescription[" + i.ToString() + "]", desc);
                     VA.SetText(">>codexOrgNameLookup[" + raceName + "]", i.ToString());
+                    orgNameCount++;
 
                     i++;
                     totalCodexItemsFound++;
@@ -149,10 +156,76 @@ public class VAInline
         }
 
 
+        VA.SetInt(">>codexOrgNameLookup.len", orgNameCount);
         VA.SetInt(">>codexOrgDescription.len", i);
-        VA.SetText(">>codexOrgList", string.Join<string>(";", codexOrgList));
-
         // VA.WriteToLog("Orgs found " + VA.GetInt(">>codexOrgDescription.len").ToString(), "Red");
+
+        if (codexOrgList.Count > 0 && VA.GetBoolean(">>codexEnabled") == true) {
+            VA.SetText(">>codexOrgList", string.Join<string>(";", codexOrgList));
+        } else {
+            VA.SetText(">>codexOrgList", "the codex list is disabled");
+        }
+    }
+
+    private void LoadShipData()
+    {
+        int shipNameCount = 0;
+        int i = 0;
+        List<string> codexShipList = new List<string>();
+
+        WebRequest request = WebRequest.Create("https://www.benoldinggames.co.uk/sfi/gamedata/files/ships.jsonp");
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        Stream dataStream = response.GetResponseStream();
+        StreamReader reader = new StreamReader(dataStream);
+
+        string json = reader.ReadToEnd();
+
+        reader.Close();
+        dataStream.Close();
+        response.Close();
+
+        string jsonpRegexStr = ".*?\\(\\s*([\"']).*?\\1\\s*,\\s*(.*)\\)";
+        Regex jsonpRegex = new Regex(jsonpRegexStr, RegexOptions.IgnoreCase);
+
+        if (!string.IsNullOrEmpty(json)) {
+            Match m = jsonpRegex.Match(json);
+            if (m.Success) {
+                json = m.Groups[2].ToString();
+
+                List<Dictionary<string, object>> shipList = new JavaScriptSerializer().Deserialize<List<Dictionary<string, object>>>(json);
+                foreach (Dictionary<string, object> shipInfo in shipList) {
+                    string name = shipInfo["name"].ToString();
+                    string desc = shipInfo["description"].ToString();
+
+                    if ((int)shipInfo["race"] > 1)
+                        continue;
+
+                    if (string.IsNullOrEmpty(desc))
+                        desc = "No Information Available";
+                    desc = name + ",, " + desc;
+
+                    if (!codexShipList.Contains(name))
+                        codexShipList.Add(name);
+
+                    VA.SetText(">>codexShipDescription[" + i.ToString() + "]", desc);
+                    VA.SetText(">>codexShipNameLookup[" + name + "]", i.ToString());
+                    shipNameCount++;
+
+                    i++;
+                    totalCodexItemsFound++;
+                }
+            }
+        }
+
+        VA.SetInt(">>codexShipNameLookup.len", shipNameCount);
+        VA.SetInt(">>codexShipDescription.len", i);
+        // VA.WriteToLog("Ships found " + VA.GetInt(">>codexShipDescription.len").ToString(), "Red");
+
+        if (codexShipList.Count > 0 && VA.GetBoolean(">>codexEnabled") == true) {
+            VA.SetText(">>codexShipList", string.Join<string>(";", codexShipList));
+        } else {
+            VA.SetText(">>codexShipList", "the codex list is disabled");
+        }
     }
 
 
@@ -167,6 +240,8 @@ public class VAInline
         string json = reader.ReadToEnd();
         if (!string.IsNullOrEmpty(json)) {
             bool matchesFound;
+            int planetNameCount = 0;
+            int objectNameCount = 0;
 
             //*** This is horrible practice, but I'm chopping up the json in to chunks to make it easier to deserialize
             //*** Changes to fields in the system object in the game data would break this section
@@ -208,20 +283,29 @@ public class VAInline
                         if (String.IsNullOrEmpty(desc))  desc = planetInfo["scanText"].ToString();
                     } catch (KeyNotFoundException) {}
                     if (String.IsNullOrEmpty(desc))  desc = name;
-                    else  desc = name + ", " + desc;
+                    else  desc = name + ",, " + desc;
 
                     if (!codexPlanetList.Contains(name))
                         codexPlanetList.Add(name);
 
                     VA.SetText(">>codexPlanetDescription[" + i.ToString() + "]", desc);
-                    VA.SetText(">>codexPlanetNameLookup[" + name + "]", i.ToString());
                     VA.SetText(">>codexPlanetSectorLookup[" + GetDisplayLocation((Dictionary<string, Object>)planetInfo["location"]) + "]", i.ToString());
+                    VA.SetText(">>codexPlanetNameLookup[" + name + "]", i.ToString());
+                    planetNameCount++;
+
                     i++;
                     totalCodexItemsFound++;
                 }
             }
+            VA.SetInt(">>codexPlanetNameLookup.len", planetNameCount);
             VA.SetInt(">>codexPlanetDescription.len", i);
-            VA.SetText(">>codexPlanetList", string.Join<string>(";", codexPlanetList));
+
+            if (codexPlanetList.Count > 0 && VA.GetBoolean(">>codexEnabled") == true) {
+                VA.SetText(">>codexPlanetList", string.Join<string>(";", codexPlanetList));
+            } else {
+                VA.SetText(">>codexPlanetList", "the codex list is disabled");
+            }
+
 
             List<string> codexObjectList = new List<string>();
             i = 0;
@@ -237,20 +321,28 @@ public class VAInline
                         if (String.IsNullOrEmpty(desc))  desc = objectInfo["scanText"].ToString();
                     } catch (KeyNotFoundException) {}
                     if (String.IsNullOrEmpty(desc))  desc = name;
-                    else  desc = name + ", " + desc;
+                    else  desc = name + ",, " + desc;
 
                     if (!codexObjectList.Contains(name))
                         codexObjectList.Add(name);
 
                     VA.SetText(">>codexObjectDescription[" + i.ToString() + "]", desc);
-                    VA.SetText(">>codexObjectNameLookup[" + name + "]", i.ToString());
                     VA.SetText(">>codexObjectSectorLookup[" + GetDisplayLocation((Dictionary<string, Object>)objectInfo["location"]) + "]", i.ToString());
+                    VA.SetText(">>codexObjectNameLookup[" + name + "]", i.ToString());
+                    objectNameCount++;
+
                     i++;
                     totalCodexItemsFound++;
                 }
             }
+            VA.SetInt(">>codexObjectNameLookup.len", objectNameCount);
             VA.SetInt(">>codexObjectDescription.len", i);
-            VA.SetText(">>codexObjectList", string.Join<string>(";", codexObjectList));
+
+            if (codexObjectList.Count > 0 && VA.GetBoolean(">>codexEnabled") == true) {
+                VA.SetText(">>codexObjectList", string.Join<string>(";", codexObjectList));
+            } else {
+                VA.SetText(">>codexObjectList", "the codex list is disabled");
+            }
 
             // VA.WriteToLog("Planets found " + VA.GetInt(">>codexPlanetDescription.len").ToString(), "Red");
             // VA.WriteToLog("Objects found " + VA.GetInt(">>codexObjectDescription.len").ToString(), "Red");

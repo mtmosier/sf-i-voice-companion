@@ -170,6 +170,9 @@ public class VAInline
 		message = "Codex Org List: " + VA.GetText(">>codexOrgList");
 		VA.WriteToLog(message, "Yellow");
 
+		message = "Codex Org List: " + VA.GetText(">>codexShipList");
+		VA.WriteToLog(message, "Yellow");
+
 		message = "Codex Planets Found: " + VA.GetInt(">>codexPlanetDescription.len").ToString();
 		VA.WriteToLog(message, "Purple");
 
@@ -177,6 +180,9 @@ public class VAInline
 		VA.WriteToLog(message, "Purple");
 
 		message = "Codex Orgs Found: " + VA.GetInt(">>codexOrgDescription.len").ToString();
+		VA.WriteToLog(message, "Purple");
+
+		message = "Codex Ships Found: " + VA.GetInt(">>codexShipDescription.len").ToString();
 		VA.WriteToLog(message, "Purple");
 
 		message = "Codex Entries Found, Total: " + VA.GetInt(">>codexDescriptionsCombined.len").ToString();
@@ -215,6 +221,10 @@ public class VAInline
 		VA.WriteToLog(message, "Blue");
 
 		message = "Individual Quantum Theory Facts Enabled: " + VA.GetBoolean(">>quantumTheoryEnabled");
+		debugOutput += message + "\n";
+		VA.WriteToLog(message, "Blue");
+
+		message = "Individual Codex Descriptions Enabled: " + VA.GetBoolean(">>codexEnabled");
 		debugOutput += message + "\n";
 		VA.WriteToLog(message, "Blue");
 

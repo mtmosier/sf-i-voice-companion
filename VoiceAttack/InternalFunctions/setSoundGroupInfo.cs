@@ -99,14 +99,28 @@ public class VAInline
 		int fileCount = 0;
 		string realFilePath, groupName;
 		List<string> constellationList = new List<string>();
-		List<string> planetList = new List<string>();
-		List<string> starList = new List<string>();
 		List<string> quantumTheoryList = new List<string>();
 		List<string> galaxapediaList = new List<string>();
 		string[] soundGroupList = getSoundFileGroupList();
 		Dictionary<string, string> soundGroupSynonymList = getSynonymList();
 		Regex altRegex = new Regex(@"\balt\s*\d*\s*\.", RegexOptions.IgnoreCase);
 		Match m;
+
+		List<string> codexPlanetList = new List<string>((VA.GetText(">>codexPlanetList")??"").ToLower().Split(';'));
+		List<string> codexObjectList = new List<string>((VA.GetText(">>codexObjectList")??"").ToLower().Split(';'));
+		List<string> codexOrgList = new List<string>((VA.GetText(">>codexOrgList")??"").ToLower().Split(';'));
+		List<string> codexShipList = new List<string>((VA.GetText(">>codexShipList")??"").ToLower().Split(';'));
+
+		List<string> codexNameList = new List<string>(codexPlanetList.Count +
+													codexObjectList.Count +
+													codexOrgList.Count +
+													codexShipList.Count);
+
+		codexNameList.AddRange(codexPlanetList);
+		codexNameList.AddRange(codexObjectList);
+		codexNameList.AddRange(codexOrgList);
+		codexNameList.AddRange(codexShipList);
+
 
 		//*** Weapon group variables
 		string wgNameListStr = VA.GetText(">>activeWeaponGroupList");
@@ -139,21 +153,27 @@ public class VAInline
 					foreach (string filePath in files) {
 						m = altRegex.Match(Path.GetFileName(filePath));
 						if (!m.Success) {
-							constellationList.Add(Path.GetFileNameWithoutExtension(filePath));
+							string name = Path.GetFileNameWithoutExtension(filePath).ToLower();
+							if (!codexNameList.Contains(name))
+								constellationList.Add(name);
 						}
 					}
 				} else if (soundGroup == "Quantum Theory") {
 					foreach (string filePath in files) {
 						m = altRegex.Match(Path.GetFileName(filePath));
 						if (!m.Success) {
-							quantumTheoryList.Add(Path.GetFileNameWithoutExtension(filePath));
+							string name = Path.GetFileNameWithoutExtension(filePath).ToLower();
+							if (!codexNameList.Contains(name))
+								quantumTheoryList.Add(name);
 						}
 					}
 				} else if (soundGroup == "Galaxapedia") {
 					foreach (string filePath in files) {
 						m = altRegex.Match(Path.GetFileName(filePath));
 						if (!m.Success) {
-							galaxapediaList.Add(Path.GetFileNameWithoutExtension(filePath));
+							string name = Path.GetFileNameWithoutExtension(filePath).ToLower();
+							if (!codexNameList.Contains(name))
+								galaxapediaList.Add(name);
 						}
 					}
 				}

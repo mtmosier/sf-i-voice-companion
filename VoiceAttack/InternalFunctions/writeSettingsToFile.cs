@@ -41,7 +41,7 @@ public class VAInline
 		string[] boolSettingsList = { ">>enableSpeech", ">>gameVoiceEnabled",
 			">>gameVoiceActionsQuiet", ">>headphonesInUse",
 			">>galaxapediaEnabled", ">>constellationsEnabled",
-			">>quantumTheoryEnabled" 
+			">>quantumTheoryEnabled", ">>codexEnabled" 
 		};
 		foreach (string sn in boolSettingsList) {
 			boolValueN = VA.GetBoolean(sn);

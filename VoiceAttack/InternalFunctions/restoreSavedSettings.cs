@@ -117,7 +117,7 @@ public class VAInline
 			string[] boolSettingsList = { ">>enableSpeech", ">>gameVoiceEnabled",
 				">>gameVoiceActionsQuiet", ">>headphonesInUse",
 				">>galaxapediaEnabled", ">>constellationsEnabled",
-				">>quantumTheoryEnabled"
+				">>quantumTheoryEnabled", ">>codexEnabled"
 			};
 			foreach (string sname in boolSettingsList) {
 				if (settings.ContainsKey(sname)) {
