@@ -28,6 +28,7 @@ public class VAInline
 
         LoadStarSystemData();
         LoadOrganizationData();
+        LoadShipData();
 
         VA.SetInt(">>codexDescriptionsCombined.len", totalCodexItemsFound);
         // VA.WriteToLog("Codex items found " + VA.GetInt(">>codexDescriptionsCombined.len").ToString(), "Red");
@@ -67,11 +68,13 @@ public class VAInline
             Match m = jsonpRegex.Match(json);
             if (m.Success) {
                 json = m.Groups[2].ToString();
+                // VA.WriteToLog("Race size: " + json.Length.ToString(), "Red");
 
                 List<Dictionary<string, object>> orgList = new JavaScriptSerializer().Deserialize<List<Dictionary<string, object>>>(json);
                 foreach (Dictionary<string, object> orgInfo in orgList) {
                     string raceName = orgInfo["name"].ToString();
                     string desc = orgInfo["info"].ToString();
+                    // VA.WriteToLog("Found race " + raceName, "Red");
 
                     if ((int)orgInfo["race"] < 2 && string.IsNullOrEmpty(desc))
                         continue;
@@ -192,7 +195,8 @@ public class VAInline
             if (m.Success) {
                 json = m.Groups[2].ToString();
 
-                List<Dictionary<string, object>> shipList = new JavaScriptSerializer().Deserialize<List<Dictionary<string, object>>>(json);
+                Dictionary<string, Dictionary<string, object>> shipDict = new JavaScriptSerializer().Deserialize<Dictionary<string, Dictionary<string, object>>>(json);
+                List<Dictionary<string, object>> shipList = new List<Dictionary<string, object>>(shipDict.Values);
                 foreach (Dictionary<string, object> shipInfo in shipList) {
                     string name = shipInfo["name"].ToString();
                     string desc = shipInfo["description"].ToString();
@@ -219,7 +223,6 @@ public class VAInline
 
         VA.SetInt(">>codexShipNameLookup.len", shipNameCount);
         VA.SetInt(">>codexShipDescription.len", i);
-        // VA.WriteToLog("Ships found " + VA.GetInt(">>codexShipDescription.len").ToString(), "Red");
 
         if (codexShipList.Count > 0 && VA.GetBoolean(">>codexEnabled") == true) {
             VA.SetText(">>codexShipList", string.Join<string>(";", codexShipList));

@@ -311,7 +311,7 @@ public class MainSettingsForm : Form
 
     private void dynamicTableLayoutPanel_CellPaint(object sender, TableLayoutCellPaintEventArgs e)
     {
-        if (e.Row == 7)
+        if (e.Row == 8)
             e.Graphics.DrawLine(Pens.Black, e.CellBounds.Location, new Point(e.CellBounds.Right, e.CellBounds.Top));
     }
 
@@ -480,7 +480,7 @@ public class MainSettingsForm : Form
         //*** codexEnabled Setting ***
         bool? codexEnabled = VA.GetBoolean(">>codexEnabled");
         Label codexEnabledOptionText = new Label();
-        codexEnabledOptionText.Text = "Individual SF Codex Descriptions";
+        codexEnabledOptionText.Text = "Individual SF Codex Facts";
         codexEnabledOptionText.TextAlign = ContentAlignment.MiddleRight;
         codexEnabledOptionText.Anchor = AnchorStyles.Right;
         codexEnabledOptionText.Size = new Size(codexEnabledOptionText.PreferredWidth, codexEnabledOptionText.PreferredHeight);

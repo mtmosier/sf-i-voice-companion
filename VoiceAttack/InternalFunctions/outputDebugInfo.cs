@@ -224,7 +224,7 @@ public class VAInline
 		debugOutput += message + "\n";
 		VA.WriteToLog(message, "Blue");
 
-		message = "Individual Codex Descriptions Enabled: " + VA.GetBoolean(">>codexEnabled");
+		message = "Individual SF Codex Facts Enabled: " + VA.GetBoolean(">>codexEnabled");
 		debugOutput += message + "\n";
 		VA.WriteToLog(message, "Blue");
 
