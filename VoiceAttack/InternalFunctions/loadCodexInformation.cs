@@ -13,17 +13,11 @@ public class VAInline
     private int totalCodexItemsFound;
     private Dictionary<string, string> systemPrefixLookup;
 
-    private Dictionary<int, string> orgNameDataLookup;
-    private Dictionary<int, Dictionary<string, Object>> objectLocationDataLookup;
-    private Dictionary<int, Dictionary<string, Object>> planetLocationDataLookup;
 
 
     public void main()
     {
         systemPrefixLookup = new Dictionary<string, string>();
-        orgNameDataLookup = new Dictionary<int, string>();
-        objectLocationDataLookup = new Dictionary<int, Dictionary<string, Object>>();
-        planetLocationDataLookup = new Dictionary<int, Dictionary<string, Object>>();
         totalCodexItemsFound = 0;
 
         LoadStarSystemData();
