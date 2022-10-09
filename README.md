@@ -117,33 +117,36 @@ You can also do your configuration using voice commands, including setting up we
 
 This command list may be incomplete. To see a full list of voice commands available please check the [voice command reference guide](https://htmlpreview.github.io/?https://github.com/mtmosier/sf-i-voice-companion/blob/master/reference/Starfighter%20Infinity%20Companion%20Reference.html).
 
-| Command | Description |
-|:------- |:----------- |
+| Command | Description | Notes |
+|:------- |:----------- |:----- |
 | **Stop listening** | Set VoiceAttack to not listen. |
 | **Start listening** | Set VoiceAttack to begin listening again. |
+| **Show configuration dialog** | Opens the configuration window. | Also available via shortcut [Left Ctrl + Left Alt + S] |
 | **List available ships** | Responds with a list of valid ship names. |
 | **List active ships** | Responds with a list of ships which have previously been used. |
 | **Register new ship** | You will be asked for a new ship name. The ship will be added and made active. |
-| **Switch to sniper ship** | Loads the configuration for **Sniper** ship. |
+| **Switch to *&lt;name&gt;* ship** | Loads the configuration for the requested ship. | Example: *Switch to War ship* |
+| **What is my current ship name** | Responds with the name of your current ship. |
+| **Delete ship configuration for *&lt;name&gt;*** | Deletes the configuration for the ship specified. There will be a short pause where you can say "***cancel***" or "***abort***". | Example: *Delete ship configuration for War Ship* |
+| **Equip slot *&lt;#&gt;*** | Switches to specified weapon slot. Will also return to this weapon slot when finished performing firing actions. | Example: *Equip slot 3* |
+| **Fire weapon slot *&lt;#&gt;*** | Single fire the specified weapon slot. | Example: *Fire weapon slot 6* |
+| **Unload slot *&lt;#&gt;*** | Continuous fire the specified weapon slot. | Example: *Unload slot 1* |
+| **Cancel slot *&lt;#&gt;*** | Stop firing the specified weapon slot. | Example: *Cancel slot 1* |
 | **List available weapon groups** | Responds with a list of valid weapon group names. |
 | **List active weapon groups** | Responds with a list of weapon groups which have been configured for your current ship. |
-| **Configure counter 1** | Initiate weapon configuration for group **Counter 1**. |
-| **Delete mining laser** | Deletes any configuration saved for **Mining Laser 1**. |
-| **Equip slot 6** | Activates (but does not fire) **Slot 6**. Will also return to this weapon slot when finished performing firing actions. |
-| **Fire weapon slot 3** | Single fire **Slot 3**. |
-| **Unload slot 1** | Continuous fire **Slot 1**. |
-| **Cancel slot 1** | Stop firing **Slot 1**. |
-| **Fire missile** | Single fire group **missile**. |
-| **Unload mine 2** | Continuous fire group **mine 2**. |
-| **Unload beacon** | Continuous fire group **beacon**. |
-| **Cancel beam 3** | Stop firing group **beam 3**. |
+| **Register new weapon group** | Adds a new weapon group and then calls the configuration command. |
+| **Configure *&lt;group name&gt;*** | Initiate weapon configuration for weapon group specified. | Example: *Configure Beacon* |
+| **Delete configuration for group *&lt;name&gt;*** | Deletes any configuration saved for specified weapon group. | Example: *Delete configuration for group Counter* |
 | **Unload primary** | Continuous fire primary weapon. |
 | **Cancel primary** | Stop firing primary weapon. |
 | **Cease fire** | Stops firing any active weapon groups as well as the primary weapon. |
-| **Configure *&lt;emergency group&gt;*** | Initiate configuration for the emergency group. |
-| **Red Alert** | Activate **Red Alert** emergency group. If configured with actions they will be carried out. |
-| **Yellow Alert** | Activate **Yellow Alert** emergency group. If configured with actions they will be carried out. |
-| **Evasive Maneuvers** | Activate **Evasive Maneuvers** emergency group. If configured with actions they will be carried out. |
+| **Configure *&lt;emergency group&gt;*** | Initiate configuration for the emergency group. | Example: *Configure Red Alert* |
+| **Fire *&lt;group name&gt;*** | Single fire specified weapon group. | Example: *Fire Beacon* |
+| **Unload *&lt;group name&gt;*** | Continuous fire specified weapon group. | Example: *Unload Missiles* |
+| **Cancel *&lt;group name&gt;*** | Stop firing specified weapon group. | Example: *Cancel Missiles* |
+| **Red Alert** | Activate **Red Alert** emergency group.  |
+| **Yellow Alert** | Activate **Yellow Alert** emergency group. |
+| **Evasive Maneuvers** | Activate **Evasive Maneuvers** emergency group. |
 | **Next Target** | Switch between locked targets. |
 | **Engines to full** | Holds down the accelerate key. |
 | **Engines to max** | Holds down the accelerate and propulsion keys. |
@@ -167,12 +170,12 @@ This command list may be incomplete. To see a full list of voice commands availa
 | **Tell me a ship fact** | Reads a random codex fact limited to ship descriptions. |
 | **Enable codex** | Turns on individual codex fact look-ups. |
 | **Disable codex** | Turns off individual codex fact look-ups. |
-| **Tell me about planet *&lt;planet name&gt;*** | Reads the planet description from the codex. |
-| **Tell me about the *&lt;object name&gt;*** | Reads the object description from the codex. |
-| **Tell me about the *&lt;race name&gt; race*** | Reads the race/org description from the codex. |
-| **Tell me about the *&lt;ship name&gt;*** | Reads the ship description from the codex. |
+| **Tell me about planet *&lt;planet name&gt;*** | Reads the planet description from the codex. | Example: *Tell me about planet Erna* |
+| **Tell me about the *&lt;object name&gt;*** | Reads the object description from the codex. | Example: *Tell me about the Dimensional Rift* |
+| **Tell me about the *&lt;race name&gt; race*** | Reads the race/org description from the codex. | Example: *Tell me about the Radii race* |
+| **Tell me about the *&lt;ship name&gt;*** | Reads the ship description from the codex. | Example: *Tell me about the Manticore* |
 | **What time is it** | Responds with the current time. |
-| **Hello *&lt;companion name&gt;*** | Voice response depending on companion used. |
+| **Hello *&lt;companion name&gt;*** | Voice response depending on companion used. | Example: *Hello Jazz* |
 | **Who are you** | Voice response depending on companion used. |
 | **Why are you on my ship** | Voice response depending on companion used. |
 | **Thank you** | Voice response depending on companion used. |
@@ -183,21 +186,21 @@ This command list may be incomplete. To see a full list of voice commands availa
 
 Additional commands relevant if you are [importing a voice pack](import/).
 
-| Command | Description |
-|:------- |:----------- |
-| **Promote *&lt;companion name&gt;*** | Will switch to a new ship's companion. |
+| Command | Description | Notes |
+|:------- |:----------- |:----- |
+| **Promote *&lt;companion name&gt;*** | Will switch to a new ship's companion. | Example: *Promote Orion* |
 | **Tell me a constellation fact** | Plays a random constellation fact* |
 | **Tell me a quantum theory fact** | Plays a random quantum theory fact* |
 | **Tell me a galaxy fact** | Plays a random galaxapedia fact* |
 | **Enable constellations** | Turns on individual constellation fact look-ups* |
 | **Disable constellations** | Turns off individual constellation fact look-ups* |
-| **Tell me about constellation *&lt;constellation name&gt;*** | Plays information about a specific constellation* |
+| **Tell me about constellation *&lt;constellation name&gt;*** | Plays information about a specific constellation* | Example: *Tell me about constellation Ares* |
 | **Enable quantum theory** | Turns on individual quantum theory fact look-ups* |
 | **Disable quantum theory** | Turns off individual quantum theory fact look-ups* |
-| **What is a *&lt;quantum theory entry&gt;*** | Plays a specific quantum theory fact* |
+| **What is *&lt;quantum theory entry&gt;*** | Plays a specific quantum theory fact* | Example: *What is Hawking Radiation* |
 | **Enable galaxy** | Turns on individual galaxapedia fact look-ups* |
 | **Disable galaxy** | Turns off individual galaxapedia fact look-ups* |
-| **What is a *&lt;galaxapedia entry&gt;*** | Plays a specific galaxapedia fact* |
+| **What is a *&lt;galaxapedia entry&gt;*** | Plays a specific galaxapedia fact* | Example: *What is a Black Hole* |
 
 * Not all voice packs include constellations/quantum theory/galaxapedia facts
 
