@@ -132,18 +132,18 @@ This command list may be incomplete. To see a full list of voice commands availa
 | **Fire weapon slot *&lt;#&gt;*** | Single fire the specified weapon slot. | Example: *Fire weapon slot 6* |
 | **Unload slot *&lt;#&gt;*** | Continuous fire the specified weapon slot. | Example: *Unload slot 1* |
 | **Cancel slot *&lt;#&gt;*** | Stop firing the specified weapon slot. | Example: *Cancel slot 1* |
+| **Unload primary** | Continuous fire primary weapon. |
+| **Cancel primary** | Stop firing primary weapon. |
 | **List available weapon groups** | Responds with a list of valid weapon group names. |
 | **List active weapon groups** | Responds with a list of weapon groups which have been configured for your current ship. |
 | **Register new weapon group** | Adds a new weapon group and then calls the configuration command. |
 | **Configure *&lt;group name&gt;*** | Initiate weapon configuration for weapon group specified. | Example: *Configure Beacon* |
 | **Delete configuration for group *&lt;name&gt;*** | Deletes any configuration saved for specified weapon group. | Example: *Delete configuration for group Counter* |
-| **Unload primary** | Continuous fire primary weapon. |
-| **Cancel primary** | Stop firing primary weapon. |
-| **Cease fire** | Stops firing any active weapon groups as well as the primary weapon. |
-| **Configure *&lt;emergency group&gt;*** | Initiate configuration for the emergency group. | Example: *Configure Red Alert* |
 | **Fire *&lt;group name&gt;*** | Single fire specified weapon group. | Example: *Fire Beacon* |
 | **Unload *&lt;group name&gt;*** | Continuous fire specified weapon group. | Example: *Unload Missiles* |
 | **Cancel *&lt;group name&gt;*** | Stop firing specified weapon group. | Example: *Cancel Missiles* |
+| **Cease fire** | Stops firing any active weapon groups as well as the primary weapon. |
+| **Configure *&lt;emergency group&gt;*** | Initiate configuration for the emergency group. | Example: *Configure Red Alert* |
 | **Red Alert** | Activate **Red Alert** emergency group.  |
 | **Yellow Alert** | Activate **Yellow Alert** emergency group. |
 | **Evasive Maneuvers** | Activate **Evasive Maneuvers** emergency group. |
