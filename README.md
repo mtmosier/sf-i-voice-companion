@@ -128,12 +128,12 @@ This command list may be incomplete. To see a full list of voice commands availa
 | **Switch to *&lt;name&gt;* ship** | Loads the configuration for the requested ship. | Example: *Switch to War ship* |
 | **What is my current ship name** | Responds with the name of your current ship. |
 | **Delete ship configuration for *&lt;name&gt;*** | Deletes the configuration for the ship specified. | Example: *Delete ship configuration for War Ship* |
+| **Unload primary** | Continuous fire primary weapon. |
+| **Cancel primary** | Stop firing primary weapon. |
 | **Equip slot *&lt;#&gt;*** | Switches to specified weapon slot. Will also return to this weapon slot when finished performing firing actions. | Example: *Equip slot 3* |
 | **Fire weapon slot *&lt;#&gt;*** | Single fire the specified weapon slot. | Example: *Fire weapon slot 6* |
 | **Unload slot *&lt;#&gt;*** | Continuous fire the specified weapon slot. | Example: *Unload slot 1* |
 | **Cancel slot *&lt;#&gt;*** | Stop firing the specified weapon slot. | Example: *Cancel slot 1* |
-| **Unload primary** | Continuous fire primary weapon. |
-| **Cancel primary** | Stop firing primary weapon. |
 | **List available weapon groups** | Responds with a list of valid weapon group names. |
 | **List active weapon groups** | Responds with a list of weapon groups which have been configured for your current ship. |
 | **Register new weapon group** | Adds a new weapon group and then calls the configuration command. |
@@ -165,15 +165,15 @@ This command list may be incomplete. To see a full list of voice commands availa
 | **Scan object** | Scan an object if in range. Also read the codex entry if a planet/object is present. |
 | **Tell me a codex fact** | Reads a random codex fact. |
 | **Tell me a planet fact** | Reads a random codex fact limited to planet descriptions. |
-| **Tell me a object fact** | Reads a random codex fact limited to object descriptions. |
+| **Tell me an object fact** | Reads a random codex fact limited to object descriptions. |
 | **Tell me a race fact** | Reads a random codex fact limited to race/org descriptions. |
 | **Tell me a ship fact** | Reads a random codex fact limited to ship descriptions. |
 | **Enable codex** | Turns on individual codex fact look-ups. | Enabling codex look-ups increases the number of commands VoiceAttack is listening for and may affect performance |
-| **Disable codex** | Turns off individual codex fact look-ups. |
 | **Tell me about planet *&lt;planet name&gt;*** | Reads the planet description from the codex. | Example: *Tell me about planet Erna* |
 | **Tell me about the *&lt;object name&gt;*** | Reads the object description from the codex. | Example: *Tell me about the Dimensional Rift* |
 | **Tell me about the *&lt;race name&gt; race*** | Reads the race/org description from the codex. | Example: *Tell me about the Radii race* |
 | **Tell me about the *&lt;ship name&gt;*** | Reads the ship description from the codex. | Example: *Tell me about the Manticore* |
+| **Disable codex** | Turns off individual codex fact look-ups. |
 | **What time is it** | Responds with the current time. |
 | **Hello *&lt;companion name&gt;*** | Voice response depending on companion used. | Example: *Hello Jazz* |
 | **Who are you** | Voice response depending on companion used. |
@@ -193,14 +193,14 @@ Additional commands relevant if you are [importing a voice pack](import/).
 | **Tell me a quantum theory fact** | Plays a random quantum theory fact* |
 | **Tell me a galaxy fact** | Plays a random galaxapedia fact* |
 | **Enable constellations** | Turns on individual constellation fact look-ups* | Enabling constellation look-ups increases the number of commands VoiceAttack is listening for and may affect performance |
-| **Disable constellations** | Turns off individual constellation fact look-ups* |
 | **Tell me about constellation *&lt;constellation name&gt;*** | Plays information about a specific constellation* | Example: *Tell me about constellation Ares* |
+| **Disable constellations** | Turns off individual constellation fact look-ups* |
 | **Enable quantum theory** | Turns on individual quantum theory fact look-ups* | Enabling quantum theory look-ups increases the number of commands VoiceAttack is listening for and may affect performance |
-| **Disable quantum theory** | Turns off individual quantum theory fact look-ups* |
 | **What is *&lt;quantum theory entry&gt;*** | Plays a specific quantum theory fact* | Example: *What is Hawking Radiation* |
+| **Disable quantum theory** | Turns off individual quantum theory fact look-ups* |
 | **Enable galaxy** | Turns on individual galaxapedia fact look-ups* | Enabling galaxapedia look-ups increases the number of commands VoiceAttack is listening for and may affect performance |
-| **Disable galaxy** | Turns off individual galaxapedia fact look-ups* |
 | **What is a *&lt;galaxapedia entry&gt;*** | Plays a specific galaxapedia fact* | Example: *What is a Black Hole* |
+| **Disable galaxy** | Turns off individual galaxapedia fact look-ups* |
 
 * Not all voice packs include constellations/quantum theory/galaxapedia facts
 
