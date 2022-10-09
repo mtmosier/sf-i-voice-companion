@@ -113,39 +113,43 @@ public class VAInline
 				shipName = ti.ToTitleCase(shipName);
 			}
 
-			if (!String.IsNullOrEmpty(shipName)) {
 
+			if (!String.IsNullOrEmpty(shipName)) {
 				VA.WriteToLog("Deleting ship, " + shipName, "Black");
 
-				request = "Deleting " + shipName + " ship.";
+				request = "Are you [sure;certain] you want to clear configuration for " + shipName + " ship?";
 				response = getUserInput(
 					string.Join(";", agreeList)
-					+ ";" + string.Join(";", saveList)
-					+ ";" + string.Join(";", cancelList)
-					+ ";" + string.Join(";", restartList),  //*** inputOptionListStr
-					request, //*** playbackText
-					null,    //*** playbackFileGroupName
-					(headphonesInUse != true)  //*** pauseForPlayback
+						+ ";" + string.Join(";", saveList)
+						+ ";" + string.Join(";", agreeList)
+						+ ";" + string.Join(";", restartList)
+						+ ";" + string.Join(";", cancelList),
+					request,
+					null,
+					(headphonesInUse != true),
+					false, //*** shortPause
+					false   //*** returnOnAnyInput
 				);
 
-				if (!string.IsNullOrEmpty(response)) {
-					if (Array.IndexOf(cancelList, response) != -1) {
-						VA.WriteToLog("Cancelled " + response, "Red");
-						cancelConfiguration();
-						return;
-					}
-
-					if (Array.IndexOf(restartList, response) != -1) {
-						VA.WriteToLog("Restart ship deletion.", "Orange");
-						shipName = "";
-						continue;
-					}
-
-					if (Array.IndexOf(agreeList, response) != -1 || Array.IndexOf(saveList, response) != -1) {
-						VA.WriteToLog("Quick confirm ship deletion.", "Black");
-						playRandomSound("Confirmed", "Non-Verbal Confirmation", true);
-					}
+				if (string.IsNullOrEmpty(response)) {
+					VA.WriteToLog("Timed out", "Red");
+					timeoutError();
+					return;
 				}
+				if (Array.IndexOf(cancelList, response) != -1) {
+					VA.WriteToLog("Cancelled " + response, "Red");
+					cancelConfiguration();
+					return;
+				}
+				if (Array.IndexOf(restartList, response) != -1) {
+					VA.WriteToLog("Restart ship deletion.", "Orange");
+					shipName = "";
+					continue;
+				}
+
+
+				VA.WriteToLog("Quick confirm ship deletion.", "Black");
+				playRandomSound("Confirmed", "Non-Verbal Confirmation", true);
 
 
 				//*** Set the ship to be no longer in use
@@ -271,6 +275,6 @@ public class VAInline
 	}
 
 	private void timeoutError() {
-		playRandomSound("Configuration error. Timed out.", "General Error", false);
+		playRandomSound("Configuration error. Timed out.", "", false);
 	}
 }
