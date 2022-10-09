@@ -127,7 +127,7 @@ This command list may be incomplete. To see a full list of voice commands availa
 | **Register new ship** | You will be asked for a new ship name. The ship will be added and made active. |
 | **Switch to *&lt;name&gt;* ship** | Loads the configuration for the requested ship. | Example: *Switch to War ship* |
 | **What is my current ship name** | Responds with the name of your current ship. |
-| **Delete ship configuration for *&lt;name&gt;*** | Deletes the configuration for the ship specified. There will be a short pause where you can say "***cancel***" or "***abort***". | Example: *Delete ship configuration for War Ship* |
+| **Delete ship configuration for *&lt;name&gt;*** | Deletes the configuration for the ship specified. | Example: *Delete ship configuration for War Ship* |
 | **Equip slot *&lt;#&gt;*** | Switches to specified weapon slot. Will also return to this weapon slot when finished performing firing actions. | Example: *Equip slot 3* |
 | **Fire weapon slot *&lt;#&gt;*** | Single fire the specified weapon slot. | Example: *Fire weapon slot 6* |
 | **Unload slot *&lt;#&gt;*** | Continuous fire the specified weapon slot. | Example: *Unload slot 1* |
