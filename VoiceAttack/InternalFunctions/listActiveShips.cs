@@ -22,7 +22,7 @@ public class VAInline
 		Dictionary<string, int> shipActiveWeaponCount = new Dictionary<string, int>();
 
 		//*** Get list of Weapon group names
-		variable = VA.GetText(">>activeWeaponGroupList");
+		variable = VA.GetText(">>weaponGroupListStr");
 		if (string.IsNullOrEmpty(variable))  variable = "";
 		List<string> activeWeaponGroupList = new List<string>(variable.Split(';'));
 
