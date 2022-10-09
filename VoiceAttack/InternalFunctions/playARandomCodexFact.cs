@@ -11,13 +11,14 @@ using System.Windows.Forms;
 public class VAInline
 {
 	private Guid playRandomSoundGuid;
+	private string notFoundText = "No information available";
+	private Random rand = new Random();
 
 	public void main()
 	{
 		string tmpCmdId = VA.GetText(">playRandomSoundCommandId");
 		if (!string.IsNullOrEmpty(tmpCmdId))  playRandomSoundGuid = new Guid(tmpCmdId);
 
-		Random rand = new Random();
 		string scanType = VA.Command.Segment(3);
 		string codexLookupVar = "";
 		int codexLookupIndex = -1;
@@ -91,6 +92,12 @@ public class VAInline
 
 		if (!string.IsNullOrEmpty(codexLookupVar)) {
 			string description = VA.GetText(codexLookupVar + "[" + codexLookupIndex.ToString() + "]");
+			if (description.IndexOf(notFoundText) > 0) {
+				// VA.WriteToLog("Empty codex entry found.  Trying another.  " + description);
+				main();
+				return;
+			}
+
 			if (!string.IsNullOrEmpty(description)) {
 				playRandomSound("", "Handover", true);
 				playRandomSound(description, "", false);

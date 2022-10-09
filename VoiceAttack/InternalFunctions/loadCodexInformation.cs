@@ -12,7 +12,7 @@ public class VAInline
 {
     private int totalCodexItemsFound;
     private Dictionary<string, string> systemPrefixLookup;
-
+    private string notFoundText = "No information available";
 
 
     public void main()
@@ -74,7 +74,7 @@ public class VAInline
                         continue;
 
                     if (string.IsNullOrEmpty(desc))
-                        desc = "No Information Available";
+                        desc = notFoundText;
                     desc = raceName + ",, " + desc;
 
                     if (!codexOrgList.Contains(raceName))
@@ -136,7 +136,7 @@ public class VAInline
                         continue;
 
                     if (string.IsNullOrEmpty(desc))
-                        desc = "No Information Available";
+                        desc = notFoundText;
                     desc = raceName + ",, " + desc;
 
                     if (!codexOrgList.Contains(raceName))
@@ -199,7 +199,7 @@ public class VAInline
                         continue;
 
                     if (string.IsNullOrEmpty(desc))
-                        desc = "No Information Available";
+                        desc = notFoundText;
                     desc = name + ",, " + desc;
 
                     if (!codexShipList.Contains(name))
@@ -279,8 +279,10 @@ public class VAInline
                     try {
                         if (String.IsNullOrEmpty(desc))  desc = planetInfo["scanText"].ToString();
                     } catch (KeyNotFoundException) {}
-                    if (String.IsNullOrEmpty(desc))  desc = name;
-                    else  desc = name + ",, " + desc;
+
+                    if (string.IsNullOrEmpty(desc))
+                        desc = notFoundText;
+                    desc = name + ",, " + desc;
 
                     if (!codexPlanetList.Contains(name))
                         codexPlanetList.Add(name);
@@ -317,8 +319,10 @@ public class VAInline
                     try {
                         if (String.IsNullOrEmpty(desc))  desc = objectInfo["scanText"].ToString();
                     } catch (KeyNotFoundException) {}
-                    if (String.IsNullOrEmpty(desc))  desc = name;
-                    else  desc = name + ",, " + desc;
+
+                    if (string.IsNullOrEmpty(desc))
+                        desc = notFoundText;
+                    desc = name + ",, " + desc;
 
                     if (!codexObjectList.Contains(name))
                         codexObjectList.Add(name);
