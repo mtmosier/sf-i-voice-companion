@@ -156,8 +156,10 @@ This command list may be incomplete. To see a full list of voice commands availa
 | **Show mission log** | Activates the objectives dialog. |
 | **Cargo hold** | Activates the inventory dialog. |
 | **Expand chat** | Expand in game chat. Add 2 or 3 to expand the chat multiple times. |
+| **Say hi to chat** | Send "hi" to chat. (Does not work in VR) |
+| **Say I'm on my way to chat** | Send "on my way" to chat. (Does not work in VR) |
 | **Take a screenshot** | Takes a screenshot. |
-| **Scan object** | Scan an object if in range. Also read the codex entry if found. |
+| **Scan object** | Scan an object if in range. Also read the codex entry if a planet/object is present. |
 | **Tell me a codex fact** | Reads a random codex fact. |
 | **Tell me a planet fact** | Reads a random codex fact limited to planet descriptions. |
 | **Tell me a object fact** | Reads a random codex fact limited to object descriptions. |
