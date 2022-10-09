@@ -168,7 +168,7 @@ This command list may be incomplete. To see a full list of voice commands availa
 | **Tell me a object fact** | Reads a random codex fact limited to object descriptions. |
 | **Tell me a race fact** | Reads a random codex fact limited to race/org descriptions. |
 | **Tell me a ship fact** | Reads a random codex fact limited to ship descriptions. |
-| **Enable codex** | Turns on individual codex fact look-ups. |
+| **Enable codex** | Turns on individual codex fact look-ups. | Enabling codex look-ups increases the number of commands VoiceAttack is listening for and may affect performance |
 | **Disable codex** | Turns off individual codex fact look-ups. |
 | **Tell me about planet *&lt;planet name&gt;*** | Reads the planet description from the codex. | Example: *Tell me about planet Erna* |
 | **Tell me about the *&lt;object name&gt;*** | Reads the object description from the codex. | Example: *Tell me about the Dimensional Rift* |
@@ -192,13 +192,13 @@ Additional commands relevant if you are [importing a voice pack](import/).
 | **Tell me a constellation fact** | Plays a random constellation fact* |
 | **Tell me a quantum theory fact** | Plays a random quantum theory fact* |
 | **Tell me a galaxy fact** | Plays a random galaxapedia fact* |
-| **Enable constellations** | Turns on individual constellation fact look-ups* |
+| **Enable constellations** | Turns on individual constellation fact look-ups* | Enabling constellation look-ups increases the number of commands VoiceAttack is listening for and may affect performance |
 | **Disable constellations** | Turns off individual constellation fact look-ups* |
 | **Tell me about constellation *&lt;constellation name&gt;*** | Plays information about a specific constellation* | Example: *Tell me about constellation Ares* |
-| **Enable quantum theory** | Turns on individual quantum theory fact look-ups* |
+| **Enable quantum theory** | Turns on individual quantum theory fact look-ups* | Enabling quantum theory look-ups increases the number of commands VoiceAttack is listening for and may affect performance |
 | **Disable quantum theory** | Turns off individual quantum theory fact look-ups* |
 | **What is *&lt;quantum theory entry&gt;*** | Plays a specific quantum theory fact* | Example: *What is Hawking Radiation* |
-| **Enable galaxy** | Turns on individual galaxapedia fact look-ups* |
+| **Enable galaxy** | Turns on individual galaxapedia fact look-ups* | Enabling galaxapedia look-ups increases the number of commands VoiceAttack is listening for and may affect performance |
 | **Disable galaxy** | Turns off individual galaxapedia fact look-ups* |
 | **What is a *&lt;galaxapedia entry&gt;*** | Plays a specific galaxapedia fact* | Example: *What is a Black Hole* |
 
