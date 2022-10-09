@@ -20,7 +20,7 @@
 
 My primary focus has been on streamlining weapon usage during battle. Weapons can be set up in groups, and groups can be fired as a one-off or in a continuous barrage. Beyond that most ship functions can be accessed verbally using the companion. The companion also has some limited chatting options, though I plan to flesh them out more in the future.
 
-Please note that I am not currently distributing any prerecorded voice files for this companion. As such all interactions are currently done via text-to-speech (unless you [Import](import/) your own voice files).
+This application requires [VoiceAttack](https://voiceattack.com/) to function.  Please note that I am not currently distributing any prerecorded voice files for this companion. As such all interactions are currently done via text-to-speech (unless you [Import](import/) your own voice files).
 
 
 <a name="prereq"></a>
@@ -53,6 +53,7 @@ Here's a very basic, no config needed, I-just-want-to-kill-stuff example of usag
 [...]
 > All stop    # releases accelerate and propulsion keys
 > Show system map    # display the system map dialog
+> Scan object    # scan an object if in range. also read the codex entry if found
 ```
 
 If you are [importing a voice pack](import/) there will be a few additional commands available to you.
@@ -62,8 +63,11 @@ If you are [importing a voice pack](import/) there will be a few additional comm
 > Who are you?    # I am your ship's companion...
 > Tell me a random constellation fact    # Pisces is a constellation. Its name is the latin..
 > Give me a random quantum theory fact    # Hawking Radiation. In 1975 Steven Hawking showed...
+> Give me a random galaxy fact    # Neutrinos. A particle produced by the nuclear reactions...
 > Enable galaxy    # Interactive mode on
 > What is a black hole    # A black hole is a region of spacetime...
+> Enable constellations    # Interactive mode on
+> Tell me about constellation Ares    # Ares. Representing a ram's horns. It is one of...
 ```
 
 
@@ -115,6 +119,8 @@ This command list may be incomplete. To see a full list of voice commands availa
 
 | Command | Description |
 |:------- |:----------- |
+| **Stop listening** | Set VoiceAttack to not listen. |
+| **Start listening** | Set VoiceAttack to begin listening again. |
 | **List available ships** | Responds with a list of valid ship names. |
 | **List active ships** | Responds with a list of ships which have previously been used. |
 | **Register new ship** | You will be asked for a new ship name. The ship will be added and made active. |
@@ -134,7 +140,8 @@ This command list may be incomplete. To see a full list of voice commands availa
 | **Unload primary** | Continuous fire primary weapon. |
 | **Cancel primary** | Stop firing primary weapon. |
 | **Cease fire** | Stops firing any active weapon groups as well as the primary weapon. |
-| **Configure red alert** | Initiate configuration for the emergency group **Red Alert**. |
+| **Configure *&lt;emergency group&gt;*** | Initiate configuration for the emergency group. |
+| **Red Alert** | Activate **Red Alert** emergency group. If configured with actions they will be carried out. |
 | **Yellow Alert** | Activate **Yellow Alert** emergency group. If configured with actions they will be carried out. |
 | **Evasive Maneuvers** | Activate **Evasive Maneuvers** emergency group. If configured with actions they will be carried out. |
 | **Next Target** | Switch between locked targets. |
@@ -150,12 +157,47 @@ This command list may be incomplete. To see a full list of voice commands availa
 | **Cargo hold** | Activates the inventory dialog. |
 | **Expand chat** | Expand in game chat. Add 2 or 3 to expand the chat multiple times. |
 | **Take a screenshot** | Takes a screenshot. |
-| **Promote Jazz** | Will switch to a new ship's companion, assuming you have multiple. |
+| **Scan object** | Scan an object if in range. Also read the codex entry if found. |
+| **Tell me a codex fact** | Reads a random codex fact. |
+| **Tell me a planet fact** | Reads a random codex fact limited to planet descriptions. |
+| **Tell me a object fact** | Reads a random codex fact limited to object descriptions. |
+| **Tell me a race fact** | Reads a random codex fact limited to race/org descriptions. |
+| **Tell me a ship fact** | Reads a random codex fact limited to ship descriptions. |
+| **Enable codex** | Turns on individual codex fact look-ups. |
+| **Disable codex** | Turns off individual codex fact look-ups. |
+| **Tell me about planet *&lt;planet name&gt;*** | Reads the planet description from the codex. |
+| **Tell me about the *&lt;object name&gt;*** | Reads the object description from the codex. |
+| **Tell me about the *&lt;race name&gt; race*** | Reads the race/org description from the codex. |
+| **Tell me about the *&lt;ship name&gt;*** | Reads the ship description from the codex. (Player ships only) |
 | **What time is it** | Responds with the current time. |
-| **Stop listening** | Set VoiceAttack to not listen. |
-| **Start listening** | Set VoiceAttack to begin listening again. |
+| **Hello *&lt;companion name&gt;*** | Voice response depending on companion used. |
+| **Who are you** | Voice response depending on companion used. |
+| **Why are you on my ship** | Voice response depending on companion used. |
+| **Thank you** | Voice response depending on companion used. |
+| **That was sarcasm** | Voice response depending on companion used. |
+| **Please stop talking** | Voice companion will stop playing sounds or reading text. |
 
 [Read a more detailed description of what you can do with weapon groups.](weaponGroupConfigurationReference.md)
+
+Additional commands relevant if you are [importing a voice pack](import/).
+
+| Command | Description |
+|:------- |:----------- |
+| **Promote *&lt;companion name&gt;*** | Will switch to a new ship's companion. |
+| **Tell me a constellation fact** | Plays a random constellation fact* |
+| **Tell me a quantum theory fact** | Plays a random quantum theory fact* |
+| **Tell me a galaxy fact** | Plays a random galaxapedia fact* |
+| **Enable constellations** | Turns on individual constellation fact look-ups* |
+| **Disable constellations** | Turns off individual constellation fact look-ups* |
+| **Tell me about constellation *&lt;constellation name&gt;*** | Plays information about a specific constellation* |
+| **Enable quantum theory** | Turns on individual quantum theory fact look-ups* |
+| **Disable quantum theory** | Turns off individual quantum theory fact look-ups* |
+| **What is a *&lt;quantum theory entry&gt;*** | Plays a specific quantum theory fact* |
+| **Enable galaxy** | Turns on individual galaxapedia fact look-ups* |
+| **Disable galaxy** | Turns off individual galaxapedia fact look-ups* |
+| **What is a *&lt;galaxapedia entry&gt;*** | Plays a specific galaxapedia fact* |
+
+* Not all voice packs include constellations/quantum theory/galaxapedia facts
 
 
 <a name="issues"></a>
@@ -205,8 +247,7 @@ I hope to add some game log parsing to get feedback directly from the companion 
 6. **Can I use the VoiceAttack demo with this companion?**
   * No, you cannot. The VA demo only allows up to 20 voice commands. At the time of this writing this profile is using over 1,300 (mostly derived) commands. It would be very difficult to compress it down to only 20.
 7. **I don't like the weapon group names or ship names you selected. Can I change them?**
-  * Yes, absolutely. Open the profile in VoiceAttack and edit the command labeled "**[Config] General**" under the "*Configuration*" category. Edit the variables "**>>weaponGroupNameList**" and/or "**>>shipNameListStr**" to better reflect your play style. These must be formatted as a semi-colon (;) separated list.
-  * ***After making changes to these variables you must reload the profile before they will take affect. You can do this by switching to another profile and switching back, or by restarting VoiceAttack.***
+  * Yes, absolutely. The easiest way to do this is to open the ship configuration window using the command "Show configuration dialog" or the keyboard shortcut [Left Ctrl + Left Alt + S].  From here you can add or delete ships and weapon groups to better suit you.
 8. **My question wasn't answered here. How do I get further help?**
   * Either report [your issue on GitHub](https://github.com/mtmosier/sf-i-voice-companion/issues), or [just email me](mailto:m.t.m.o.s.i.e.r@gmail.com). If this project becomes at all popular I'll set up some forums or similar.
 
