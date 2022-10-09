@@ -170,7 +170,7 @@ This command list may be incomplete. To see a full list of voice commands availa
 | **Tell me about planet *&lt;planet name&gt;*** | Reads the planet description from the codex. |
 | **Tell me about the *&lt;object name&gt;*** | Reads the object description from the codex. |
 | **Tell me about the *&lt;race name&gt; race*** | Reads the race/org description from the codex. |
-| **Tell me about the *&lt;ship name&gt;*** | Reads the ship description from the codex. (Player ships only) |
+| **Tell me about the *&lt;ship name&gt;*** | Reads the ship description from the codex. |
 | **What time is it** | Responds with the current time. |
 | **Hello *&lt;companion name&gt;*** | Voice response depending on companion used. |
 | **Who are you** | Voice response depending on companion used. |
